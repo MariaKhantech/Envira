@@ -10,6 +10,11 @@ module.exports = (sequelize, DataTypes) => {
       unique: false,
       allowNull: false,
     },
+    environmental_focus: {
+      type: DataTypes.STRING,
+      unique: false,
+      allowNull: false,
+    },
     website: {
       type: DataTypes.STRING,
       allowNull: false,
