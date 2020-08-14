@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const CompanyProfile = sequelize.define("CompanyProfile", {
+  const CompanyProfile = sequelize.define('CompanyProfile', {
     contact_person: {
       type: DataTypes.STRING,
       unique: false,
