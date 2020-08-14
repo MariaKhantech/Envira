@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTyles) => {
+module.exports = (sequelize, DataTypes) => {
 	// For user profile card
 	const ProfileUser = sequelize.define('ProfileUser', {
 		email: {
@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTyles) => {
 			allowNull: false
 		},
 		about: {
-			type: DataTyles.STRING,
+			type: DataTypes.STRING,
 			allowNull: false
 		}
 	});
