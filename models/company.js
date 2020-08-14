@@ -10,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
     },
     phoneNumber: {
-      type: DataTypes.Number,
+      type: DataTypes.NUMBER,
       allowNull: false,
       unique: true,
       validate: {
@@ -20,7 +20,7 @@ module.exports = function (sequelize, DataTypes) {
     companyEmail: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: false,
       validate: {
         isEmail: true,
       },
@@ -28,10 +28,6 @@ module.exports = function (sequelize, DataTypes) {
     contactPerson: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    non_profit: {
-      type: DataTypes.STRING,
-      allowNull: true,
     },
   });
 
