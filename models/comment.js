@@ -1,26 +1,29 @@
-module.exports = function (sequelize, DataTypes) {
-    const Comment = sequelize.define('Comment', {
-        commentDetail: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: false,
-        },
-        commentReplyDetail: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: false,
-        },
+module.exports = (sequelize, DataTypes) => {
+  const Comment = sequelize.define('Comment', {
+    commentDetail: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
+    },
+    commentReplyDetail: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
+    },
 
-    });
+  });
 
-    //userId and companyId are foreign keys
-    
+  // userId and companyId are foreign keys
 
-    //define relationship between user and comment
-    //A user can post many comments
 
-    //define relationship between company and comment
-    //A company can have many comments
+  // define relationship between user and comment
+  // A user can post many comments
 
-    return Comment;
+  // define relationship between event and comment
+  // event can have many comments
+
+  // define relationship between company and comment
+  // A company can have many comments
+
+  return Comment;
 };
