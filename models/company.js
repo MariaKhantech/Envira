@@ -1,6 +1,8 @@
+
 // eslint-disable-next-line func-names
 module.exports = (sequelize, DataTypes) => {
   const Company = sequelize.define('Company', {
+
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -11,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     phoneNumber: {
+
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,

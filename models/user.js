@@ -1,4 +1,6 @@
+
 // const bcrypt = require('bcryptjs');
+
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -9,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       allowNull: false,
     },
+
+    // Cognitio User ID(?)
 
     // FIRST AND LAST NAME
     firstName: {
@@ -61,6 +65,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  // PASSPORT TEMPLATE
   // Creating a custom method for our User model. This will check if an unhashed
   // password entered by the user can be compared to the hashed password stored in our database
   // User.prototype.validPassword = (password) => bcrypt.compareSync(password, this.password);
