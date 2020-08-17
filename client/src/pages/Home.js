@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../AuthContext";
 import "../App.css";
 import { Container, Row, Button, Col } from "react-bootstrap";
+import Polly from '../components/Polly'
 import Axios from "axios";
 
 function Home(props) {
@@ -19,7 +20,9 @@ function Home(props) {
   };
 
   return (
+  
     <Container className="signup">
+      <Polly/>
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
           <h1>Home Page</h1>

@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/kylewhittemore/react-sequelize-template#readme",
   "dependencies": {
+    "aws-sdk": "^2.734.0",
     "axios": "^0.19.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -33,7 +34,9 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "react-bootstrap": "^1.0.0-beta.16",
-    "sequelize": "^5.21.3"
+    "sequelize": "^5.21.3",
+    "speaker": "^0.5.2",
+    "stream": "0.0.2"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
