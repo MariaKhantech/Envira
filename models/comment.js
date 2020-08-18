@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
 
   });
 
-  // userId and companyId are foreign keys
+  // userId,eventId and companyId are foreign keys
+  // A user can comment on many events or many companies
+  // one to many relationship
 
 
   // define relationship between user and comment

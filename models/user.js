@@ -80,6 +80,12 @@ module.exports = (sequelize, DataTypes) => {
   //     null,
   //   );
   // });
-
+  User.associate = (models) => {
+    // Associating user with events
+    // When an user is deleted, also delete any associated Events
+    User.hasMany(models.Event, {
+      onDelete: 'cascade',
+    });
+  };
   return User;
 };

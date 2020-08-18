@@ -1,0 +1,10 @@
+{
+	"auth": {},
+	"function": {
+		"project3AmplifyCognitoCustomMessage": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda"
+		}
+	}
+}

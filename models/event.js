@@ -33,5 +33,20 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  Event.associate = (models) => {
+    // We're saying that a Event should belong to an User
+    // A Event can't be created without an User due to the foreign key constraint
+    Event.belongsTo(models.user, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
+  // userID, companyId and commentID are foreign keys
+
+  // one user can create many events....one to many relationship
+  // one company can create many events.....one to many relationship
+  // An event can have many comments.....one to many relationship
+
   return Event;
 };
