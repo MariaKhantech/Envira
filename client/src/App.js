@@ -1,10 +1,17 @@
-// import React, { useContext } from "react";
-// import { Route, Switch, BrowserRouter as Router, Redirect } from "react-router-dom";
-// import { AuthProvider, AuthContext } from "./AuthContext";
-// import Home from "./pages/Home";
-// import Signup from "./pages/Signup";
-// import Login from "./pages/Login";
-// import Members from "./pages/Members";
+import React, { useContext } from "react";
+import { Route, Switch, BrowserRouter as Router, Redirect } from "react-router-dom";
+import { AuthProvider, AuthContext } from "./AuthContext";
+import Home from "./pages/Home";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Members from "./pages/Members";
+import Infographics from "./pages/Infographics";
+import Ocean from "./pages/Ocean";
+import Rainforest from "./pages/Rainforest";
+
+// Even though this is the App.js file, in the end we are not exactly exporting
+// the App component.  We actually set up the app component to implement our react
+// router, but in the end we export App wrapped in the context provider
 
 // // Even though this is the App.js file, in the end we are not exactly exporting
 // // the App component.  We actually set up the app component to implement our react
@@ -63,10 +70,21 @@ import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
 
 function App() {
   return (
-    <div>
-      <AmplifySignOut />
-      My App
-    </div>
+    <Router>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={props => <Home {...props} />}
+        />
+        <Route path="/Infographics" component={Infographics} />
+        <Route path="/Ocean" component={Ocean} />
+        <Route path="/Rainforest" component={Rainforest} />
+        <Route exact path="/login" render={props => <Login {...props} />} />
+        <Route exact path="/signup" render={props => <Signup {...props} />} />
+        <PrivateRoute exact path="/members" component={Members} />
+      </Switch>
+    </Router>
   );
 }
 
