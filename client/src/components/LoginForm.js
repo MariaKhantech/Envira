@@ -3,6 +3,7 @@ import { AuthContext } from '../AuthContext';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 import Axios from 'axios';
+import "../App.css";
 
 const LoginForm = props => {
 
@@ -41,7 +42,7 @@ const LoginForm = props => {
     }
 
     return (
-        <Form onSubmit={handleFormSubmit}>
+        <Form onSubmit={handleFormSubmit} className="signupForm ">
             <Form.Group controlId="emailInput">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control name="emailInput" type="email" placeholder="Enter email" value={formData.emailInput} onChange={handleInputChange} />
