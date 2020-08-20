@@ -1,11 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
-  const CompanyProfile = sequelize.define("CompanyProfile", {
+  const CompanyProfile = sequelize.define('CompanyProfile', {
     contact_person: {
       type: DataTypes.STRING,
       unique: false,
       allowNull: false,
     },
     company_description: {
+      type: DataTypes.STRING,
+      unique: false,
+      allowNull: false,
+    },
+    environmental_focus: {
       type: DataTypes.STRING,
       unique: false,
       allowNull: false,
