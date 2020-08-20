@@ -33,7 +33,7 @@ function App() {
 
 	return (
 		<Router>
-			<div>
+			<>
 				<NavBar />
 				<Switch>
 					<Route exact path="/" render={(props) => <Home {...props} />} />
@@ -45,7 +45,7 @@ function App() {
 					<Route exact path="/signup" render={(props) => <Signup {...props} />} />
 					<PrivateRoute exact path="/members" component={Members} />
 				</Switch>
-			</div>
+			</>
 		</Router>
 	);
 }
