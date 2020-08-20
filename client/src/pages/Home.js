@@ -22,7 +22,6 @@ function Home(props) {
   return (
   
     <Container className="signup">
-      <Polly/>
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
           <h1>Home Page</h1>

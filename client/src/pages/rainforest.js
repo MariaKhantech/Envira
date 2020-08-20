@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react'
 
-function Rainforest() {
-	return (
-		<div>
-			<h1>Rainforest Page</h1>
-		</div>
-	);
+export class Rainforest extends Component {
+	render() {
+		return (
+			<div>
+				<p>Rainforest</p>
+			</div>
+		)
+	}
 }
 
-export default Rainforest;
+export default Rainforest
