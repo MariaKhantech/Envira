@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react'
 
-function Infographics() {
-	return (
-		<div>
-			<h1>Infographics Page</h1>
-		</div>
-	);
+export class Infographics extends Component {
+	render() {
+		return (
+			<div>
+				<p>INFORGRAPHICS</p>
+			</div>
+		)
+	}
 }
 
-export default Infographics;
+export default Infographics
+

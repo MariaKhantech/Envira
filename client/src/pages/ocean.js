@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react'
 
-function Ocean() {
-	return (
-		<div>
-			<h1>Ocean Page</h1>
-		</div>
-	);
+export class Ocean extends Component {
+	render() {
+		return (
+			<div>
+				<p>OCEAN</p>
+			</div>
+		)
+	}
 }
 
-export default Ocean;
+export default Ocean
