@@ -1,5 +1,12 @@
 {
-	"auth": {},
+	"auth": {
+		"enviroplatformf0ee9c03": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	},
 	"function": {
 		"project3AmplifyCognitoCustomMessage": {
 			"build": true,

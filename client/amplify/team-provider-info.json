@@ -18,6 +18,9 @@
                     "EMAILSUBJECT": "",
                     "EMAILMESSAGE": ""
                 }
+            },
+            "auth": {
+                "enviroplatformf0ee9c03": {}
             }
         }
     }
