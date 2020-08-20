@@ -27,10 +27,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    attendee: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
   });
 
   // one user can create many events....one to many relationship
@@ -55,17 +51,23 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  // userID, companyId  are foreign keys
-
   // An event can have many comments.....one to many relationship
   // Associating event with comments
   // When an event is deleted, also delete any associated comments
   // An event can have many comments
   Event.associate = (models) => {
-    Event.hasMany(models.Comment, {
+    Event.hasMany(models.EventComment, {
       onDelete: 'cascade',
     });
   };
 
+  Event.associate = (models) => {
+    Event.belongsToMany(models.User, {
+      through: 'EventAttendee',
+      as: 'users',
+      foreignKey: 'eventId',
+      otherKey: 'userId',
+    });
+  };
   return Event;
 };

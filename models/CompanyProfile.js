@@ -1,16 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
   const CompanyProfile = sequelize.define('CompanyProfile', {
-    contact_person: {
+    contactPerson: {
       type: DataTypes.STRING,
       unique: false,
       allowNull: false,
     },
-    company_description: {
+    companyDescription: {
       type: DataTypes.STRING,
       unique: false,
       allowNull: false,
     },
-    environmental_focus: {
+    environmentalFocus: {
       type: DataTypes.STRING,
       unique: false,
       allowNull: false,
@@ -20,6 +20,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: false,
       isUrl: true,
+    },
+    // add validation for phone number
+    phoneNumber: {
+      type: DataTypes.Integer,
+      allowNull: false,
+      unique: false,
     },
   });
 

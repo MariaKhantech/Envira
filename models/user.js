@@ -1,27 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    // USER ID
-    userId: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false,
-    },
-
-    // Cognitio User ID(?)
-
-    // FIRST AND LAST NAME
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: false,
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: false,
-    },
-
     // USERNAME AND EMAIL
     userName: {
       type: DataTypes.STRING,
@@ -36,29 +14,13 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true,
       },
     },
-
-    // PASSWORD
+    // add some validation for password
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
-
-    // CITY, STATE, and ZIP
-    city: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: false,
-    },
-    state: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: false,
-    },
-    zipCode: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      unique: false,
-    },
+    // cognito userPoolId
   });
 
   // Associating user with events
@@ -67,6 +29,32 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = (models) => {
     User.hasMany(models.Event, {
       onDelete: 'cascade',
+    });
+  };
+
+  User.associate = (models) => {
+    User.hasMany(models.EventComment, {
+      onDelete: 'cascade',
+    });
+  };
+
+
+  // We're saying that an User should be associated with the role
+  // An User can't be created without a Role due to the foreign key constraint
+  User.associate = (models) => {
+    User.belongsTo(models.Role, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
+
+  User.associate = (models) => {
+    User.belongsToMany(models.Event, {
+      through: 'EventAttendee',
+      as: 'event',
+      foreignKey: 'userId',
+      otherKey: 'eventId',
     });
   };
   return User;
