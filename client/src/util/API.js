@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 export default {
-	// Gets all books
-	speakPolly: function(text) {
+	speakPolly: (text) => {
 		return axios.get('/api/polly' + text);
 	}
 };
