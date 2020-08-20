@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 import Axios from 'axios';
 import "../App.css";
+import { Auth } from "aws-amplify";
 
 const LoginForm = props => {
 

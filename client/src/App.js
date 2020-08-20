@@ -59,3 +59,14 @@ export default () => {
 		</AuthProvider>
 	);
 };
+// import React from 'react'
+// import Register from "./components/RegisterTest"
+// import Login from "./components/Login"
+// export default function App() {
+//   return (
+//     <div>
+//       <Register></Register>
+//       <Login></Login>
+//     </div>
+//   )
+// }
