@@ -1,8 +1,19 @@
 import React, { Component } from "react";
-import EventCarousel from "../components/EventSearch/index";
+import EventSearch from "../components/EventSearch/index";
+import Container from "react-bootstrap/Container";
 
 export default class Events extends Component {
+  state = {
+    searchByTitle: "",
+    searchByLocation: "",
+    searchByKeyword: "",
+  };
+
   render() {
-    return <EventCarousel />;
+    return (
+      <Container>
+        <EventSearch />
+      </Container>
+    );
   }
 }
