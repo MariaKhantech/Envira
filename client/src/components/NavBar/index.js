@@ -15,15 +15,15 @@ export class NavBar extends Component {
 	render() {
 		const { isSidebarOpen } = this.state;
 		return (
-			<div className="container">
+			<div className="ml-2">
 				<div className="menu-button" onClick={this.handleMenuButtonClick}>
 					<i className="fa fa-bars" />
 				</div>
 				{/*	Sidebar */}
 				{menuData.length && (
-					<nav className={`nav ${isSidebarOpen ? 'show' : ''}`}>
+					<nav className={`nav ${isSidebarOpen ? 'show ml-2 mt-2' : ''}`}>
 						<div onClick={this.handleMenuButtonClick} className="close">
-							<i className="fas fa-times" />
+							<i className="fa fa-window-close" />
 						</div>
 						<ul className="menu-items">
 							{menuData.map((item) => (

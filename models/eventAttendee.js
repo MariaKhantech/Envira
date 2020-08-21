@@ -1,15 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
-  // For user profile card
-  const ProfileUser = sequelize.define('ProfileUser', {
-    email: {
+  const EventAttendee = sequelize.define('EventAttendee', {
+    userId: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    about: {
+    eventId: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   });
 
-  return ProfileUser;
+  return EventAttendee;
 };

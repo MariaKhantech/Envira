@@ -16,7 +16,7 @@ body {
   position: absolute;
   top: 0;
   z-index: 999;
-  background-color: #fff;
+  background-color: rgb(219, 214, 214);
   left: -40vw;
   -webkit-transition: left 0.3s ease-in;
   transition: left 0.3s ease-in;
