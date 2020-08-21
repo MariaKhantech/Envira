@@ -30,9 +30,9 @@ export default class Register extends Component {
                 type: "user"
             })
         }
-        else {
+        else{
             this.setState({
-                type: "company"
+                type:"company"
             })
         }
     }

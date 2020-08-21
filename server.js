@@ -5,7 +5,7 @@ const logger = require('morgan');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const db = require('./models');
-// const routes = require('./routes');
+const routes = require('./routes');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -29,7 +29,7 @@ app.use(passport.session());
 
 // Routing
 // =============================================
-// app.use('/api', routes);
+app.use('/api', routes);
 
 // Everything that is not an api request is sent to index.html
 // for client side routing.
