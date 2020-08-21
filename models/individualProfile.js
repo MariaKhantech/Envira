@@ -2,12 +2,12 @@ module.exports = (sequelize, DataTypes) => {
   // For user profile card
   const UserProfile = sequelize.define('UserProfile', {
     // FIRST AND LAST NAME
-    firstName: {
+    first_name: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: false,
     },
-    lastName: {
+    last_name: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: false,
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: false,
     },
-    zipCode: {
+    zip_code: {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: false,
@@ -32,7 +32,20 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    phone_number: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: false,
+    },
   });
+
+  UserProfile.associate = (models) => {
+    UserProfile.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
 
   return UserProfile;
 };

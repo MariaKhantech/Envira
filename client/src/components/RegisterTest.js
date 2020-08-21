@@ -12,15 +12,29 @@ export default class Register extends Component {
         lastName: "",
         email: "",
         password: "",
-        confirmPassword: "",  
+        confirmPassword: "",
         signedUp: false,
         confirmationCode: "",
         newUser: null,
         isLoading: false,
+        type: "company"
     }
 
     validateConfirmationForm() {
         return this.state.confirmationCode.length > 0;
+    }
+
+    handleToggle = (e) => {
+        if (this.state.type === "company") {
+            this.setState({
+                type: "user"
+            })
+        }
+        else {
+            this.setState({
+                type: "company"
+            })
+        }
     }
 
 
@@ -111,11 +125,11 @@ export default class Register extends Component {
 
                             <ul className="nav nav-tabs nav-justified" id="myTab" role="tablist">
                                 <li className="nav-item">
-                                    <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                    <a onClick={this.handleToggle} className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                                         aria-controls="home" aria-selected="true">Company</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                    <a onClick={this.handleToggle} className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                         aria-controls="profile" aria-selected="false">User</a>
                                 </li>
                             </ul>
@@ -137,7 +151,7 @@ export default class Register extends Component {
                                             </div>
                                             <div className="form-group">
                                                 <label htmlFor="address" className="font-italic font-weight-bold">Address:</label>
-                                                <textarea name="address" onChange={this.handleInputChange} type="textarea" className="form-control" placeholder="Company Address *"  />
+                                                <textarea name="address" onChange={this.handleInputChange} type="textarea" className="form-control" placeholder="Company Address *" />
                                             </div>
 
                                             <div className="form-group">
@@ -157,7 +171,7 @@ export default class Register extends Component {
 
                                         <div className="col-md-6">
                                             <div className="form-group">
-                                            <label htmlFor="phoneNumber" className="font-italic font-weight-bold">Phone Number:</label>
+                                                <label htmlFor="phoneNumber" className="font-italic font-weight-bold">Phone Number:</label>
                                                 <input name="phoneNumber" onChange={this.handleInputChange} type="text" minLength="10" maxLength="10" name="txtEmpPhone"
                                                     className="form-control" placeholder="Your Phone *" value="" />
                                             </div>

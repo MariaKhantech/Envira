@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Event = sequelize.define('Event', {
-    name: {
+    event_name: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: false,
@@ -19,11 +19,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
     },
-    contactPerson: {
+    contact_person: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    contactNumber: {
+    contact_number: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -40,17 +40,6 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  // one company can create many events.....one to many relationship
-  // We're saying that an Event should belong to a Company
-  // An Event can't be created without a Company due to the foreign key constraint
-  Event.associate = (models) => {
-    Event.belongsTo(models.Company, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-  };
-
   // An event can have many comments.....one to many relationship
   // Associating event with comments
   // When an event is deleted, also delete any associated comments
@@ -60,13 +49,10 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'cascade',
     });
   };
-
+  // When an event is deleted, also delete any associated reply
   Event.associate = (models) => {
-    Event.belongsToMany(models.User, {
-      through: 'EventAttendee',
-      as: 'users',
-      foreignKey: 'eventId',
-      otherKey: 'userId',
+    Event.hasMany(models.Reply, {
+      onDelete: 'cascade',
     });
   };
   return Event;
