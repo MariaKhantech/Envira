@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './AuthContext';
-import NavBar from './components/NavBar';
+
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -31,16 +31,21 @@ function App() {
 		<Route {...rest} render={(props) => (isAuth ? <Component {...props} /> : <Redirect to="/login" />)} />
 	);
 
+	const userDetails = {
+		name: 'uzi',
+		address: 'test',
+		role: 'individual'
+	};
+
 	return (
 		<Router>
 			<div>
-				<NavBar />
 				<Switch>
 					<Route exact path="/" render={(props) => <Home {...props} />} />
 					<Route path="/infographics" component={Infographics} />
 					<Route path="/ocean" component={Ocean} />
 					<Route path="/rainforest" component={Rainforest} />
-					<Route path="/profile" component={Profile} />
+					<Route path="/profile" render={(props) => <Profile {...props} userObject={userDetails} />} />
 					<Route exact path="/login" render={(props) => <Login {...props} />} />
 					<Route exact path="/signup" render={(props) => <Signup {...props} />} />
 					<PrivateRoute exact path="/members" component={Members} />

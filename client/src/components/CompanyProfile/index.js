@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './style.css';
 
-export class UserProfile extends Component {
-	componentDidMount() {
-		document.body.style.background = '-webkit-linear-gradient(left, #3931af, #00c6ff)';
+export class CompanyProfile extends Component {
+
+
+	componentDidMount(){
+ 		document.body.style.background = "-webkit-linear-gradient(left, #3931af, #00c6ff)";
 	}
 	render() {
 		return (
@@ -24,7 +26,7 @@ export class UserProfile extends Component {
 						</div>
 						<div className="col-md-6">
 							<div className="profile-head">
-								<h5>{this.props.name}</h5>
+								<h5>COMPANY PROFILE</h5>
 								<h6>Web Developer and Designer</h6>
 								<p className="proile-rating">
 									RANKINGS : <span>8/10</span>
@@ -197,4 +199,4 @@ export class UserProfile extends Component {
 	}
 }
 
-export default UserProfile;
+export default CompanyProfile;
