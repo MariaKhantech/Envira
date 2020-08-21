@@ -2,9 +2,10 @@ import React, { Component } from "react";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import Nav from "react-bootstrap/Nav";
 import CardDeck from "react-bootstrap/CardDeck";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 import {
   CarouselProvider,
@@ -30,7 +31,7 @@ export default class index extends Component {
   render() {
     return (
       <Row>
-        <Col md={6} className="mx-auto mt-5">
+        <Col md={10} className="mx-auto mt-5">
           <CarouselProvider
             naturalSlideWidth={100}
             naturalSlideHeight={150}
@@ -40,7 +41,7 @@ export default class index extends Component {
               <Slide index={0}>
                 <CardDeck>
                   <Card>
-                    <Card.Img variant="top" src="http://placehold.it/250x250" />
+                    <Card.Img variant="top" src="http://placehold.it/250x200" />
                     <Card.Body>
                       <Card.Title>Card title</Card.Title>
                       <Card.Text>
@@ -56,7 +57,7 @@ export default class index extends Component {
                     </Card.Footer>
                   </Card>
                   <Card>
-                    <Card.Img variant="top" src="http://placehold.it/250x250" />
+                    <Card.Img variant="top" src="http://placehold.it/250x200" />
                     <Card.Body>
                       <Card.Title>Card title</Card.Title>
                       <Card.Text>
@@ -71,7 +72,7 @@ export default class index extends Component {
                     </Card.Footer>
                   </Card>
                   <Card>
-                    <Card.Img variant="top" src="http://placehold.it/250x250" />
+                    <Card.Img variant="top" src="http://placehold.it/250x200" />
                     <Card.Body>
                       <Card.Title>Card title</Card.Title>
                       <Card.Text>
