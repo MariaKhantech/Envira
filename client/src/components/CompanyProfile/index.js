@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './style.css';
 
-export class UserProfile extends Component {
-	componentDidMount() {
-		document.body.style.background = '-webkit-linear-gradient(left, #3931af, #00c6ff)';
+export class CompanyProfile extends Component {
+
+
+	componentDidMount(){
+ 		document.body.style.background = "-webkit-linear-gradient(left, #3931af, #00c6ff)";
 	}
 	render() {
 		return (
@@ -24,10 +26,10 @@ export class UserProfile extends Component {
 						</div>
 						<div className="col-md-6">
 							<div className="profile-head">
-								<h5>{this.props.name}</h5>
+								<h5>COMPANY PROFILE</h5>
 								<h6>Web Developer and Designer</h6>
 								<p className="proile-rating">
-									EVENT RANKINGS : <span>8/10</span>
+									RANKINGS : <span>8/10</span>
 								</p>
 								<ul className="nav nav-tabs" id="myTab" role="tablist">
 									<li className="nav-item">
@@ -40,7 +42,7 @@ export class UserProfile extends Component {
 											aria-controls="home"
 											aria-selected="true"
 										>
-											About Me:
+											About
 										</a>
 									</li>
 									<li className="nav-item">
@@ -53,7 +55,7 @@ export class UserProfile extends Component {
 											aria-controls="profile"
 											aria-selected="false"
 										>
-											Contact Info
+											Contact
 										</a>
 									</li>
 								</ul>
@@ -113,6 +115,9 @@ export class UserProfile extends Component {
 										<div className="col-md-6">
 											<label>Email</label>
 										</div>
+										<div className="col-md-6">
+											<p>kshitighelani@gmail.com</p>
+										</div>
 									</div>
 									<div className="row">
 										<div className="col-md-6">
@@ -139,15 +144,15 @@ export class UserProfile extends Component {
 								>
 									<div className="row">
 										<div className="col-md-6">
-											<label>Name:</label>
+											<label>Experience</label>
 										</div>
 										<div className="col-md-6">
-											<p />
+											<p>Expert</p>
 										</div>
 									</div>
 									<div className="row">
 										<div className="col-md-6">
-											<label>Location:</label>
+											<label>Hourly Rate</label>
 										</div>
 										<div className="col-md-6">
 											<p>10$/hr</p>
@@ -155,7 +160,7 @@ export class UserProfile extends Component {
 									</div>
 									<div className="row">
 										<div className="col-md-6">
-											<label>Contact Email:</label>
+											<label>Total Projects</label>
 										</div>
 										<div className="col-md-6">
 											<p>230</p>
@@ -163,7 +168,7 @@ export class UserProfile extends Component {
 									</div>
 									<div className="row">
 										<div className="col-md-6">
-											<label>Contact Number:</label>
+											<label>English Level</label>
 										</div>
 										<div className="col-md-6">
 											<p>Expert</p>
@@ -194,4 +199,4 @@ export class UserProfile extends Component {
 	}
 }
 
-export default UserProfile;
+export default CompanyProfile;

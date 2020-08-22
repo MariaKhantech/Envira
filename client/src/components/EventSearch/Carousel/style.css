@@ -13,3 +13,14 @@
   top: 225px;
   right: -45px;
 }
+
+.carouselControl {
+  position: absolute;
+  top: 595px;
+  left: 420px;
+}
+
+.carousel__dot {
+  padding: 1px;
+  width: 50px;
+}
