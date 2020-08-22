@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
-import {
-  Route,
-  Switch,
-  BrowserRouter as Router,
-  Redirect,
-} from "react-router-dom";
-import { AuthProvider, AuthContext } from "./AuthContext";
+import React, { Component } from 'react'
+import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './components/NavbarTest';
 import NavBar from "./components/NavBar";
+import Home from './components/Home';
+import LogIn from './components/Login/Login';
+import Register from './components/SignUp/Register';
+import ForgotPassword from './components/auth/ForgotPassword';
+import ForgotPasswordVerification from './components/auth/ForgotPasswordVerification';
+import ChangePassword from './components/auth/ChangePassword';
+import ChangePasswordConfirm from './components/auth/ChangePasswordConfirm';
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -16,73 +19,75 @@ import Ocean from "./pages/ocean";
 import Rainforest from "./pages/rainforest";
 import Profile from "./pages/Profile";
 import Events from "./pages/events";
+import { Auth } from 'aws-amplify';
 
-// Even though this is the App.js file, in the end we are not exactly exporting
-// the App component.  We actually set up the app component to implement our react
-// router, but in the end we export App wrapped in the context provider
+export default class AppTest extends Component {
+  state = {
+    isAuthenticated: false,
+    isAuthenticating: true,
+    user: null
+  }
+  setAuthStatus = authenticated => {
+    this.setState({ isAuthenticated: authenticated });
+  }
 
-function App() {
-  // Here we subscribe the authentication context using the useContext hook
-  // we use isAuth to determine whether the user is logged in, and setIsAuth
-  // to change their status on logout.
-  const { isAuth, setIsAuth } = useContext(AuthContext);
-  console.log("App auth: ", isAuth);
+  setUser = user => {
+    this.setState({ user: user });
+  }
 
-  // here we are ceating a private route wrapper to prevent front end routing to
-  // restricted pages.  The ({ component: Component, ...rest })  argument that is
-  // passed to this functional component is essentially the same as just passing
-  // props, but using object destucturing.  the ...rest is literally the rest of
-  // the props that were not destructured.
-  const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuth ? <Component {...props} /> : <Redirect to="/login" />
+  async componentDidMount() {
+    try {
+      const session = await Auth.currentSession();
+      this.setAuthStatus(true);
+      console.log(session);
+      const user = await Auth.currentAuthenticatedUser();
+      this.setUser(user);
+    } catch (error) {
+      if (error !== 'No current user') {
+        console.log(error);
       }
-    />
-  );
+    }
 
-  return (
-    <Router>
-      <div>
-        <NavBar />
-        <Switch>
-          <Route exact path="/" render={(props) => <Home {...props} />} />
-          <Route path="/infographics" component={Infographics} />
-          <Route path="/ocean" component={Ocean} />
-          <Route path="/rainforest" component={Rainforest} />
-          <Route path="/events" component={Events} />
-          <Route path="/profile" component={Profile} />
-          <Route exact path="/login" render={(props) => <Login {...props} />} />
-          <Route
-            exact
-            path="/signup"
-            render={(props) => <Signup {...props} />}
-          />
-          <PrivateRoute exact path="/members" component={Members} />
-        </Switch>
-      </div>
-    </Router>
-  );
+    this.setState({ isAuthenticating: false });
+  }
+
+
+
+
+
+  render() {
+    const authProps = {
+      isAuthenticated: this.state.isAuthenticated,
+      user: this.state.user,
+      setAuthStatus: this.setAuthStatus,
+      setUser: this.setUser
+    }
+    return (
+      !this.state.isAuthenticating &&
+      <>
+        <div className="App">
+          <Router>
+            <div>
+              <Navbar auth={authProps} />
+              <Switch>
+                <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
+                <Route exact path="/login" render={(props) => <LogIn {...props} auth={authProps} />} />
+                <Route exact path="/register" render={(props) => <Register {...props} auth={authProps} />} />
+                <Route exact path="/profile" render={(props) => <Profile {...props} auth={authProps} />} />
+                <Route exact path="/infographics" render={(props) => < Infographics {...props} auth={authProps} />} />
+                <Route exact path="/ocean" render={(props) => < Ocean {...props} auth={authProps} />} />
+                <Route exact path="/rainforest" render={(props) => <Rainforest {...props} auth={authProps} />} />
+                <Route exact path="/events" render={(props) => <Events {...props} auth={authProps} />} />
+                <Route exact path="/forgotpassword" render={(props) => <ForgotPassword {...props} auth={authProps} />} />
+                <Route exact path="/forgotpasswordverification" render={(props) => <ForgotPasswordVerification {...props} auth={authProps} />} />
+                <Route exact path="/changepassword" render={(props) => <ChangePassword {...props} auth={authProps} />} />
+                <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
+              </Switch>
+
+            </div>
+          </Router>
+        </div>
+      </>
+    )
+  }
 }
-
-// Here we export the final product of our app/context configuration, and
-// even though it is unnamed here, it will be imported as App in index.js
-export default () => {
-  return (
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  );
-};
-// import React from 'react'
-// import Register from "./components/RegisterTest"
-// import Login from "./components/Login"
-// export default function App() {
-//   return (
-//     <div>
-//       <Register></Register>
-//       <Login></Login>
-//     </div>
-//   )
-// }
