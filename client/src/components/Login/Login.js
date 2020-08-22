@@ -42,12 +42,12 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div>
+            <>
                 <div id="login">
                     <h3 className="text-center text-white pt-5">Login form</h3>
                     <div className="container">
                         <div id="login-row" className="row justify-content-center align-items-center">
-                            <div id="login-column" className="col-md-6">
+                            <div id="login-column" className="col-md-12">
                                 <div id="login-box" className="col-md-12">
                                     <form id="login-form" className="form" action="" method="post">
                                         <h3 className="text-center text-info">Login</h3>
@@ -67,7 +67,7 @@ export default class Login extends Component {
                                             <input onClick={this.handleFormSubmit} type="submit" name="submit" className="btn btn-info btn-md" value="submit" />
                                         </div>
                                         <div id="register-link" className="text-right">
-                                            <a href="#" className="text-info">Register here</a>
+                                            <a href="/forgotpassword" className="text-info">Forgot Password</a>
                                         </div>
                                     </form>
                                 </div>
@@ -75,7 +75,7 @@ export default class Login extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
         )
     }
 }
