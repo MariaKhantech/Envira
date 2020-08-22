@@ -1,92 +1,15 @@
-import React, { useContext, useState } from "react";
-import { AuthContext } from "../AuthContext";
+import React, { Component } from 'react'
 import "../App.css";
-import { Container, Row, Button, Col } from "react-bootstrap";
 import Polly from '../components/Polly'
 import Axios from "axios";
 
-function Home(props) {
-  
-  const { isAuth, logout } = useContext(AuthContext);
 
-  const [secret, setSecret] = useState("");
+export default class Home extends Component {
+  render() {
+    return (
+      <div>
 
-  // this function is duplicated in the Members page component
-  // consider refactor 
-  const getSecret = async () => {
-    const secretResponse = await Axios.get("/api/secrets");
-    console.log(secretResponse.data);
-    setSecret(secretResponse.data);
-  };
-
-  return (
-  
-    <Container className="signup">
-      <Row>
-        <Col md={{ span: 8, offset: 2 }}>
-          <h1>Home Page</h1>
-          {isAuth ? (
-            <>
-              <Button
-                className="m-1"
-                onClick={e => {
-                  e.preventDefault();
-                  setSecret('');
-                  logout();
-                }}
-              >
-                Logout
-              </Button>
-              <Button
-                className="m-1"
-                onClick={e => {
-                  e.preventDefault();
-                  props.history.push("/members");
-                }}
-              >
-                Members
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button
-                className="m-1"
-                onClick={e => {
-                  e.preventDefault();
-                  props.history.push("/login");
-                }}
-              >
-                Login
-              </Button>
-              <Button
-                className="m-1"
-                onClick={e => {
-                  e.preventDefault();
-                  props.history.push("/signup");
-                }}
-              >
-                Signup
-              </Button>
-            </>
-          )}
-          <Button
-            className="m-1"
-            onClick={e => {
-              e.preventDefault();
-              getSecret();
-            }}
-          >
-            Show Secrets
-          </Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col md={{ span: 8, offset: 2 }}>
-          <h1>{secret}</h1>
-        </Col>
-      </Row>
-    </Container>
-  );
+      </div>
+    )
+  }
 }
-
-export default Home;

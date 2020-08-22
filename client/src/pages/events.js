@@ -1,14 +1,18 @@
 import React, { Component } from "react";
-import Login from "../components/Login/";
+import EventSearch from "../components/EventSearch/index";
 import Container from "react-bootstrap/Container";
 
 export default class Events extends Component {
- 
+  state = {
+    searchByTitle: "",
+    searchByLocation: "",
+    searchByKeyword: "",
+  };
 
   render() {
     return (
       <Container>
-        <Login />
+        <EventSearch />
       </Container>
     );
   }

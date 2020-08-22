@@ -1,20 +1,15 @@
-import React from 'react'
-import "../App.css";
-import SignupForm from "../components/SignupForm";
+import React, { Component } from "react";
+import Login from "../components/SignUp";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
-function Signup(props) {
-  return (
-    <Container className="signup">
-      <Row>
-        <Col md={{ span: 8, offset: 2 }}>
-          <SignupForm {...props} />
-        </Col>
-      </Row>
-    </Container>
-  );
+export default class Events extends Component {
+ 
+
+  render() {
+    return (
+      <Container>
+        <Login />
+      </Container>
+    );
+  }
 }
-
-export default Signup;
