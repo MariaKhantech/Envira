@@ -1,0 +1,49 @@
+body {
+  background: #632778;
+}
+
+.form-control:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-color: #BA68C8;
+}
+
+.profile-button {
+  background: #632778;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border: none;
+}
+
+.profile-button:hover {
+  background: #682773;
+}
+
+.profile-button:focus {
+  background: #682773;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.profile-button:active {
+  background: #682773;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.back:hover {
+  color: #682773;
+  cursor: pointer;
+}
+
+.labels {
+  font-size: 11px;
+}
+
+.add-experience:hover {
+  background: #BA68C8;
+  color: #fff;
+  cursor: pointer;
+  border: solid 1px #BA68C8;
+}
+/*# sourceMappingURL=updateProfile.css.map */

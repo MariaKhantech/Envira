@@ -1,26 +1,14 @@
-import React, { useContext, useState } from "react";
-import { AuthContext } from "../AuthContext";
+import React, { useState } from "react";
 import "../App.css";
 import { Container, Row, Button, Col } from "react-bootstrap";
 import Polly from '../components/Polly'
 import Axios from "axios";
 
 function Home(props) {
-  
-  const { isAuth, logout } = useContext(AuthContext);
 
-  const [secret, setSecret] = useState("");
-
-  // this function is duplicated in the Members page component
-  // consider refactor 
-  const getSecret = async () => {
-    const secretResponse = await Axios.get("/api/secrets");
-    console.log(secretResponse.data);
-    setSecret(secretResponse.data);
-  };
-
+ 
   return (
-  
+
     <Container className="signup">
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
@@ -48,27 +36,27 @@ function Home(props) {
               </Button>
             </>
           ) : (
-            <>
-              <Button
-                className="m-1"
-                onClick={e => {
-                  e.preventDefault();
-                  props.history.push("/login");
-                }}
-              >
-                Login
+              <>
+                <Button
+                  className="m-1"
+                  onClick={e => {
+                    e.preventDefault();
+                    props.history.push("/login");
+                  }}
+                >
+                  Login
               </Button>
-              <Button
-                className="m-1"
-                onClick={e => {
-                  e.preventDefault();
-                  props.history.push("/signup");
-                }}
-              >
-                Signup
+                <Button
+                  className="m-1"
+                  onClick={e => {
+                    e.preventDefault();
+                    props.history.push("/signup");
+                  }}
+                >
+                  Signup
               </Button>
-            </>
-          )}
+              </>
+            )}
           <Button
             className="m-1"
             onClick={e => {
