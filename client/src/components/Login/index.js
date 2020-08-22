@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Auth } from "aws-amplify";
-import "./login.css"
+import "../Login/style.css"
 
 export default class Login extends Component {
 
