@@ -19,26 +19,33 @@ export default class index extends Component {
   infoIcon = (<FontAwesomeIcon icon={faInfo} size="1x" />);
 
   render() {
-    console.log(this.props.state);
+    const {
+      company,
+      eventTitle,
+      email,
+      website,
+      date,
+      location,
+    } = this.state.props;
     return (
       <Card className="p-2">
-        <Card.Header>{this.props.state.company} </Card.Header>
+        <Card.Header name="company">{company} </Card.Header>
         <Card.Img variant="top" src="http://placehold.it/250x200" />
         <Card.Body>
-          <Card.Title className="text-center">
-            {this.props.state.eventTitle}
+          <Card.Title className="text-center" name="eventTitle">
+            {eventTitle}
           </Card.Title>
-          <Card.Text className="text-center">
+          <Card.Text className="text-center" name="email">
             <i>{this.envelopeIcon}</i>
-            {this.props.state.email}
+            {email}
           </Card.Text>
-          <Card.Text className="text-center">
+          <Card.Text className="text-center" name="website">
             <i>{this.globeIcon}</i>
             {this.props.state.website}
           </Card.Text>
-          <Card.Text className="text-center">
+          <Card.Text className="text-center" name="date">
             <i>{this.calendarIcon}</i>
-            {this.props.state.date}
+            {date}
           </Card.Text>
         </Card.Body>
         <Card.Body className="mx-auto">
@@ -47,8 +54,8 @@ export default class index extends Component {
           </Button>
         </Card.Body>
         <Card.Footer>
-          <small className="text-muted">
-            {this.props.state.location}
+          <small className="text-muted" name="location">
+            {location}
             <i>{this.mapIcon}</i>
           </small>
           <Button

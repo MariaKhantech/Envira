@@ -33,7 +33,7 @@ export default class EventSearch extends Component {
       <>
         <Search onChange={this.onChange} />
 
-        <Carousel onChange={this.onChange} state={this.state} />
+        <Carousel state={this.state} />
       </>
     );
   }
