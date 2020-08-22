@@ -1,16 +1,20 @@
-body{
-  background-color: lightyellow;
+body {
+  background-color: #f5f5ef;
 }
+
 .signup {
   padding-top: 100px;
 }
-.signupForm{
-  background-color: rgb(194, 193, 191);
- border: 0.5px solid grey;
+
+.signupForm {
+  background-color: #c2c1bf;
+  border: 0.5px solid grey;
   border-radius: 20px;
   padding: 10px;
   font-family: inherit;
   font-size: 20px;
-  box-shadow: 10px 10px 5px grey;
+  -webkit-box-shadow: 10px 10px 5px grey;
+          box-shadow: 10px 10px 5px grey;
   font-style: italic;
 }
+/*# sourceMappingURL=App.css.map */

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Ratings = sequelize.define('Ratings', {
+  const Rating = sequelize.define('Rating', {
     rating: {
       type: DataTypes.INTEGER,
       validate: {
@@ -12,7 +12,13 @@ module.exports = (sequelize, DataTypes) => {
   // Ratings will belong to
 
   // --> User (user_id)
-  // --> Company (company_id)
+  Rating.associate = (models) => {
+    Rating.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
 
-  return Ratings;
+  return Rating;
 };

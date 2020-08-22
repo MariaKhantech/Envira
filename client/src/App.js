@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './AuthContext';
-
+// import NavBar from "./components/NavBar"
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -10,6 +10,7 @@ import Infographics from './pages/Infographics';
 import Ocean from './pages/Ocean';
 import Rainforest from './pages/Rainforest';
 import Profile from './pages/Profile';
+import { Navbar } from 'react-bootstrap';
 
 // Even though this is the App.js file, in the end we are not exactly exporting
 // the App component.  We actually set up the app component to implement our react
@@ -40,6 +41,7 @@ function App() {
 	return (
 		<Router>
 			<div>
+				{/* <NavBar /> */}
 				<Switch>
 					<Route exact path="/" render={(props) => <Home {...props} />} />
 					<Route path="/infographics" component={Infographics} />
