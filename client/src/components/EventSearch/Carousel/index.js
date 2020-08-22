@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Nav from "react-bootstrap/Nav";
 import CardDeck from "react-bootstrap/CardDeck";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -13,6 +12,7 @@ import {
   Slide,
   ButtonBack,
   ButtonNext,
+  DotGroup,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
@@ -20,13 +20,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
+  faEnvelope,
+  faGlobe,
+  faCalendarDay,
+  faMapMarkerAlt,
+  faInfo,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./style.css";
 
-export default class index extends Component {
+export default class Carousel extends Component {
   leftIcon = (<FontAwesomeIcon icon={faChevronLeft} />);
   rightIcon = (<FontAwesomeIcon icon={faChevronRight} />);
+  envelopeIcon = (<FontAwesomeIcon icon={faEnvelope} />);
+  globeIcon = (<FontAwesomeIcon icon={faGlobe} />);
+  calendarIcon = (<FontAwesomeIcon icon={faCalendarDay} />);
+  mapIcon = (<FontAwesomeIcon icon={faMapMarkerAlt} />);
+  infoIcon = (<FontAwesomeIcon icon={faInfo} size="1x" />);
 
   render() {
     return (
@@ -39,59 +49,344 @@ export default class index extends Component {
           >
             <Slider>
               <Slide index={0}>
+                {/* CARDDECK 1 */}
                 <CardDeck>
-                  <Card>
+                  {/* CARD 1 */}
+                  <Card className="p-2">
+                    <Card.Header>Company </Card.Header>
                     <Card.Img variant="top" src="http://placehold.it/250x200" />
                     <Card.Body>
-                      <Card.Title>Card title</Card.Title>
-                      <Card.Text>
-                        This is a wider card with supporting text below as a
-                        natural lead-in to additional content. This content is a
-                        little bit longer.
+                      <Card.Title className="text-center">
+                        Event title
+                      </Card.Title>
+                      <Card.Text className="text-center">
+                        <i>{this.envelopeIcon}</i> myemail@email.com
                       </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.globeIcon}</i> www.myWebsite.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.calendarIcon}</i> September 1st, 2020
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Body className="mx-auto">
+                      <Button variant="primary" size="sm">
+                        Attend
+                      </Button>
                     </Card.Body>
                     <Card.Footer>
                       <small className="text-muted">
-                        Last updated 3 mins ago
+                        Portsmouth <i>{this.mapIcon}</i>
                       </small>
+                      <Button
+                        variant="outline-dark"
+                        size="sm"
+                        className="rounded-circle float-right"
+                      >
+                        {this.infoIcon}
+                      </Button>
                     </Card.Footer>
                   </Card>
-                  <Card>
+                  {/* CARD 2 */}
+                  <Card className="p-2">
+                    <Card.Header>Company </Card.Header>
                     <Card.Img variant="top" src="http://placehold.it/250x200" />
                     <Card.Body>
-                      <Card.Title>Card title</Card.Title>
-                      <Card.Text>
-                        This card has supporting text below as a natural lead-in
-                        to additional content.{" "}
+                      <Card.Title className="text-center">
+                        Event title
+                      </Card.Title>
+                      <Card.Text className="text-center">
+                        <i>{this.envelopeIcon}</i> myemail@email.com
                       </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.globeIcon}</i> www.myWebsite.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.calendarIcon}</i> September 1st, 2020
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Body className="mx-auto">
+                      <Button variant="primary" size="sm">
+                        Attend
+                      </Button>
                     </Card.Body>
                     <Card.Footer>
                       <small className="text-muted">
-                        Last updated 3 mins ago
+                        Portsmouth <i>{this.mapIcon}</i>
                       </small>
+                      <Button
+                        variant="outline-dark"
+                        size="sm"
+                        className="rounded-circle float-right"
+                      >
+                        {this.infoIcon}
+                      </Button>
                     </Card.Footer>
                   </Card>
-                  <Card>
+                  {/* CARD 3 */}
+                  <Card className="p-2">
+                    <Card.Header>Company </Card.Header>
                     <Card.Img variant="top" src="http://placehold.it/250x200" />
                     <Card.Body>
-                      <Card.Title>Card title</Card.Title>
-                      <Card.Text>
-                        This is a wider card with supporting text below as a
-                        natural lead-in to additional content. This card has
-                        even longer content than the first to show that equal
-                        height action.
+                      <Card.Title className="text-center">
+                        Event title
+                      </Card.Title>
+                      <Card.Text className="text-center">
+                        <i>{this.envelopeIcon}</i> myemail@email.com
                       </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.globeIcon}</i> www.myWebsite.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.calendarIcon}</i> September 1st, 2020
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Body className="mx-auto">
+                      <Button variant="primary" size="sm">
+                        Attend
+                      </Button>
                     </Card.Body>
                     <Card.Footer>
                       <small className="text-muted">
-                        Last updated 3 mins ago
+                        Portsmouth <i>{this.mapIcon}</i>
                       </small>
+                      <Button
+                        variant="outline-dark"
+                        size="sm"
+                        className="rounded-circle float-right"
+                      >
+                        {this.infoIcon}
+                      </Button>
                     </Card.Footer>
                   </Card>
                 </CardDeck>
               </Slide>
-              <Slide index={1}>Slide 2</Slide>
-              <Slide index={2}>Slide 3</Slide>
+              <Slide index={1}>
+                {/* CARDDECK 2 */}
+                <CardDeck>
+                  {/* CARDDECK 1 */}
+                  <Card className="p-2">
+                    <Card.Header>Company </Card.Header>
+                    <Card.Img variant="top" src="http://placehold.it/250x200" />
+                    <Card.Body>
+                      <Card.Title className="text-center">
+                        Event title
+                      </Card.Title>
+                      <Card.Text className="text-center">
+                        <i>{this.envelopeIcon}</i> myemail@email.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.globeIcon}</i> www.myWebsite.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.calendarIcon}</i> September 1st, 2020
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Body className="mx-auto">
+                      <Button variant="primary" size="sm">
+                        Attend
+                      </Button>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">
+                        Portsmouth <i>{this.mapIcon}</i>
+                      </small>
+                      <Button
+                        variant="outline-dark"
+                        size="sm"
+                        className="rounded-circle float-right"
+                      >
+                        {this.infoIcon}
+                      </Button>
+                    </Card.Footer>
+                  </Card>
+                  {/* CARD 2 */}
+                  <Card className="p-2">
+                    <Card.Header>Company </Card.Header>
+                    <Card.Img variant="top" src="http://placehold.it/250x200" />
+                    <Card.Body>
+                      <Card.Title className="text-center">
+                        Event title
+                      </Card.Title>
+                      <Card.Text className="text-center">
+                        <i>{this.envelopeIcon}</i> myemail@email.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.globeIcon}</i> www.myWebsite.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.calendarIcon}</i> September 1st, 2020
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Body className="mx-auto">
+                      <Button variant="primary" size="sm">
+                        Attend
+                      </Button>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">
+                        Portsmouth <i>{this.mapIcon}</i>
+                      </small>
+                      <Button
+                        variant="outline-dark"
+                        size="sm"
+                        className="rounded-circle float-right"
+                      >
+                        {this.infoIcon}
+                      </Button>
+                    </Card.Footer>
+                  </Card>
+                  {/* CARD 3 */}
+                  <Card className="p-2">
+                    <Card.Header>Company </Card.Header>
+                    <Card.Img variant="top" src="http://placehold.it/250x200" />
+                    <Card.Body>
+                      <Card.Title className="text-center">
+                        Event title
+                      </Card.Title>
+                      <Card.Text className="text-center">
+                        <i>{this.envelopeIcon}</i> myemail@email.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.globeIcon}</i> www.myWebsite.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.calendarIcon}</i> September 1st, 2020
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Body className="mx-auto">
+                      <Button variant="primary" size="sm">
+                        Attend
+                      </Button>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">
+                        Portsmouth <i>{this.mapIcon}</i>
+                      </small>
+                      <Button
+                        variant="outline-dark"
+                        size="sm"
+                        className="rounded-circle float-right"
+                      >
+                        {this.infoIcon}
+                      </Button>
+                    </Card.Footer>
+                  </Card>
+                </CardDeck>
+              </Slide>
+              <Slide index={2}>
+                {/* CARDDeck 3 */}
+                <CardDeck>
+                  {/* CARD 1 */}
+                  <Card className="p-2">
+                    <Card.Header>Company </Card.Header>
+                    <Card.Img variant="top" src="http://placehold.it/250x200" />
+                    <Card.Body>
+                      <Card.Title className="text-center">
+                        Event title
+                      </Card.Title>
+                      <Card.Text className="text-center">
+                        <i>{this.envelopeIcon}</i> myemail@email.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.globeIcon}</i> www.myWebsite.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.calendarIcon}</i> September 1st, 2020
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Body className="mx-auto">
+                      <Button variant="primary" size="sm">
+                        Attend
+                      </Button>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">
+                        Portsmouth <i>{this.mapIcon}</i>
+                      </small>
+                      <Button
+                        variant="outline-dark"
+                        size="sm"
+                        className="rounded-circle float-right"
+                      >
+                        {this.infoIcon}
+                      </Button>
+                    </Card.Footer>
+                  </Card>
+                  {/* CARD 2 */}
+                  <Card className="p-2">
+                    <Card.Header>Company </Card.Header>
+                    <Card.Img variant="top" src="http://placehold.it/250x200" />
+                    <Card.Body>
+                      <Card.Title className="text-center">
+                        Event title
+                      </Card.Title>
+                      <Card.Text className="text-center">
+                        <i>{this.envelopeIcon}</i> myemail@email.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.globeIcon}</i> www.myWebsite.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.calendarIcon}</i> September 1st, 2020
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Body className="mx-auto">
+                      <Button variant="primary" size="sm">
+                        Attend
+                      </Button>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">
+                        Portsmouth <i>{this.mapIcon}</i>
+                      </small>
+                      <Button
+                        variant="outline-dark"
+                        size="sm"
+                        className="rounded-circle float-right"
+                      >
+                        {this.infoIcon}
+                      </Button>
+                    </Card.Footer>
+                  </Card>
+                  {/* CARD 3 */}
+                  <Card className="p-2">
+                    <Card.Header>Company </Card.Header>
+                    <Card.Img variant="top" src="http://placehold.it/250x200" />
+                    <Card.Body>
+                      <Card.Title className="text-center">
+                        Event title
+                      </Card.Title>
+                      <Card.Text className="text-center">
+                        <i>{this.envelopeIcon}</i> myemail@email.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.globeIcon}</i> www.myWebsite.com
+                      </Card.Text>
+                      <Card.Text className="text-center">
+                        <i>{this.calendarIcon}</i> September 1st, 2020
+                      </Card.Text>
+                    </Card.Body>
+                    <Card.Body className="mx-auto">
+                      <Button variant="primary" size="sm">
+                        Attend
+                      </Button>
+                    </Card.Body>
+                    <Card.Footer>
+                      <small className="text-muted">
+                        Portsmouth <i>{this.mapIcon}</i>
+                      </small>
+                      <Button
+                        variant="outline-dark"
+                        size="sm"
+                        className="rounded-circle float-right"
+                      >
+                        {this.infoIcon}
+                      </Button>
+                    </Card.Footer>
+                  </Card>
+                </CardDeck>
+              </Slide>
             </Slider>
             <ButtonBack className="carouselButtonLeft btn-outline-dark">
               {this.leftIcon}
@@ -100,6 +395,7 @@ export default class index extends Component {
             <ButtonNext className="carouselButtonRight btn-outline-dark">
               {this.rightIcon}
             </ButtonNext>
+            <DotGroup className="carouselControl" />
           </CarouselProvider>
         </Col>
       </Row>

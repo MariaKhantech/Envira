@@ -13,7 +13,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faBinoculars } from "@fortawesome/free-solid-svg-icons";
 
-export default class index extends Component {
+export default class Search extends Component {
   searchIcon = (<FontAwesomeIcon icon={faSearch} />);
   binocularsIcon = (<FontAwesomeIcon icon={faBinoculars} />);
   render() {
