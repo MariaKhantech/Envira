@@ -1,10 +1,9 @@
 import React, { Component } from "react";
+import EventCard from "../EventCard/index";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CardDeck from "react-bootstrap/CardDeck";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 
 import {
   CarouselProvider,
@@ -20,11 +19,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
-  faEnvelope,
-  faGlobe,
-  faCalendarDay,
-  faMapMarkerAlt,
-  faInfo,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./style.css";
@@ -32,13 +26,9 @@ import "./style.css";
 export default class Carousel extends Component {
   leftIcon = (<FontAwesomeIcon icon={faChevronLeft} />);
   rightIcon = (<FontAwesomeIcon icon={faChevronRight} />);
-  envelopeIcon = (<FontAwesomeIcon icon={faEnvelope} />);
-  globeIcon = (<FontAwesomeIcon icon={faGlobe} />);
-  calendarIcon = (<FontAwesomeIcon icon={faCalendarDay} />);
-  mapIcon = (<FontAwesomeIcon icon={faMapMarkerAlt} />);
-  infoIcon = (<FontAwesomeIcon icon={faInfo} size="1x" />);
 
   render() {
+    // console.log(this.props);
     return (
       <Row>
         <Col md={10} className="mx-auto mt-5">
@@ -52,339 +42,33 @@ export default class Carousel extends Component {
                 {/* CARDDECK 1 */}
                 <CardDeck>
                   {/* CARD 1 */}
-                  <Card className="p-2">
-                    <Card.Header>Company </Card.Header>
-                    <Card.Img variant="top" src="http://placehold.it/250x200" />
-                    <Card.Body>
-                      <Card.Title className="text-center">
-                        Event title
-                      </Card.Title>
-                      <Card.Text className="text-center">
-                        <i>{this.envelopeIcon}</i> myemail@email.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.globeIcon}</i> www.myWebsite.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.calendarIcon}</i> September 1st, 2020
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Body className="mx-auto">
-                      <Button variant="primary" size="sm">
-                        Attend
-                      </Button>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">
-                        Portsmouth <i>{this.mapIcon}</i>
-                      </small>
-                      <Button
-                        variant="outline-dark"
-                        size="sm"
-                        className="rounded-circle float-right"
-                      >
-                        {this.infoIcon}
-                      </Button>
-                    </Card.Footer>
-                  </Card>
+                  <EventCard state={this.props.state} />
                   {/* CARD 2 */}
-                  <Card className="p-2">
-                    <Card.Header>Company </Card.Header>
-                    <Card.Img variant="top" src="http://placehold.it/250x200" />
-                    <Card.Body>
-                      <Card.Title className="text-center">
-                        Event title
-                      </Card.Title>
-                      <Card.Text className="text-center">
-                        <i>{this.envelopeIcon}</i> myemail@email.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.globeIcon}</i> www.myWebsite.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.calendarIcon}</i> September 1st, 2020
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Body className="mx-auto">
-                      <Button variant="primary" size="sm">
-                        Attend
-                      </Button>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">
-                        Portsmouth <i>{this.mapIcon}</i>
-                      </small>
-                      <Button
-                        variant="outline-dark"
-                        size="sm"
-                        className="rounded-circle float-right"
-                      >
-                        {this.infoIcon}
-                      </Button>
-                    </Card.Footer>
-                  </Card>
+                  <EventCard state={this.props.state} />
                   {/* CARD 3 */}
-                  <Card className="p-2">
-                    <Card.Header>Company </Card.Header>
-                    <Card.Img variant="top" src="http://placehold.it/250x200" />
-                    <Card.Body>
-                      <Card.Title className="text-center">
-                        Event title
-                      </Card.Title>
-                      <Card.Text className="text-center">
-                        <i>{this.envelopeIcon}</i> myemail@email.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.globeIcon}</i> www.myWebsite.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.calendarIcon}</i> September 1st, 2020
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Body className="mx-auto">
-                      <Button variant="primary" size="sm">
-                        Attend
-                      </Button>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">
-                        Portsmouth <i>{this.mapIcon}</i>
-                      </small>
-                      <Button
-                        variant="outline-dark"
-                        size="sm"
-                        className="rounded-circle float-right"
-                      >
-                        {this.infoIcon}
-                      </Button>
-                    </Card.Footer>
-                  </Card>
+                  <EventCard state={this.props.state} />
                 </CardDeck>
               </Slide>
               <Slide index={1}>
                 {/* CARDDECK 2 */}
                 <CardDeck>
-                  {/* CARDDECK 1 */}
-                  <Card className="p-2">
-                    <Card.Header>Company </Card.Header>
-                    <Card.Img variant="top" src="http://placehold.it/250x200" />
-                    <Card.Body>
-                      <Card.Title className="text-center">
-                        Event title
-                      </Card.Title>
-                      <Card.Text className="text-center">
-                        <i>{this.envelopeIcon}</i> myemail@email.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.globeIcon}</i> www.myWebsite.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.calendarIcon}</i> September 1st, 2020
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Body className="mx-auto">
-                      <Button variant="primary" size="sm">
-                        Attend
-                      </Button>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">
-                        Portsmouth <i>{this.mapIcon}</i>
-                      </small>
-                      <Button
-                        variant="outline-dark"
-                        size="sm"
-                        className="rounded-circle float-right"
-                      >
-                        {this.infoIcon}
-                      </Button>
-                    </Card.Footer>
-                  </Card>
+                  {/* CARD 1 */}
+                  <EventCard state={this.props.state} />
                   {/* CARD 2 */}
-                  <Card className="p-2">
-                    <Card.Header>Company </Card.Header>
-                    <Card.Img variant="top" src="http://placehold.it/250x200" />
-                    <Card.Body>
-                      <Card.Title className="text-center">
-                        Event title
-                      </Card.Title>
-                      <Card.Text className="text-center">
-                        <i>{this.envelopeIcon}</i> myemail@email.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.globeIcon}</i> www.myWebsite.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.calendarIcon}</i> September 1st, 2020
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Body className="mx-auto">
-                      <Button variant="primary" size="sm">
-                        Attend
-                      </Button>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">
-                        Portsmouth <i>{this.mapIcon}</i>
-                      </small>
-                      <Button
-                        variant="outline-dark"
-                        size="sm"
-                        className="rounded-circle float-right"
-                      >
-                        {this.infoIcon}
-                      </Button>
-                    </Card.Footer>
-                  </Card>
+                  <EventCard state={this.props.state} />
                   {/* CARD 3 */}
-                  <Card className="p-2">
-                    <Card.Header>Company </Card.Header>
-                    <Card.Img variant="top" src="http://placehold.it/250x200" />
-                    <Card.Body>
-                      <Card.Title className="text-center">
-                        Event title
-                      </Card.Title>
-                      <Card.Text className="text-center">
-                        <i>{this.envelopeIcon}</i> myemail@email.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.globeIcon}</i> www.myWebsite.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.calendarIcon}</i> September 1st, 2020
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Body className="mx-auto">
-                      <Button variant="primary" size="sm">
-                        Attend
-                      </Button>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">
-                        Portsmouth <i>{this.mapIcon}</i>
-                      </small>
-                      <Button
-                        variant="outline-dark"
-                        size="sm"
-                        className="rounded-circle float-right"
-                      >
-                        {this.infoIcon}
-                      </Button>
-                    </Card.Footer>
-                  </Card>
+                  <EventCard state={this.props.state} />
                 </CardDeck>
               </Slide>
               <Slide index={2}>
                 {/* CARDDeck 3 */}
                 <CardDeck>
                   {/* CARD 1 */}
-                  <Card className="p-2">
-                    <Card.Header>Company </Card.Header>
-                    <Card.Img variant="top" src="http://placehold.it/250x200" />
-                    <Card.Body>
-                      <Card.Title className="text-center">
-                        Event title
-                      </Card.Title>
-                      <Card.Text className="text-center">
-                        <i>{this.envelopeIcon}</i> myemail@email.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.globeIcon}</i> www.myWebsite.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.calendarIcon}</i> September 1st, 2020
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Body className="mx-auto">
-                      <Button variant="primary" size="sm">
-                        Attend
-                      </Button>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">
-                        Portsmouth <i>{this.mapIcon}</i>
-                      </small>
-                      <Button
-                        variant="outline-dark"
-                        size="sm"
-                        className="rounded-circle float-right"
-                      >
-                        {this.infoIcon}
-                      </Button>
-                    </Card.Footer>
-                  </Card>
+                  <EventCard state={this.props.state} />
                   {/* CARD 2 */}
-                  <Card className="p-2">
-                    <Card.Header>Company </Card.Header>
-                    <Card.Img variant="top" src="http://placehold.it/250x200" />
-                    <Card.Body>
-                      <Card.Title className="text-center">
-                        Event title
-                      </Card.Title>
-                      <Card.Text className="text-center">
-                        <i>{this.envelopeIcon}</i> myemail@email.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.globeIcon}</i> www.myWebsite.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.calendarIcon}</i> September 1st, 2020
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Body className="mx-auto">
-                      <Button variant="primary" size="sm">
-                        Attend
-                      </Button>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">
-                        Portsmouth <i>{this.mapIcon}</i>
-                      </small>
-                      <Button
-                        variant="outline-dark"
-                        size="sm"
-                        className="rounded-circle float-right"
-                      >
-                        {this.infoIcon}
-                      </Button>
-                    </Card.Footer>
-                  </Card>
+                  <EventCard state={this.props.state} />
                   {/* CARD 3 */}
-                  <Card className="p-2">
-                    <Card.Header>Company </Card.Header>
-                    <Card.Img variant="top" src="http://placehold.it/250x200" />
-                    <Card.Body>
-                      <Card.Title className="text-center">
-                        Event title
-                      </Card.Title>
-                      <Card.Text className="text-center">
-                        <i>{this.envelopeIcon}</i> myemail@email.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.globeIcon}</i> www.myWebsite.com
-                      </Card.Text>
-                      <Card.Text className="text-center">
-                        <i>{this.calendarIcon}</i> September 1st, 2020
-                      </Card.Text>
-                    </Card.Body>
-                    <Card.Body className="mx-auto">
-                      <Button variant="primary" size="sm">
-                        Attend
-                      </Button>
-                    </Card.Body>
-                    <Card.Footer>
-                      <small className="text-muted">
-                        Portsmouth <i>{this.mapIcon}</i>
-                      </small>
-                      <Button
-                        variant="outline-dark"
-                        size="sm"
-                        className="rounded-circle float-right"
-                      >
-                        {this.infoIcon}
-                      </Button>
-                    </Card.Footer>
-                  </Card>
+                  <EventCard state={this.props.state} />
                 </CardDeck>
               </Slide>
             </Slider>

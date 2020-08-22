@@ -16,6 +16,7 @@ import { faSearch, faBinoculars } from "@fortawesome/free-solid-svg-icons";
 export default class Search extends Component {
   searchIcon = (<FontAwesomeIcon icon={faSearch} />);
   binocularsIcon = (<FontAwesomeIcon icon={faBinoculars} />);
+
   render() {
     return (
       <Row>
@@ -34,7 +35,7 @@ export default class Search extends Component {
                       <Form.Group controlId="formGroupLocation">
                         <InputGroup>
                           <Form.Label>Search by Location</Form.Label>
-                          <FormControl type="text" placeholder="Portsmouth" />
+                          <FormControl type="text" />
                           <InputGroup.Append>
                             <Button>{this.searchIcon}</Button>
                           </InputGroup.Append>

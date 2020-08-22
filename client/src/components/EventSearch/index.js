@@ -14,12 +14,26 @@ import Carousel from "./Carousel/index";
 //
 
 export default class EventSearch extends Component {
+  state = {
+    searchInput: "",
+    locationInput: "",
+    company: "walmart",
+    eventTitle: "clean-up day",
+    email: "walmart@walmart.com",
+    website: "www.walmart.com",
+    date: "September 1st,2020",
+    location: "Portsmouth",
+  };
+
+  onChange = (event) =>
+    this.setState({ [event.target.name]: event.target.value });
+
   render() {
     return (
       <>
-        <Search />
+        <Search onChange={this.onChange} />
 
-        <Carousel />
+        <Carousel onChange={this.onChange} state={this.state} />
       </>
     );
   }
