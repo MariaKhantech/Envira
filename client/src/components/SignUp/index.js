@@ -77,14 +77,14 @@ export default class Register extends Component {
   renderConfirmationForm() {
     return (
       <form onSubmit={this.handleConfirmationSubmit}>
-        <Form.Group>
-          <Form.Label htmlFor="confirmationCode">Confirmation Code</Form.Label>
-          <Form.Control name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} />
+        <div className="container">
+          <label htmlFor="confirmationCode">Confirmation Code</label>
+          <input name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} />
           <h1>Please check your email for the code.</h1>
-        </Form.Group>
-        <Button variant="primary" type="submit">
+        </div>
+        <button variant="primary" type="submit">
           Submit
-    </Button>
+    </button>
       </form>
     );
   }

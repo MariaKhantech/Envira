@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import Navbar from './components/NavbarTest';
-import NavBar from "./components/NavBar";    
+import Navbar from './components/NavbarTest';
+import NavBar from "./components/NavBar";
 
-// import ForgotPassword from './components/auth/ForgotPassword';
-// import ForgotPasswordVerification from './components/auth/ForgotPasswordVerification';
-// import ChangePassword from './components/auth/ChangePassword';
-// import ChangePasswordConfirm from './components/auth/ChangePasswordConfirm';
+import ForgotPassword from './components/auth/ForgotPassword';
+import ForgotPasswordVerification from './components/auth/ForgotPasswordVerification';
+import ChangePassword from './components/auth/ChangePassword';
+import ChangePasswordConfirm from './components/auth/ChangePasswordConfirm';
 import Home from './pages/Home';
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
