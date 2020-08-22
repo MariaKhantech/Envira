@@ -2,50 +2,24 @@ import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEnvelope,
-  faGlobe,
-  faCalendarDay,
-  faMapMarkerAlt,
-  faInfo,
-} from "@fortawesome/free-solid-svg-icons";
-
-export default class index extends Component {
-  envelopeIcon = (<FontAwesomeIcon icon={faEnvelope} />);
-  globeIcon = (<FontAwesomeIcon icon={faGlobe} />);
-  calendarIcon = (<FontAwesomeIcon icon={faCalendarDay} />);
-  mapIcon = (<FontAwesomeIcon icon={faMapMarkerAlt} />);
-  infoIcon = (<FontAwesomeIcon icon={faInfo} size="1x" />);
-
+export default class EventCard extends Component {
   render() {
-    const {
-      company,
-      eventTitle,
-      email,
-      website,
-      date,
-      location,
-    } = this.state.props;
     return (
       <Card className="p-2">
-        <Card.Header name="company">{company} </Card.Header>
+        <Card.Header name="company">Company </Card.Header>
         <Card.Img variant="top" src="http://placehold.it/250x200" />
         <Card.Body>
           <Card.Title className="text-center" name="eventTitle">
-            {eventTitle}
+            Event Title
           </Card.Title>
           <Card.Text className="text-center" name="email">
-            <i>{this.envelopeIcon}</i>
-            {email}
+            <i></i>email@email.com
           </Card.Text>
           <Card.Text className="text-center" name="website">
-            <i>{this.globeIcon}</i>
-            {this.props.state.website}
+            <i></i>wwww.website.com
           </Card.Text>
           <Card.Text className="text-center" name="date">
-            <i>{this.calendarIcon}</i>
-            {date}
+            <i></i>
           </Card.Text>
         </Card.Body>
         <Card.Body className="mx-auto">
@@ -55,16 +29,13 @@ export default class index extends Component {
         </Card.Body>
         <Card.Footer>
           <small className="text-muted" name="location">
-            {location}
-            <i>{this.mapIcon}</i>
+            <i></i>portsmouth
           </small>
           <Button
             variant="outline-dark"
             size="sm"
             className="rounded-circle float-right"
-          >
-            {this.infoIcon}
-          </Button>
+          ></Button>
         </Card.Footer>
       </Card>
     );

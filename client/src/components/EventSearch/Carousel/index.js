@@ -15,18 +15,9 @@ import {
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
-
 import "./style.css";
 
 export default class Carousel extends Component {
-  leftIcon = (<FontAwesomeIcon icon={faChevronLeft} />);
-  rightIcon = (<FontAwesomeIcon icon={faChevronRight} />);
-
   render() {
     // console.log(this.props);
     return (
