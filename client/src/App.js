@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './components/NavbarTest';
-import NavBar from "./components/NavBar";
-import Home from './components/Home';
-import LogIn from './components/Login/Login';
-import Register from './components/SignUp/Register';
-import ForgotPassword from './components/auth/ForgotPassword';
-import ForgotPasswordVerification from './components/auth/ForgotPasswordVerification';
-import ChangePassword from './components/auth/ChangePassword';
-import ChangePasswordConfirm from './components/auth/ChangePasswordConfirm';
-import Home from "./pages/Home";
+// import Navbar from './components/NavbarTest';
+import NavBar from "./components/NavBar";    
+
+// import ForgotPassword from './components/auth/ForgotPassword';
+// import ForgotPasswordVerification from './components/auth/ForgotPasswordVerification';
+// import ChangePassword from './components/auth/ChangePassword';
+// import ChangePasswordConfirm from './components/auth/ChangePasswordConfirm';
+import Home from './pages/Home';
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Members from "./pages/Members";
 import Infographics from "./pages/Infographics";
 import Ocean from "./pages/ocean";
 import Rainforest from "./pages/rainforest";
@@ -71,8 +68,8 @@ export default class AppTest extends Component {
               <Navbar auth={authProps} />
               <Switch>
                 <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
-                <Route exact path="/login" render={(props) => <LogIn {...props} auth={authProps} />} />
-                <Route exact path="/register" render={(props) => <Register {...props} auth={authProps} />} />
+                <Route exact path="/login" render={(props) => <Login {...props} auth={authProps} />} />
+                <Route exact path="/signup" render={(props) => <Signup {...props} auth={authProps} />} />
                 <Route exact path="/profile" render={(props) => <Profile {...props} auth={authProps} />} />
                 <Route exact path="/infographics" render={(props) => < Infographics {...props} auth={authProps} />} />
                 <Route exact path="/ocean" render={(props) => < Ocean {...props} auth={authProps} />} />
