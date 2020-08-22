@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import FormErrors from "../FormErrors";
-import Validate from "../utility/FormValidation";
+
 import { Auth } from 'aws-amplify';
 
 export default class ChangePassword extends Component {
@@ -28,7 +27,7 @@ export default class ChangePassword extends Component {
         this.state.newPassword
       );
       this.props.history.push("/changepasswordconfirmation");
-    } catch (error) {
+    } catch (err) {
       console.log(err);
     }
   };

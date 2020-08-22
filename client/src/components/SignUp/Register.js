@@ -82,12 +82,6 @@ export default class Register extends Component {
           <Form.Control name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} />
           <h1>Please check your email for the code.</h1>
         </Form.Group>
-        {/* <Button
-          disabled={!this.validateConfirmationForm()}
-          type="submit"
-          isLoading={this.state.isLoading}
-
-        /> */}
         <Button variant="primary" type="submit">
           Submit
     </Button>
@@ -103,7 +97,7 @@ export default class Register extends Component {
             <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
             <h3>Welcome</h3>
             <p>You are 30 seconds away from earning your own money!</p>
-            <input type="submit" name="" value="Login" /><br />
+            <a href="/login" className="text-info" type="submit" className="btn btn-light btn-block rounded-pill">Login</a>
           </div>
 
           <div className="col-md-8">
