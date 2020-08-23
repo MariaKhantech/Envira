@@ -13,7 +13,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 export default class Search extends Component {
   render() {
     const { filter, disabled, searchInput } = this.props.state;
-    const { handleFilterOption, onChange } = this.props;
+    const { handleFilterOption, onChange, handleShowAll } = this.props;
 
     return (
       <Row>
@@ -36,7 +36,7 @@ export default class Search extends Component {
                 </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item>
-                  <Button>Show All Events</Button>
+                  <Button onClick={handleShowAll}>Show All Events</Button>
                 </Dropdown.Item>
               </DropdownButton>
             </InputGroup.Prepend>

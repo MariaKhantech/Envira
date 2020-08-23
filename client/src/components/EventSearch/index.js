@@ -16,14 +16,15 @@ import Carousel from "./Carousel/index";
 export default class EventSearch extends Component {
   state = {
     filter: "Filter",
+    disabled: true,
     searchInput: "",
+    showCarousel: false,
     company: "",
     eventTitle: "",
     email: "",
     website: "",
     date: "",
     location: "",
-    disabled: true,
   };
 
   onChange = (event) =>
@@ -33,16 +34,26 @@ export default class EventSearch extends Component {
     this.setState({ filter: event.target.innerHTML, disabled: false });
   };
 
+  handleShowAll = (event) => {
+    event.preventDefault();
+    this.setState({ showCarousel: !this.state.showCarousel });
+  };
+
   render() {
+    let renderCarousel = null;
+    if (this.state.showCarousel) {
+      renderCarousel = <Carousel state={this.state} />;
+    }
+
     return (
       <>
         <Search
           onChange={this.onChange}
           handleFilterOption={this.handleFilterOption}
+          handleShowAll={this.handleShowAll}
           state={this.state}
         />
-
-        <Carousel state={this.state} />
+        {renderCarousel}
       </>
     );
   }
