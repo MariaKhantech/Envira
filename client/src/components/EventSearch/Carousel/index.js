@@ -19,7 +19,6 @@ import "./style.css";
 
 export default class Carousel extends Component {
   render() {
-    // console.log(this.props);
     return (
       <Row>
         <Col md={10} className="mx-auto mt-5">
@@ -64,11 +63,11 @@ export default class Carousel extends Component {
               </Slide>
             </Slider>
             <ButtonBack className="carouselButtonLeft btn-outline-dark">
-              {this.leftIcon}
+              <i className="fa fa-chevron-left"></i>
             </ButtonBack>
 
             <ButtonNext className="carouselButtonRight btn-outline-dark">
-              {this.rightIcon}
+              <i className="fa fa-chevron-right"></i>
             </ButtonNext>
             <DotGroup className="carouselControl" />
           </CarouselProvider>

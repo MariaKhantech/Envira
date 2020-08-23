@@ -4,22 +4,31 @@ import Button from "react-bootstrap/Button";
 
 export default class EventCard extends Component {
   render() {
+    const {
+      company,
+      eventTitle,
+      email,
+      website,
+      date,
+      location,
+    } = this.props.state;
+
     return (
       <Card className="p-2">
-        <Card.Header name="company">Company </Card.Header>
+        <Card.Header name="company">{company} </Card.Header>
         <Card.Img variant="top" src="http://placehold.it/250x200" />
         <Card.Body>
           <Card.Title className="text-center" name="eventTitle">
-            Event Title
+            {eventTitle}
           </Card.Title>
           <Card.Text className="text-center" name="email">
-            <i></i>email@email.com
+            <i className="fa fa-envelope"></i> {email}
           </Card.Text>
           <Card.Text className="text-center" name="website">
-            <i></i>wwww.website.com
+            <i className="fa fa-globe"></i> {website}
           </Card.Text>
           <Card.Text className="text-center" name="date">
-            <i></i>
+            <i className="fa fa-calendar"></i> {date}
           </Card.Text>
         </Card.Body>
         <Card.Body className="mx-auto">
@@ -29,13 +38,9 @@ export default class EventCard extends Component {
         </Card.Body>
         <Card.Footer>
           <small className="text-muted" name="location">
-            <i></i>portsmouth
+            {location}
+            <i className="ml-1 fa fa-map-pin"></i>
           </small>
-          <Button
-            variant="outline-dark"
-            size="sm"
-            className="rounded-circle float-right"
-          ></Button>
         </Card.Footer>
       </Card>
     );
