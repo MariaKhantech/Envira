@@ -10,12 +10,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faBinoculars } from "@fortawesome/free-solid-svg-icons";
-
-export default class index extends Component {
-  searchIcon = (<FontAwesomeIcon icon={faSearch} />);
-  binocularsIcon = (<FontAwesomeIcon icon={faBinoculars} />);
+export default class Search extends Component {
   render() {
     return (
       <Row>
@@ -36,18 +31,16 @@ export default class index extends Component {
                           <Form.Label>Search by Location</Form.Label>
                           <FormControl type="text" placeholder="Portsmouth" />
                           <InputGroup.Append>
-                            <Button>{this.searchIcon}</Button>
+                            <Button></Button>
                           </InputGroup.Append>
                         </InputGroup>
                         <Form.Label>Show All Events</Form.Label>
-                        <Button variant="primary" size="sm" block>
-                          {this.binocularsIcon}
-                        </Button>
+                        <Button variant="primary" size="sm" block></Button>
                       </Form.Group>
                     </Form>
                   </Dropdown.Item>
                 </DropdownButton>
-                <Button>{this.searchIcon}</Button>
+                <Button></Button>
               </ButtonGroup>
             </InputGroup.Append>
           </InputGroup>
