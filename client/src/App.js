@@ -4,16 +4,16 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import Navbar from './components/NavbarTest';
 import NavBar from "./components/NavBar";    
 
-// import ForgotPassword from './components/auth/ForgotPassword';
-// import ForgotPasswordVerification from './components/auth/ForgotPasswordVerification';
-// import ChangePassword from './components/auth/ChangePassword';
-// import ChangePasswordConfirm from './components/auth/ChangePasswordConfirm';
+import ForgotPassword from './components/auth/ForgotPassword';
+import ForgotPasswordVerification from './components/auth/ForgotPasswordVerification';
+import ChangePassword from './components/auth/ChangePassword';
+import ChangePasswordConfirm from './components/auth/ChangePasswordConfirm';
 import Home from './pages/Home';
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Infographics from "./pages/Infographics";
-import Ocean from "./pages/ocean";
-import Rainforest from "./pages/rainforest";
+import Ocean from "./pages/Ocean";
+import Rainforest from "./pages/Rainforest";
 import Profile from "./pages/Profile";
 import Events from "./pages/events";
 import { Auth } from 'aws-amplify';
@@ -65,7 +65,7 @@ export default class AppTest extends Component {
         <div className="App">
           <Router>
             <div>
-              <Navbar auth={authProps} />
+              <NavBar auth={authProps} />
               <Switch>
                 <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
                 <Route exact path="/login" render={(props) => <Login {...props} auth={authProps} />} />

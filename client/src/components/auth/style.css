@@ -1,9 +1,11 @@
-body {
+/* body {
     background: #eee;
-}
+} */
 .page-wrap {
-    min-height: 100vh;
+  min-height: 100vh;
 }
+
 .container {
-    max-width: 900px;
+  max-width: 900px;
 }
+/*# sourceMappingURL=style.css.map */

@@ -1,16 +1,19 @@
-body{
-  background-color: rgb(245, 245, 239);
+$neutral-yellow: #fcf5dc;
+
+body {
+	background-color: $neutral-yellow;
 }
+
 .signup {
-  padding-top: 100px;
+	padding-top: 100px;
 }
-.signupForm{
-  background-color: rgb(194, 193, 191);
- border: 0.5px solid grey;
-  border-radius: 20px;
-  padding: 10px;
-  font-family: inherit;
-  font-size: 20px;
-  box-shadow: 10px 10px 5px grey;
-  font-style: italic;
+.signupForm {
+	background-color: rgb(194, 193, 191);
+	border: 0.5px solid grey;
+	border-radius: 20px;
+	padding: 10px;
+	font-family: inherit;
+	font-size: 20px;
+	box-shadow: 10px 10px 5px grey;
+	font-style: italic;
 }
