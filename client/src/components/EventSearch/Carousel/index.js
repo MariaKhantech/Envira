@@ -1,76 +1,61 @@
 import React, { Component } from "react";
-import EventCard from "../EventCard/index";
+import Slider from "react-slick";
+// import EventCard from "../EventCard/index";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import CardDeck from "react-bootstrap/CardDeck";
-
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
-  DotGroup,
-} from "pure-react-carousel";
-import "pure-react-carousel/dist/react-carousel.es.css";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 import "./style.css";
 
 export default class Carousel extends Component {
   render() {
+    const renderCard = this.props.state.information.map((data) => (
+      <Card className="p-2 w-100">
+        <Card.Header name="company">{data.company} </Card.Header>
+        <Card.Img variant="top" src={data.image} />
+        <Card.Body>
+          <Card.Title className="text-center" name="eventTitle">
+            {data.eventTitle}
+          </Card.Title>
+          <Card.Text className="text-center" name="email">
+            <i className="fa fa-envelope"></i> {data.email}
+          </Card.Text>
+          <Card.Text className="text-center" name="website">
+            <i className="fa fa-globe"></i> {data.website}
+          </Card.Text>
+          <Card.Text className="text-center" name="date">
+            <i className="fa fa-calendar"></i> {data.date}
+          </Card.Text>
+        </Card.Body>
+        <Card.Body className="mx-auto text-center">
+          <Button variant="primary" size="sm">
+            Attend
+          </Button>
+        </Card.Body>
+        <Card.Footer>
+          <small className="text-muted" name="location">
+            {data.location}
+            <i className="ml-1 fa fa-map-pin"></i>
+          </small>
+        </Card.Footer>
+      </Card>
+    ));
+
+    const carouselSettings = {
+      dots: true,
+      infinite: true,
+      adaptiveHeight: true,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+    };
+
     return (
       <Row>
-        <Col md={10} className="mx-auto mt-5">
-          <CarouselProvider
-            naturalSlideWidth={100}
-            naturalSlideHeight={150}
-            totalSlides={3}
-          >
-            <Slider>
-              <Slide index={0}>
-                {/* CARDDECK 1 */}
-                <CardDeck>
-                  {/* CARD 1 */}
-                  <EventCard state={this.props.state} />
-                  {/* CARD 2 */}
-                  <EventCard state={this.props.state} />
-                  {/* CARD 3 */}
-                  <EventCard state={this.props.state} />
-                </CardDeck>
-              </Slide>
-              <Slide index={1}>
-                {/* CARDDECK 2 */}
-                <CardDeck>
-                  {/* CARD 1 */}
-                  <EventCard state={this.props.state} />
-                  {/* CARD 2 */}
-                  <EventCard state={this.props.state} />
-                  {/* CARD 3 */}
-                  <EventCard state={this.props.state} />
-                </CardDeck>
-              </Slide>
-              <Slide index={2}>
-                {/* CARDDeck 3 */}
-                <CardDeck>
-                  {/* CARD 1 */}
-                  <EventCard state={this.props.state} />
-                  {/* CARD 2 */}
-                  <EventCard state={this.props.state} />
-                  {/* CARD 3 */}
-                  <EventCard state={this.props.state} />
-                </CardDeck>
-              </Slide>
-            </Slider>
-            <ButtonBack className="carouselButtonLeft btn-outline-dark">
-              <i className="fa fa-chevron-left"></i>
-            </ButtonBack>
-
-            <ButtonNext className="carouselButtonRight btn-outline-dark">
-              <i className="fa fa-chevron-right"></i>
-            </ButtonNext>
-            <DotGroup className="carouselControl" />
-          </CarouselProvider>
+        <Col md={12} className="mx-auto mt-5">
+          <Slider {...carouselSettings}>{renderCard}</Slider>
         </Col>
       </Row>
     );

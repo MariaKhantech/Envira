@@ -4,31 +4,31 @@ import Button from "react-bootstrap/Button";
 
 export default class EventCard extends Component {
   render() {
-    const {
-      company,
-      eventTitle,
-      email,
-      website,
-      date,
-      location,
-    } = this.props.state;
+    // const {
+    //   company,
+    //   eventTitle,
+    //   email,
+    //   website,
+    //   date,
+    //   location,
+    // } = this.props.state;
 
     return (
       <Card className="p-2">
-        <Card.Header name="company">{company} </Card.Header>
-        <Card.Img variant="top" src="http://placehold.it/250x200" />
+        <Card.Header name="company">{data.company} </Card.Header>
+        <Card.Img variant="top" src={data.image} />
         <Card.Body>
           <Card.Title className="text-center" name="eventTitle">
-            {eventTitle}
+            {data.eventTitle}
           </Card.Title>
           <Card.Text className="text-center" name="email">
-            <i className="fa fa-envelope"></i> {email}
+            <i className="fa fa-envelope"></i> {data.email}
           </Card.Text>
           <Card.Text className="text-center" name="website">
-            <i className="fa fa-globe"></i> {website}
+            <i className="fa fa-globe"></i> {data.website}
           </Card.Text>
           <Card.Text className="text-center" name="date">
-            <i className="fa fa-calendar"></i> {date}
+            <i className="fa fa-calendar"></i> {data.date}
           </Card.Text>
         </Card.Body>
         <Card.Body className="mx-auto">
@@ -38,7 +38,7 @@ export default class EventCard extends Component {
         </Card.Body>
         <Card.Footer>
           <small className="text-muted" name="location">
-            {location}
+            {data.location}
             <i className="ml-1 fa fa-map-pin"></i>
           </small>
         </Card.Footer>
