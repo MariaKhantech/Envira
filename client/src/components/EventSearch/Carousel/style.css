@@ -1,26 +1,7 @@
-.carouselButtonLeft {
-  position: absolute;
-  border: none;
-  border-radius: 10px;
-  top: 225px;
-  left: -45px;
+.slick-slider {
+  margin: 0 10px;
 }
-
-.carouselButtonRight {
-  position: absolute;
-  border: none;
-  border-radius: 10px;
-  top: 225px;
-  right: -45px;
+.slick-slide {
+  padding: 15px;
 }
-
-.carouselControl {
-  position: absolute;
-  top: 595px;
-  left: 420px;
-}
-
-.carousel__dot {
-  padding: 1px;
-  width: 50px;
-}
+/*# sourceMappingURL=style.css.map */

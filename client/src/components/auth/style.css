@@ -1,10 +1,11 @@
 
-
-
-
+/* body {
+    background: #eee;
+} */
 .page-wrap {
-    min-height: 100vh;
+  min-height: 100vh;
 }
+
 .container {
     max-width: 900px;
 }
@@ -22,4 +23,7 @@
   
   #login .container #login-row #login-column #login-box #login-form #register-link {
     margin-top: -50px;
+    max-width: 900px;
   }
+
+/*# sourceMappingURL=style.css.map */
