@@ -31,7 +31,7 @@ export default class Search extends Component {
                 id="input-group-dropdown-1"
               >
                 <Dropdown.Item onClick={handleFilterOption}>
-                  Title
+                  Organizer
                 </Dropdown.Item>
                 <Dropdown.Item onClick={handleFilterOption}>
                   Location

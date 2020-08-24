@@ -8,7 +8,7 @@ import Data from "./Data.json";
 
 // A <Carousel /> component will be rendered below the search bar
 // Inside the carousel will be <CardDecks/> which will contain three <Cards /> on each slide.
-//  Each <Card /> will display Event data from our event Model (event title, location, host, contact info, etc)
+//  Each <Card /> will display Event data from our event Model (event Org, location, host, contact info, etc)
 // Each <Card /> will also have a "Attend" Button that will register (Post) that the user intends on attending the event.
 // Each <Card /> will also have a "i" button for more information the event (retrieved from the description column from the events Model ) and when selected a modal showing the description will appear
 
@@ -45,14 +45,14 @@ export default class EventSearch extends Component {
       this.setState({ slidesToScroll: filteredLocation.length });
       this.setState({ searchInput: "" });
     }
-    if (this.state.filter === "Title") {
-      const filteredTitle = Data.filter(
-        (detail) => detail.eventTitle === this.state.searchInput
+    if (this.state.filter === "Organizer") {
+      const filteredOrg = Data.filter(
+        (detail) => detail.organizer === this.state.searchInput
       );
-      this.setState({ information: filteredTitle });
+      this.setState({ information: filteredOrg });
       this.setState({ showCarousel: true });
-      this.setState({ slidesToShow: filteredTitle.length });
-      this.setState({ slidesToScroll: filteredTitle.length });
+      this.setState({ slidesToShow: filteredOrg.length });
+      this.setState({ slidesToScroll: filteredOrg.length });
       this.setState({ searchInput: "" });
     }
   };

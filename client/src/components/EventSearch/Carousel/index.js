@@ -13,7 +13,7 @@ export default class Carousel extends Component {
   render() {
     const renderCard = this.props.state.information.map((data) => (
       <Card className="p-2">
-        <Card.Header name="company">{data.company} </Card.Header>
+        <Card.Header name="organizer">{data.organizer}</Card.Header>
         <Card.Img variant="top" src={data.image} />
         <Card.Body>
           <Card.Title className="text-center" name="eventTitle">

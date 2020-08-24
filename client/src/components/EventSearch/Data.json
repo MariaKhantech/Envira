@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "company": "Walmart",
+    "organizer": "Walmart",
     "eventTitle": "Clean Up",
     "image": "http://placehold.it/250x200",
     "email": "email1@gmail.com",
@@ -11,7 +11,7 @@
   },
   {
     "id": 2,
-    "company": "Lowes",
+    "organizer": "Lowes",
     "eventTitle": "Clean Park",
     "image": "http://placehold.it/250x200",
     "email": "email2@gmail.com",
@@ -21,7 +21,7 @@
   },
   {
     "id": 3,
-    "company": "Home Depot",
+    "organizer": "Home Depot",
     "eventTitle": "Clean Road",
     "image": "http://placehold.it/250x200",
     "email": "email3@gmail.com",
@@ -31,7 +31,7 @@
   },
   {
     "id": 4,
-    "company": "Apple",
+    "organizer": "Apple",
     "eventTitle": "Help out",
     "image": "http://placehold.it/250x200",
     "email": "email1@apple.com",
@@ -41,7 +41,7 @@
   },
   {
     "id": 5,
-    "company": "Tesla",
+    "organizer": "Tesla",
     "eventTitle": "Go to Mars",
     "image": "http://placehold.it/250x200",
     "email": "email2@tesla.com",
@@ -51,7 +51,7 @@
   },
   {
     "id": 6,
-    "company": "Google",
+    "organizer": "Google",
     "eventTitle": "Clean Road",
     "image": "http://placehold.it/250x200",
     "email": "email3@gmail.com",
@@ -61,7 +61,7 @@
   },
   {
     "id": 7,
-    "company": "Bill Gates",
+    "organizer": "Bill Gates",
     "eventTitle": "Save World",
     "image": "http://placehold.it/250x200",
     "email": "email1@microsoft.com",
@@ -71,7 +71,7 @@
   },
   {
     "id": 8,
-    "company": "Lowes",
+    "organizer": "Lowes",
     "eventTitle": "Clean Park",
     "image": "http://placehold.it/250x200",
     "email": "email2@gmail.com",
@@ -81,7 +81,7 @@
   },
   {
     "id": 9,
-    "company": "Home Depot",
+    "organizer": "Home Depot",
     "eventTitle": "Clean Road",
     "image": "http://placehold.it/250x200",
     "email": "email3@gmail.com",
