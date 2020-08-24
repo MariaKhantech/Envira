@@ -4,4 +4,10 @@
 .slick-slide {
   padding: 15px;
 }
+
+.slick-prev:before,
+.slick-next:before {
+  color: #000;
+  background-color: #fcf5dc;
+}
 /*# sourceMappingURL=style.css.map */

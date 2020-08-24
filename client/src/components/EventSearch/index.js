@@ -128,9 +128,9 @@ export default class EventSearch extends Component {
   render() {
     let renderCarousel = null;
     if (this.state.showCarousel) {
-      renderCarousel = (
-        <Carousel state={this.state} renderCard={this.renderCard} />
-      );
+      renderCarousel = <Carousel state={this.state} />;
+    } else if (!this.state.showCarousel) {
+      renderCarousel = null;
     }
 
     return (

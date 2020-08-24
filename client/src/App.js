@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Navbar from './components/NavbarTest';
+import Navbar from "./components/NavbarTest";
 // import NavBar from "./components/NavBar";
 
 import ForgotPassword from "./components/auth/ForgotPassword";
@@ -12,8 +12,8 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Infographics from "./pages/Infographics";
-import Ocean from "./pages/Ocean";
-import Rainforest from "./pages/Rainforest";
+import Ocean from "./pages/ocean";
+import Rainforest from "./pages/rainforest";
 import Profile from "./pages/Profile";
 import Events from "./pages/events";
 import { Auth } from "aws-amplify";
