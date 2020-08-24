@@ -63,7 +63,7 @@ export default class AppTest extends Component {
             <Router>
               <div>
                 {/* <Navbar auth={authProps} /> */}
-                <Navbar auth={authProps} />
+                <NavBar auth={authProps} />
         
                 <Switch>
                   <Route
