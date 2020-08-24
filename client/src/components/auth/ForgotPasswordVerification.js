@@ -8,6 +8,15 @@ class ForgotPasswordVerification extends Component {
     newPassword: "",
   };
 
+  handleInputChange = (e) => {
+    let name = e.target.name;
+    console.log(name);
+    let value = e.target.value;
+    console.log(value);
+    this.setState({
+      [name]: value
+    })
+  }
 
   handlePasswordVerification = async event => {
     event.preventDefault();
@@ -21,46 +30,42 @@ class ForgotPasswordVerification extends Component {
         this.state.verificationCode,
         this.state.newPassword
       );
-      this.props.history.push("/changepasswordconfirmation");
+      // this.props.history.push("/changepasswordconfirmation");
+      window.location="/changepasswordconfirmation";
     } catch (error) {
       console.log(error);
     }
   };
 
-  handleInputChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-  };
-
+  
   render() {
     return (
-      <div>
-        <div id="login">
+      <>
+        <div>
           <div className="container">
-            <h1>Set new password</h1>
-            <p>
-              Please enter the verification code sent to your email address below,
-              your email address and a new password.
-          </p>
-            <div id="login-row" className="row justify-content-center align-items-center">
-              <div id="login-column" className="col-md-6">
-                <div id="login-box" className="col-md-12">
-                  <form id="login-form" className="form" action="" method="post">
+            <div className="row justify-content-center align-items-center">
+              <h1>Set new password</h1>
+              <p>
+                Please enter the verification code sent to your email address below,
+                your email address and a new password.
+              </p>
+              <div className="col-md-6 border mt-2 shadow-lg p-3 mb-5 bg-white rounded">
+                <div className="col-md-12">
+                  <form onSubmit={this.handlePasswordVerification}>
                     <div className="form-group">
-                      <label>Verification Code:</label><br />
+                      <label className="mt-2 font-weight-bold">Verification Code:</label><br />
                       <input onChange={this.handleInputChange} type="text" name="verificationCode" value={this.state.verificationCode} className="form-control" />
                     </div>
                     <div className="form-group">
-                      <label>New Password:</label><br />
+                      <label className="font-weight-bold">New Password:</label><br />
                       <input onChange={this.handleInputChange} type="password" name="newPassword" value={this.state.newPassword} className="form-control" />
                     </div>
                     <div className="form-group">
-                      <label>Email:</label><br />
+                      <label className="mt-2 font-weight-bold">Email:</label><br />
                       <input onChange={this.handleInputChange} type="password" name="email" value={this.state.email} className="form-control" />
                     </div>
-                    <div className="form-group">
-                      <button onClick={this.handlePasswordVerification} type="submit" className="btn btn-info btn-md" >Submit</button>
+                    <div className="form-group mx-auto text-center ">
+                      <button type="submit" className="btn btn-info btn-lg" >Submit</button>
                     </div>
                   </form>
                 </div>
@@ -68,7 +73,7 @@ class ForgotPasswordVerification extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </>
     )
   }
 }

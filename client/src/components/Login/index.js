@@ -5,7 +5,7 @@ import "../Login/style.css"
 export default class Login extends Component {
 
     state = {
-        userName: "",
+        username: "",
         password: "",
     }
 
@@ -22,17 +22,20 @@ export default class Login extends Component {
 
     handleFormSubmit = async (event) => {
         event.preventDefault();
+        //form validation
         console.log("hello")
         this.setState({ isLoading: true });
 
-        const { userName, password } = this.state;
+        const { username, password } = this.state;
         try {
             const newUser = await Auth.signIn({
-                userName,
+                username,
                 password,
             });
             this.setState({ newUser })
+            window.location="/";
             console.log(newUser);
+         //redirect user to home page   
         } catch (err) {
             console.log(err);
         }
@@ -49,22 +52,18 @@ export default class Login extends Component {
                         <div id="login-row" className="row justify-content-center align-items-center">
                             <div id="login-column" className="col-md-12">
                                 <div id="login-box" className="col-md-12">
-                                    <form id="login-form" className="form" action="" method="post">
+                                    <form id="login-form" className="form" >
                                         <h3 className="text-center text-info">Login</h3>
                                         <div className="form-group">
-                                            <label htmlFor="userName" className="text-info">Username:</label><br />
-                                            <input onChange={this.handleInputChange} type="text" name="userName" id="username" className="form-control" />
+                                            <label htmlFor="username" className="text-info">Username:</label><br />
+                                            <input onChange={this.handleInputChange} type="text" name="username" id="username" className="form-control" />
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="password" className="text-info">Password:</label><br />
                                             <input onChange={this.handleInputChange} type="password" name="password" id="password" className="form-control" />
                                         </div>
                                         <div className="form-group">
-                                            <label htmlFor="remember-me" className="text-info">
-
-                                                <span><input id="remember-me" name="remember-me" type="checkbox" />
-                                                </span></label><br />
-                                            <input onClick={this.handleFormSubmit} type="submit" name="submit" className="btn btn-info btn-md" value="submit" />
+                                            <button onClick={this.handleFormSubmit} type="submit" name="submit" className="btn btn-info btn-md">Submit</button>
                                         </div>
                                         <div id="register-link" className="text-right">
                                             <a href="/forgotpassword" className="text-info">Forgot Password</a>
