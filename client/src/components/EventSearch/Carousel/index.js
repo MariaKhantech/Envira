@@ -12,7 +12,7 @@ import "./style.css";
 export default class Carousel extends Component {
   render() {
     const renderCard = this.props.state.information.map((data) => (
-      <Card className="p-2 w-100">
+      <Card className="p-2">
         <Card.Header name="company">{data.company} </Card.Header>
         <Card.Img variant="top" src={data.image} />
         <Card.Body>

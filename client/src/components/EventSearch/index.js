@@ -61,6 +61,8 @@ export default class EventSearch extends Component {
     event.preventDefault();
     this.setState({ showCarousel: true });
     this.setState({ information: Data });
+    this.setState({ slidesToShow: 3 });
+    this.setState({ slidesToScroll: 3 });
   };
 
   render() {
