@@ -58,6 +58,11 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'cascade',
     });
   };
+  User.associate = (models) => {
+    User.hasMany(models.EventAttendee, {
+      onDelete: 'cascade',
+    });
+  };
 
   // We're saying that an User should be associated with the role
   // An User can't be created without a Role due to the foreign key constraint
@@ -66,6 +71,15 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: {
         allowNull: false,
       },
+    });
+  };
+
+  User.associate = (models) => {
+    User.belongsToMany(models.Event, {
+      through: 'EventAttendee',
+      as: 'events',
+      foreignKey: 'userId',
+      otherKey: 'eventId',
     });
   };
   return User;

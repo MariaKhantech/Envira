@@ -55,5 +55,13 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'cascade',
     });
   };
+  Event.associate = (models) => {
+    Event.belongsToMany(models.User, {
+      through: 'EventAttendee',
+      as: 'users',
+      foreignKey: 'eventId',
+      otherKey: 'userId',
+    });
+  };
   return Event;
 };

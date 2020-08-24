@@ -1,14 +1,11 @@
 
-/* body {
-    background: #eee;
-} */
 .page-wrap {
   min-height: 100vh;
 }
 
-.container {
+/* .container {
     max-width: 900px;
-}
+} */
 #login .container #login-row #login-column #login-box {
     margin-top: 80px;
     max-width: 600px;

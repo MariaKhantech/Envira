@@ -18,10 +18,6 @@ export default class Register extends Component {
     newUser: null
   }
 
-  validateConfirmationForm() {
-    return this.state.confirmationCode.length > 0;
-  }
-
 
   handleInputChange = (e) => {
     let name = e.target.name;
@@ -38,6 +34,8 @@ export default class Register extends Component {
     event.preventDefault();
     console.log("hello")
     //check for form validation
+    // password match
+    
     this.setState({ isLoading: true });
 
     const { username, email, password } = this.state;
@@ -88,7 +86,7 @@ export default class Register extends Component {
                   <h3>Please check your email for the code.</h3>
                   <div className="form-group input-group">
                     <label htmlFor="confirmationCode" className="mr-2">Confirmation Code:</label>
-                    <input name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} />
+                    <input name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} required />
                   </div>
                   <div className="form-group">
                     <button type="submit" className="btn btn-primary btn-block rounded-pill">Submit</button>
@@ -113,29 +111,28 @@ export default class Register extends Component {
             <p>You are 30 seconds away from earning your own money!</p>
             <a href="/login" className="text-info" type="submit" className="btn btn-light btn-block rounded-pill">Login</a>
           </div>
-
           <div className="col-md-8">
             <div className="card cardStyle bg-light">
               <div className="card-body">
                 <h4 className="card-title mt-3 text-center">Create Account</h4>
-                <form>
+                <form onSubmit={this.handleFormSubmit}>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-user"></i> </span>
                     </div>
-                    <input name="username" value={this.state.username} onChange={this.handleInputChange} className="form-control" placeholder="User name" type="text" />
+                    <input name="username" value={this.state.username} onChange={this.handleInputChange} className="form-control" placeholder="User name" type="text" required />
                   </div>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
                     </div>
-                    <input name="email" value={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email address" type="email"/>
+                    <input name="email" value={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email address" type="email" required />
                   </div>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-building"></i> </span>
                     </div>
-                    <select name="role" value={this.state.role} onChange={this.handleInputChange} className="form-control">
+                    <select name="role" value={this.state.role} onChange={this.handleInputChange} className="form-control" required>
                       <option defaultValue> Select registration type</option>
                       <option value="user">User</option>
                       <option value="company">Company</option>
@@ -146,20 +143,17 @@ export default class Register extends Component {
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
                     </div>
-                    <input name="password" value={this.state.password} onChange={this.handleInputChange} className="form-control" placeholder="Create password" type="password" />
+                    <input name="password" value={this.state.password} onChange={this.handleInputChange} className="form-control" placeholder="Create password" type="password" required />
                   </div>
-                  <span id="8char" className="glyphicon glyphicon-remove" style={{ color: "red" }}></span> 8 Characters Long<br />
-                  <span id="ucase" className="glyphicon glyphicon-remove" style={{ color: "red" }}></span> One Uppercase Letter
-
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
                     </div>
-                    <input name="confirmPassword" value={this.state.confirmPassword} onChange={this.handleInputChange} className="form-control" placeholder="Confirm password" type="password" />
+                    <input name="confirmPassword" value={this.state.confirmPassword} onChange={this.handleInputChange} className="form-control" placeholder="Confirm password" type="password" required />
                   </div>
 
-                  <div className="form-group">
-                    <button onClick={this.handleFormSubmit} type="submit" className="btn btn-primary btn-block"> Create Account  </button>
+                  <div className="form-group mx-auto text-center">
+                    <button type="submit" className="btn btn-primary btn-lg"> Create Account  </button>
                   </div>
                 </form>
               </div>
