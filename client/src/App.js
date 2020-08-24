@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/NavbarTest";
 // import NavBar from "./components/NavBar";
+import NavBar from './components/NavBar'
 
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ForgotPasswordVerification from "./components/auth/ForgotPasswordVerification";
@@ -61,7 +62,9 @@ export default class AppTest extends Component {
           <div className="App">
             <Router>
               <div>
-                <Navbar auth={authProps} />
+                {/* <Navbar auth={authProps} /> */}
+                <NavBar auth={authProps} />
+        
                 <Switch>
                   <Route
                     exact

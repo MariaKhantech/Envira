@@ -1,7 +1,3 @@
-body {
-  background: #632778;
-}
-
 .form-control:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
