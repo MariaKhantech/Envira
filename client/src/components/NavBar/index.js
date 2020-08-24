@@ -1,96 +1,62 @@
-import React, { Component } from 'react';
-import './style.css';
+import React, { Component } from 'react'
+import { bubble as Menu } from "react-burger-menu";
+import './style.css'
+// import { RuleTester } from "eslint";
+
+
 
 export class NavBar extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			isCollapsed: true
-		};
-	}
+    render() {
+        return (
+            <Menu>
+        <hr style={{background: "white"}}/>
+      <a className="menu-item text-center text-white" href="/">
+        Home
+      </a>
+        <hr class="bg-light" style={{background: "white"}}/>
+      <a className="menu-item text-center text-white" href="/ocean">
+       About
+      </a>
 
-	//hides and shows the side nav when the button is clicked
-	toggleclassName = () => {
-		//grab the html elements
-		const sideBarElement = document.getElementById('sidebar');
-		const sidebarCollapseElement = document.getElementById('sidebarCollapse');
+      <li class="nav-item dropdown ">
+        <a class="nav-link dropdown-toggle text-center text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Events
+        </a>
+        <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+          <a class="dropdown-item text-center " href="#">Action</a>
+          <a class="dropdown-item text-center " href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item text-center " href="#">Something else here</a>
+        </div>
+      </li>
 
-		if (this.state.isCollapsed) {
-			sideBarElement.classList.remove('active');
-			sidebarCollapseElement.classList.remove('active');
-			this.setState({ isCollapsed: false });
-		} else {
-			sideBarElement.classList.add('active');
-			sidebarCollapseElement.classList.add('active');
-			this.setState({ isCollapsed: true });
-		}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-center text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Climate Change
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item " href="#">Action</a>
+          <a class="dropdown-item " href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item " href="#">Something else here</a>
+        </div>
+      </li>
 
-		//add active class make them disappear
-	};
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-center text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Company Pollution
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item " href="#">Action</a>
+          <a class="dropdown-item " href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item " href="#">Something else here</a>
+        </div>
+      </li>
 
-	render() {
-		return (
-			<div className="wrapper">
-				{/* <!-- Sidebar Holder --> */}
-				<nav id="sidebar" className="active">
-					<div className="sidebar-header ">
-						<h3>Enviro</h3>
-					</div>
+     
 
-					<ul className="list-unstyled components">
-						<p>Menu</p>
-						<li className="active">
-							<a
-								href="#homeSubmenu"
-								data-toggle="collapse"
-								aria-expanded="false"
-								className="dropdown-toggle"
-							>
-								Environmental Information
-							</a>
-							<ul className="collapse list-unstyled" id="homeSubmenu">
-								<li>
-									<a href="#">Ocean</a>
-								</li>
-								<li>
-									<a href="#">Rainforest</a>
-								</li>
-								<li>
-									<a href="#">Climate Change Information</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="#">About</a>
-							<a
-								href="#pageSubmenu"
-								data-toggle="collapse"
-								aria-expanded="false"
-								className="dropdown-toggle"
-							>
-								Pollutant information
-							</a>
-							<ul className="collapse list-unstyled" id="pageSubmenu">
-								<li>
-									<a href="#">Page 1</a>
-								</li>
-								<li>
-									<a href="#">Page 2</a>
-								</li>
-								<li>
-									<a href="#">Page 3</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="#">Events</a>
-						</li>
-						<li>
-							<a href="#">Contact</a>
-						</li>
-					</ul>
-
-					<li className="dropdown dropdown-login  order-1 text-center">
+      <li className="dropdown dropdown-login  order-1 text-center menu-item mt-4">
 						<button type="button" data-toggle="dropdown" className="btn btn-outline-light dropdown-toggle ">
 							Login <span className="caret" />
 						</button>
@@ -139,39 +105,11 @@ export class NavBar extends Component {
 							</li>
 						</ul>
 					</li>
-				</nav>
-
-				{/* <!-- Page Content Holder --> */}
-				<div id="content">
-					<nav className="navbar navbar-expand-lg navbar-light bg-light">
-						<div className="container-fluid">
-							<button
-								type="button"
-								id="sidebarCollapse"
-								className="navbar-btn active"
-								onClick={this.toggleclassName}
-							>
-								<span />
-								<span />
-								<span />
-							</button>
-							<button
-								className="btn btn-dark d-inline-block d-lg-none ml-auto"
-								type="button"
-								data-toggle="collapse"
-								data-target="#navbarSupportedContent"
-								aria-controls="navbarSupportedContent"
-								aria-expanded="false"
-								aria-label="Toggle navigation"
-							>
-								<i className="fas fa-align-justify fa-lg" />
-							</button>
-						</div>
-					</nav>
-				</div>
-			</div>
-		);
-	}
+    </Menu>
+        )
+    }
 }
 
 export default NavBar;
+
+
