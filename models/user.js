@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     // USERNAME AND EMAIL
@@ -31,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = (models) => {
     User.hasMany(models.Event, {
       onDelete: 'cascade',
+      foreignKey: 'userId',
     });
   };
 
@@ -82,5 +85,11 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: 'eventId',
     });
   };
+
+  User.addHook('beforeCreate', (user) => {
+    const users = user;
+    users.password = bcrypt.hashSync(users.password, bcrypt.genSaltSync(10), null);
+  });
+
   return User;
 };

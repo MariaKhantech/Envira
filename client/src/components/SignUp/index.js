@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button'
-import "../SignUp/style.css";
+import "./style.css";
 import { Auth } from "aws-amplify";
+import Axios from 'axios';
 
 export default class Register extends Component {
 
@@ -12,12 +11,31 @@ export default class Register extends Component {
     confirmPassword: "",
     email: "",
     role: "",
+    roleTypes: [],
     isLoading: false,
     signedUp: false,
     confirmationCode: "",
     newUser: null
   }
 
+  componentDidMount() {
+    
+    Axios.get("/api/auth/role") //getting role types from role table 
+      .then(
+        (response) => {
+          console.log(response)
+          this.setState({
+            roleTypes: response.data,
+          });
+          console.log(this.state.role);
+        },
+        (error) => {
+          this.setState({
+            error
+          });
+        }
+      )
+  }
 
   handleInputChange = (e) => {
     let name = e.target.name;
@@ -32,10 +50,17 @@ export default class Register extends Component {
 
   handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log("hello")
+    let newUser = {
+      user_name: this.state.username,
+      password: this.state.password,
+      role: this.state.role,
+      email: this.state.email
+    }
+
     //check for form validation
     // password match
-    
+    this.postNewUser(newUser); //call this function to post data in user model
+
     this.setState({ isLoading: true });
 
     const { username, email, password } = this.state;
@@ -54,6 +79,15 @@ export default class Register extends Component {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  postNewUser = newUser => {
+    console.log(newUser)
+    Axios.post("api/auth/signup", newUser)
+      .then(() => {
+        console.log("user created")
+      })
+      .catch(err => console.log(err))
   }
 
   handleConfirmationSubmit = async event => {
@@ -77,23 +111,19 @@ export default class Register extends Component {
   renderConfirmationForm() {
     return (
 
-      <div className="container text-center">
-        <div className="row">
-          <div className="col-md-12">
-            <div className="card cardConfirm bg-light">
-              <div className="card-body">
-                <form onSubmit={this.handleConfirmationSubmit}>
-                  <h3>Please check your email for the code.</h3>
-                  <div className="form-group input-group">
-                    <label htmlFor="confirmationCode" className="mr-2">Confirmation Code:</label>
-                    <input name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} required />
-                  </div>
-                  <div className="form-group">
-                    <button type="submit" className="btn btn-primary btn-block rounded-pill">Submit</button>
-                  </div>
-                </form>
+      <div className="container mt-5">
+        <div className="row justify-content-center align-items-center">
+          <div className="col-md-7 border mt-2 shadow-lg p-3 mb-5 bg-white rounded">
+            <h3 className="font-weight-normal text-center mb-2">Please check your email for the code.</h3>
+            <form onSubmit={this.handleConfirmationSubmit}>
+              <div className="form-group input-group text-center">
+                <label htmlFor="confirmationCode" className="mr-2">Confirmation Code:</label>
+                <input name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} required />
               </div>
-            </div>
+              <div className="form-group mx-auto text-center">
+                <button type="submit" className="btn btn-primary btn-md">Submit</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -103,7 +133,7 @@ export default class Register extends Component {
 
   renderForm() {
     return <>
-      <div className="container register">
+      <div className="container w-75 register">
         <div className="row">
           <div className="col-md-4 register-left">
             <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
@@ -133,10 +163,15 @@ export default class Register extends Component {
                       <span className="input-group-text"> <i className="fa fa-building"></i> </span>
                     </div>
                     <select name="role" value={this.state.role} onChange={this.handleInputChange} className="form-control" required>
-                      <option defaultValue> Select registration type</option>
+
+                      {this.state.roleTypes.map(role => {
+                        return (<option value={role.type}>{role.type}</option>)
+
+                      })}
+                      {/* <option defaultValue> Select registration type</option>
                       <option value="user">User</option>
                       <option value="company">Company</option>
-                      <option value="non-profit">Non-profit</option>
+                      <option value="non-profit">Non-profit</option> */}
                     </select>
                   </div>
                   <div className="form-group input-group">

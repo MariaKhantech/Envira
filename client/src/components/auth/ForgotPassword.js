@@ -47,7 +47,7 @@ export default class ForgotPassword extends Component {
                   <input name="email" value={this.state.email}
                     onChange={this.handleInputChange} className="form-control form-control-lg" type="email" placeholder="Your email address" required/>
                 </div>
-                <div className=" form-group mx-auto text-center">
+                <div className="form-group mx-auto text-center">
                   <button type="submit" className="btn btn-lg btn-success">Reset Password</button>
                 </div>
               </form>
