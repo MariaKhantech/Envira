@@ -36,7 +36,6 @@ module.exports = (sequelize, DataTypes) => {
     Event.belongsTo(models.User, {
       onDelete: 'CASCADE',
       foreignKey: 'userId',
-
     });
   };
 

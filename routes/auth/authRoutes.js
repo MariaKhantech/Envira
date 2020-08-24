@@ -5,20 +5,31 @@ const db = require('../../models');
 // Sequelize User Model. If the user is created successfully, proceed
 //  to log the user in, otherwise send back an error
 router.post('/signup', (req, res) => {
-  console.log(req);
+  let Id;
+  console.log(req.body.username);
+  console.log(req.body.role);
+  if (req.body.role === 'company') {
+    Id = 2;
+  } else if (req.body.role === 'individual user') {
+    Id = 1;
+  } else if (req.body.role === 'non-profit') {
+    Id = 3;
+  }
   db.User.create({
     user_name: req.body.username,
     password: req.body.password,
     email: req.body.email,
-    role: req.body.role,
+    RoleId: Id,
   })
     .then((dbResponse) => {
       res.json(dbResponse);
+      console.log(dbResponse);
     })
     .catch((err) => {
       res.json(err);
     });
 });
+
 router.get('/role', (req, res) => {
   console.log('hit here');
   db.Role.findAll({})

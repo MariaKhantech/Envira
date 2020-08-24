@@ -19,7 +19,6 @@ export default class Register extends Component {
   }
 
   componentDidMount() {
-    
     Axios.get("/api/auth/role") //getting role types from role table 
       .then(
         (response) => {
@@ -27,7 +26,6 @@ export default class Register extends Component {
           this.setState({
             roleTypes: response.data,
           });
-          console.log(this.state.role);
         },
         (error) => {
           this.setState({
@@ -39,9 +37,7 @@ export default class Register extends Component {
 
   handleInputChange = (e) => {
     let name = e.target.name;
-    console.log(name);
     let value = e.target.value;
-    console.log(value);
     this.setState({
       [name]: value
     })
@@ -51,41 +47,51 @@ export default class Register extends Component {
   handleFormSubmit = async (event) => {
     event.preventDefault();
     let newUser = {
-      user_name: this.state.username,
+      username: this.state.username,
       password: this.state.password,
       role: this.state.role,
       email: this.state.email
     }
-
+    const { username, email, password } = this.state;
     //check for form validation
     // password match
-    this.postNewUser(newUser); //call this function to post data in user model
+    if (this.state.password !== this.state.confirmPassword) {
+      
+      alert("password don't match")
+    } else {
+      this.postNewUser(newUser); //call this function to post data in user model
 
-    this.setState({ isLoading: true });
+      this.setState({ isLoading: true });
 
-    const { username, email, password } = this.state;
-    console.log(this.state.username)
-    try {
-      const newUser = await Auth.signUp({
-        username,
-        password,
-        attributes: {
-          email: email
-        }
-      });
-      console.log(username)
-      this.setState({ newUser })
-      console.log(newUser);
-    } catch (err) {
-      console.log(err);
+      console.log(this.state.username)
+      try {
+        const newUser = await Auth.signUp({
+          username,
+          password,
+          attributes: {
+            email: email
+          }
+        });
+        console.log(username)
+        this.setState({ newUser })
+        console.log(newUser);
+      } catch (err) {
+        console.log(err);
+      }
     }
+
   };
 
-  postNewUser = newUser => {
-    console.log(newUser)
-    Axios.post("api/auth/signup", newUser)
-      .then(() => {
-        console.log("user created")
+  postNewUser = ()=> {
+    // console.log(newUser)
+    Axios.post("/api/auth/signup", {
+      username: this.state.username,
+      password: this.state.password,
+      role: this.state.role,
+      email: this.state.email
+    })
+      .then((res) => {
+        console.log(res)
       })
       .catch(err => console.log(err))
   }
@@ -165,13 +171,9 @@ export default class Register extends Component {
                     <select name="role" value={this.state.role} onChange={this.handleInputChange} className="form-control" required>
 
                       {this.state.roleTypes.map(role => {
-                        return (<option value={role.type}>{role.type}</option>)
+                        return (<option key={role.id} value={role.type}>{role.type}</option>)
 
                       })}
-                      {/* <option defaultValue> Select registration type</option>
-                      <option value="user">User</option>
-                      <option value="company">Company</option>
-                      <option value="non-profit">Non-profit</option> */}
                     </select>
                   </div>
                   <div className="form-group input-group">
