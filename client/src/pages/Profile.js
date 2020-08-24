@@ -13,7 +13,7 @@ export class Profile extends Component {
 	}
 	//this function is run when the component is rendered
 	componentDidMount() {
-		this.setState({ profileType: this.props.userObject.role });
+		this.setState({ profileType: this.props.auth });
 	}
 
 	render() {
@@ -23,7 +23,8 @@ export class Profile extends Component {
 		} else {
 			renderedProfile = <UserProfile name="MARIA" />;
 		}
-		return <div className="container">{renderedProfile}</div>;
+
+		return <div className = "container-fluid p-0">{renderedProfile} </div>
 	}
 }
 
