@@ -7,7 +7,7 @@ import { Auth } from "aws-amplify";
 export default class Register extends Component {
 
   state = {
-    userName: "",
+    username: "",
     password: "",
     confirmPassword: "",
     email: "",
@@ -41,6 +41,7 @@ export default class Register extends Component {
     this.setState({ isLoading: true });
 
     const { username, email, password } = this.state;
+    console.log(this.state.username)
     try {
       const newUser = await Auth.signUp({
         username,
@@ -49,6 +50,7 @@ export default class Register extends Component {
           email: email
         }
       });
+      console.log(username)
       this.setState({ newUser })
       console.log(newUser);
     } catch (err) {
@@ -65,7 +67,7 @@ export default class Register extends Component {
       await Auth.confirmSignUp(this.state.username, this.state.confirmationCode);
       await Auth.signIn(this.state.username, this.state.password);
 
-      // this.props.userHasAuthenticated(true);
+      // this.props.user.userHasAuthenticated(true);
       this.props.history.push('/login');
     } catch (e) {
       alert(e.message);
@@ -76,16 +78,28 @@ export default class Register extends Component {
 
   renderConfirmationForm() {
     return (
-      <form onSubmit={this.handleConfirmationSubmit}>
-        <div className="container">
-          <label htmlFor="confirmationCode">Confirmation Code</label>
-          <input name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} />
-          <h1>Please check your email for the code.</h1>
+
+      <div className="container text-center">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="card cardConfirm bg-light">
+              <div className="card-body">
+                <form onSubmit={this.handleConfirmationSubmit}>
+                  <h3>Please check your email for the code.</h3>
+                  <div className="form-group input-group">
+                    <label htmlFor="confirmationCode" className="mr-2">Confirmation Code:</label>
+                    <input name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} />
+                  </div>
+                  <div className="form-group">
+                    <button type="submit" className="btn btn-primary btn-block rounded-pill">Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <button variant="primary" type="submit">
-          Submit
-    </button>
-      </form>
+      </div>
+
     );
   }
 
@@ -101,21 +115,21 @@ export default class Register extends Component {
           </div>
 
           <div className="col-md-8">
-            <div className="card bg-light">
-              <div className="card-body mx-auto">
+            <div className="card cardStyle bg-light">
+              <div className="card-body">
                 <h4 className="card-title mt-3 text-center">Create Account</h4>
                 <form>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-user"></i> </span>
                     </div>
-                    <input name="userName" value={this.state.userName} onChange={this.handleInputChange} className="form-control" placeholder="User name" type="text" />
+                    <input name="username" value={this.state.username} onChange={this.handleInputChange} className="form-control" placeholder="User name" type="text" />
                   </div>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
                     </div>
-                    <input name="email" value={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email address" type="email" />
+                    <input name="email" value={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email address" type="email"/>
                   </div>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
@@ -134,12 +148,16 @@ export default class Register extends Component {
                     </div>
                     <input name="password" value={this.state.password} onChange={this.handleInputChange} className="form-control" placeholder="Create password" type="password" />
                   </div>
+                  <span id="8char" className="glyphicon glyphicon-remove" style={{ color: "red" }}></span> 8 Characters Long<br />
+                  <span id="ucase" className="glyphicon glyphicon-remove" style={{ color: "red" }}></span> One Uppercase Letter
+
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
                     </div>
                     <input name="confirmPassword" value={this.state.confirmPassword} onChange={this.handleInputChange} className="form-control" placeholder="Confirm password" type="password" />
                   </div>
+
                   <div className="form-group">
                     <button onClick={this.handleFormSubmit} type="submit" className="btn btn-primary btn-block"> Create Account  </button>
                   </div>

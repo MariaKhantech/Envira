@@ -1,7 +1,6 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #17a2b8;
   height: 100vh;
 }
 
@@ -18,6 +17,6 @@ body {
 }
 
 #login .container #login-row #login-column #login-box #login-form #register-link {
-  margin-top: -85px;
+  margin-top: -50px;
 }
 /*# sourceMappingURL=login.css.map */
