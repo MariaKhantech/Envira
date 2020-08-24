@@ -48,8 +48,8 @@ export default class Carousel extends Component {
       infinite: true,
       adaptiveHeight: true,
       speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 3,
+      slidesToShow: this.props.state.slidesToShow,
+      slidesToScroll: this.props.state.slidesToScroll,
     };
 
     return (
