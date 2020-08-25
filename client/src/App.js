@@ -67,7 +67,7 @@ export default class AppTest extends Component {
               <div>
                 {/* <Navbar auth={authProps} /> */}
                 <NavBar auth={authProps} />
-        
+
                 <Switch>
                   <Route
                     exact
@@ -113,14 +113,14 @@ export default class AppTest extends Component {
                       <Rainforest {...props} auth={authProps} />
                     )}
                   />
-                    <Route
+                  <Route
                     exact
                     path="/eventcreate"
                     render={(props) => (
                       <EventCreate {...props} auth={authProps} />
                     )}
                   />
-                   <Route
+                  <Route
                     exact
                     path="/eventspage"
                     render={(props) => (

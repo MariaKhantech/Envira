@@ -174,10 +174,11 @@ export default class Register extends Component {
                     <select name="role" value={this.state.role} onChange={this.handleInputChange} className="form-control" required>
 
                       {this.state.roleTypes.map(role => {
-                        return (<option key={role.id} value={role.type}>{role.type}</option>)
+                        return (<option key={role.id} value={role.type.id}>{role.type}</option>)
 
                       })}
                     </select>
+
                   </div>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
