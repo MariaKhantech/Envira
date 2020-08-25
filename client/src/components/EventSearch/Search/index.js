@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Modal from "../Modal/index";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -10,6 +11,8 @@ import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
+import ReactTooltip from "react-tooltip";
+
 export default class Search extends Component {
   render() {
     const { filter, disabled, searchInput } = this.props.state;
@@ -18,6 +21,9 @@ export default class Search extends Component {
       onChange,
       handleFilterSubmit,
       handleShowAll,
+      handleShowModal,
+      handleHideModal,
+      postNewEvent,
     } = this.props;
 
     return (
@@ -29,6 +35,8 @@ export default class Search extends Component {
                 variant="primary"
                 title={filter}
                 id="input-group-dropdown-1"
+                data-tip
+                data-for="filterTip"
               >
                 <Dropdown.Item onClick={handleFilterOption}>
                   Organizer
@@ -44,6 +52,9 @@ export default class Search extends Component {
                   <Button onClick={handleShowAll}>Show All Events</Button>
                 </Dropdown.Item>
               </DropdownButton>
+              <ReactTooltip id="filterTip" place="top" effect="solid">
+                Select a Filter
+              </ReactTooltip>
             </InputGroup.Prepend>
             <FormControl
               placeholder="Search for Events"
@@ -53,12 +64,35 @@ export default class Search extends Component {
               disabled={disabled}
             />
             <InputGroup.Append>
-              <Button onClick={handleFilterSubmit}>
+              <Button
+                onClick={handleFilterSubmit}
+                data-tip
+                data-for="searchTip"
+              >
                 <i className="fa fa-search"></i>
               </Button>
+              <ReactTooltip id="searchTip" place="top" effect="solid">
+                Search
+              </ReactTooltip>
+              <Button
+                onClick={handleShowModal}
+                data-tip
+                data-for="addTip"
+                style={{ "background-color": "green" }}
+              >
+                <i className="fa fa-plus"></i>
+              </Button>
+              <ReactTooltip id="addTip" place="top" effect="solid">
+                Add new event
+              </ReactTooltip>
             </InputGroup.Append>
           </InputGroup>
         </Col>
+        <Modal
+          handleHideModal={handleHideModal}
+          postNewEvent={postNewEvent}
+          state={this.props.state}
+        />
       </Row>
     );
   }
