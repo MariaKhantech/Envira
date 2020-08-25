@@ -37,19 +37,17 @@ export default class ForgotPassword extends Component {
   render() {
     return (
       <>
-
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h2 className="font-weight-light">Forgot your password?</h2>
-              <p>Not to worry. Just enter your email address below and we'll send you an instruction email for recovery.</p>
-
+        <div className="container mt-5">
+          <div className="row justify-content-center align-items-center">
+            <div className="col-md-7 border mt-2 shadow-lg p-3 mb-5 bg-white rounded">
+              <h2 className="font-weight-normal text-center">Forgot your password?</h2>
+              <p className="font-italic">Not to worry. Just enter your email address below and we'll send you an instruction email for recovery.</p>
               <form onSubmit={this.handleForgotPassword} className="mt-3">
-
-                <input name="email" value={this.state.email}
-                  onChange={this.handleInputChange} className="form-control form-control-lg" type="email" placeholder="Your email address" />
-
-                <div className="text-right my-3">
+                <div className="form-group">
+                  <input name="email" value={this.state.email}
+                    onChange={this.handleInputChange} className="form-control form-control-lg" type="email" placeholder="Your email address" required/>
+                </div>
+                <div className="form-group mx-auto text-center">
                   <button type="submit" className="btn btn-lg btn-success">Reset Password</button>
                 </div>
               </form>

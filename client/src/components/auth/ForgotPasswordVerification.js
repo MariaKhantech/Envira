@@ -44,12 +44,13 @@ class ForgotPasswordVerification extends Component {
         <div>
           <div className="container">
             <div className="row justify-content-center align-items-center">
-              <h1>Set new password</h1>
+              
+              <div className="col-md-6 border mt-2 shadow-lg p-3 mb-5 bg-white rounded">
+              <h3 className="text-center">Set new password</h3>
               <p>
                 Please enter the verification code sent to your email address below,
                 your email address and a new password.
               </p>
-              <div className="col-md-6 border mt-2 shadow-lg p-3 mb-5 bg-white rounded">
                 <div className="col-md-12">
                   <form onSubmit={this.handlePasswordVerification}>
                     <div className="form-group">

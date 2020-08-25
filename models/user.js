@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     // USERNAME AND EMAIL
@@ -58,6 +60,11 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'cascade',
     });
   };
+  User.associate = (models) => {
+    User.hasMany(models.EventAttendee, {
+      onDelete: 'cascade',
+    });
+  };
 
   // We're saying that an User should be associated with the role
   // An User can't be created without a Role due to the foreign key constraint
@@ -68,5 +75,20 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
   };
+
+  User.associate = (models) => {
+    User.belongsToMany(models.Event, {
+      through: 'EventAttendee',
+      as: 'events',
+      foreignKey: 'userId',
+      otherKey: 'eventId',
+    });
+  };
+
+  User.addHook('beforeCreate', (user) => {
+    const users = user;
+    users.password = bcrypt.hashSync(users.password, bcrypt.genSaltSync(10), null);
+  });
+
   return User;
 };

@@ -12,20 +12,20 @@ module.exports = (sequelize, DataTypes) => {
 
   // define relationship between event and comment
   // An event can have many comments
-  CompanyComment.associate = (models) => {
-    CompanyComment.belongsTo(models.Event, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-  };
-  CompanyComment.associate = (models) => {
-    CompanyComment.hasMany(models.CompanyReply, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-  };
+  // CompanyComment.associate = (models) => {
+  //   CompanyComment.belongsTo(models.Event, {
+  //     foreignKey: {
+  //       allowNull: false,
+  //     },
+  //   });
+  // };
+  // CompanyComment.associate = (models) => {
+  //   CompanyComment.hasMany(models.CompanyReply, {
+  //     foreignKey: {
+  //       allowNull: false,
+  //     },
+  //   });
+  // };
 
 
   // define relationship between user and comment
