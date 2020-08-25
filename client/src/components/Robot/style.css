@@ -1,5 +1,5 @@
 #robot {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 80%;
   max-width: 15vw;

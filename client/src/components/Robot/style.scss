@@ -4,7 +4,7 @@ $hover_bottom: 30px;
 $hover_top_bow: 55px;
 
 #robot {
-	position: absolute;
+	position: fixed;
 	top: 50%;
 	left: 80%;
 	//transform: translate3d(-50%, -50%, 0);
