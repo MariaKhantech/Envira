@@ -1,0 +1,30 @@
+{
+	"auth": {
+		"enviroplatformf0ee9c03": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	},
+	"function": {
+		"project3AmplifyCognitoCustomMessage": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda"
+		}
+	},
+	"interactions": {
+		"lexenvira": {
+			"service": "Lex",
+			"providerPlugin": "awscloudformation",
+			"build": true
+		}
+	},
+	"storage": {
+		"s3envira": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}
