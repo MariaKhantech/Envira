@@ -1,0 +1,14 @@
+#card-image {
+  width: 18rem;
+}
+
+.card-body {
+  background-color: #fdfaed;
+}
+
+.card-header {
+  border: 4px;
+  border-style: solid;
+  border-color: #004080;
+}
+/*# sourceMappingURL=style.css.map */
