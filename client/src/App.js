@@ -13,10 +13,12 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Infographics from "./pages/Infographics";
-import Ocean from "./pages/ocean";
-import Rainforest from "./pages/rainforest";
+import Ocean from "./pages/Ocean";
+import Rainforest from "./pages/Rainforest";
 import Profile from "./pages/Profile";
-import Events from "./pages/events";
+import Events from "./pages/Events";
+import EventsPage from "./pages/EventsPage"
+import EventCreate from "./pages/EventCreate";
 import { Auth } from "aws-amplify";
 
 export default class AppTest extends Component {
@@ -103,6 +105,20 @@ export default class AppTest extends Component {
                     path="/rainforest"
                     render={(props) => (
                       <Rainforest {...props} auth={authProps} />
+                    )}
+                  />
+                    <Route
+                    exact
+                    path="/eventcreate"
+                    render={(props) => (
+                      <EventCreate {...props} auth={authProps} />
+                    )}
+                  />
+                   <Route
+                    exact
+                    path="/eventspage"
+                    render={(props) => (
+                      <EventsPage {...props} auth={authProps} />
                     )}
                   />
                   <Route

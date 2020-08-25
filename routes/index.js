@@ -1,9 +1,8 @@
 const router = require("express").Router();
 const authRoutes = require("./auth/authRoutes");
-// const apiRoutes = require('./api/index');
-const eventSearchRoutes = require("./api/eventSearchRoutes");
+const apiRoutes = require("./api/index");
 
-// router.use('/', apiRoutes);
+router.use("/", apiRoutes);
 
 router.use("/create", eventSearchRoutes);
 
