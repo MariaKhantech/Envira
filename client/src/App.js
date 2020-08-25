@@ -13,10 +13,10 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Infographics from "./pages/Infographics";
-import Ocean from "./pages/ocean";
-import Rainforest from "./pages/rainforest";
+import Ocean from "./pages/Ocean";
+import Rainforest from "./pages/Rainforest";
 import Profile from "./pages/Profile";
-import Events from "./pages/events";
+import Events from "./pages/Events";
 import { Auth } from "aws-amplify";
 
 export default class AppTest extends Component {
