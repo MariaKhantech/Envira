@@ -21,8 +21,12 @@ module.exports = {
   },
   plugins: [
     'react',
+    ["prettier"],
   ],
   rules: {
-    'no-console': 'off'
+    'no-console': 'off',
+    "rules": {
+      "prettier/prettier": "error",
+    }
   },
 };

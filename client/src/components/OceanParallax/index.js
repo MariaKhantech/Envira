@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Parallax } from "react-parallax";
 import Jumbotron from 'react-bootstrap/Jumbotron';
+import OceanPollutionText from '../OceanPollutionText';
 import "./style.scss";
 
     
@@ -22,9 +23,10 @@ import "./style.scss";
             const image1 ="https://images.unsplash.com/photo-1498092651296-641e88c3b057?auto=format&fit=crop&w=1778&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D";
             const image2 =  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80';
 
+            
             let cardDiv = <div className="card text-center text-white">
   				              	  <div className="card-header" style={{background: "#001a33"}}>
-    				                  Oceans Pollution Dilema
+    				                 <OceanPollutionText /> 
                             </div>
   					                  <div className="card-body text-white" >
                             <h5 className="card-title">Special title treatment</h5>
@@ -51,19 +53,19 @@ import "./style.scss";
                                <div style={insideStyles}>HTML inside the parallax</div>
                           </div>
                       </Parallax>
-                      {cardDiv}
+                      <div>|||</div>
                       <Parallax bgImage={image2} strength={500}>
                           <div style={{ height: 500 }}>
                             
                           </div>
                       </Parallax>
-                      {cardDiv}
+                      <div>|||sdsd</div>
                       <Parallax bgImage={image2} strength={500}>
                           <div style={{ height: 500 }}>
                             
                           </div>
                       </Parallax>
-                      {cardDiv}
+                      <div>sdsdasdsadsad</div>
                       <Parallax bgImage={image2} strength={500}>
                           <div style={{ height: 500 }}>
                             
