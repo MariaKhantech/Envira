@@ -13,7 +13,12 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 export default class Search extends Component {
   render() {
     const { filter, disabled, searchInput } = this.props.state;
-    const { handleFilterOption, onChange, handleShowAll } = this.props;
+    const {
+      handleFilterOption,
+      onChange,
+      handleFilterSubmit,
+      handleShowAll,
+    } = this.props;
 
     return (
       <Row>
@@ -26,7 +31,7 @@ export default class Search extends Component {
                 id="input-group-dropdown-1"
               >
                 <Dropdown.Item onClick={handleFilterOption}>
-                  Title
+                  Organizer
                 </Dropdown.Item>
                 <Dropdown.Item onClick={handleFilterOption}>
                   Location
@@ -48,7 +53,7 @@ export default class Search extends Component {
               disabled={disabled}
             />
             <InputGroup.Append>
-              <Button>
+              <Button onClick={handleFilterSubmit}>
                 <i className="fa fa-search"></i>
               </Button>
             </InputGroup.Append>
