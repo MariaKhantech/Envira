@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const CompanyComment = sequelize.define('CompanyComment', {
-    review_detail: {
+  const EventComment = sequelize.define('EventComment', {
+    comment_detail: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: false,
@@ -12,26 +12,27 @@ module.exports = (sequelize, DataTypes) => {
 
   // define relationship between event and comment
   // An event can have many comments
-  CompanyComment.associate = (models) => {
-    CompanyComment.belongsTo(models.Event, {
+  EventComment.associate = (models) => {
+    EventComment.belongsTo(models.Event, {
       foreignKey: {
         allowNull: false,
       },
     });
   };
-  CompanyComment.associate = (models) => {
-    CompanyComment.hasMany(models.CompanyReply, {
-      foreignKey: {
-        allowNull: false,
-      },
-    });
-  };
+
+  // EventComment.associate = (models) => {
+  //   EventComment.hasMany(models.Reply, {
+  //     foreignKey: {
+  //       allowNull: false,
+  //     },
+  //   });
+  // };
 
 
   // define relationship between user and comment
   // A user can post many comments
-  CompanyComment.associate = (models) => {
-    CompanyComment.belongsTo(models.User, {
+  EventComment.associate = (models) => {
+    EventComment.belongsTo(models.User, {
       foreignKey: {
         allowNull: false,
       },
@@ -39,5 +40,5 @@ module.exports = (sequelize, DataTypes) => {
   };
 
 
-  return CompanyComment;
+  return EventComment;
 };

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { Auth } from 'aws-amplify';
 
 export default class ChangePassword extends Component {

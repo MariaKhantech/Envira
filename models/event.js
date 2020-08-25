@@ -34,9 +34,8 @@ module.exports = (sequelize, DataTypes) => {
   // An Event can't be created without an User due to the foreign key constraint
   Event.associate = (models) => {
     Event.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false,
-      },
+      onDelete: 'CASCADE',
+      foreignKey: 'userId',
     });
   };
 
@@ -53,6 +52,14 @@ module.exports = (sequelize, DataTypes) => {
   Event.associate = (models) => {
     Event.hasMany(models.Reply, {
       onDelete: 'cascade',
+    });
+  };
+  Event.associate = (models) => {
+    Event.belongsToMany(models.User, {
+      through: 'EventAttendee',
+      as: 'users',
+      foreignKey: 'eventId',
+      otherKey: 'userId',
     });
   };
   return Event;
