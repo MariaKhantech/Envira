@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Axios from "axios";
 import Search from "./Search/index";
 import Carousel from "./Carousel/index";
 import Data from "./Data.json";
@@ -23,6 +24,15 @@ export default class EventSearch extends Component {
     slidesToShow: 3,
     slidesToScroll: 3,
     information: Data,
+    apiData: [],
+    eventTitle: "save planet",
+    date: "09/05/20",
+    location: "portland",
+    contactPerson: "jane doe",
+    contactNumber: "18005678",
+    description: "come help us clean planet",
+
+    showModal: false,
   };
 
   onChange = (event) =>
@@ -65,6 +75,29 @@ export default class EventSearch extends Component {
     this.setState({ slidesToScroll: 3 });
   };
 
+  handleShowModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  handleHideModal = () => {
+    this.setState({ showModal: false });
+  };
+
+  postNewEvent = () => {
+    Axios.post("/api/create/events", {
+      eventTitle: this.state.eventTitle,
+      date: this.state.date,
+      location: this.state.location,
+      contactPerson: this.state.contactPerson,
+      contactNumber: this.state.contactNumber,
+      description: this.state.description,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
     let renderCarousel = null;
     if (this.state.showCarousel === true) {
@@ -80,6 +113,9 @@ export default class EventSearch extends Component {
           handleFilterOption={this.handleFilterOption}
           handleFilterSubmit={this.handleFilterSubmit}
           handleShowAll={this.handleShowAll}
+          handleShowModal={this.handleShowModal}
+          handleHideModal={this.handleHideModal}
+          postNewEvent={this.postNewEvent}
           state={this.state}
         />
         {renderCarousel}
