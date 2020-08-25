@@ -15,7 +15,7 @@ import Data from "./Data.json";
 
 //
 
-export default class EventSearch extends Component {
+export default class EventsSearch extends Component {
   state = {
     filter: "Filter",
     disabled: true,
