@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Parallax } from "react-parallax";
 import Jumbotron from 'react-bootstrap/Jumbotron';
+import OceanPollutionText from '../OceanPollutionText';
 import "./style.scss";
 
     
@@ -25,7 +26,7 @@ import "./style.scss";
             
             let cardDiv = <div className="card text-center text-white">
   				              	  <div className="card-header" style={{background: "#001a33"}}>
-    				                  Oceans Pollution Dilema
+    				                 <OceanPollutionText /> 
                             </div>
   					                  <div className="card-body text-white" >
                             <h5 className="card-title">Special title treatment</h5>

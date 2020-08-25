@@ -11,7 +11,7 @@ export class Robot extends Component {
 			x="0"
 			y="0"
 			viewBox="0 0 600 800"
-			enable-background="new 0 0 600 800"
+			enableBackground="new 0 0 600 800"
 		>
 			<ellipse id="shadow" opacity="0.4" fill="#2C3332" cx="300" cy="703.4" rx="89" ry="30.6" />
 			<g id="left_arm">
