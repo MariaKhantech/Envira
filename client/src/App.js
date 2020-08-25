@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/NavbarTest";
 // import NavBar from "./components/NavBar";
-import NavBar from './components/NavBar'
+import NavBar from './components/NavbarTest'
 
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ForgotPasswordVerification from "./components/auth/ForgotPasswordVerification";
@@ -14,8 +14,9 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Infographics from "./pages/Infographics";
 import Ocean from "./pages/ocean";
-import Rainforest from "./pages/rainforest";
+import Rainforest from "./pages/Rainforest";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 import Events from "./pages/events";
 import { Auth } from "aws-amplify";
 
@@ -85,6 +86,11 @@ export default class AppTest extends Component {
                     exact
                     path="/profile"
                     render={(props) => <Profile {...props} auth={authProps} />}
+                  />
+                  <Route
+                    exact
+                    path="/editprofile"
+                    render={(props) => <EditProfile {...props} auth={authProps} />}
                   />
                   <Route
                     exact
