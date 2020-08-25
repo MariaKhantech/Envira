@@ -1,12 +1,58 @@
 import React, { Component } from 'react';
 import "./updateProfile.css";
+import Axios from 'axios';
+import { Auth } from 'aws-amplify';
 
 export default class UpdateProfile extends Component {
+    state = {
+        userProfile: [{}]
+    }
 
+    //current logged in user
+  
+    componentDidMount() {
+        // const currentLoggedInUser= this.props.auth.user.username
+        console.log(this.props.auth);
+        // getting user profile for logged in user from user profile table 
+        Axios.get("/api/auth/user/1")
+            .then(
+                (response) => {
+                    console.log(response)
+                    this.setState({
+                        roleTypes: response.data,
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        error
+                    });
+                }
+            )
+    }
+    handleInputChange = (e) => {
+        let name = e.target.name;
+        console.log(name);
+        let value = e.target.value;
+        console.log(value);
+        this.setState({
+            [name]: value
+        })
+    }
 
+    handleFormSubmit = async (event) => {
+        event.preventDefault();
+        //form validation
+        // validate for correct password and username
+
+        this.setState({ isLoading: true });
+
+        const { username, password } = this.state;
+    }
     render() {
         return (
             <>
+            {/* only display this page when user is logged in */}
+            {/* get the id of userid or username form session */}
                 <div className="container rounded bg-white mt-5 mb-5">
                     <div className="row">
                         <div className="col-md-3 border-right">
@@ -20,33 +66,33 @@ export default class UpdateProfile extends Component {
                                 <div className="row mt-2">
                                     <div className="col-md-6">
                                         <label className="labels">First Name</label>
-                                        <input type="text" className="form-control" placeholder="first name" value="" />
+                                        <input type="text" className="form-control" placeholder="first name" value={this.state.firstName} onChange={this.handleInputChange}/>
                                     </div>
                                     <div className="col-md-6">
                                         <label className="labels">Last Name</label>
-                                        <input type="text" className="form-control" value="" placeholder="last name" /></div>
+                                        <input type="text" className="form-control" placeholder="last name" value={this.state.lastName} onChange={this.handleInputChange}/></div>
                                 </div>
                                 <div className="row mt-3">
                                     <div className="col-md-12">
                                         <label className="labels">Phone Number</label>
-                                        <input type="tel" className="form-control" placeholder="enter phone number" value="" /></div>
+                                        <input value={this.state.phoneNumber} type="tel" className="form-control" placeholder="enter phone number" onChange={this.handleInputChange} /></div>
                                     <div className="col-md-12">
                                         <label className="labels">Address</label>
-                                        <input type="text" className="form-control" placeholder="enter address" value="" /></div>
+                                        <input type="text" className="form-control" placeholder="enter address" value={this.state.address} onChange={this.handleInputChange} /></div>
                                     <div className="col-md-12">
                                         <label className="labels">Email ID</label>
-                                        <input type="text" className="form-control" placeholder="enter email id" value="" /></div>
+                                        <input type="text" className="form-control" placeholder="enter email id" value={this.state.email} onChange={this.handleInputChange} /></div>
                                     <div className="col-md-12">
                                         <label className="labels">Education</label>
-                                        <input type="text" className="form-control" placeholder="education" value="" /></div>
+                                        <input type="text" className="form-control" placeholder="education" value={this.state.education} onChange={this.handleInputChange} /></div>
                                 </div>
                                 <div className="row mt-3">
                                     <div className="col-md-6">
                                         <label className="labels">City</label>
-                                        <input type="text" className="form-control" placeholder="city" value="" /></div>
+                                        <input type="text" className="form-control" placeholder="city" value={this.state.city} onChange={this.handleInputChange} /></div>
                                     <div className="col-md-6">
                                         <label className="labels">State/Region</label>
-                                        <input type="text" className="form-control" value="" placeholder="state" /></div>
+                                        <input type="text" className="form-control" value={this.state.region} placeholder="state" onChange={this.handleInputChange}/></div>
                                 </div>
                                 <div className="mt-5 text-center">
                                     <button className="btn btn-primary profile-button" type="button">Save Profile</button>
@@ -58,12 +104,12 @@ export default class UpdateProfile extends Component {
                                 <div className="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span className="border px-3 p-1 add-experience"><i className="fa fa-plus"></i>&nbsp;Experience</span></div><br />
                                 <div className="col-md-12">
                                     <label className="labels">Experience in Designing</label>
-                                    <input type="text" className="form-control" placeholder="experience" value="" />
-                                    </div> <br />
+                                    <input type="text" className="form-control" placeholder="experience" value="" onChange={this.handleInputChange} />
+                                </div> <br />
                                 <div className="col-md-12">
                                     <label className="labels">Additional Details</label>
-                                    <input type="text" className="form-control" placeholder="additional details" value="" />
-                                    </div>
+                                    <input type="text" className="form-control" placeholder="additional details" value="" onChange={this.handleInputChange}/>
+                                </div>
                             </div>
                         </div>
                     </div>

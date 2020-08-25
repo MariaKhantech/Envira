@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/NavbarTest";
 // import NavBar from "./components/NavBar";
-import NavBar from './components/NavBar'
+import NavBar from './components/NavbarTest'
 
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ForgotPasswordVerification from "./components/auth/ForgotPasswordVerification";
@@ -19,6 +19,7 @@ import Profile from "./pages/Profile";
 import Events from "./pages/Events";
 import EventsPage from "./pages/EventsPage"
 import EventCreate from "./pages/EventCreate";
+import EditProfile from "./pages/EditProfile";
 import { Auth } from "aws-amplify";
 
 export default class AppTest extends Component {
@@ -66,7 +67,7 @@ export default class AppTest extends Component {
               <div>
                 {/* <Navbar auth={authProps} /> */}
                 <NavBar auth={authProps} />
-        
+
                 <Switch>
                   <Route
                     exact
@@ -90,6 +91,11 @@ export default class AppTest extends Component {
                   />
                   <Route
                     exact
+                    path="/editprofile"
+                    render={(props) => <EditProfile {...props} auth={authProps} />}
+                  />
+                  <Route
+                    exact
                     path="/infographics"
                     render={(props) => (
                       <Infographics {...props} auth={authProps} />
@@ -107,14 +113,14 @@ export default class AppTest extends Component {
                       <Rainforest {...props} auth={authProps} />
                     )}
                   />
-                    <Route
+                  <Route
                     exact
                     path="/eventcreate"
                     render={(props) => (
                       <EventCreate {...props} auth={authProps} />
                     )}
                   />
-                   <Route
+                  <Route
                     exact
                     path="/eventspage"
                     render={(props) => (

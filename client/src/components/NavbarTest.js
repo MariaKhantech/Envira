@@ -3,6 +3,7 @@ import { Auth } from 'aws-amplify';
 
 
 export default class Navbar extends Component {
+  
   handleLogOut = async event => {
     event.preventDefault();
     try {

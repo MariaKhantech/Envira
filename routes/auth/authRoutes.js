@@ -43,5 +43,33 @@ router.get('/role', (req, res) => {
     });
 });
 
+router.get('/editUserProfile', (req, res) => {
+  console.log('hit here');
+  db.UserProfile.findOne({
+    where: req.params.Id, // send logged in user id here
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+    });
+});
 
+router.get('/user', (req, res) => {
+  console.log('hit here');
+  db.User.findOne({
+    where: req.params.Id, // send logged in user id here
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+    });
+});
 module.exports = router;
