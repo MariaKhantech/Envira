@@ -13,50 +13,50 @@ export class NavBar extends Component {
       <a className="menu-item text-center text-white" href="/">
         Home
       </a>
-        <hr class="bg-light" style={{background: "white"}}/>
-      <a className="menu-item text-center text-white" href="/ocean">
+        <hr className="bg-light" style={{background: "white"}}/>
+      <a className="menu-item text-white about" href="/ocean">
        About
       </a>
 
-      <li class="nav-item dropdown ">
-        <a class="nav-link dropdown-toggle text-center text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li className="nav-item dropdown ">
+        <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          Events
         </a>
-        <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-          <a class="dropdown-item text-center " href="#">Action</a>
-          <a class="dropdown-item text-center " href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item text-center " href="#">Something else here</a>
+        <div className="dropdown-menu " aria-labelledby="navbarDropdown">
+          <a className="dropdown-item text-center " href="#">Action</a>
+          <a className="dropdown-item text-center " href="#">Another action</a>
+          <div className="dropdown-divider"></div>
+          <a className="dropdown-item text-center " href="#">Something else here</a>
         </div>
       </li>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-center text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li className="nav-item dropdown">
+        <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          Climate Change
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item " href="#">Action</a>
-          <a class="dropdown-item " href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item " href="#">Something else here</a>
+        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a className="dropdown-item " href="#">Action</a>
+          <a className="dropdown-item " href="#">Another action</a>
+          <div className="dropdown-divider"></div>
+          <a className="dropdown-item " href="#">Something else here</a>
         </div>
       </li>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-center text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li className="nav-item dropdown">
+        <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          Company Pollution
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item " href="#">Action</a>
-          <a class="dropdown-item " href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item " href="#">Something else here</a>
+        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a className="dropdown-item " href="#">Action</a>
+          <a className="dropdown-item " href="#">Another action</a>
+          <div className="dropdown-divider"></div>
+          <a className="dropdown-item " href="#">Something else here</a>
         </div>
       </li>
 
-     
+     <hr style={{background: "white"}}/>
 
-      <li className="dropdown dropdown-login  order-1 text-center menu-item mt-4">
+      <li className="dropdown dropdown-login  order-1 menu-item mt-4">
 						<button type="button" data-toggle="dropdown" className="btn btn-outline-light dropdown-toggle ">
 							Login <span className="caret" />
 						</button>
