@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Navbar from "./components/NavbarTest";
-// import NavBar from "./components/NavBar";
-import NavBar from "./components/NavbarTest";
+// import Navbar from "./components/NavbarTest";
+import NavBar from "./components/NavBar";
+// import NavBar from "./components/NavbarTest";
 
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ForgotPasswordVerification from "./components/auth/ForgotPasswordVerification";
@@ -19,6 +19,7 @@ import Profile from "./pages/Profile";
 import EventSearch from "./pages/EventSearch";
 import EventsPage from "./pages/EventsPage";
 import EventCreate from "./pages/EventCreate";
+import Explore from "./pages/Explore";
 import EditProfile from "./pages/EditProfile";
 import { Auth } from "aws-amplify";
 
@@ -135,6 +136,11 @@ export default class AppTest extends Component {
                     render={(props) => (
                       <EventSearch {...props} auth={authProps} />
                     )}
+                  />
+                  <Route
+                    exact
+                    path="/explore"
+                    render={(props) => <Explore {...props} auth={authProps} />}
                   />
                   <Route
                     exact

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 import Search from "./Search/index";
 import Carousel from "./Carousel/index";
-import Data from "./Data.json";
+// import Data from "./Data.json";
 
 // SEE ALL EVENTS
 // on page load user will be presented a search bar <Search /> and when a user selects the dropdown appended to the bar and selects the see all events button the following will happen...
@@ -23,17 +23,26 @@ export default class EventsSearch extends Component {
     showCarousel: false,
     slidesToShow: 3,
     slidesToScroll: 3,
-    information: Data,
-    apiData: [],
-    eventTitle: "save planet",
-    date: "09/05/20",
-    location: "portland",
-    contactPerson: "jane doe",
-    contactNumber: "18005678",
-    description: "come help us clean planet",
-
+    // information: Data,
+    eventData: [],
     showModal: false,
   };
+
+  componentDidMount() {
+    Axios.get("/api/create/eventcreate").then(
+      (response) => {
+        console.log(response);
+        this.setState({
+          eventData: response.data,
+        });
+      },
+      (error) => {
+        this.setState({
+          error,
+        });
+      }
+    );
+  }
 
   onChange = (event) =>
     this.setState({ [event.target.name]: event.target.value });
@@ -46,20 +55,24 @@ export default class EventsSearch extends Component {
     event.preventDefault();
 
     if (this.state.filter === "Location") {
-      const filteredLocation = Data.filter(
-        (detail) => detail.location === this.state.searchInput
+      this.componentDidMount();
+      const filteredLocation = this.state.eventData.filter(
+        (detail) => detail.address === this.state.searchInput
       );
-      this.setState({ information: filteredLocation });
+      this.setState({ eventData: filteredLocation });
+      console.log(this.state.eventData);
       this.setState({ showCarousel: true });
       this.setState({ slidesToShow: filteredLocation.length });
       this.setState({ slidesToScroll: filteredLocation.length });
       this.setState({ searchInput: "" });
     }
     if (this.state.filter === "Organizer") {
-      const filteredOrg = Data.filter(
-        (detail) => detail.organizer === this.state.searchInput
+      this.componentDidMount();
+      const filteredOrg = this.state.eventData.filter(
+        (detail) => detail.event_name === this.state.searchInput
       );
-      this.setState({ information: filteredOrg });
+      this.setState({ eventData: filteredOrg });
+      console.log(this.state.eventData);
       this.setState({ showCarousel: true });
       this.setState({ slidesToShow: filteredOrg.length });
       this.setState({ slidesToScroll: filteredOrg.length });
@@ -69,8 +82,9 @@ export default class EventsSearch extends Component {
 
   handleShowAll = (event) => {
     event.preventDefault();
+    this.componentDidMount();
     this.setState({ showCarousel: true });
-    this.setState({ information: Data });
+    // this.setState({ information: Data });
     this.setState({ slidesToShow: 3 });
     this.setState({ slidesToScroll: 3 });
   };
@@ -81,21 +95,6 @@ export default class EventsSearch extends Component {
 
   handleHideModal = () => {
     this.setState({ showModal: false });
-  };
-
-  postNewEvent = () => {
-    Axios.post("/api/create/events", {
-      eventTitle: this.state.eventTitle,
-      date: this.state.date,
-      location: this.state.location,
-      contactPerson: this.state.contactPerson,
-      contactNumber: this.state.contactNumber,
-      description: this.state.description,
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
   };
 
   render() {
