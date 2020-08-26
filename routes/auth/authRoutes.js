@@ -5,21 +5,14 @@ const db = require('../../models');
 // Sequelize User Model. If the user is created successfully, proceed
 //  to log the user in, otherwise send back an error
 router.post('/signup', (req, res) => {
-  let Id;
   console.log(req.body.username);
   console.log(req.body.role);
-  if (req.body.role === 'company') {
-    Id = 2;
-  } else if (req.body.role === 'individual user') {
-    Id = 1;
-  } else if (req.body.role === 'non-profit') {
-    Id = 3;
-  }
+
   db.User.create({
     user_name: req.body.username,
     password: req.body.password,
     email: req.body.email,
-    RoleId: Id,
+    RoleId: req.body.role,
   })
     .then((dbResponse) => {
       res.json(dbResponse);
@@ -43,10 +36,24 @@ router.get('/role', (req, res) => {
     });
 });
 
-router.get('/editUserProfile', (req, res) => {
-  console.log('hit here');
+router.get('/editUserProfile/:id', (req, res) => {
+  console.log(req.params.id);
   db.UserProfile.findOne({
-    where: req.params.Id, // send logged in user id here
+    where: req.params.id, // send logged in user id here
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+    });
+});
+router.post('/editUserProfile', (req, res) => {
+  console.log('hit here');
+  db.UserProfile.findAll({
+
   })
     .then((data) => {
       res.json(data);
@@ -58,13 +65,17 @@ router.get('/editUserProfile', (req, res) => {
     });
 });
 
-router.get('/user', (req, res) => {
-  console.log('hit here');
+router.get('/user/:username', (req, res) => {
+  console.log(req.params.username);
   db.User.findOne({
-    where: req.params.Id, // send logged in user id here
+    // send logged in user id here
+    where: {
+      user_name: req.params.username
+    }
   })
     .then((data) => {
       res.json(data);
+      console.log(data)
     })
     .catch((err) => {
       if (err) {
