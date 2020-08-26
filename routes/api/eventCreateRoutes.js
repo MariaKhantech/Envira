@@ -29,4 +29,16 @@ router.post("/eventcreate", (req, res) => {
     });
 });
 
+router.get("/eventcreate", (req, res) => {
+  db.Event.findAll({})
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+    });
+});
+
 module.exports = router;

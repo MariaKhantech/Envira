@@ -24,9 +24,25 @@ export default class EventsSearch extends Component {
     slidesToShow: 3,
     slidesToScroll: 3,
     information: Data,
-    apiData: [],
+    eventData: [],
     showModal: false,
   };
+
+  componentDidMount() {
+    Axios.get("/api/create/eventcreate").then(
+      (response) => {
+        console.log(response);
+        this.setState({
+          eventData: response.data,
+        });
+      },
+      (error) => {
+        this.setState({
+          error,
+        });
+      }
+    );
+  }
 
   onChange = (event) =>
     this.setState({ [event.target.name]: event.target.value });
@@ -97,6 +113,7 @@ export default class EventsSearch extends Component {
           state={this.state}
         />
         {renderCarousel}
+        {this.componentDidMount}
       </>
     );
   }
