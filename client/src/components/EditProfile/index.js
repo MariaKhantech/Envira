@@ -7,45 +7,62 @@ import { Auth } from 'aws-amplify';
 export default class UpdateProfile extends Component {
     state = {
         profile: [],
-        firstName: "",
+        first_name: "",
         lastName: "",
         city: "",
         state: "",
         phoneNumber: "",
         address: "",
         about: "",
+        zipCode: "",
     }
-
 
     async componentDidMount() {
         try {
-            const session = Auth.currentSession();
-            console.log(session);
+            // get the current logged in user details
             const user = await Auth.currentAuthenticatedUser();
-            // this.setUser(user)
+            // get username from user object
             const userDetail = user.username;
-            console.log(userDetail)
+            // get the user details for logged in user from the User table 
             Axios.get(`/api/auth/user/${userDetail}`)
                 .then(
                     (response) => {
-                        console.log(response)
                         this.setState({
                             profile: response.data,
                         });
-                    },
-                    (error) => {
-                        this.setState({
-                            error
-                        });
-                    }
-                )
+                        this.getUserProfile()
+                    })
+           
+                .catch(err => console.log(err))
         } catch (error) {
             if (error !== "No current user") {
                 console.log(error);
             }
-        }
+        }   
 
     }
+
+
+    getUserProfile = () => {
+        const UserId=this.state.profile.id
+        Axios.get(`/api/auth/userProfile/${UserId}`)
+        .then(
+            (response) => {
+                console.log(response)
+                this.setState({
+                    firstName: response.data.first_name,
+                    lastName:response.data.last_name,
+                    phoneNumber:response.data.phone_number,
+                    city:response.data.city,
+                    state:response.data.state,
+                    about:response.data.about,
+                    zipCode:response.data.zip_code,
+                    address:response.data.address,
+                });
+            })
+        .catch(err => console.log(err))
+    }
+
     handleInputChange = (e) => {
         let name = e.target.name;
         let value = e.target.value;
@@ -56,14 +73,37 @@ export default class UpdateProfile extends Component {
 
     handleFormSubmit = async (event) => {
         event.preventDefault();
-        //form validation
-        // validate for correct password and username
+        const { firstName, lastName, city, state, zipCode, about, phoneNumber } = this.state
+        console.log(this.state.profile.id);
 
-        Axios.post("/api/auth/signup", {
-            username: this.state.username,
-            password: this.state.password,
-            role: this.state.role,
-            email: this.state.email
+        console.log(firstName, lastName)
+        Axios.post("/api/auth/updateUserProfile", {
+            firstName,
+            lastName,
+            city,
+            state,
+            zipCode,
+            about,
+            phoneNumber,
+            id: this.state.profile.id
+        })
+            .then((res) => {
+                console.log(res)
+            })
+            .catch(err => console.log(err))
+    }
+    handleUpdateFormSubmit = async (event) => {
+        event.preventDefault();
+        const { firstName, lastName, city, state, zipCode, about, phoneNumber } = this.state
+        const UserId=this.state.profile.id;
+        Axios.put(`/api/auth/updateUserProfile/${UserId}`, {
+            firstName,
+            lastName,
+            city,
+            state,
+            zipCode,
+            about,
+            phoneNumber,
         })
             .then((res) => {
                 console.log(res)
@@ -115,15 +155,24 @@ export default class UpdateProfile extends Component {
                                     <textarea name="about" type="text" className="form-control" placeholder="about" value={this.state.about} onChange={this.handleInputChange} /></div>
                             </div>
                             <div className="row mt-3">
-                                <div className="col-md-6">
+                                <div className="col-md-4">
                                     <label className="labels">City</label>
-                                    <input name="city" type="text" className="form-control" placeholder="city" value={this.state.city} onChange={this.handleInputChange} /></div>
-                                <div className="col-md-6">
+                                    <input name="city" type="text" className="form-control" placeholder="city" value={this.state.city} onChange={this.handleInputChange} />
+                                </div>
+                                <div className="col-md-4">
                                     <label className="labels">State/Region</label>
-                                    <input name="state" type="text" className="form-control" value={this.state.state} placeholder="state" onChange={this.handleInputChange} /></div>
+                                    <input name="state" type="text" className="form-control" value={this.state.state} placeholder="state" onChange={this.handleInputChange} />
+                                </div>
+                                <div className="col-md-4">
+                                    <label className="labels">Zip Code</label>
+                                    <input name="zipCode" type="text" className="form-control" value={this.state.zipCode} placeholder="state" onChange={this.handleInputChange} />
+                                </div>
                             </div>
                             <div className="mt-5 text-center">
-                                <button className="btn btn-primary profile-button" type="button">Save Profile</button>
+                                <button onClick={this.handleFormSubmit} className="btn btn-primary profile-button" type="button">Save Profile</button>
+                            </div>
+                            <div className="mt-5 text-center">
+                                <button onClick={this.handleUpdateFormSubmit} className="btn btn-primary profile-button" type="button">Update Profile</button>
                             </div>
                         </div>
                     </div>

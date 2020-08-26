@@ -36,24 +36,13 @@ router.get('/role', (req, res) => {
     });
 });
 
-router.get('/editUserProfile/:id', (req, res) => {
-  console.log(req.params.id);
+//this route is to get the logged in user profile details
+router.get('/userProfile/:UserId', (req, res) => {
+  console.log(req.params.UserId);
   db.UserProfile.findOne({
-    where: req.params.id, // send logged in user id here
-  })
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((err) => {
-      if (err) {
-        res.status(500).json(err);
-      }
-    });
-});
-router.post('/editUserProfile', (req, res) => {
-  console.log('hit here');
-  db.UserProfile.findAll({
-
+    where: {
+      UserId: req.params.UserId
+    }
   })
     .then((data) => {
       res.json(data);
@@ -65,10 +54,57 @@ router.post('/editUserProfile', (req, res) => {
     });
 });
 
+//this route is to save the user profile first time
+router.post('/updateUserProfile', (req, res) => {
+  db.UserProfile.create({
+    UserId: req.body.id,
+    first_name: req.body.firstName,
+    last_name: req.body.lastName,
+    city: req.body.city,
+    state: req.body.state,
+    zip_code: req.body.zipCode,
+    about: req.body.about,
+    phone_number: req.body.phoneNumber,
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+    });
+});
+
+//this route is to update the user profile
+router.put('/updateUserProfile/:UserId', (req, res) => {
+  db.UserProfile.update({
+    first_name: req.body.firstName,
+    last_name: req.body.lastName,
+    city: req.body.city,
+    state: req.body.state,
+    zip_code: req.body.zipCode,
+    about: req.body.about,
+    phone_number: req.body.phoneNumber,
+  }, {
+    where:
+      { UserId: req.params.UserId }
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+    });
+});
+
+
+// this route is to get logged in user information
 router.get('/user/:username', (req, res) => {
   console.log(req.params.username);
   db.User.findOne({
-    // send logged in user id here
     where: {
       user_name: req.params.username
     }
@@ -83,4 +119,5 @@ router.get('/user/:username', (req, res) => {
       }
     });
 });
+
 module.exports = router;
