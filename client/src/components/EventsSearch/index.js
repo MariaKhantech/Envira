@@ -78,6 +78,7 @@ export default class EventsSearch extends Component {
 
   handleShowAll = (event) => {
     event.preventDefault();
+    this.componentDidMount();
     this.setState({ showCarousel: true });
     this.setState({ information: Data });
     this.setState({ slidesToShow: 3 });
@@ -113,7 +114,6 @@ export default class EventsSearch extends Component {
           state={this.state}
         />
         {renderCarousel}
-        {this.componentDidMount}
       </>
     );
   }
