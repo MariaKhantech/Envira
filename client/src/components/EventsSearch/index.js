@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 import Search from "./Search/index";
 import Carousel from "./Carousel/index";
-import Data from "./Data.json";
+// import Data from "./Data.json";
 
 // SEE ALL EVENTS
 // on page load user will be presented a search bar <Search /> and when a user selects the dropdown appended to the bar and selects the see all events button the following will happen...
@@ -23,7 +23,7 @@ export default class EventsSearch extends Component {
     showCarousel: false,
     slidesToShow: 3,
     slidesToScroll: 3,
-    information: Data,
+    // information: Data,
     eventData: [],
     showModal: false,
   };
@@ -55,20 +55,24 @@ export default class EventsSearch extends Component {
     event.preventDefault();
 
     if (this.state.filter === "Location") {
-      const filteredLocation = Data.filter(
-        (detail) => detail.location === this.state.searchInput
+      this.componentDidMount();
+      const filteredLocation = this.state.eventData.filter(
+        (detail) => detail.address === this.state.searchInput
       );
-      this.setState({ information: filteredLocation });
+      this.setState({ eventData: filteredLocation });
+      console.log(this.state.eventData);
       this.setState({ showCarousel: true });
       this.setState({ slidesToShow: filteredLocation.length });
       this.setState({ slidesToScroll: filteredLocation.length });
       this.setState({ searchInput: "" });
     }
     if (this.state.filter === "Organizer") {
-      const filteredOrg = Data.filter(
-        (detail) => detail.organizer === this.state.searchInput
+      this.componentDidMount();
+      const filteredOrg = this.state.eventData.filter(
+        (detail) => detail.event_name === this.state.searchInput
       );
-      this.setState({ information: filteredOrg });
+      this.setState({ eventData: filteredOrg });
+      console.log(this.state.eventData);
       this.setState({ showCarousel: true });
       this.setState({ slidesToShow: filteredOrg.length });
       this.setState({ slidesToScroll: filteredOrg.length });
@@ -80,7 +84,7 @@ export default class EventsSearch extends Component {
     event.preventDefault();
     this.componentDidMount();
     this.setState({ showCarousel: true });
-    this.setState({ information: Data });
+    // this.setState({ information: Data });
     this.setState({ slidesToShow: 3 });
     this.setState({ slidesToScroll: 3 });
   };
