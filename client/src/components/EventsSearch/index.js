@@ -25,13 +25,6 @@ export default class EventsSearch extends Component {
     slidesToScroll: 3,
     information: Data,
     apiData: [],
-    eventTitle: "save planet",
-    date: "09/05/20",
-    location: "portland",
-    contactPerson: "jane doe",
-    contactNumber: "18005678",
-    description: "come help us clean planet",
-
     showModal: false,
   };
 
@@ -81,21 +74,6 @@ export default class EventsSearch extends Component {
 
   handleHideModal = () => {
     this.setState({ showModal: false });
-  };
-
-  postNewEvent = () => {
-    Axios.post("/api/create/events", {
-      eventTitle: this.state.eventTitle,
-      date: this.state.date,
-      location: this.state.location,
-      contactPerson: this.state.contactPerson,
-      contactNumber: this.state.contactNumber,
-      description: this.state.description,
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
   };
 
   render() {
