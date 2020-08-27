@@ -1,0 +1,12 @@
+.slick-slider {
+  margin: 0 25px;
+}
+.slick-slide {
+  padding: 10px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #000;
+}
+/*# sourceMappingURL=style.css.map */
