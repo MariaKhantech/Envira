@@ -17,10 +17,10 @@ import Ocean from "./pages/Ocean";
 import Rainforest from "./pages/Rainforest";
 import Profile from "./pages/Profile";
 import EventSearch from "./pages/EventSearch";
-import EventsPage from "./pages/EventsPage";
+// import EventsPage from "./pages/EventsPage";
 import EventCreate from "./pages/EventCreate";
 
-import CompanyReview from "./pages/CompanyReview";
+// import CompanyReview from "./pages/CompanyReview";
 
 import Explore from "./pages/Explore";
 import EditProfile from "./pages/EditProfile";
@@ -127,20 +127,20 @@ export default class AppTest extends Component {
                       <EventCreate {...props} auth={authProps} />
                     )}
                   />
-                  <Route
+                  {/* <Route
                     exact
                     path="/eventspage"
                     render={(props) => (
                       <EventsPage {...props} auth={authProps} />
                     )}
-                  />
-                   <Route
+                  /> */}
+                  {/* <Route
                     exact
                     path="/companyReview"
                     render={(props) => (
                       <CompanyReview {...props} auth={authProps} />
                     )}
-                  />
+                  /> */}
                   <Route
                     exact
                     path="/eventsearch"
