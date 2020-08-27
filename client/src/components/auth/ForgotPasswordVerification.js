@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Auth } from 'aws-amplify';
 
-class ForgotPasswordVerification extends Component {
+export default class ForgotPasswordVerification extends Component {
   state = {
     verificationCode: "",
     email: "",
@@ -20,7 +20,6 @@ class ForgotPasswordVerification extends Component {
   handlePasswordVerification = async event => {
     event.preventDefault();
 
-    // Form validation
 
     // AWS Cognito integration here
     try {
@@ -33,11 +32,19 @@ class ForgotPasswordVerification extends Component {
       window.location = "/changepasswordconfirmation";
     } catch (error) {
       console.log(error);
+      this.setState({
+        cognitoErrors: error.message
+      })
     }
   };
 
 
   render() {
+    const myStyle = {
+      color: "red",
+      display: "block",
+      fontSize: "15px"
+    };
     return (
       <>
         <div>
@@ -54,18 +61,22 @@ class ForgotPasswordVerification extends Component {
                   <form onSubmit={this.handlePasswordVerification}>
                     <div className="form-group">
                       <label className="mt-2 font-weight-bold">Verification Code:</label><br />
-                      <input onChange={this.handleInputChange} type="text" name="verificationCode" value={this.state.verificationCode} className="form-control" />
+                      <input onChange={this.handleInputChange} placeholder="Please enter verification code" type="text" name="verificationCode" value={this.state.verificationCode} className="form-control" />
                     </div>
                     <div className="form-group">
                       <label className="font-weight-bold">New Password:</label><br />
-                      <input onChange={this.handleInputChange} type="password" name="newPassword" value={this.state.newPassword} className="form-control" />
+                      <input onChange={this.handleInputChange} placeholder="Please enter password" type="password" name="newPassword" value={this.state.newPassword} className="form-control" />
                     </div>
                     <div className="form-group">
-                      <label className="mt-2 font-weight-bold">Email:</label><br />
-                      <input onChange={this.handleInputChange} type="email" name="email" value={this.state.email} className="form-control" />
+                      <label className="mt-2 font-weight-bold">Email/User Name:</label><br />
+                      <input onChange={this.handleInputChange} placeholder="Please enter email or user name" type="text" name="email" value={this.state.email} className="form-control" />
                     </div>
-                    <div className="form-group mx-auto text-center ">
+                    <div style={myStyle}>{this.state.cognitoErrors}</div>
+                    <div className="form-group mx-auto text-center mt-2">
                       <button type="submit" className="btn btn-info btn-lg" >Submit</button>
+                    </div>
+                    <div id="register-link" className="text-center">
+                      <a href="/forgotpassword" className="text-info">Request for a new verification code</a>
                     </div>
                   </form>
                 </div>
@@ -77,5 +88,3 @@ class ForgotPasswordVerification extends Component {
     )
   }
 }
-
-export default ForgotPasswordVerification;
