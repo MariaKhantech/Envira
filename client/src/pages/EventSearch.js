@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import EventSearch from "../components/EventSearch/index";
+import EventsSearch from "../components/EventsSearch/index";
 import Container from "react-bootstrap/Container";
 
-export default class Events extends Component {
+export default class EventSearch extends Component {
   render() {
     return (
       <Container>
-        <EventSearch />
+        <EventsSearch />
       </Container>
     );
   }

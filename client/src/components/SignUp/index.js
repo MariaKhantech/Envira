@@ -15,7 +15,8 @@ export default class Register extends Component {
     isLoading: false,
     signedUp: false,
     confirmationCode: "",
-    newUser: null
+    newUser: null,
+    errors: {}
   }
 
   componentDidMount() {
@@ -25,7 +26,9 @@ export default class Register extends Component {
           console.log(response)
           this.setState({
             roleTypes: response.data,
+
           });
+
         },
         (error) => {
           this.setState({
@@ -46,20 +49,20 @@ export default class Register extends Component {
 
   handleFormSubmit = async (event) => {
     event.preventDefault();
-    let newUser = {
-      username: this.state.username,
-      password: this.state.password,
-      role: this.state.role,
-      email: this.state.email
-    }
+
     const { username, email, password } = this.state;
     //check for form validation
     // password match
     if (this.state.password !== this.state.confirmPassword) {
-      
-      alert("password don't match")
+
+      this.setState({
+        errors: {
+          ...this.state.errors, password: "test message"
+        }
+      })
+
     } else {
-      this.postNewUser(newUser); //call this function to post data in user model
+      this.postNewUser(); //call this function to post data in user model
 
       this.setState({ isLoading: true });
 
@@ -82,8 +85,7 @@ export default class Register extends Component {
 
   };
 
-  postNewUser = ()=> {
-    // console.log(newUser)
+  postNewUser = () => {
     Axios.post("/api/auth/signup", {
       username: this.state.username,
       password: this.state.password,
@@ -106,12 +108,14 @@ export default class Register extends Component {
       await Auth.signIn(this.state.username, this.state.password);
 
       // this.props.user.userHasAuthenticated(true);
-      this.props.history.push('/login');
+      // this.props.history.push('/login');
+      window.location = "/login"
     } catch (e) {
       alert(e.message);
       this.setState({ isLoading: false });
     }
   };
+
 
 
   renderConfirmationForm() {
@@ -171,16 +175,19 @@ export default class Register extends Component {
                     <select name="role" value={this.state.role} onChange={this.handleInputChange} className="form-control" required>
 
                       {this.state.roleTypes.map(role => {
-                        return (<option key={role.id} value={role.type}>{role.type}</option>)
+                        return (<option key={role.id} value={role.id}>{role.type}</option>)
 
                       })}
                     </select>
+
                   </div>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
                     </div>
-                    <input name="password" value={this.state.password} onChange={this.handleInputChange} className="form-control" placeholder="Create password" type="password" required />
+                    <input name="password" value={this.state.password} onChange={this.handleInputChange} className={this.state.errors.password ? "form-control is-invalid" : "form-control"} placeholder="Create password" type="password" required />
+                    {this.state.errors.password && (<div className="invalid-feedback">test message</div>)}
+
                   </div>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
