@@ -24,26 +24,30 @@ import "./style.scss";
             const image2 =  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80';
 
             
-            let cardDiv = <div className="card text-center text-white">
+            let cardDiv = <div className="card text-center ">
   				              	  <div className="card-header" style={{background: "#001a33"}}>
     				                 <OceanPollutionText /> 
                             </div>
-  					                  <div className="card-body text-white" >
+  					                  <div className="card-body " >
                             <h5 className="card-title">Special title treatment</h5>
-                           
+                            <div class="card">
+                                  <div class="card-body">
+                                    This is some text within a card body.
+                                  </div>
+                                </div>
                             <div className="card" id="card-image">
                             <div className="card-body">
-                              <img className="card-img rounded float-left" src="/assets/imgs/svg/scientist.svg" alt="Card image cap"/>
+                              
+                              <img className="card-img border rounded float-left" src="/assets/imgs/svg/scientist.svg" alt="Card image cap"/>
+                              
+                              
+                              
                                 </div>
                                 </div>
                    
                             <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            
                             </div>
-                           <div className="card-footer text-muted">
-                            2 days ago
-                          </div>
-                        </div>
+                            </div>
           
             return (
                 <div className="wrapper">
