@@ -19,17 +19,17 @@ export default class Login extends Component {
 
     handleFormSubmit = async (event) => {
         event.preventDefault();
-        // this.setState({ isLoading: true });
 
         const { username, password } = this.state;
         try {
-            const newUser = await Auth.signIn({
+            const user = await Auth.signIn({
                 username,
                 password,
             });
-            // this.setState({ newUser })  
+            this.auth.setAuthStatus(true)
             //redirect user to home page 
-            window.location = "/";
+            this.props.history.push('/');
+            // window.location = "/";
         } catch (err) {
             console.log(err);
             this.setState({

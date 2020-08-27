@@ -57,7 +57,7 @@ export default class Register extends Component {
     const messages = {
       required: (field) => `${field} is required`,
       'email.email': "The email is invalid",
-      'password.confirmed': "The password and confirm password do not match",    
+      'password.confirmed': "The password and confirm password do not match",
     }
     validateAll(data, rules, messages)
       .then(() => {
@@ -85,6 +85,7 @@ export default class Register extends Component {
     } catch (err) {
       console.log(err);
       this.setState({
+        errors: "",
         cognitoErrors: err.message
       })
     }
@@ -163,13 +164,13 @@ export default class Register extends Component {
           <div className="col-md-8">
             <div className="card cardStyle bg-light">
               <div className="card-body">
-              
+
                 <h4 className="card-title mt-3 text-center">Create Account</h4>
                 <form onSubmit={this.handleFormSubmit}>
-                  {/* <div style={mystyle}>{this.state.errors.username}</div> */}
+                  <div style={mystyle}>{this.state.errors.username}</div>
                   <div style={mystyle}>{this.state.cognitoErrors}</div>
                   <div className="form-group input-group">
-             
+
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-user"></i> </span>
                     </div>
@@ -209,7 +210,6 @@ export default class Register extends Component {
                     </div>
                     <input name="confirmPassword" value={this.state.confirmPassword} onChange={this.handleInputChange} className="form-control" placeholder="Confirm password" type="password" />
                   </div>
-
                   <div className="form-group mx-auto text-center">
                     <button type="submit" className="btn btn-primary btn-lg"> Create Account  </button>
                   </div>
