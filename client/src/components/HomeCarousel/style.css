@@ -1,0 +1,10 @@
+.carousel-inner > .carousel-item > img {
+  height: 18rem;
+}
+
+.homepage {
+  border-style: double;
+  border-color: #e27d60;
+  border-width: 2rem;
+}
+/*# sourceMappingURL=style.css.map */

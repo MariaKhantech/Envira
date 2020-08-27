@@ -1,8 +1,15 @@
 body {
-  background-color: #fcf5dc;
+  font-family: #85dcba;
+  /* background-color: #85dcba; */
+  background-color: #27a770;
+  background-image: linear-gradient(315deg, #27a770 0%, #efefef 74%);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-
+.signup {
+  padding-top: 100px;
+}
 
 /* .signupForm {
   background-color: #c2c1bf;

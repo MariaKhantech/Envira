@@ -1,56 +1,55 @@
-$navbar-background-color: #659dbd;
-$navbar-color: #DAAD86;
-
+$navbar-background-color: #e27d60;
+$navbar-color: #daad86;
 
 /* Position and sizing of burger button */
 .bm-burger-button {
-    position: fixed;
-    width: 36px;
-    height: 30px;
-    left: 36px;
-    top: 36px;
-  }
-  
-  /* Color/shape of burger icon bars */
-  .bm-burger-bars {
-    background: $navbar-background-color;
-  }
-  
-  /* Position and sizing of clickable cross button */
-  .bm-cross-button {
-    height: 24px;
-    width: 24px;
-  }
-  
-  /* Color/shape of close button cross */
-  .bm-cross {
-    background: #23628b;
-  }
-  
-  /* General sidebar styles */
-  .bm-menu {
-    background: $navbar-background-color;
-    padding: 2.5em 1.5em 0;
-    font-size: 1.15em;
-  }
-  
-  /* Morph shape necessary with bubble or elastic */
-  .bm-morph-shape {
-    fill: #DAAD86;
-  }
-  
-  /* Wrapper for item list */
-  .bm-item-list {
-    color: #b8b7ad;
-    height: 90% !important;
-  }
-  
-  /* Styling of overlay */
-  .bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
-   
-  }
+	position: fixed;
+	width: 36px;
+	height: 30px;
+	left: 36px;
+	top: 36px;
+}
 
-  .about {
-    padding: .5rem 1rem;
-  }
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+	background: $navbar-background-color;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+	height: 24px;
+	width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+	background: #23628b;
+}
+
+/* General sidebar styles */
+.bm-menu {
+	background: $navbar-background-color;
+	padding: 2.5em 1.5em 0;
+	font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+	fill: #daad86;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+	color: #b8b7ad;
+	height: 90% !important;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+	background: rgba(0, 0, 0, 0.3);
+	position: relative !important;
+}
+
+.about {
+	padding: .5rem 1rem;
+}

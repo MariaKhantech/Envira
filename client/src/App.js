@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Navbar from "./components/NavbarTest";
-// import NavBar from "./components/NavBar";
-import NavBar from './components/NavbarTest'
+// import Navbar from "./components/NavbarTest";
+import NavBar from "./components/NavBar";
+// import NavBar from "./components/NavbarTest";
 
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ForgotPasswordVerification from "./components/auth/ForgotPasswordVerification";
@@ -16,10 +16,15 @@ import Infographics from "./pages/Infographics";
 import Ocean from "./pages/Ocean";
 import Rainforest from "./pages/Rainforest";
 import Profile from "./pages/Profile";
-import Events from "./pages/Events";
-import EventsPage from "./pages/EventsPage"
+import EventSearch from "./pages/EventSearch";
+import EventsPage from "./pages/EventsPage";
 import EventCreate from "./pages/EventCreate";
+
+import CompanyReview from "./pages/CompanyReview";
+
+import Explore from "./pages/Explore";
 import EditProfile from "./pages/EditProfile";
+
 import { Auth } from "aws-amplify";
 
 export default class AppTest extends Component {
@@ -92,7 +97,9 @@ export default class AppTest extends Component {
                   <Route
                     exact
                     path="/editprofile"
-                    render={(props) => <EditProfile {...props} auth={authProps} />}
+                    render={(props) => (
+                      <EditProfile {...props} auth={authProps} />
+                    )}
                   />
                   <Route
                     exact
@@ -127,10 +134,24 @@ export default class AppTest extends Component {
                       <EventsPage {...props} auth={authProps} />
                     )}
                   />
+                   <Route
+                    exact
+                    path="/companyReview"
+                    render={(props) => (
+                      <CompanyReview {...props} auth={authProps} />
+                    )}
+                  />
                   <Route
                     exact
-                    path="/events"
-                    render={(props) => <Events {...props} auth={authProps} />}
+                    path="/eventsearch"
+                    render={(props) => (
+                      <EventSearch {...props} auth={authProps} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/explore"
+                    render={(props) => <Explore {...props} auth={authProps} />}
                   />
                   <Route
                     exact
