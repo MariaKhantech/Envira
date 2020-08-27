@@ -6,14 +6,12 @@ export default class Login extends Component {
     state = {
         username: "",
         password: "",
+        cognitoErrors:""
     }
-
 
     handleInputChange = (e) => {
         let name = e.target.name;
-        console.log(name);
         let value = e.target.value;
-        console.log(value);
         this.setState({
             [name]: value
         })
@@ -21,28 +19,31 @@ export default class Login extends Component {
 
     handleFormSubmit = async (event) => {
         event.preventDefault();
-        //form validation
-        // validate for correct password and username
-
-        this.setState({ isLoading: true });
 
         const { username, password } = this.state;
         try {
-            const newUser = await Auth.signIn({
+            const user = await Auth.signIn({
                 username,
                 password,
             });
-            this.setState({ newUser })
-
-            console.log(newUser);
+            this.auth.setAuthStatus(true)
             //redirect user to home page 
-            window.location = "/";
+            this.props.history.push('/');
+            // window.location = "/";
         } catch (err) {
             console.log(err);
+            this.setState({
+                cognitoErrors:err.message
+            })
         }
     }
 
     render() {
+        const mystyle = {
+            color: "red",
+            display: "block",
+            fontSize: "15px"
+          };
         return (
             <>
                 <div className="container mt-5">
@@ -51,6 +52,7 @@ export default class Login extends Component {
                             <div className="col-md-12">
                                 <form className="form" onSubmit={this.handleFormSubmit} >
                                     <h3 className="text-center ">Login</h3>
+                                   
                                     <div className="form-group">
                                         <label className="font-weight-bold">Username:</label><br />
                                         <input onChange={this.handleInputChange} type="text" name="username" id="username" className="form-control" value={this.state.username} required />
@@ -59,6 +61,7 @@ export default class Login extends Component {
                                         <label className="font-weight-bold">Password:</label><br />
                                         <input onChange={this.handleInputChange} type="password" name="password" id="password" className="form-control" value={this.state.password} required />
                                     </div>
+                                    <div style={mystyle}>{this.state.cognitoErrors}</div>
                                     <div className="form-group mx-auto text-center">
                                         <button type="submit" name="submit" className="btn btn-info btn-lg">Login</button>
                                     </div>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class ChangePasswordConfirmation extends Component {
+export default class ChangePasswordConfirmation extends Component {
   render() {
     return (
 
@@ -17,5 +17,3 @@ class ChangePasswordConfirmation extends Component {
     );
   }
 }
-
-export default ChangePasswordConfirmation;

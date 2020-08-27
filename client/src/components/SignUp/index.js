@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import "./style.css";
 import { Auth } from "aws-amplify";
 import Axios from 'axios';
+import { validateAll } from 'indicative/validator'
 
 export default class Register extends Component {
 
@@ -13,22 +14,19 @@ export default class Register extends Component {
     role: "",
     roleTypes: [],
     isLoading: false,
-    signedUp: false,
     confirmationCode: "",
     newUser: null,
-    errors: {}
+    errors: "",
+    cognitoErrors: ""
   }
 
   componentDidMount() {
     Axios.get("/api/auth/role") //getting role types from role table 
       .then(
         (response) => {
-          console.log(response)
           this.setState({
             roleTypes: response.data,
-
           });
-
         },
         (error) => {
           this.setState({
@@ -49,38 +47,47 @@ export default class Register extends Component {
 
   handleFormSubmit = async (event) => {
     event.preventDefault();
-
     const { username, email, password } = this.state;
-    //check for form validation
-    // password match
-    if (this.state.password !== this.state.confirmPassword) {
-
-      this.setState({
-        errors: {
-          ...this.state.errors, password: "test message"
-        }
+    const data = this.state;
+    const rules = {
+      username: "required|string",
+      email: "required|email",
+      password: "required|string|min:8|number|confirmed"
+    }
+    const messages = {
+      required: (field) => `${field} is required`,
+      'email.email': "The email is invalid",
+      'password.confirmed': "The password and confirm password do not match",
+    }
+    validateAll(data, rules, messages)
+      .then(() => {
+        console.log("success")
+      }).catch(errors => {
+        console.log(errors)
+        const formattedErrors = {};
+        errors.forEach(errors => formattedErrors[errors.field] = errors.message)
+        this.setState(
+          { errors: formattedErrors }
+        )
+        console.log(formattedErrors)
       })
-
-    } else {
+    this.setState({ isLoading: true });
+    try {
+      const newUser = await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email: email
+        }
+      });
+      this.setState({ newUser })
       this.postNewUser(); //call this function to post data in user model
-
-      this.setState({ isLoading: true });
-
-      console.log(this.state.username)
-      try {
-        const newUser = await Auth.signUp({
-          username,
-          password,
-          attributes: {
-            email: email
-          }
-        });
-        console.log(username)
-        this.setState({ newUser })
-        console.log(newUser);
-      } catch (err) {
-        console.log(err);
-      }
+    } catch (err) {
+      console.log(err);
+      this.setState({
+        errors: "",
+        cognitoErrors: err.message
+      })
     }
 
   };
@@ -117,7 +124,6 @@ export default class Register extends Component {
   };
 
 
-
   renderConfirmationForm() {
     return (
 
@@ -142,6 +148,10 @@ export default class Register extends Component {
   }
 
   renderForm() {
+    const mystyle = {
+      color: "red",
+      display: "block"
+    };
     return <>
       <div className="container w-75 register">
         <div className="row">
@@ -154,48 +164,52 @@ export default class Register extends Component {
           <div className="col-md-8">
             <div className="card cardStyle bg-light">
               <div className="card-body">
+
                 <h4 className="card-title mt-3 text-center">Create Account</h4>
                 <form onSubmit={this.handleFormSubmit}>
+                  <div style={mystyle}>{this.state.errors.username}</div>
+                  <div style={mystyle}>{this.state.cognitoErrors}</div>
                   <div className="form-group input-group">
+
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-user"></i> </span>
                     </div>
-                    <input name="username" value={this.state.username} onChange={this.handleInputChange} className="form-control" placeholder="User name" type="text" required />
+                    <input name="username" value={this.state.username} onChange={this.handleInputChange} className="form-control" placeholder="User name" type="text" />
+
                   </div>
+                  <div style={mystyle}>{this.state.errors.email}</div>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-envelope"></i> </span>
                     </div>
-                    <input name="email" value={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email address" type="email" required />
+                    <input name="email" value={this.state.email} onChange={this.handleInputChange} className="form-control" placeholder="Email address" type="email" />
                   </div>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-building"></i> </span>
                     </div>
-                    <select name="role" value={this.state.role} onChange={this.handleInputChange} className="form-control" required>
+                    <select name="role" value={this.state.role} onChange={this.handleInputChange} className="form-control">
 
                       {this.state.roleTypes.map(role => {
                         return (<option key={role.id} value={role.id}>{role.type}</option>)
 
                       })}
                     </select>
-
                   </div>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
                     </div>
-                    <input name="password" value={this.state.password} onChange={this.handleInputChange} className={this.state.errors.password ? "form-control is-invalid" : "form-control"} placeholder="Create password" type="password" required />
-                    {this.state.errors.password && (<div className="invalid-feedback">test message</div>)}
-
+                    <input name="password" value={this.state.password} onChange={this.handleInputChange} className="form-control" placeholder="Create password" type="password" />
+                    {/* {this.state.errors.password && (<div className="invalid-feedback">test message</div>)} */}
                   </div>
+                  <div style={mystyle}>{this.state.errors.password}</div>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
                     </div>
-                    <input name="confirmPassword" value={this.state.confirmPassword} onChange={this.handleInputChange} className="form-control" placeholder="Confirm password" type="password" required />
+                    <input name="confirmPassword" value={this.state.confirmPassword} onChange={this.handleInputChange} className="form-control" placeholder="Confirm password" type="password" />
                   </div>
-
                   <div className="form-group mx-auto text-center">
                     <button type="submit" className="btn btn-primary btn-lg"> Create Account  </button>
                   </div>
@@ -205,8 +219,6 @@ export default class Register extends Component {
           </div>
         </div>
       </div>
-
-
     </>
   }
 
