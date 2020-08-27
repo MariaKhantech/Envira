@@ -21,7 +21,7 @@ export default class ForgotPasswordVerification extends Component {
     event.preventDefault();
 
 
-    // AWS Cognito integration here
+    // AWS Cognito integration for new password setup
     try {
       await Auth.forgotPasswordSubmit(
         this.state.email,
@@ -31,7 +31,6 @@ export default class ForgotPasswordVerification extends Component {
       // this.props.history.push("/changepasswordconfirmation");
       window.location = "/changepasswordconfirmation";
     } catch (error) {
-      console.log(error);
       this.setState({
         cognitoErrors: error.message
       })
