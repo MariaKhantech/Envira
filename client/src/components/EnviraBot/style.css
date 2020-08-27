@@ -1,9 +1,17 @@
 .amplify-section-header,
 .amplify-section-body {
+  display: none !important;
+}
+
+.amplify-section-footer-content form > input {
   display: none;
 }
 
-.amplify-section-footer-content form {
-  display: none;
+.envirabot {
+  position: fixed;
+  top: 65%;
+  left: 80%;
+  max-width: 10vw;
+  max-height: 40vh;
 }
 /*# sourceMappingURL=style.css.map */

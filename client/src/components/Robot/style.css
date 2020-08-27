@@ -1,11 +1,3 @@
-#robot {
-  position: fixed;
-  top: 50%;
-  left: 80%;
-  max-width: 15vw;
-  max-height: 40vh;
-}
-
 #body {
   -webkit-animation: hover 1.1s ease-in-out 0s infinite alternate;
           animation: hover 1.1s ease-in-out 0s infinite alternate;
