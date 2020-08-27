@@ -19,6 +19,7 @@ import Profile from "./pages/Profile";
 import Events from "./pages/Events";
 import EventsPage from "./pages/EventsPage"
 import EventCreate from "./pages/EventCreate";
+import CompanyReview from "./pages/CompanyReview";
 import { Auth } from "aws-amplify";
 
 export default class AppTest extends Component {
@@ -119,6 +120,13 @@ export default class AppTest extends Component {
                     path="/eventspage"
                     render={(props) => (
                       <EventsPage {...props} auth={authProps} />
+                    )}
+                  />
+                   <Route
+                    exact
+                    path="/companyReview"
+                    render={(props) => (
+                      <CompanyReview {...props} auth={authProps} />
                     )}
                   />
                   <Route

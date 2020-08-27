@@ -1,8 +1,10 @@
 body {
-  background-color: #fcf5dc;
+  background-color: #fbffed;
 }
 
-
+.signup {
+  padding-top: 100px;
+}
 
 .signupForm {
   background-color: #c2c1bf;

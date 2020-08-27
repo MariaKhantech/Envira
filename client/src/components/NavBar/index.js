@@ -22,7 +22,7 @@ export class NavBar extends Component {
         <a className="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          Events
         </a>
-        <div className="dropdown-menu " aria-labelledby="navbarDropdown">
+        <div className="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
           <a className="dropdown-item text-center " href="#">Action</a>
           <a className="dropdown-item text-center " href="#">Another action</a>
           <div className="dropdown-divider"></div>
@@ -82,7 +82,7 @@ export class NavBar extends Component {
 										/>
 									</div>
 									<div className="form-group">
-										<button type="submit" className="btn btn- btn-block login-button ">
+										<button type="submit" className="btn btn-warning btn-block login-button ">
 											Login
 										</button>
 									</div>
