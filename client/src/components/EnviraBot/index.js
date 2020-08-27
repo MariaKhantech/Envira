@@ -3,25 +3,11 @@ import Amplify, { Interactions } from 'aws-amplify';
 import { ChatBot, AmplifyTheme } from 'aws-amplify-react';
 import awsconfig from '../../aws-exports';
 import Robot from '../Robot';
-Amplify.configure({
-    Auth: {
-      identityPoolId: 'us-east-1:270e49bd-86d1-42ef-a63f-57867286c0f9',
-      region: 'us-east-1'
-    },
-    Interactions: {
-      bots: {
-        "BookTrip": {
-            "name": "BookTrip_dev",
-            "alias": "$LATEST",
-            "region": "us-east-1"
-        },
-      }
-    }
-  });
+import './style.scss';
+Amplify.configure(awsconfig);
 
-
-export class index extends Component {
-    handleComplete(err, confirmation) {
+export class EnviraBot extends Component {
+	handleComplete(err, confirmation) {
 		if (err) {
 			alert('Bot conversation failed');
 			return;
@@ -31,36 +17,32 @@ export class index extends Component {
 		return 'Trip booked. Thank you! what would you like to do next?';
 	}
 
-	componentDidMount() {
-	}
+	componentDidMount() {}
 
 	render() {
-
-        const myTheme = {
-            ...AmplifyTheme,
-            sectionHeader: {
-                ...AmplifyTheme.sectionHeader,
-                backgroundColor: '#ff6600'
-            }
-        };
+		const myTheme = {
+			...AmplifyTheme,
+			sectionHeader: {
+				...AmplifyTheme.sectionHeader,
+				backgroundColor: '#ff6600'
+			}
+		};
 		return (
-			<div className="App">
-			
-					<Robot />
-					{/* <ChatBot
-						title="My Bot"
-						theme={myTheme}
-						botName="BookTrip"
-						welcomeMessage="Welcome, how can I help you today?"
-						onComplete={this.handleComplete.bind(this)}
-						clearOnComplete={true}
-						conversationModeOn={false}
-						voiceEnabled={true}
-					/> */}
-				
+			<div className="envirabot">
+				<Robot />
+				<ChatBot
+					title="My Bot"
+					theme={myTheme}
+					botName="BookTrip_dev"
+					welcomeMessage="Welcome, how can I help you today?"
+					onComplete={this.handleComplete.bind(this)}
+					clearOnComplete={true}
+					conversationModeOn={false}
+					voiceEnabled={true}
+				/>
 			</div>
 		);
 	}
 }
 
-export default index
+export default EnviraBot;

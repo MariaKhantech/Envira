@@ -3,14 +3,14 @@ $hover_top: 80px;
 $hover_bottom: 30px;
 $hover_top_bow: 55px;
 
-#robot {
-	position: fixed;
-	top: 50%;
-	left: 80%;
-	//transform: translate3d(-50%, -50%, 0);
-	max-width: 15vw;
-	max-height: 40vh;
-}
+// #robot {
+// 	position: fixed;
+// 	top: 50%;
+// 	left: 80%;
+// 	//transform: translate3d(-50%, -50%, 0);
+// 	max-width: 15vw;
+// 	max-height: 40vh;
+// }
 
 #body {
 	animation: hover 1.1s ease-in-out 0s infinite alternate;
