@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import { Auth } from 'aws-amplify';
-import "./style.css"
-
+import { validateAll } from 'indicative/validator'
 export default class ForgotPassword extends Component {
   state = {
     email: "",
+    errors: "",
   };
-
 
   handleInputChange = (e) => {
     let name = e.target.name;
-    console.log(name);
     let value = e.target.value;
-    console.log(value);
     this.setState({
       [name]: value
     })
@@ -22,9 +19,27 @@ export default class ForgotPassword extends Component {
   handleForgotPassword = async event => {
     event.preventDefault();
 
-    // Form validation
-    // AWS Cognito integration here
-    console.log(this.state.email)
+    //validation for email field
+    const data = this.state;
+    const rules = {
+      email: "required|email",
+    }
+    const messages = {
+      required: (field) => `Please enter your ${field} address`,
+      'email.email': "The email is invalid",
+    }
+    validateAll(data, rules, messages)
+      .then(() => {
+        console.log("success")
+      }).catch(errors => {
+        const formattedErrors = {};
+        errors.forEach(errors => formattedErrors[errors.field] = errors.message)
+        this.setState(
+          { errors: formattedErrors }
+        )
+      })
+
+    // cognito integration for forgot password
     try {
       await Auth.forgotPassword(this.state.email);
       window.location = '/forgotpasswordverification';
@@ -35,6 +50,11 @@ export default class ForgotPassword extends Component {
   }
 
   render() {
+    const myStyle = {
+      color: "red",
+      display: "block",
+      fontSize: "15px"
+    };
     return (
       <>
         <div className="container mt-5">
@@ -45,8 +65,9 @@ export default class ForgotPassword extends Component {
               <form onSubmit={this.handleForgotPassword} className="mt-3">
                 <div className="form-group">
                   <input name="email" value={this.state.email}
-                    onChange={this.handleInputChange} className="form-control form-control-lg" type="email" placeholder="Your email address" required/>
+                    onChange={this.handleInputChange} className="form-control form-control-lg" type="email" placeholder="Your email address" />
                 </div>
+                <div style={myStyle}>{this.state.errors.email}</div>
                 <div className="form-group mx-auto text-center">
                   <button type="submit" className="btn btn-lg btn-success">Reset Password</button>
                 </div>
@@ -54,7 +75,6 @@ export default class ForgotPassword extends Component {
             </div>
           </div>
         </div>
-
       </>
     )
   }
