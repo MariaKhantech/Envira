@@ -23,7 +23,6 @@ export default class EventsSearch extends Component {
     showCarousel: false,
     slidesToShow: 3,
     slidesToScroll: 3,
-    // information: Data,
     eventData: [],
     showModal: false,
   };
@@ -66,16 +65,16 @@ export default class EventsSearch extends Component {
       this.setState({ slidesToScroll: filteredLocation.length });
       this.setState({ searchInput: "" });
     }
-    if (this.state.filter === "Organizer") {
+    if (this.state.filter === "Event Name") {
       this.componentDidMount();
-      const filteredOrg = this.state.eventData.filter(
+      const filteredEv = this.state.eventData.filter(
         (detail) => detail.event_name === this.state.searchInput
       );
-      this.setState({ eventData: filteredOrg });
+      this.setState({ eventData: filteredEv });
       console.log(this.state.eventData);
       this.setState({ showCarousel: true });
-      this.setState({ slidesToShow: filteredOrg.length });
-      this.setState({ slidesToScroll: filteredOrg.length });
+      this.setState({ slidesToShow: filteredEv.length });
+      this.setState({ slidesToScroll: filteredEv.length });
       this.setState({ searchInput: "" });
     }
   };

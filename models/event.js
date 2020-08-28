@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Event = sequelize.define('Event', {
+  const Event = sequelize.define("Event", {
     event_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -14,14 +14,30 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     date: {
       type: DataTypes.DATE,
       allowNull: false,
-      unique: true,
+      unique: false,
     },
     contact_person: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    contact_email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
+      validate: {
+        isEmail: true,
+      },
     },
     contact_number: {
       type: DataTypes.INTEGER,
@@ -29,17 +45,15 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-
-
   // one user can create many events....one to many relationship
   // We're saying that an Event should belong to an User
   // An Event can't be created without an User due to the foreign key constraint
 
   Event.associate = (models) => {
-    Event.belongsTo(models.User, {foreignKey: {allowNull: false}});
-    Event.hasMany(models.EventComment, {onDelete: 'cascade'});
-    Event.hasMany(models.Reply, {onDelete: 'cascade'});
-  }; 
+    Event.belongsTo(models.User, { foreignKey: { allowNull: false } });
+    Event.hasMany(models.EventComment, { onDelete: "cascade" });
+    Event.hasMany(models.Reply, { onDelete: "cascade" });
+  };
 
   // Event.associate = (models) => {
   //   Event.belongsTo(models.User, {

@@ -39,13 +39,10 @@ export default class Search extends Component {
                 data-for="filterTip"
               >
                 <Dropdown.Item onClick={handleFilterOption}>
-                  Organizer
+                  Event Name
                 </Dropdown.Item>
                 <Dropdown.Item onClick={handleFilterOption}>
                   Location
-                </Dropdown.Item>
-                <Dropdown.Item onClick={handleFilterOption}>
-                  Keyword
                 </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item>
