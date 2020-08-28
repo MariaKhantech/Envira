@@ -11,7 +11,7 @@ router.post("/eventcreate", (req, res) => {
   console.log(req.body.contactPerson);
   console.log(req.body.contactEmail);
   console.log(req.body.contactNumber);
-  console.log(req.body.UserId);
+  console.log(req.body.id);
 
   db.Event.create({
     event_name: req.body.eventName,
@@ -23,7 +23,7 @@ router.post("/eventcreate", (req, res) => {
     contact_person: req.body.contactPerson,
     contact_email: req.body.contactEmail,
     contact_number: req.body.contactNumber,
-    UserId: req.body.UserId,
+    UserId: req.body.id,
   })
     .then((dbResponse) => {
       res.json(dbResponse);
