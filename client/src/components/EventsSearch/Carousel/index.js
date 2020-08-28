@@ -13,20 +13,20 @@ export default class Carousel extends Component {
   render() {
     const renderCard = this.props.state.eventData.map((data) => (
       <Card className="p-2">
-        <Card.Header name="organizer">{data.id}</Card.Header>
+        <Card.Header name="event">{data.event_name}</Card.Header>
         <Card.Img variant="top" src="http://placehold.it/250x200" />
         <Card.Body>
-          <Card.Title className="text-center" name="eventTitle">
-            {data.event_name}
-          </Card.Title>
-          <Card.Text className="text-center" name="email">
-            <i className="fa fa-envelope"></i> {data.contact_person}
-          </Card.Text>
-          <Card.Text className="text-center" name="website">
-            <i className="fa fa-globe"></i> {data.contact_number}
-          </Card.Text>
-          <Card.Text className="text-center" name="date">
+          <Card.Title className="text-center" name="date">
             <i className="fa fa-calendar"></i> {data.date}
+          </Card.Title>
+          <Card.Text className="text-center" name="person">
+            <i className="fa fa-persons"></i> {data.contact_person}
+          </Card.Text>
+          <Card.Text className="text-center" name="email">
+            <i className="fa fa-envelope"></i> {data.contact_email}
+          </Card.Text>
+          <Card.Text className="text-center" name="number">
+            <i className="fa fa-phone"></i> {data.contact_number}
           </Card.Text>
         </Card.Body>
         <Card.Body className="mx-auto text-center">
@@ -36,7 +36,7 @@ export default class Carousel extends Component {
         </Card.Body>
         <Card.Footer>
           <small className="text-muted" name="location">
-            {data.address}
+            {data.city}
             <i className="ml-1 fa fa-map-pin"></i>
           </small>
         </Card.Footer>
