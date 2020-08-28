@@ -3,12 +3,7 @@ import AirQualitySearch from "./AirQualitySearch/index";
 import EpaInfo from "./EpaInfo/index";
 import Articles from "./Articles/index";
 
-import Axios from "axios";
-
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
+import { Row, Col, Tabs, Tab } from "react-bootstrap";
 
 import "./style.css";
 
@@ -22,12 +17,6 @@ export default class ExploreWrapper extends Component {
 
     // Bind the handleSelect function already here (not in the render function)
     this.handleSelect = this.handleSelect.bind(this);
-  }
-
-  componentDidMount() {
-    Axios.get(
-      "https://api.waqi.info/feed/boston/?token=e76fff504230a5ff145917055b7138ef3159918d"
-    ).then((response) => this.setState({ aqiData: response.data }));
   }
 
   render() {
@@ -54,6 +43,7 @@ export default class ExploreWrapper extends Component {
       </Row>
     );
   }
+
   handleSelect(selectedTab) {
     // The active tab must be set into the state so that
     // the Tabs component knows about the change and re-renders.

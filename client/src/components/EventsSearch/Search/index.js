@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import Modal from "../Modal/index";
 
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import InputGroup from "react-bootstrap/InputGroup";
-import FormControl from "react-bootstrap/FormControl";
-
-import Button from "react-bootstrap/Button";
-
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
+import {
+  Row,
+  Col,
+  InputGroup,
+  FormControl,
+  Button,
+  Dropdown,
+  DropdownButton,
+} from "react-bootstrap";
 
 import ReactTooltip from "react-tooltip";
 
@@ -21,9 +20,6 @@ export default class Search extends Component {
       onChange,
       handleFilterSubmit,
       handleShowAll,
-      handleShowModal,
-      handleHideModal,
-      postNewEvent,
     } = this.props;
 
     return (
@@ -72,7 +68,6 @@ export default class Search extends Component {
                 Search
               </ReactTooltip>
               <Button
-                onClick={handleShowModal}
                 data-tip
                 data-for="addTip"
                 style={{ "background-color": "green" }}
@@ -85,11 +80,6 @@ export default class Search extends Component {
             </InputGroup.Append>
           </InputGroup>
         </Col>
-        <Modal
-          handleHideModal={handleHideModal}
-          postNewEvent={postNewEvent}
-          state={this.props.state}
-        />
       </Row>
     );
   }

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+
 import Axios from "axios";
+
+import "./style.css";
 
 export default class AirQualitySearch extends Component {
   state = {
