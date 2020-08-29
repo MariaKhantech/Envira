@@ -68,7 +68,7 @@ export class index extends Component {
 
 				<div className="card bg-transparent border-0" style={{ width: '12rem' }}>
 					<div className="card-body">
-						<h5 className="card-title text-center">Climate Change Fires</h5>
+						<h5 className="card-title text-center">Forest Fires & Deforestation</h5>
 						<div className="image">
 							<object
 								className="svg-file fires"

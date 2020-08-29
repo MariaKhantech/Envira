@@ -16,16 +16,16 @@ export class Profile extends Component {
     this.setState({ profileType: this.props.auth });
   }
 
-  // render() {
-  // 	let renderedProfile;
-  // 	if (this.state.profileType === 'company') {
-  // 		renderedProfile = <CompanyProfile />;
-  // 	} else {
-  // 		renderedProfile = <UserProfile name="MARIA" />;
-  // 	}
+   render() {
+  	let renderedProfile;
+  	if (this.state.profileType === 'company') {
+  		renderedProfile = "";
+  	} else {
+  		renderedProfile = <UserProfile name="MARIA" />;
+  	}
 
-  // 	return <div className = "container-fluid p-0">{renderedProfile} </div>
-  // }
+  	return <div className = "container-fluid p-0">{renderedProfile} </div>
+  }
 }
 
 export default Profile;
