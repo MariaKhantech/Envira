@@ -1,12 +1,12 @@
 .slick-slider {
-  margin: 0 25px;
-}
-.slick-slide {
-  padding: 10px;
+  margin: 0 -15px;
 }
 
-.slick-prev:before,
-.slick-next:before {
-  color: #000;
+.slick-slide {
+  padding: 10px;
+  background-color: red;
+  text-align: center;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 /*# sourceMappingURL=style.css.map */
