@@ -175,11 +175,11 @@ export default class UpdateProfile extends Component {
                             <div className="mt-5 text-center">
                                 <button onClick={this.handleFormSubmit} className="btn btn-primary profile-button" type="button">Save Profile</button>
                             </div>
-                            {!this.state.profile}(
+                            {!this.state.profile &&(
                                 <div className="mt-5 text-center">
                                 <button onClick={this.handleUpdateFormSubmit} className="btn btn-primary profile-button" type="button">Update Profile</button>
                             </div>
-                            )
+                            )}
                            
                         </div>
                     </div>

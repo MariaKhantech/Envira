@@ -14,12 +14,14 @@ export class NavBar extends Component {
 
 	handleLogOut = async event => {
 		event.preventDefault();
-
 		try {
 			Auth.signOut();
 			this.props.auth.setAuthStatus(false);
 			this.props.auth.setUser(null);
-		} catch (error) {
+			window.location="/"
+		} 
+	
+		catch (error) {
 
 			console.log(error.message);
 		}
@@ -98,7 +100,11 @@ export class NavBar extends Component {
 						</a>
 					</div>
 				</li>
-
+				{this.props.auth.isAuthenticated && (
+				<a className="menu-item text-white about" href="/">
+					My Account
+				</a>
+				)}
 				<hr style={{ background: 'white' }} />
 				{!this.props.auth.isAuthenticated && (
 
@@ -108,50 +114,9 @@ export class NavBar extends Component {
 						</button>
 						<ul className="dropdown-menu mt-2">
 							<li className="px-3 py-2">
-								{/* <form className="form">
-								<div className="form-group">
-									<input
-										id="emailInput"
-										placeholder="Email"
-										className="form-control form-control-sm"
-										type="email"
-										required=""
-									/>
-								</div>
-								<div className="form-group">
-									<input
-										id="passwordInput"
-										placeholder="Password"
-										className="form-control form-control-sm"
-										type="password"
-										required=""
-									/>
-								</div>
-								<div className="form-group">
-									<button type="submit" className="btn btn-warning btn-block login-button ">
-										Login
-									</button>
-								</div>
-								<div className="form-group text-center">
-									<small>
-										<a href="/forgotpassword"  className="">
-											Forgot password?
-										</a>
-									</small>
-								</div>
 
-								<div className="form-group text-center">
-									<small>
-										<a href="/signup" className="">
-											<b>register</b>
-										</a>
-									</small>
-								</div>
-							</form> */}
 								<Login username={this.props.username}
-									password={this.props.password}
-
-								></Login>
+									password={this.props.password}></Login>
 							</li>
 						</ul>
 					</li>
