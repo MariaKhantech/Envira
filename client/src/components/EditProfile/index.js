@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "./updateProfile.css";
 import Axios from 'axios';
 import { Auth } from 'aws-amplify';
+import ProfileImage from "../EditProfile"
 
 
 export default class UpdateProfile extends Component {
@@ -132,34 +133,31 @@ export default class UpdateProfile extends Component {
             right: "0",
             top: "0",
         }
+        
         return (
             <div className="container rounded bg-white mt-5 mb-5">
                 <div className="row">
                     <div className="col-md-3 border-right">
                         <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-                            <img className="rounded-circle mt-5" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQF2psCzfbB611rnUhxgMi-lc2oB78ykqDGYb4v83xQ1pAbhPiB&usqp=CAU" />
+                            <ProfileImage></ProfileImage>
+                            {/* <img className="rounded-circle mt-5" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQF2psCzfbB611rnUhxgMi-lc2oB78ykqDGYb4v83xQ1pAbhPiB&usqp=CAU" /> */}
 
-
-                            {/* <div style={file} className="btn btn-lg btn-primary">
-                                Change Photo
-                                 <input style ={fileButton} type="file" name="file" /> 
-                            </div> */}
-
-
-
-                            <div className="input-group mb-3 px-2 py-2 bg-dark rounded-pill bg-white shadow-sm">
-                                <input style={upload} type="file" onchange="readURL(this);" className="form-control border-0" />
-                                <label style={uploadLabel} for="upload" className="font-weight-light text-muted">Choose file</label>
-                                <div className="input-group-append">
-                                    <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i className="fa fa-cloud-upload mr-2 text-muted"></i><small className="text-uppercase font-weight-bold text-muted">Choose file</small></label>
-                                </div>
+                            {/* <!-- Uploaded image area--> */}
+                            <p className="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
+                            <div className="image-area mt-4"><img id="imageResult" src="#" alt="" className="img-fluid rounded shadow-sm mx-auto d-block" />
                             </div>
 
 
+                            <div className="input-group mb-3 px-2 py-2 rounded-pill bg-light shadow-sm">
+                                <input style={upload} type="file" onChange="readURL(this);" className="form-control border-0" />
+                                <label style={uploadLabel} for="upload" className="font-weight-light text-muted">Choose file</label>
+                                <div className="input-group-append">
+                                    <label htmlFor="upload" class="btn btn-dark m-0 rounded-pill px-4"> <i className="fa fa-cloud-upload mr-2 text-muted"></i><small className="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                                </div>
+                            </div>
 
                             <span className="font-weight-bold">{this.state.firstName}</span>
                             <span className="text-black-50">{this.state.profile.email}</span>
-
 
                         </div>
                     </div>
