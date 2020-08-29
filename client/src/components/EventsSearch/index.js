@@ -23,9 +23,7 @@ export default class EventsSearch extends Component {
     showCarousel: false,
     slidesToShow: 3,
     slidesToScroll: 3,
-    // information: Data,
     eventData: [],
-    showModal: false,
   };
 
   componentDidMount() {
@@ -66,16 +64,16 @@ export default class EventsSearch extends Component {
       this.setState({ slidesToScroll: filteredLocation.length });
       this.setState({ searchInput: "" });
     }
-    if (this.state.filter === "Organizer") {
+    if (this.state.filter === "Event Name") {
       this.componentDidMount();
-      const filteredOrg = this.state.eventData.filter(
+      const filteredEv = this.state.eventData.filter(
         (detail) => detail.event_name === this.state.searchInput
       );
-      this.setState({ eventData: filteredOrg });
+      this.setState({ eventData: filteredEv });
       console.log(this.state.eventData);
       this.setState({ showCarousel: true });
-      this.setState({ slidesToShow: filteredOrg.length });
-      this.setState({ slidesToScroll: filteredOrg.length });
+      this.setState({ slidesToShow: filteredEv.length });
+      this.setState({ slidesToScroll: filteredEv.length });
       this.setState({ searchInput: "" });
     }
   };
@@ -84,17 +82,8 @@ export default class EventsSearch extends Component {
     event.preventDefault();
     this.componentDidMount();
     this.setState({ showCarousel: true });
-    // this.setState({ information: Data });
     this.setState({ slidesToShow: 3 });
     this.setState({ slidesToScroll: 3 });
-  };
-
-  handleShowModal = () => {
-    this.setState({ showModal: true });
-  };
-
-  handleHideModal = () => {
-    this.setState({ showModal: false });
   };
 
   render() {
@@ -112,8 +101,6 @@ export default class EventsSearch extends Component {
           handleFilterOption={this.handleFilterOption}
           handleFilterSubmit={this.handleFilterSubmit}
           handleShowAll={this.handleShowAll}
-          handleShowModal={this.handleShowModal}
-          handleHideModal={this.handleHideModal}
           postNewEvent={this.postNewEvent}
           state={this.state}
         />

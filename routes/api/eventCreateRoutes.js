@@ -2,23 +2,28 @@ const router = require("express").Router();
 const db = require("../../models");
 
 router.post("/eventcreate", (req, res) => {
-  console.log(req.body.eventTitle);
-  console.log(req.body.data);
-  console.log(req.body.location);
-  console.log(req.body.contactPerson);
-  console.log(req.body.contactNumber);
+  console.log(req.body.eventName);
   console.log(req.body.description);
-  // USED ID WILL NOT BE NEEDED
-  console.log(req.body.userId);
+  console.log(req.body.address);
+  console.log(req.body.city);
+  console.log(req.body.state);
+  console.log(req.body.date);
+  console.log(req.body.contactPerson);
+  console.log(req.body.contactEmail);
+  console.log(req.body.contactNumber);
+  console.log(req.body.id);
 
   db.Event.create({
-    event_name: req.body.eventTitle,
-    date: req.body.date,
-    address: req.body.location,
-    contact_person: req.body.contactPerson,
-    contact_number: req.body.contactNumber,
+    event_name: req.body.eventName,
     description: req.body.description,
-    UserId: req.body.userId,
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state,
+    date: req.body.date,
+    contact_person: req.body.contactPerson,
+    contact_email: req.body.contactEmail,
+    contact_number: req.body.contactNumber,
+    UserId: req.body.id,
   })
     .then((dbResponse) => {
       res.json(dbResponse);

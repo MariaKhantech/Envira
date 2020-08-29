@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Auth } from 'aws-amplify';
+import Axios from 'axios';
 import Jumbotron from 'react-bootstrap/Jumbotron';
-import { Storage } from 'aws-amplify';
 import Button from 'react-bootstrap/Button';
 // import 'react-date-range/dist/theme/default.css';
 // import 'react-date-range/dist/styles.css';
@@ -29,6 +30,26 @@ export class CreateEvents extends Component {
 		console.log('successfully saved file...');
 	};
 
+	postNewEvent = async (event) => {
+		event.preventDefault();
+		Axios.post('/api/create/eventcreate', {
+			eventName: this.state.eventName,
+			date: this.state.date,
+			description: this.state.description,
+			contactName: this.state.contactName,
+			contactEmail: this.state.contactEmail,
+			contactNumber: this.state.contactNumber,
+			address: this.state.address,
+			city: this.state.city,
+			state: this.state.state,
+			id: this.state.profile.id
+		})
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((err) => console.log(err));
+	};
+
 	handleChange = ({ target }) => {
 		this.setState({ [target.name]: target.value });
 	};
@@ -40,24 +61,25 @@ export class CreateEvents extends Component {
 		return (
 			<div>
 				<div className="container mt-0">
-					<form class="form-style text-center" style={{ marginTop: '5em' }}>
+					<form className="form-style text-center" style={{ marginTop: '5em' }}>
 						<div className="card person-card ">
 							<Jumbotron style={styles}>
-								<h1 class="text-white">Create an event</h1>
+								<h1 className="text-white">Create an event</h1>
 								<br />
-								<p class="text-white">save the planet.</p>
+								<p className="text-white">save the planet.</p>
 
 								{/*link these!*/}
 							</Jumbotron>
 							<div className="card-body">
 								<div className="row justify-content-center">
 									<div className="form-group col-md-5">
-										<label for="eventname" className="col-form-label">
+										<label htmlFor="eventname" className="col-form-label">
 											Event Name:
 										</label>
 										<input
-											type="eventname"
+											type="text"
 											id="eventname"
+											name="eventName"
 											className="form-control"
 											placeholder="Example Beach Cleanup "
 											value={this.state.eventName}
@@ -69,24 +91,27 @@ export class CreateEvents extends Component {
 											Date:
 										</label>
 										<input
-											type="date"
+											type="text"
 											id="date"
 											className="form-control"
 											placeholder="September, 15, 2020"
+											name="date"
 											value={this.state.date}
 											onChange={this.handleChange}
 											required
 										/>
 									</div>
 									<div className="form-group col-md-5">
-										<label for="description" className="col-form-label">
+										<label htmlFor="description" className="col-form-label">
 											Event Description:
 										</label>
 										<textarea
-											class="form-control"
+											className="form-control"
+											type="text"
 											id="description"
 											rows="5"
 											style={{ resize: 'none' }}
+											name="description"
 											value={this.state.description}
 											onChange={this.handleChange}
 											required
@@ -96,23 +121,27 @@ export class CreateEvents extends Component {
 									<div />
 								</div>
 								<hr />
-								<div class="row justify-content-center">
-									<div class="col-6">
-										<div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+								<div className="row justify-content-center">
+									<div className="col-6">
+										<div className="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
 											<input
 												id="upload"
 												type="file"
 												onchange="readURL(this);"
-												class="form-control border-0"
+												className="form-control border-0"
 											/>
-											<label id="upload-label" for="upload" class="font-weight-light text-muted">
+											<label
+												id="upload-label"
+												for="upload"
+												className="font-weight-light text-muted"
+											>
 												Choose file
 											</label>
-											<div class="input-group-append">
-												<label for="upload" class="btn btn-secondary m-0 rounded-pill px-4">
+											<div className="input-group-append">
+												<label for="upload" className="btn btn-secondary m-0 rounded-pill px-4">
 													{' '}
-													<i class="fa fa-cloud-upload mr-2 text-white" />
-													<small class="text-uppercase font-weight-bold text-white">
+													<i className="fa fa-cloud-upload mr-2 text-white" />
+													<small className="text-uppercase font-weight-bold text-white">
 														Choose file
 													</small>
 												</label>
@@ -121,14 +150,16 @@ export class CreateEvents extends Component {
 									</div>
 								</div>
 
-								<div class="row justify-content-center">
-									<p class="font-italic text-center">The image uploaded image will appear below.</p>
-									<div class="image-area mt-4">
+								<div className="row justify-content-center">
+									<p className="font-italic text-center">
+										The image uploaded image will appear below.
+									</p>
+									<div className="image-area mt-4">
 										<img
 											id="imageResult"
 											src="https://images.unsplash.com/photo-1562591970-254bc62245c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
 											alt=""
-											class="img-fluid rounded shadow-sm mx-auto d-block"
+											className="img-fluid rounded shadow-sm mx-auto d-block"
 										/>
 									</div>
 								</div>
@@ -141,7 +172,7 @@ export class CreateEvents extends Component {
 									<div className="card-body">
 										<h2 className="card-title">How to contact you?</h2>
 										<div className="form-group">
-											<label for="email" className="col-form-label">
+											<label htmlFor="contactname" className="col-form-label">
 												Contact Person:
 											</label>
 											<input
@@ -149,6 +180,7 @@ export class CreateEvents extends Component {
 												className="form-control"
 												id="contactName"
 												placeholder="Joe Bloggs"
+												name="contactName"
 												value={this.state.contactName}
 												onChange={this.handleChange}
 												required
@@ -160,6 +192,9 @@ export class CreateEvents extends Component {
 											<input
 												type="email"
 												className="form-control"
+												name="contactEmail"
+												value={this.state.contactEmail}
+												onChange={this.handleChange}
 												id="email"
 												placeholder="example@gmail.com"
 												required
@@ -167,12 +202,15 @@ export class CreateEvents extends Component {
 											<div className="email-feedback" />
 										</div>
 										<div className="form-group">
-											<label for="tel" className="col-form-label">
+											<label htmlFor="tel" className="col-form-label">
 												Phone number
 											</label>
 											<input
 												type="text"
 												className="form-control"
+												name="contactNumber"
+												value={this.state.contactNumber}
+												onChange={this.handleChange}
 												id="tel"
 												placeholder="999-999-9999"
 												required
@@ -188,35 +226,44 @@ export class CreateEvents extends Component {
 									<div className="card-body">
 										<h2 className="card-title">Location:</h2>
 										<div className="form-group">
-											<label for="address:" className="col-form-label">
+											<label htmlFor="address:" className="col-form-label">
 												Address
 											</label>
 											<input
-												type="city"
+												type="text"
 												className="form-control"
-												id="password"
+												id="address"
+												name="address"
+												value={this.state.address}
+												onChange={this.handleChange}
 												placeholder="249 beckon ave."
 												required
 											/>
 										</div>
 										<div className="form-group">
-											<label for="city" className="col-form-label">
+											<label htmlFor="city" className="col-form-label">
 												City
 											</label>
 											<input
-												type="password"
+												type="text"
 												className="form-control"
+												name="city"
+												value={this.state.city}
+												onChange={this.handleChange}
 												id="city"
 												placeholder="Portsmouth"
 												required
 											/>
 
-											<label for="state" className="col-form-label">
+											<label htmlFor="state" className="col-form-label">
 												State
 											</label>
 											<input
-												type="password"
+												type="text"
 												className="form-control"
+												name="state"
+												value={this.state.state}
+												onChange={this.handleChange}
 												id="state"
 												placeholder="NH"
 												required
@@ -226,9 +273,9 @@ export class CreateEvents extends Component {
 								</div>
 							</div>
 						</div>
-						<div class="row ">
-							<div class="col-12 text-center">
-								<button onClick={this.saveFile} type="button" class="btn btn-success mb-5 mt-3">
+						<div className="row ">
+							<div className="col-12 text-center">
+								<button type="button" onClick={this.postNewEvent} className="btn btn-success mb-5 mt-3">
 									Create
 								</button>
 							</div>

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { bubble as Menu } from 'react-burger-menu';
 import './style.css';
+import Login from "../Login";
+import { Auth } from 'aws-amplify';
+
 // import { RuleTester } from "eslint";
 
 const orangeColor = {
@@ -8,13 +11,34 @@ const orangeColor = {
 };
 
 export class NavBar extends Component {
+
+	handleLogOut = async event => {
+		event.preventDefault();
+
+		try {
+			Auth.signOut();
+			this.props.auth.setAuthStatus(false);
+			this.props.auth.setUser(null);
+		} catch (error) {
+
+			console.log(error.message);
+		}
+	}
+
+
 	render() {
 		return (
+
 			<Menu>
 				<hr style={{ background: 'white' }} />
 				<a className="menu-item text-center text-white" href="/">
 					Home
 				</a>
+				{this.props.auth.isAuthenticated && this.props.auth.user && (
+					<h5 style={{ textAlign: "center", color: "white" }}>
+						Welcome {this.props.auth.user.username}
+					</h5>
+				)}
 				<hr className="bg-light" style={{ background: 'white' }} />
 				<a className="menu-item text-white about" href="/ocean">
 					About
@@ -76,14 +100,15 @@ export class NavBar extends Component {
 				</li>
 
 				<hr style={{ background: 'white' }} />
+				{!this.props.auth.isAuthenticated && (
 
-				<li className="dropdown dropdown-login  order-1 menu-item mt-4">
-					<button type="button" data-toggle="dropdown" className="btn btn-outline-light dropdown-toggle ">
-						Login <span className="caret" />
-					</button>
-					<ul className="dropdown-menu mt-2">
-						<li className="px-3 py-2">
-							<form className="form">
+					<li className="dropdown dropdown-login  order-1 menu-item mt-4">
+						<button type="button" data-toggle="dropdown" className="btn btn-outline-light dropdown-toggle ">
+							Login <span className="caret" />
+						</button>
+						<ul className="dropdown-menu mt-2">
+							<li className="px-3 py-2">
+								{/* <form className="form">
 								<div className="form-group">
 									<input
 										id="emailInput"
@@ -109,7 +134,7 @@ export class NavBar extends Component {
 								</div>
 								<div className="form-group text-center">
 									<small>
-										<a href="#" data-toggle="modal" data-target="#modalPassword" className="">
+										<a href="/forgotpassword"  className="">
 											Forgot password?
 										</a>
 									</small>
@@ -117,15 +142,25 @@ export class NavBar extends Component {
 
 								<div className="form-group text-center">
 									<small>
-										<a href="" className="">
+										<a href="/signup" className="">
 											<b>register</b>
 										</a>
 									</small>
 								</div>
-							</form>
-						</li>
-					</ul>
-				</li>
+							</form> */}
+								<Login username={this.props.username}
+									password={this.props.password}
+
+								></Login>
+							</li>
+						</ul>
+					</li>
+				)}
+				{this.props.auth.isAuthenticated && (
+					<a href="/" onClick={this.handleLogOut} className="button is-light text-center text-white">
+						Log out
+					</a>
+				)}
 			</Menu>
 		);
 	}
