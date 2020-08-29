@@ -1,9 +1,66 @@
 import React, { Component } from 'react';
 import './style.scss';
+import Axios from 'axios';
+import { Auth } from 'aws-amplify';
 
 export class UserProfile extends Component {
-  componentDidMount() {
 
+  state = {
+    profile: [],
+    first_name: "",
+    lastName: "",
+    city: "",
+    state: "",
+    phoneNumber: "",
+    address: "",
+    about: "",
+    zipCode: "",
+  }
+
+
+  async componentDidMount() {
+    try {
+      // get the current logged in user details
+      const user = await Auth.currentAuthenticatedUser();
+      // get username from user object
+      const userDetail = user.username;
+      // get the user details for logged in user from the User table 
+      Axios.get(`/api/auth/user/${userDetail}`)
+        .then(
+          (response) => {
+            this.setState({
+              profile: response.data,
+            });
+            this.getUserProfile()
+          })
+
+        .catch(err => console.log(err))
+    } catch (error) {
+      if (error !== "No current user") {
+        console.log(error);
+      }
+    }
+
+  }
+
+  getUserProfile = () => {
+    const UserId = this.state.profile.id
+    Axios.get(`/api/auth/userProfile/${UserId}`)
+      .then(
+        (response) => {
+          console.log(response)
+          this.setState({
+            firstName: response.data.first_name,
+            lastName: response.data.last_name,
+            phoneNumber: response.data.phone_number,
+            city: response.data.city,
+            state: response.data.state,
+            about: response.data.about,
+            zipCode: response.data.zip_code,
+            address: response.data.address,
+          });
+        })
+      .catch(err => console.log(err))
   }
   render() {
     return (<div class=" main-content">
@@ -16,7 +73,7 @@ export class UserProfile extends Component {
         <div class="container-fluid d-flex align-items-center">
           <div class="row">
             <div class="col-lg-7 col-md-10">
-              <h1 class="display-2 text-black">Greta Thunburg</h1>
+              <h1 class="display-2 text-black">{this.state.profile.user_name}</h1>
               <p class="text-black mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
             </div>
           </div>
@@ -112,7 +169,7 @@ export class UserProfile extends Component {
                           <label>Username:</label>
                         </div>
                         <div class="col-md-6">
-                          <p>GretchenHealsTheEarth</p>
+                          <p>{this.state.profile.user_name}</p>
                         </div>
                       </div>
                       <div class="row">
@@ -120,7 +177,7 @@ export class UserProfile extends Component {
                           <label>Name:</label>
                         </div>
                         <div class="col-md-6">
-                          <p>Gretchen Thunburg</p>
+                          <p>{this.state.firstName} {this.state.lastName}</p>
                         </div>
                       </div>
                       <div class="row">
@@ -128,7 +185,7 @@ export class UserProfile extends Component {
                           <label>Email:</label>
                         </div>
                         <div class="col-md-6">
-                          <p>kidActivist@gogreen.com</p>
+                          <p>{this.state.profile.email}</p>
                         </div>
                       </div>
                       <div class="row">
@@ -136,7 +193,7 @@ export class UserProfile extends Component {
                           <label>Phone:</label>
                         </div>
                         <div class="col-md-6">
-                          <p>603-555-2999</p>
+                          <p>{this.state.phoneNumber}</p>
                         </div>
                       </div>
                       <div class="row">
@@ -144,7 +201,7 @@ export class UserProfile extends Component {
                           <label>Location:</label>
                         </div>
                         <div class="col-md-6">
-                          <p>Stockholm, Sweden, 03102</p>
+                          <p>{this.state.address} {this.state.state} {this.state.city} {this.state.zipCode}</p>
                         </div>
                       </div>
                       <div class="row">
