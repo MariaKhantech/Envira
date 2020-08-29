@@ -44,7 +44,7 @@ export class NavBar extends Component {
 					About
 				</a>
 
-				<a className="menu-item text-white about" href="/ocean">
+				<a className="menu-item text-white about" href="#">
 					Events
 				</a>
 
@@ -61,7 +61,7 @@ export class NavBar extends Component {
 						Climate Change
 					</a>
 					<div className="dropdown-menu" style={orangeColor} aria-labelledby="navbarDropdown">
-						<a className="dropdown-item text-white" href="#">
+						<a className="dropdown-item text-white" href="/ocean">
 							Ocean
 						</a>
 						<a className="dropdown-item text-white" href="#">

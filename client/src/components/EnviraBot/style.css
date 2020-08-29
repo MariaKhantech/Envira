@@ -1,17 +1,35 @@
-.amplify-section-header,
-.amplify-section-body {
-  display: none !important;
-}
-
-.amplify-section-footer-content form > input {
-  display: none;
-}
-
 .envirabot {
   position: fixed;
   top: 65%;
   left: 80%;
   max-width: 10vw;
   max-height: 40vh;
+}
+
+.amplify-form-section {
+  width: unset !important;
+  margin-bottom: unset !important;
+}
+
+.amplify-section-header,
+.amplify-section-body {
+  display: none;
+}
+
+.amplify-section-footer {
+  border-top: 0px !important;
+  padding: 0px !important;
+}
+
+.amplify-section-footer-content form > input {
+  display: none !important;
+}
+
+.amplify-section-footer-content form > button[type=submit] {
+  display: none !important;
+}
+
+.amplify-section-footer-content form > button {
+  background-color: #e8a87c !important;
 }
 /*# sourceMappingURL=style.css.map */

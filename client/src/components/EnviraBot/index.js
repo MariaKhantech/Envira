@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Amplify, { Interactions } from 'aws-amplify';
 import { ChatBot, AmplifyTheme } from 'aws-amplify-react';
-import awsconfig from '../../aws-exports';
+// import awsconfig from '../../aws-exports';
 import Robot from '../Robot';
 import './style.scss';
-Amplify.configure(awsconfig);
+// Amplify.configure(awsconfig);
 
 export class EnviraBot extends Component {
 	handleComplete(err, confirmation) {
