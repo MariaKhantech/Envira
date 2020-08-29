@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-// import EventCard from "../EventCard/index";
 
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+import { Row, Col, Card, Button } from "react-bootstrap";
 
 import "./style.css";
 

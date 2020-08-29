@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Auth } from "aws-amplify";
 import Axios from "axios";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Button from "react-bootstrap/Button";
@@ -11,6 +12,7 @@ export class CreateEvents extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      profile: [],
       eventName: "",
       date: new Date(),
       description: "",
@@ -23,7 +25,31 @@ export class CreateEvents extends Component {
     };
   }
 
-  postNewEvent = () => {
+  async componentDidMount() {
+    try {
+      // get the current logged in user details
+      const user = await Auth.currentAuthenticatedUser();
+      // get username from user object
+      const userDetail = user.username;
+      // get the user details for logged in user from the User table
+      Axios.get(`/api/auth/user/${userDetail}`)
+        .then((response) => {
+          this.setState({
+            profile: response.data,
+          });
+          this.getUserProfile();
+        })
+
+        .catch((err) => console.log(err));
+    } catch (error) {
+      if (error !== "No current user") {
+        console.log(error);
+      }
+    }
+  }
+
+  postNewEvent = async (event) => {
+    event.preventDefault();
     Axios.post("/api/create/eventcreate", {
       eventName: this.state.eventName,
       date: this.state.date,
@@ -34,6 +60,7 @@ export class CreateEvents extends Component {
       address: this.state.address,
       city: this.state.city,
       state: this.state.state,
+      id: this.state.profile.id,
     })
       .then((res) => {
         console.log(res);

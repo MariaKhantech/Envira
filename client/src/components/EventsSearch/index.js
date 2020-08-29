@@ -24,7 +24,6 @@ export default class EventsSearch extends Component {
     slidesToShow: 3,
     slidesToScroll: 3,
     eventData: [],
-    showModal: false,
   };
 
   componentDidMount() {
@@ -83,17 +82,8 @@ export default class EventsSearch extends Component {
     event.preventDefault();
     this.componentDidMount();
     this.setState({ showCarousel: true });
-    // this.setState({ information: Data });
     this.setState({ slidesToShow: 3 });
     this.setState({ slidesToScroll: 3 });
-  };
-
-  handleShowModal = () => {
-    this.setState({ showModal: true });
-  };
-
-  handleHideModal = () => {
-    this.setState({ showModal: false });
   };
 
   render() {
@@ -111,8 +101,6 @@ export default class EventsSearch extends Component {
           handleFilterOption={this.handleFilterOption}
           handleFilterSubmit={this.handleFilterSubmit}
           handleShowAll={this.handleShowAll}
-          handleShowModal={this.handleShowModal}
-          handleHideModal={this.handleHideModal}
           postNewEvent={this.postNewEvent}
           state={this.state}
         />
