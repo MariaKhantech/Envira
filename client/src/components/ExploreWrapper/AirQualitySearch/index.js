@@ -10,7 +10,6 @@ export default class AirQualitySearch extends Component {
   state = {
     aqiData: [],
     cityInput: "",
-    showCity: false,
   };
 
   onChange = (event) => {
@@ -25,7 +24,7 @@ export default class AirQualitySearch extends Component {
       Axios.get(
         `https://api.waqi.info/feed/${this.state.cityInput}/?token=e76fff504230a5ff145917055b7138ef3159918d`
       ).then((response) => this.setState({ aqiData: [response.data] }));
-      this.setState({ showCity: true });
+
       this.setState({ cityInput: "" });
     }
   };
@@ -33,12 +32,20 @@ export default class AirQualitySearch extends Component {
     const { aqiData } = this.state;
     console.log(aqiData);
 
-    // let renderCity = null;
-    // if (this.state.showCity === true) {
-    //   renderCity = this.state.aqiData.map((city) => <p>{city.data.aqi}</p>);
-    // } else if (this.state.showCity === "") {
-    //   renderCity = null;
-    // }
+    const aqiBox = {
+      backgroundColor: "green",
+      fontSize: "80px",
+      color: "#fff",
+      border: "none",
+      borderRadius: "10px",
+      padding: "10px 20px 10px 20px",
+    };
+
+    const status = {
+      margin: "0px 0px 0px 0px",
+      listStyle: "none",
+      padding: "0px 0px 0px 20px ",
+    };
 
     return (
       <Row>
@@ -57,14 +64,37 @@ export default class AirQualitySearch extends Component {
               </Button>
             </InputGroup.Append>
           </InputGroup>
-        </Col>
-        <Row>
-          <Col md={12}>
-            {aqiData.map((city) => (
-              <p>{city.data.aqi}</p>
-            ))}
+          <Col md={12} className=" p-3 mb-3 bg-light">
+            <Row>
+              <h1 style={{ marginLeft: "15px" }}>Boston AQI</h1>
+              <Col md={12}>
+                <Row>
+                  <Col md={3}>
+                    <h1 id="aqiBox" className="mt-0 d-inline" style={aqiBox}>
+                      30
+                    </h1>
+                  </Col>
+                  <Col md={9}>
+                    <ul style={status}>
+                      <li>
+                        <h2>Good</h2>
+                      </li>
+                      <li>
+                        <h4>
+                          Air quality is considered satisfactory, and air
+                          pollution poses little or no risk
+                        </h4>
+                      </li>
+                    </ul>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
           </Col>
-        </Row>
+          {/* /* {aqiData.map((city) => (
+            <p>{city.data.aqi}</p> 
+          ))} */}
+        </Col>
       </Row>
     );
   }
