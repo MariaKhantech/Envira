@@ -101,7 +101,7 @@ export class NavBar extends Component {
 					</div>
 				</li>
 				{this.props.auth.isAuthenticated && (
-				<a className="menu-item text-white about" href="/">
+				<a className="menu-item text-white about" href="/userprofile">
 					My Account
 				</a>
 				)}

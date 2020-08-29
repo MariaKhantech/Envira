@@ -172,15 +172,17 @@ export default class UpdateProfile extends Component {
                                     <input name="zipCode" type="text" className="form-control" value={this.state.zipCode} placeholder="state" onChange={this.handleInputChange} />
                                 </div>
                             </div>
-                            <div className="mt-5 text-center">
-                                <button onClick={this.handleFormSubmit} className="btn btn-primary profile-button" type="button">Save Profile</button>
-                            </div>
-                            {!this.state.profile &&(
+                            {!this.state.profile && (
                                 <div className="mt-5 text-center">
-                                <button onClick={this.handleUpdateFormSubmit} className="btn btn-primary profile-button" type="button">Update Profile</button>
-                            </div>
+                                    <button onClick={this.handleFormSubmit} className="btn btn-primary profile-button" type="button">Save Profile</button>
+                                </div>
                             )}
-                           
+                            {this.state.profile && (
+                                <div className="mt-5 text-center">
+                                    <button onClick={this.handleUpdateFormSubmit} className="btn btn-primary profile-button" type="button">Update Profile</button>
+                                </div>
+                            )}
+
                         </div>
                     </div>
                     {/* <div className="col-md-4">
