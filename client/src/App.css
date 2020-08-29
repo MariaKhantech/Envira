@@ -1,27 +1,27 @@
-html {
-  font-family: #85dcba;
-  /* background-color: #85dcba; */
-  background-color: #27a770 !important;
-  background-image: linear-gradient(315deg, #27a770 0%, #efefef 74%);
-  background-repeat: repeat;
-  background-size: cover;
-  width: 100%;
-  height: 100%;
+body {
+	font-family: #85dcba;
+	/* background-color: #85dcba; */
+	background-color: #27a770 !important;
+	background-image: linear-gradient(315deg, #27a770 0%, #efefef 74%);
+	background-position: center;
+	background-size: cover;
+	width: 100%;
+	height: 100vh;
 }
 
 .signup {
-  padding-top: 100px;
+	padding-top: 100px;
 }
 
 .signupForm {
-  background-color: #c2c1bf;
-  border: 0.5px solid grey;
-  border-radius: 20px;
-  padding: 10px;
-  font-family: inherit;
-  font-size: 20px;
-  -webkit-box-shadow: 10px 10px 5px grey;
-          box-shadow: 10px 10px 5px grey;
-  font-style: italic;
+	background-color: #c2c1bf;
+	border: 0.5px solid grey;
+	border-radius: 20px;
+	padding: 10px;
+	font-family: inherit;
+	font-size: 20px;
+	-webkit-box-shadow: 10px 10px 5px grey;
+	box-shadow: 10px 10px 5px grey;
+	font-style: italic;
 }
 /*# sourceMappingURL=App.css.map */

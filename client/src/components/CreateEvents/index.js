@@ -1,6 +1,6 @@
-
 import React, { Component } from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron';
+import { Storage } from 'aws-amplify';
 import Button from 'react-bootstrap/Button';
 // import 'react-date-range/dist/theme/default.css';
 // import 'react-date-range/dist/styles.css';
@@ -22,6 +22,12 @@ export class CreateEvents extends Component {
 			state: ''
 		};
 	}
+	//test for S3//
+	saveFile = async () => {
+		// const { file } = this.state;
+		await Storage.put('test.txt', 'hello');
+		console.log('successfully saved file...');
+	};
 
 	handleChange = ({ target }) => {
 		this.setState({ [target.name]: target.value });
@@ -222,7 +228,7 @@ export class CreateEvents extends Component {
 						</div>
 						<div class="row ">
 							<div class="col-12 text-center">
-								<button type="button" class="btn btn-success mb-5 mt-3">
+								<button onClick={this.saveFile} type="button" class="btn btn-success mb-5 mt-3">
 									Create
 								</button>
 							</div>
@@ -232,7 +238,6 @@ export class CreateEvents extends Component {
 			</div>
 		);
 	}
-
 }
 
 export default CreateEvents;

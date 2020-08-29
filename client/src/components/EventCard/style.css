@@ -130,7 +130,7 @@
 
 .home-info-section {
   padding: 120px;
-  background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
+  background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 25%, #fad0c4 50%);
 }
 
 .home-info-section figure img {
