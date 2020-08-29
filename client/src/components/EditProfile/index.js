@@ -92,6 +92,7 @@ export default class UpdateProfile extends Component {
             })
             .catch(err => console.log(err))
     }
+    
     handleUpdateFormSubmit = async (event) => {
         event.preventDefault();
         const { firstName, lastName, city, state, zipCode, about, phoneNumber } = this.state
@@ -105,6 +106,7 @@ export default class UpdateProfile extends Component {
             about,
             phoneNumber,
         })
+        this.history.push("/userprofile")
             .then((res) => {
                 console.log(res)
             })

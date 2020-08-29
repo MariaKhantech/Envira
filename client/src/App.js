@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import Navbar from "./components/NavbarTest";
+import { browserHistory } from 'react-router';
+
 import NavBar from "./components/NavBar";
-// import NavBar from "./components/NavbarTest";
 
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ForgotPasswordVerification from "./components/auth/ForgotPasswordVerification";

@@ -225,13 +225,12 @@ export class UserProfile extends Component {
                     <hr class="my-4" />
                     {/* <!-- Description --> */}
                     <form>
-                      <h6 class="heading-small text-muted mb-4">About me</h6>
+                      {/* <h6 class="heading-small text-muted mb-4">About me</h6> */}
                       <div class="pl-lg-4">
                         <div class="form-group focused">
                           <label>About Me</label>
-                          <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ..."> "We cannot solve a crisis without treating it as a crisis. And if solutions within the system are so impossible to find, then maybe we should change the system itself."
-                          -Greta Thunberg
-                        </textarea>
+                          <textarea rows="4" class="form-control form-control-alternative" value={this.state.about}>
+                          </textarea >
                         </div>
                       </div>
                     </form>
