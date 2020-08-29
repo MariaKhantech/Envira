@@ -7,7 +7,7 @@ import { Auth } from 'aws-amplify';
 export default class UpdateProfile extends Component {
     state = {
         profile: [],
-        first_name: "",
+        firstName: "",
         lastName: "",
         city: "",
         state: "",
@@ -32,35 +32,35 @@ export default class UpdateProfile extends Component {
                         });
                         this.getUserProfile()
                     })
-           
+
                 .catch(err => console.log(err))
         } catch (error) {
             if (error !== "No current user") {
                 console.log(error);
             }
-        }   
+        }
 
     }
 
 
     getUserProfile = () => {
-        const UserId=this.state.profile.id
+        const UserId = this.state.profile.id
         Axios.get(`/api/auth/userProfile/${UserId}`)
-        .then(
-            (response) => {
-                console.log(response)
-                this.setState({
-                    firstName: response.data.first_name,
-                    lastName:response.data.last_name,
-                    phoneNumber:response.data.phone_number,
-                    city:response.data.city,
-                    state:response.data.state,
-                    about:response.data.about,
-                    zipCode:response.data.zip_code,
-                    address:response.data.address,
-                });
-            })
-        .catch(err => console.log(err))
+            .then(
+                (response) => {
+                    console.log(response)
+                    this.setState({
+                        firstName: response.data.first_name,
+                        lastName: response.data.last_name,
+                        phoneNumber: response.data.phone_number,
+                        city: response.data.city,
+                        state: response.data.state,
+                        about: response.data.about,
+                        zipCode: response.data.zip_code,
+                        address: response.data.address,
+                    });
+                })
+            .catch(err => console.log(err))
     }
 
     handleInputChange = (e) => {
@@ -92,11 +92,11 @@ export default class UpdateProfile extends Component {
             })
             .catch(err => console.log(err))
     }
-    
+
     handleUpdateFormSubmit = async (event) => {
         event.preventDefault();
         const { firstName, lastName, city, state, zipCode, about, phoneNumber } = this.state
-        const UserId=this.state.profile.id;
+        const UserId = this.state.profile.id;
         Axios.put(`/api/auth/updateUserProfile/${UserId}`, {
             firstName,
             lastName,
@@ -106,10 +106,12 @@ export default class UpdateProfile extends Component {
             about,
             phoneNumber,
         })
-        this.history.push("/userprofile")
+
             .then((res) => {
                 console.log(res)
+                window.location = "/userprofile";
             })
+
             .catch(err => console.log(err))
     }
 
@@ -173,10 +175,12 @@ export default class UpdateProfile extends Component {
                             <div className="mt-5 text-center">
                                 <button onClick={this.handleFormSubmit} className="btn btn-primary profile-button" type="button">Save Profile</button>
                             </div>
-                            {/* for first time when there no profile details disabled this button */}
-                            <div className="mt-5 text-center">
+                            {!this.state.profile}(
+                                <div className="mt-5 text-center">
                                 <button onClick={this.handleUpdateFormSubmit} className="btn btn-primary profile-button" type="button">Update Profile</button>
                             </div>
+                            )
+                           
                         </div>
                     </div>
                     {/* <div className="col-md-4">

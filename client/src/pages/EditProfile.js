@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import UpdateProfile from "../components/EditProfile";
-import { browserHistory } from 'react-router';
+;
 
 export default class EditProfile extends Component {
 

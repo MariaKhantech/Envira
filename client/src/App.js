@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { browserHistory } from 'react-router';
 
 import NavBar from "./components/NavBar";
-
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ForgotPasswordVerification from "./components/auth/ForgotPasswordVerification";
 import ChangePassword from "./components/auth/ChangePassword";
