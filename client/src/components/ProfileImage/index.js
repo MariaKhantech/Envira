@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
+import "./profileImage.css"
 
 export default class index extends Component {
     state = {
         file: '',
         imagePreviewUrl: ''
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        // save image in S3
+        console.log('handle uploading-', this.state.file);
     }
 
     handleImageChange = (event) => {
