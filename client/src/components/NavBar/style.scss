@@ -53,3 +53,23 @@ $navbar-color: #daad86;
 .about {
 	padding: .5rem 1rem;
 }
+
+.nav-list li a {
+	text-decoration: none;
+	display: block;
+	padding: 10px;
+	cursor: pointer;
+	border-bottom: 1px solid #515151 !important;
+	color: #9d9d9d;
+}
+
+.nav-list > li > a {
+	color: #c4c4c4;
+	font-size: 14px;
+	padding-left: 13px !important;
+	border-bottom: 1px solid #585858;
+}
+
+.nav-list > li > a:hover {
+	background-color: #444444;
+}

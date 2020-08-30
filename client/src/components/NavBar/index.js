@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bubble as Menu } from 'react-burger-menu';
 import './style.css';
-import Login from "../Login";
+import Login from '../Login';
 import { Auth } from 'aws-amplify';
 
 // import { RuleTester } from "eslint";
@@ -11,8 +11,7 @@ const orangeColor = {
 };
 
 export class NavBar extends Component {
-
-	handleLogOut = async event => {
+	handleLogOut = async (event) => {
 		event.preventDefault();
 
 		try {
@@ -20,24 +19,20 @@ export class NavBar extends Component {
 			this.props.auth.setAuthStatus(false);
 			this.props.auth.setUser(null);
 		} catch (error) {
-
 			console.log(error.message);
 		}
-	}
-
+	};
 
 	render() {
 		return (
-
 			<Menu>
 				<hr style={{ background: 'white' }} />
 				<a className="menu-item text-center text-white" href="/">
 					Home
 				</a>
-				{this.props.auth.isAuthenticated && this.props.auth.user && (
-					<h5 style={{ textAlign: "center", color: "white" }}>
-						Welcome {this.props.auth.user.username}
-					</h5>
+				{this.props.auth.isAuthenticated &&
+				this.props.auth.user && (
+					<h5 style={{ textAlign: 'center', color: 'white' }}>Welcome {this.props.auth.user.username}</h5>
 				)}
 				<hr className="bg-light" style={{ background: 'white' }} />
 				<a className="menu-item text-white about" href="/ocean">
@@ -79,13 +74,12 @@ export class NavBar extends Component {
 						href="#"
 						id="navbarDropdown"
 						role="button"
-						data-toggle="dropdown"
-						aria-haspopup="true"
-						aria-expanded="false"
+						data-toggle="collapse"
+						data-target="#submenu1"
 					>
 						Company Pollution
 					</a>
-					<div className="dropdown-menu" aria-labelledby="navbarDropdown">
+					<div className="collapse" id="submenu1">
 						<a className="dropdown-item " href="#">
 							Action
 						</a>
@@ -99,9 +93,36 @@ export class NavBar extends Component {
 					</div>
 				</li>
 
+				{/* <ul class="nav-item nav-list text-white" style={{ listStyleType: 'none' }}>
+					{/* <li>
+						<a class="" data-toggle="collapse" data-target="#submenu1">
+							Menu Link{' '}
+						</a> */}
+
+				{/* <ul class="nav nav-list collapse" id="submenu1">
+						<li>
+							<a class="accordion-heading" data-toggle="collapse" data-target="#submenu2">
+								Sub Menu Link1{' '}
+								<span class="pull-right">
+									<b class="caret" />
+								</span>
+							</a>
+						</li>
+
+						<li>
+							<a class="accordion-heading" data-toggle="collapse" data-target="#submenu2">
+								Sub Menu Link1{' '}
+								<span class="pull-right">
+									<b class="caret" />
+								</span>
+							</a>
+						</li>
+					</ul> */}
+				{/* </li> */}
+				{/* </ul>  */}
+
 				<hr style={{ background: 'white' }} />
 				{!this.props.auth.isAuthenticated && (
-
 					<li className="dropdown dropdown-login  order-1 menu-item mt-4">
 						<button type="button" data-toggle="dropdown" className="btn btn-outline-light dropdown-toggle ">
 							Login <span className="caret" />
@@ -148,10 +169,7 @@ export class NavBar extends Component {
 									</small>
 								</div>
 							</form> */}
-								<Login username={this.props.username}
-									password={this.props.password}
-
-								></Login>
+								<Login username={this.props.username} password={this.props.password} />
 							</li>
 						</ul>
 					</li>
