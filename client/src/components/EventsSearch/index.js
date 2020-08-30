@@ -24,24 +24,8 @@ export default class EventsSearch extends Component {
     slidesToShow: 3,
     slidesToScroll: 3,
     eventData: [],
+    madeRequest: false,
   };
-
-  componentDidMount() {
-    Axios.get("/api/create/eventcreate").then(
-      (response) => {
-        // console.log(response);
-        this.setState({
-          eventData: response.data,
-        });
-      },
-      (error) => {
-        this.setState({
-          error,
-        });
-      }
-    );
-    console.log(this.state.eventData);
-  }
 
   onChange = (event) =>
     this.setState({ [event.target.name]: event.target.value });
@@ -50,42 +34,77 @@ export default class EventsSearch extends Component {
     this.setState({ filter: event.target.innerHTML, disabled: false });
   };
 
-  handleFilterCondition = () => {
-    const filteredLocation = this.state.eventData.filter(
-      (detail) => detail.city === this.state.searchInput
-    );
-
-    const filteredEv = this.state.eventData.filter(
-      (detail) => detail.event_name === this.state.searchInput
-    );
-
-    if (this.state.filter === "Location") {
-      this.setState({
-        eventData: filteredLocation,
-
-        showCarousel: true,
-        slidesToShow: filteredLocation.length,
-        slidesToScroll: filteredLocation.length,
-      });
-    }
-    if (this.state.filter === "Event Name") {
-      this.setState({
-        eventData: filteredEv,
-        showCarousel: true,
-        slidesToShow: filteredEv.length,
-        slidesToScroll: filteredEv.length,
-      });
-    }
-  };
-
-  handleFilterSubmit = async (event) => {
+  handleFilterSubmit = (event) => {
     event.preventDefault();
-    this.handleFilterCondition();
+    Axios.get("/api/create/eventcreate").then(
+      (response) => {
+        // console.log(response);
+        this.setState({
+          eventData: response.data,
+          madeRequest: true,
+        });
+
+        if (
+          this.state.filter === "Location" &&
+          this.state.madeRequest === true
+        ) {
+          const filteredLocation = this.state.eventData.filter(
+            (detail) => detail.city === this.state.searchInput
+          );
+          this.setState({
+            eventData: filteredLocation,
+
+            showCarousel: true,
+            slidesToShow: filteredLocation.length,
+            slidesToScroll: filteredLocation.length,
+            madeRequest: false,
+            searchInput: "",
+          });
+        }
+        if (
+          this.state.filter === "Event Name" &&
+          this.state.madeRequest === true
+        ) {
+          const filteredEv = this.state.eventData.filter(
+            (detail) => detail.event_name === this.state.searchInput
+          );
+          this.setState({
+            eventData: filteredEv,
+
+            showCarousel: true,
+            slidesToShow: filteredEv.length,
+            slidesToScroll: filteredEv.length,
+            madeRequest: false,
+            searchInput: "",
+          });
+        }
+      },
+      (error) => {
+        this.setState({
+          error,
+        });
+      },
+      this.setState({ madeRequest: false, showCarousel: false })
+    );
   };
 
   handleShowAll = (event) => {
     event.preventDefault();
-    this.componentDidMount();
+    Axios.get("/api/create/eventcreate").then(
+      (response) => {
+        // console.log(response);
+        this.setState({
+          eventData: response.data,
+          madeRequest: true,
+        });
+      },
+      (error) => {
+        this.setState({
+          error,
+        });
+      },
+      this.setState({ madeRequest: false })
+    );
     this.setState({ showCarousel: true, slidesToShow: 3, slidesToScroll: 3 });
   };
 
@@ -96,7 +115,6 @@ export default class EventsSearch extends Component {
     } else if (this.state.showCarousel === "") {
       renderCarousel = null;
     }
-
     console.log(this.state.eventData);
 
     return (
