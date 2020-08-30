@@ -29,13 +29,13 @@ export default class ExploreWrapper extends Component {
             className="justify-content-center"
             onSelect={this.handleSelect}
           >
-            <Tab eventKey={1} title="Air Quality Index Search">
+            <Tab eventKey={3} title="Air Quality Index Search">
               <AirQualitySearch />
             </Tab>
             <Tab eventKey={2} title="EPA Information">
               <EpaInfo />
             </Tab>
-            <Tab eventKey={3} title="Articles">
+            <Tab eventKey={1} title="Articles">
               <Articles />
             </Tab>
           </Tabs>

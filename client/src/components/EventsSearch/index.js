@@ -29,7 +29,7 @@ export default class EventsSearch extends Component {
   componentDidMount() {
     Axios.get("/api/create/eventcreate").then(
       (response) => {
-        console.log(response);
+        // console.log(response);
         this.setState({
           eventData: response.data,
         });
@@ -40,6 +40,7 @@ export default class EventsSearch extends Component {
         });
       }
     );
+    console.log(this.state.eventData);
   }
 
   onChange = (event) =>
@@ -49,41 +50,43 @@ export default class EventsSearch extends Component {
     this.setState({ filter: event.target.innerHTML, disabled: false });
   };
 
-  handleFilterSubmit = (event) => {
-    event.preventDefault();
+  handleFilterCondition = () => {
+    const filteredLocation = this.state.eventData.filter(
+      (detail) => detail.city === this.state.searchInput
+    );
+
+    const filteredEv = this.state.eventData.filter(
+      (detail) => detail.event_name === this.state.searchInput
+    );
 
     if (this.state.filter === "Location") {
-      this.componentDidMount();
-      const filteredLocation = this.state.eventData.filter(
-        (detail) => detail.address === this.state.searchInput
-      );
-      this.setState({ eventData: filteredLocation });
-      console.log(this.state.eventData);
-      this.setState({ showCarousel: true });
-      this.setState({ slidesToShow: filteredLocation.length });
-      this.setState({ slidesToScroll: filteredLocation.length });
-      this.setState({ searchInput: "" });
+      this.setState({
+        eventData: filteredLocation,
+
+        showCarousel: true,
+        slidesToShow: filteredLocation.length,
+        slidesToScroll: filteredLocation.length,
+      });
     }
     if (this.state.filter === "Event Name") {
-      this.componentDidMount();
-      const filteredEv = this.state.eventData.filter(
-        (detail) => detail.event_name === this.state.searchInput
-      );
-      this.setState({ eventData: filteredEv });
-      console.log(this.state.eventData);
-      this.setState({ showCarousel: true });
-      this.setState({ slidesToShow: filteredEv.length });
-      this.setState({ slidesToScroll: filteredEv.length });
-      this.setState({ searchInput: "" });
+      this.setState({
+        eventData: filteredEv,
+        showCarousel: true,
+        slidesToShow: filteredEv.length,
+        slidesToScroll: filteredEv.length,
+      });
     }
+  };
+
+  handleFilterSubmit = async (event) => {
+    event.preventDefault();
+    this.handleFilterCondition();
   };
 
   handleShowAll = (event) => {
     event.preventDefault();
     this.componentDidMount();
-    this.setState({ showCarousel: true });
-    this.setState({ slidesToShow: 3 });
-    this.setState({ slidesToScroll: 3 });
+    this.setState({ showCarousel: true, slidesToShow: 3, slidesToScroll: 3 });
   };
 
   render() {
@@ -93,6 +96,8 @@ export default class EventsSearch extends Component {
     } else if (this.state.showCarousel === "") {
       renderCarousel = null;
     }
+
+    console.log(this.state.eventData);
 
     return (
       <>
