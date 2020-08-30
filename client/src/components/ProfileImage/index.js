@@ -1,19 +1,26 @@
 import React, { Component } from 'react'
 
 export default class index extends Component {
+    state={
+        file: '',
+        imagePreviewUrl: ''
+    }
+
+
+
     render() {
         return (
             <div>
                 <div className="imgPreview">
                     {$imagePreview}
                 </div>
-                <form onSubmit={(e) => this._handleSubmit(e)}>
+                <form onSubmit={this.handleSubmit}>
                     <input className="fileInput"
                         type="file"
-                        onChange={(e) => this._handleImageChange(e)} />
+                        onChange={this.handleImageChange} />
                     <button className="submitButton"
                         type="submit"
-                        onClick={(e) => this._handleSubmit(e)}>Upload Image</button>
+                        onClick={this.handleSubmit}>Upload Image</button>
                 </form>
             </div>
         )
