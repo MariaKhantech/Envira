@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import "./updateProfile.css";
 import Axios from 'axios';
 import { Auth } from 'aws-amplify';
-import ProfileImage from "../EditProfile"
+import ProfileImage from "../ProfileImage"
+
 
 
 export default class UpdateProfile extends Component {
@@ -139,22 +140,12 @@ export default class UpdateProfile extends Component {
                 <div className="row">
                     <div className="col-md-3 border-right">
                         <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-                            <ProfileImage></ProfileImage>
-                            {/* <img className="rounded-circle mt-5" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQF2psCzfbB611rnUhxgMi-lc2oB78ykqDGYb4v83xQ1pAbhPiB&usqp=CAU" /> */}
+                           
+                            <img className="rounded-circle mt-5" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQF2psCzfbB611rnUhxgMi-lc2oB78ykqDGYb4v83xQ1pAbhPiB&usqp=CAU" />
 
-                            {/* <!-- Uploaded image area--> */}
-                            <p className="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
-                            <div className="image-area mt-4"><img id="imageResult" src="#" alt="" className="img-fluid rounded shadow-sm mx-auto d-block" />
-                            </div>
+                        <ProfileImage></ProfileImage>
 
-
-                            <div className="input-group mb-3 px-2 py-2 rounded-pill bg-light shadow-sm">
-                                <input style={upload} type="file" onChange="readURL(this);" className="form-control border-0" />
-                                <label style={uploadLabel} for="upload" className="font-weight-light text-muted">Choose file</label>
-                                <div className="input-group-append">
-                                    <label htmlFor="upload" class="btn btn-dark m-0 rounded-pill px-4"> <i className="fa fa-cloud-upload mr-2 text-muted"></i><small className="text-uppercase font-weight-bold text-muted">Choose file</small></label>
-                                </div>
-                            </div>
+                            
 
                             <span className="font-weight-bold">{this.state.firstName}</span>
                             <span className="text-black-50">{this.state.profile.email}</span>
