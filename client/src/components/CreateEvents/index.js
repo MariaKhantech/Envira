@@ -21,13 +21,42 @@ export class CreateEvents extends Component {
 			conactNumber: '',
 			address: '',
 			city: '',
-			state: ''
+			state: '',
+			selectedFile: '',
+			selectedFileName: 'Choose file',
+			imagePreviewUrl: '',
+			displayUploadButton: false
 		};
 	}
 	//test for S3//
 	saveFile = async () => {
 		// const { file } = this.state;
 		await Storage.put('test3.txt', 'hello');
+		console.log('successfully saved file...');
+	};
+
+	uploadFile = (event) => {
+		console.log(event.target);
+
+		let file = event.target.files[0];
+		let reader = new FileReader();
+
+		reader.onloadend = () => {
+			this.setState({
+				selectedFile: file,
+				selectedFileName: file.name,
+				imagePreviewUrl: reader.result,
+				displayUploadButton: true
+			});
+		};
+		reader.readAsDataURL(file);
+	};
+
+	uploadEventImagetoS3 = async (event) => {
+		event.preventDefault();
+		event.target.textContent = 'Successfully uploaded';
+		event.target.disabled = true;
+		await Storage.put(this.state.selectedFileName, this.state.selectedFile);
 		console.log('successfully saved file...');
 	};
 
@@ -128,7 +157,7 @@ export class CreateEvents extends Component {
 											<input
 												id="upload"
 												type="file"
-												onChange=""
+												onChange={this.uploadFile}
 												className="form-control border-0"
 											/>
 											<label
@@ -136,7 +165,7 @@ export class CreateEvents extends Component {
 												htmlFor="upload"
 												className="font-weight-light text-muted"
 											>
-												Choose file
+												{this.state.selectedFileName}
 											</label>
 											<div className="input-group-append">
 												<label
@@ -161,11 +190,17 @@ export class CreateEvents extends Component {
 									<div className="image-area mt-4">
 										<img
 											id="imageResult"
-											src="https://images.unsplash.com/photo-1562591970-254bc62245c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+											src={this.state.imagePreviewUrl}
 											alt=""
 											className="img-fluid rounded shadow-sm mx-auto d-block"
 										/>
 									</div>
+								</div>
+								<div
+									className="row justify-content-center mt-2 "
+									style={{ display: this.state.displayUploadButton ? 'block' : 'none' }}
+								>
+									<button onClick={this.uploadEventImagetoS3}>Upload</button>
 								</div>
 							</div>
 						</div>
