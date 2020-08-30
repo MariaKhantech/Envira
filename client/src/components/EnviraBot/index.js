@@ -35,7 +35,7 @@ export class EnviraBot extends Component {
 					theme={myTheme}
 					botName="BookTrip_dev"
 					welcomeMessage="Welcome, how can I help you today?"
-					onComplete={this.handleComplete.bind(this)}
+					// onComplete={this.handleComplete.bind(this)}
 					clearOnComplete={true}
 					conversationModeOn={false}
 					voiceEnabled={true}
