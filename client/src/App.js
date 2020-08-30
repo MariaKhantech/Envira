@@ -17,6 +17,7 @@ import Profile from "./pages/Profile";
 import EventSearch from "./pages/EventSearch";
 // import EventsPage from "./pages/EventsPage";
 import EventCreate from "./pages/EventCreate";
+import ViewEventCard from "./pages/ViewEventCard";
 
 // import CompanyReview from "./pages/CompanyReview";
 
@@ -151,6 +152,11 @@ export default class AppTest extends Component {
                     exact
                     path="/explore"
                     render={(props) => <Explore {...props} auth={authProps} />}
+                  />
+                   <Route
+                    exact
+                    path="/vieweventcard"
+                    render={(props) => <ViewEventCard {...props} auth={authProps} />}
                   />
                   <Route
                     exact

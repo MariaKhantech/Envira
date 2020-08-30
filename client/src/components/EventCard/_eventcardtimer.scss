@@ -1,0 +1,85 @@
+$continer-color: #85dcba;
+$continer-padding: 30px 20px 10px 20px;
+
+.continer {
+	background-color: $continer-color;
+	padding: $continer-padding;
+	border-radius: 8px;
+	color: #fff;
+	width: 450px;
+	margin: auto;
+	box-shadow: 0 5px 50px rgba(0, 0, 0, 0.2);
+	label {
+		display: block;
+	}
+	.project-title {
+		font-size: 9pt;
+		opacity: 0.5;
+	}
+	.project-name {
+		font-size: 16pt;
+		margin: 5px 0;
+	}
+	.counter {
+		padding-bottom: 5px;
+		margin: 25px 0 15px 0;
+		background-color: #e27d60;
+		font-weight: 700;
+		border-radius: 8px;
+		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+		min-height: 80px;
+		div {
+			display: inline-block;
+		}
+		.days,
+		.hours,
+		.minutes,
+		.seconds {
+			width: 25%;
+			float: left;
+			text-align: center;
+			.value {
+				display: block;
+				font-size: 30pt;
+				width: 100%;
+				display: block;
+			}
+			span {
+				font-size: 8pt;
+				opacity: 0.8;
+				width: 100%;
+				display: block;
+			}
+		}
+		.hours::before,
+		.minutes::before,
+		.seconds::before {
+			content: ":";
+			float: left;
+			font-size: 20pt;
+			position: relative;
+			margin-top: 10px;
+			opacity: 0.7;
+			animation: pink 1s ease-in-out infinite;
+		}
+	}
+}
+
+.centerIt {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+
+@keyframes pink {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 1;
+	}
+}
