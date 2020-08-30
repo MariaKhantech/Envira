@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Auth } from 'aws-amplify';
+import { Storage } from 'aws-amplify';
 import Axios from 'axios';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Button from 'react-bootstrap/Button';
@@ -26,7 +27,7 @@ export class CreateEvents extends Component {
 	//test for S3//
 	saveFile = async () => {
 		// const { file } = this.state;
-		await Storage.put('test.txt', 'hello');
+		await Storage.put('test3.txt', 'hello');
 		console.log('successfully saved file...');
 	};
 
@@ -87,7 +88,7 @@ export class CreateEvents extends Component {
 											required
 										/>
 
-										<label for="date" className="col-form-label mt-3">
+										<label htmlFor="date" className="col-form-label mt-3">
 											Date:
 										</label>
 										<input
@@ -127,18 +128,21 @@ export class CreateEvents extends Component {
 											<input
 												id="upload"
 												type="file"
-												onchange="readURL(this);"
+												onChange=""
 												className="form-control border-0"
 											/>
 											<label
 												id="upload-label"
-												for="upload"
+												htmlFor="upload"
 												className="font-weight-light text-muted"
 											>
 												Choose file
 											</label>
 											<div className="input-group-append">
-												<label for="upload" className="btn btn-secondary m-0 rounded-pill px-4">
+												<label
+													htmlFor="upload"
+													className="btn btn-secondary m-0 rounded-pill px-4"
+												>
 													{' '}
 													<i className="fa fa-cloud-upload mr-2 text-white" />
 													<small className="text-uppercase font-weight-bold text-white">
@@ -186,7 +190,7 @@ export class CreateEvents extends Component {
 												required
 											/>
 
-											<label for="email" className="col-form-label">
+											<label htmlFor="email" className="col-form-label">
 												Email
 											</label>
 											<input
