@@ -120,13 +120,13 @@ export default class UpdateProfile extends Component {
     render() {
         return (
             <>
-                <div className="container rounded bg-dark mt-5 mb-5">
+                <div className="container profile-container rounded mt-5 mb-5">
                     <div className="row">
                         <div className="col-md-4 border-right">
                             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
+                                <span className="font-weight-bold mb-3">Hello {this.state.firstName}</span>
+                                {/* <span className="text-black-50">{this.state.profile.email}</span> */}
                                 <ProfileImage></ProfileImage>
-                                <span className="font-weight-bold">{this.state.firstName}</span>
-                                <span className="text-black-50">{this.state.profile.email}</span>
 
                             </div>
                         </div>
@@ -141,26 +141,27 @@ export default class UpdateProfile extends Component {
                                         <label className="labels">User Name</label>
                                         <input type="text" className="form-control" value={this.state.profile.user_name} readOnly />
                                     </div>
-                                    <div className="col-md-12">
+                                    <div className="col-md-6">
                                         <label className="labels">First Name</label>
                                         <input name="firstName" type="text" className="form-control" placeholder="first name" value={this.state.firstName} onChange={this.handleInputChange} />
                                     </div>
-                                    <div className="col-md-12">
+                                    <div className="col-md-6">
                                         <label className="labels">Last Name</label>
                                         <input name="lastName" type="text" className="form-control" placeholder="last name" value={this.state.lastName} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 <div className="row mt-3">
-                                    <div className="col-md-12">
+                                    <div className="col-md-6">
                                         <label className="labels">Phone Number</label>
                                         <input name="phoneNumber" value={this.state.phoneNumber} type="tel" className="form-control" placeholder="enter phone number" onChange={this.handleInputChange} /></div>
-                                    <div className="col-md-12">
-                                        <label className="labels">Address</label>
-                                        <input name="address" type="text" className="form-control" placeholder="enter address" value={this.state.address} onChange={this.handleInputChange} /></div>
-                                    <div className="col-md-12">
+                                    <div className="col-md-6">
                                         <label className="labels">Email ID</label>
                                         <input readOnly type="text" className="form-control" value={this.state.profile.email} />
                                     </div>
+                                    <div className="col-md-12">
+                                        <label className="labels">Address</label>
+                                        <input name="address" type="text" className="form-control" placeholder="enter address" value={this.state.address} onChange={this.handleInputChange} /></div>
+
                                     <div className="col-md-12">
                                         <label className="labels">About</label>
                                         <textarea name="about" type="text" className="form-control" placeholder="about" value={this.state.about} onChange={this.handleInputChange} /></div>
