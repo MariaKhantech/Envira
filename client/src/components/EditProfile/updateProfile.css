@@ -5,14 +5,14 @@
 }
 
 .profile-button {
-  background: #632778;
+  background: #186305;
   -webkit-box-shadow: none;
           box-shadow: none;
   border: none;
 }
 
 .profile-button:hover {
-  background: #682773;
+  background:  #8dc081;
 }
 
 .profile-button:focus {

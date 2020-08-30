@@ -39,7 +39,7 @@ export default class index extends Component {
             $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
         }
         return (
-            <div>
+            <>
                 <div className="imgPreview">
                     {$imagePreview}
                 </div>
@@ -47,11 +47,11 @@ export default class index extends Component {
                     <input className="fileInput"
                         type="file"
                         onChange={this.handleImageChange} />
-                    <button className="submitButton"
+                    <button className="submitButton m-auto"
                         type="submit"
                         onClick={this.handleSubmit}>Upload Image</button>
                 </form>
-            </div>
+            </>
         )
     }
 }
