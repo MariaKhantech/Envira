@@ -1,28 +1,30 @@
 .form-control:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
-  border-color: #BA68C8;
+  border-color:  #186305;
+}
+
+.profile-container{
+ 
+  /* background-color: #f9ea8f;
+  background-image: linear-gradient(315deg, #f9ea8f 0%, #aff1da 74%); */
+  background-color: #63a4ff;
+background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
 }
 
 .profile-button {
-  background: #632778;
+  background: #186305;
   -webkit-box-shadow: none;
           box-shadow: none;
   border: none;
 }
 
 .profile-button:hover {
-  background: #682773;
+  background:  #8dc081;
 }
 
 .profile-button:focus {
-  background: #682773;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-.profile-button:active {
-  background: #682773;
+  background:  #8dc081;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
@@ -33,13 +35,8 @@
 }
 
 .labels {
-  font-size: 11px;
+  font-size: 15px;
 }
 
-.add-experience:hover {
-  background: #BA68C8;
-  color: #fff;
-  cursor: pointer;
-  border: solid 1px #BA68C8;
-}
+
 /*# sourceMappingURL=updateProfile.css.map */
