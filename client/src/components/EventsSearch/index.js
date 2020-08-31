@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Axios from "axios";
 import Search from "./Search/index";
 import Carousel from "./Carousel/index";
+import StarRatingComponent from "react-star-rating-component";
+
+import Button from "react-bootstrap/Button";
 // import Data from "./Data.json";
 
 // SEE ALL EVENTS
@@ -25,6 +28,25 @@ export default class EventsSearch extends Component {
     slidesToScroll: 3,
     eventData: [],
     madeRequest: false,
+    rating: "0",
+  };
+
+  onStarClick(nextValue, prevValue, name) {
+    this.setState({ rating: nextValue });
+  }
+
+  postRating = (event) => {
+    event.preventDefault();
+    Axios.post("/api/rate/eventsearch", {
+      rating: this.state.rating,
+      UserId: 7,
+      EventId: 7,
+    })
+      .then((res) => {
+        console.log(res);
+        this.setState({ rating: "0" });
+      })
+      .catch((err) => console.log(err));
   };
 
   onChange = (event) =>
@@ -115,7 +137,7 @@ export default class EventsSearch extends Component {
     } else if (this.state.showCarousel === "") {
       renderCarousel = null;
     }
-    console.log(this.state.eventData);
+    console.log(this.state.rating);
 
     return (
       <>
@@ -127,6 +149,14 @@ export default class EventsSearch extends Component {
           postNewEvent={this.postNewEvent}
           state={this.state}
         />
+        <StarRatingComponent
+          name="rating"
+          starCount={5}
+          value={this.state.rating}
+          onStarClick={this.onStarClick.bind(this)}
+          style={{ fontSize: "50px" }}
+        />
+        <Button variant="primary" onClick={this.postRating} />
         {renderCarousel}
       </>
     );

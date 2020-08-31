@@ -29,7 +29,7 @@ export default class Carousel extends Component {
         </Card.Body>
         <Card.Body className="mx-auto text-center">
           <Button variant="primary" size="sm">
-            Attend
+            Post Rating
           </Button>
         </Card.Body>
         <Card.Footer>

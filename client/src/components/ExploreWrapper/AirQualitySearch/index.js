@@ -15,14 +15,48 @@ export default class AirQualitySearch extends Component {
     boxColor: "",
     status: "",
     message: "",
+    madeRequest: false,
   };
 
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  handleInputSubmit = (event) => {
+    event.preventDefault();
+
+    Axios.get(
+      `https://api.waqi.info/feed/${this.state.cityInput}/?token=e76fff504230a5ff145917055b7138ef3159918d`
+    ).then(
+      (response) => {
+        this.setState({
+          aqiData: [response.data],
+          madeRequest: true,
+          currentAqi: response.data.data.aqi,
+          currentCity: response.data.data.city.name,
+        });
+      },
+      (error) => {
+        this.setState({
+          error,
+        });
+      },
+      this.handlePollutionStatus(),
+      this.setState({
+        madeRequest: false,
+        cityInput: "",
+        status: "",
+        message: "",
+      })
+    );
+  };
+
   handlePollutionStatus = () => {
-    if (this.state.currentAqi >= 0 && this.state.currentAqi <= 50) {
+    if (
+      this.state.currentAqi !== "" &&
+      this.state.currentAqi >= 0 &&
+      this.state.currentAqi <= 50
+    ) {
       this.setState({
         boxColor: "#009966",
         status: "Good",
@@ -71,28 +105,15 @@ export default class AirQualitySearch extends Component {
       });
     }
   };
-
-  handleInputSubmit = (event) => {
-    event.preventDefault();
-
-    if (this.state.cityInput === "") {
-      alert("please enter a city");
-    } else {
-      Axios.get(
-        `https://api.waqi.info/feed/${this.state.cityInput}/?token=e76fff504230a5ff145917055b7138ef3159918d`
-      ).then((response) =>
-        this.setState({
-          aqiData: [response.data],
-          currentAqi: response.data.data.aqi,
-          currentCity: response.data.data.city.name,
-        })
-      );
-      this.handlePollutionStatus();
-      this.setState({ cityInput: "" });
-    }
-  };
   render() {
-    const { aqiData, currentAqi, currentCity, boxColor } = this.state;
+    const {
+      aqiData,
+      currentAqi,
+      currentCity,
+      boxColor,
+
+      message,
+    } = this.state;
     console.log(aqiData, currentAqi, boxColor);
 
     const aqiBox = {
