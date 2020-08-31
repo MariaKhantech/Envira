@@ -41,7 +41,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     contact_number: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      unique: false,
+      validate: {
+        is: /^ (\+ 0 ? 1\s) ?\(?\d{ 3 } \)?[\s.-]\d{ 3 } [\s.-]\d{ 4 } $/i
+      }
     },
   });
 
@@ -53,6 +56,12 @@ module.exports = (sequelize, DataTypes) => {
     Event.belongsTo(models.User, { foreignKey: { allowNull: false } });
     Event.hasMany(models.EventComment, { onDelete: "cascade" });
     Event.hasMany(models.Reply, { onDelete: "cascade" });
+    Event.belongsToMany(models.User, {
+      through: 'EventAttendee',
+      as: 'events',
+      foreignKey: 'eventId',
+      otherKey: 'userId',
+    });
   };
 
   // Event.associate = (models) => {

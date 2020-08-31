@@ -32,10 +32,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    occupation: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     phone_number: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       unique: false,
+      validate: {
+        is: /^ (\+ 0 ? 1\s) ?\(?\d{ 3 } \)?[\s.-]\d{ 3 } [\s.-]\d{ 4 } $/i
+      }
+
     },
   });
 
