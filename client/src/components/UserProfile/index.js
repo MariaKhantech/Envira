@@ -7,7 +7,7 @@ export class UserProfile extends Component {
 
   state = {
     profile: [],
-    first_name: "",
+    firstName: "",
     lastName: "",
     city: "",
     state: "",

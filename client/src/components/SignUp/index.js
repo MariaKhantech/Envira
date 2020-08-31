@@ -95,7 +95,6 @@ export default class Register extends Component {
   postNewUser = () => {
     Axios.post("/api/auth/signup", {
       username: this.state.username,
-      password: this.state.password,
       role: this.state.role,
       email: this.state.email
     })

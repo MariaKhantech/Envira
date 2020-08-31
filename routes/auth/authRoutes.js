@@ -10,7 +10,6 @@ router.post('/signup', (req, res) => {
 
   db.User.create({
     user_name: req.body.username,
-    password: req.body.password,
     email: req.body.email,
     RoleId: req.body.role,
   })
@@ -24,7 +23,6 @@ router.post('/signup', (req, res) => {
 });
 
 router.get('/role', (req, res) => {
-  console.log('hit here');
   db.Role.findAll({})
     .then((data) => {
       res.json(data);
