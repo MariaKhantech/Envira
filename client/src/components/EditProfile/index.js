@@ -14,9 +14,10 @@ export default class UpdateProfile extends Component {
         city: "",
         state: "",
         phoneNumber: "",
-        address: "",
+        occupation: "",
         about: "",
         zipCode: "",
+        data: ""
     }
 
     async componentDidMount() {
@@ -47,10 +48,11 @@ export default class UpdateProfile extends Component {
 
     getUserProfile = () => {
         const UserId = this.state.profile.id
+        console.log(this.state.firstName)
         Axios.get(`/api/auth/userProfile/${UserId}`)
             .then(
                 (response) => {
-                    console.log(response)
+                    console.log(response.data)
                     this.setState({
                         firstName: response.data.first_name,
                         lastName: response.data.last_name,
@@ -59,7 +61,8 @@ export default class UpdateProfile extends Component {
                         state: response.data.state,
                         about: response.data.about,
                         zipCode: response.data.zip_code,
-                        address: response.data.address,
+                        occupation: response.data.occupation,
+                        data: response.data
                     });
                 })
             .catch(err => console.log(err))
@@ -159,8 +162,8 @@ export default class UpdateProfile extends Component {
                                         <input readOnly type="text" className="form-control" value={this.state.profile.email} />
                                     </div>
                                     <div className="col-md-12">
-                                        <label className="labels">Address</label>
-                                        <input name="address" type="text" className="form-control" placeholder="enter address" value={this.state.address} onChange={this.handleInputChange} /></div>
+                                        <label className="labels">Occupation</label>
+                                        <input name="occupation" type="text" className="form-control" placeholder="enter occupation" value={this.state.occupation} onChange={this.handleInputChange} /></div>
 
                                     <div className="col-md-12">
                                         <label className="labels">About</label>
@@ -180,17 +183,16 @@ export default class UpdateProfile extends Component {
                                         <input name="zipCode" type="text" className="form-control" value={this.state.zipCode} placeholder="state" onChange={this.handleInputChange} />
                                     </div>
                                 </div>
-                                {!this.state.profile && (
+                                {!this.state.data && (
                                     <div className="mt-5 text-center">
                                         <button onClick={this.handleFormSubmit} className="btn btn-primary profile-button" type="button">Save Profile</button>
                                     </div>
                                 )}
-                                {this.state.profile && (
+                                {this.state.data && (
                                     <div className="mt-5 text-center">
                                         <button onClick={this.handleUpdateFormSubmit} className="btn btn-primary profile-button" type="button">Update Profile</button>
                                     </div>
                                 )}
-
                             </div>
                         </div>
                     </div>

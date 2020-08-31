@@ -65,6 +65,7 @@ router.post('/updateUserProfile', (req, res) => {
     zip_code: req.body.zipCode,
     about: req.body.about,
     phone_number: req.body.phoneNumber,
+    occupation:req.body.occupation
   })
     .then((data) => {
       res.json(data);

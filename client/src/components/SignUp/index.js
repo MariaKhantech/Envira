@@ -20,8 +20,9 @@ export default class Register extends Component {
     cognitoErrors: ""
   }
 
-  componentDidMount() {
-    Axios.get("/api/auth/role") //getting role types from role table 
+  async componentDidMount() {
+    try {
+      Axios.get("/api/auth/role") //getting role types from role table 
       .then(
         (response) => {
           this.setState({
@@ -34,6 +35,12 @@ export default class Register extends Component {
           });
         }
       )
+    }
+    catch (error) {
+
+      console.log(error);
+
+    }
   }
 
   handleInputChange = (e) => {
@@ -93,6 +100,7 @@ export default class Register extends Component {
   };
 
   postNewUser = () => {
+    console.log(this.state.role)
     Axios.post("/api/auth/signup", {
       username: this.state.username,
       role: this.state.role,
@@ -190,7 +198,7 @@ export default class Register extends Component {
                     <select name="role" value={this.state.role} onChange={this.handleInputChange} className="form-control">
 
                       {this.state.roleTypes.map(role => {
-                        return (<option key={role.id} value={role.id}>{role.type}</option>)
+                        return (<option defaultValue="User" key={role.id} value={role.id}>{role.type}</option>)
 
                       })}
                     </select>
@@ -202,7 +210,7 @@ export default class Register extends Component {
                     <input name="password" value={this.state.password} onChange={this.handleInputChange} className="form-control" placeholder="Create password" type="password" />
                     {/* {this.state.errors.password && (<div className="invalid-feedback">test message</div>)} */}
                   </div>
-                  <div style={mystyle}>{this.state.errors.password}</div>
+                  {/* <div style={mystyle}>{this.state.errors.password}</div> */}
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-lock"></i> </span>
