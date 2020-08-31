@@ -15,49 +15,88 @@ export default class AirQualitySearch extends Component {
     boxColor: "",
     status: "",
     message: "",
+    madeRequest: false,
   };
 
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  handleInputSubmit = (event) => {
+    event.preventDefault();
+
+    Axios.get(
+      `https://api.waqi.info/feed/${this.state.cityInput}/?token=e76fff504230a5ff145917055b7138ef3159918d`
+    ).then(
+      (response) => {
+        this.setState({
+          aqiData: [response.data],
+          madeRequest: true,
+          currentAqi: response.data.data.aqi,
+          currentCity: response.data.data.city.name,
+        });
+      },
+      (error) => {
+        this.setState({
+          error,
+        });
+      },
+      this.handlePollutionStatus(),
+      this.setState({
+        madeRequest: false,
+        cityInput: "",
+        status: "",
+        message: "",
+      })
+    );
+  };
+
   handlePollutionStatus = () => {
-    if (this.state.currentAqi >= 0 && this.state.currentAqi <= 50) {
+    if (
+      this.state.currentAqi !== "" &&
+      this.state.currentAqi >= 0 &&
+      this.state.currentAqi <= 50
+    ) {
       this.setState({
         boxColor: "#009966",
         status: "Good",
         message:
           "Air quality is considered satisfactory, and air pollution poses little or no risk",
       });
-    } else if (this.state.currentAqi >= 51 && this.state.currentAqi <= 100) {
+    }
+    if (this.state.currentAqi >= 51 && this.state.currentAqi <= 100) {
       this.setState({
         boxColor: "#FFDE33",
         status: "Moderate",
         message:
           "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution.",
       });
-    } else if (this.state.currentAqi >= 101 && this.state.currentAqi <= 150) {
+    }
+    if (this.state.currentAqi >= 101 && this.state.currentAqi <= 150) {
       this.setState({
         boxColor: "#FF9933",
         status: "Unhealthy for Sensitive Groups",
         message:
           "Members of sensitive groups may experience health effects. The general public is not likely to be affected.",
       });
-    } else if (this.state.currentAqi >= 151 && this.state.currentAqi <= 200) {
+    }
+    if (this.state.currentAqi >= 151 && this.state.currentAqi <= 200) {
       this.setState({
         boxColor: "#CC0033",
         status: "Unhealthy",
         message:
           "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects",
       });
-    } else if (this.state.currentAqi >= 201 && this.state.currentAqi <= 299) {
+    }
+    if (this.state.currentAqi >= 201 && this.state.currentAqi <= 299) {
       this.setState({
         boxColor: "#660099",
         status: "Very Unhealthy",
         message:
           "Health warnings of emergency conditions. The entire population is more likely to be affected",
       });
-    } else if (this.state.currentAqi >= 300) {
+    }
+    if (this.state.currentAqi >= 300) {
       this.setState({
         boxColor: "#7E0023",
         status: "Hazardous",
@@ -66,28 +105,15 @@ export default class AirQualitySearch extends Component {
       });
     }
   };
-
-  handleInputSubmit = (event) => {
-    event.preventDefault();
-
-    if (this.state.cityInput === "") {
-      alert("please enter a city");
-    } else {
-      Axios.get(
-        `https://api.waqi.info/feed/${this.state.cityInput}/?token=e76fff504230a5ff145917055b7138ef3159918d`
-      ).then((response) =>
-        this.setState({
-          aqiData: [response.data],
-          currentAqi: response.data.data.aqi,
-          currentCity: response.data.data.city.name,
-        })
-      );
-      this.handlePollutionStatus();
-      this.setState({ cityInput: "" });
-    }
-  };
   render() {
-    const { aqiData, currentAqi, currentCity, boxColor } = this.state;
+    const {
+      aqiData,
+      currentAqi,
+      currentCity,
+      boxColor,
+
+      message,
+    } = this.state;
     console.log(aqiData, currentAqi, boxColor);
 
     const aqiBox = {
@@ -107,7 +133,7 @@ export default class AirQualitySearch extends Component {
 
     return (
       <Row>
-        <Col md={8} className="mx-auto mt-3">
+        <Col md={12} className="mx-auto mt-3  ">
           <InputGroup className="mb-3">
             <FormControl
               type="text"
