@@ -78,7 +78,7 @@ export default class UpdateProfile extends Component {
 
     handleFormSubmit = async (event) => {
         event.preventDefault();
-        const { firstName, lastName, city, state, zipCode, about, phoneNumber } = this.state
+        const { firstName, lastName, city, state, zipCode, about, phoneNumber,occupation } = this.state
         console.log(this.state.profile.id);
 
         console.log(firstName, lastName)
@@ -90,6 +90,7 @@ export default class UpdateProfile extends Component {
             zipCode,
             about,
             phoneNumber,
+            occupation,
             id: this.state.profile.id
         })
             .then((res) => {
@@ -100,7 +101,7 @@ export default class UpdateProfile extends Component {
 
     handleUpdateFormSubmit = async (event) => {
         event.preventDefault();
-        const { firstName, lastName, city, state, zipCode, about, phoneNumber } = this.state
+        const { firstName, lastName, city, state, zipCode, about, phoneNumber, occupation } = this.state
         const UserId = this.state.profile.id;
         Axios.put(`/api/auth/updateUserProfile/${UserId}`, {
             firstName,
@@ -110,6 +111,7 @@ export default class UpdateProfile extends Component {
             zipCode,
             about,
             phoneNumber,
+            occupation
         })
 
             .then((res) => {

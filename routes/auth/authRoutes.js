@@ -54,8 +54,7 @@ router.get('/userProfile/:UserId', (req, res) => {
 
 //this route is to save the user profile first time
 router.post('/updateUserProfile', (req, res) => {
-  console.log(req.body.id);
-  console.log(req)
+  console.log(req.body.phoneNumber);
   db.UserProfile.create({
     UserId: req.body.id,
     first_name: req.body.firstName,
