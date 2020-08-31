@@ -12,7 +12,7 @@ export class UserProfile extends Component {
     city: "",
     state: "",
     phoneNumber: "",
-    address: "",
+    occupation: "",
     about: "",
     zipCode: "",
   }
@@ -57,7 +57,7 @@ export class UserProfile extends Component {
             state: response.data.state,
             about: response.data.about,
             zipCode: response.data.zip_code,
-            address: response.data.address,
+            occupation: response.data.occupation,
           });
         })
       .catch(err => console.log(err))
@@ -197,7 +197,7 @@ export class UserProfile extends Component {
                             <label>Location:</label>
                           </div>
                           <div className="col-md-6">
-                            <p>{this.state.address} {this.state.state} {this.state.city} {this.state.zipCode}</p>
+                            <p>{this.state.state} {this.state.city} {this.state.zipCode}</p>
                           </div>
                         </div>
                         <div className="row">
