@@ -9,7 +9,9 @@ export default class Carousel extends Component {
   render() {
     const renderCard = this.props.state.eventData.map((data) => (
       <Card className="p-2">
-        <Card.Header name="event">{data.event_name}</Card.Header>
+        <Card.Header name="event" key={data.id}>
+          {data.event_name}
+        </Card.Header>
         <Card.Img variant="top" src="http://placehold.it/250x200" />
         <Card.Body>
           <Card.Title className="text-center" name="date">
@@ -27,7 +29,7 @@ export default class Carousel extends Component {
         </Card.Body>
         <Card.Body className="mx-auto text-center">
           <Button variant="primary" size="sm">
-            Attend
+            Post Rating
           </Button>
         </Card.Body>
         <Card.Footer>

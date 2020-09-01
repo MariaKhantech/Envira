@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import { Auth } from 'aws-amplify';
-import { Storage } from 'aws-amplify';
-import Axios from 'axios';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Button from 'react-bootstrap/Button';
+import React, { Component } from "react";
+import { Auth } from "aws-amplify";
+import { Storage } from "aws-amplify";
+import Axios from "axios";
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Button from "react-bootstrap/Button";
 // import 'react-date-range/dist/theme/default.css';
 // import 'react-date-range/dist/styles.css';
 // import { DateRange } from 'react-date-range';
-import './style.scss';
+import "./style.scss";
 
 export class CreateEvents extends Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -80,42 +81,44 @@ export class CreateEvents extends Component {
 			.catch((err) => console.log(err));
 	};
 
-	handleChange = ({ target }) => {
-		this.setState({ [target.name]: target.value });
-	};
-	render() {
-		var styles = {
-			backgroundImage:
-				"url('https://images.unsplash.com/photo-1562591970-254bc62245c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')"
-		};
-		return (
-			<div>
-				<div className="container mt-0">
-					<form className="form-style text-center" style={{ marginTop: '5em' }}>
-						<div className="card person-card ">
-							<Jumbotron style={styles}>
-								<h1 className="text-white">Create an event</h1>
-								<br />
-								<p className="text-white">save the planet.</p>
 
-								{/*link these!*/}
-							</Jumbotron>
-							<div className="card-body">
-								<div className="row justify-content-center">
-									<div className="form-group col-md-5">
-										<label htmlFor="eventname" className="col-form-label">
-											Event Name:
-										</label>
-										<input
-											type="text"
-											id="eventname"
-											name="eventName"
-											className="form-control"
-											placeholder="Example Beach Cleanup "
-											value={this.state.eventName}
-											onChange={this.handleChange}
-											required
-										/>
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
+  render() {
+    var styles = {
+      backgroundImage:
+        "url('https://images.unsplash.com/photo-1562591970-254bc62245c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')",
+    };
+    return (
+      <div>
+        <div className="container mt-0">
+          <form className="form-style text-center" style={{ marginTop: "5em" }}>
+            <div className="card person-card ">
+              <Jumbotron style={styles}>
+                <h1 className="text-white">Create an event</h1>
+                <br />
+                <p className="text-white">save the planet.</p>
+
+                {/*link these!*/}
+              </Jumbotron>
+              <div className="card-body">
+                <div className="row justify-content-center">
+                  <div className="form-group col-md-5">
+                    <label htmlFor="eventname" className="col-form-label">
+                      Event Name:
+                    </label>
+                    <input
+                      type="text"
+                      id="eventname"
+                      name="eventName"
+                      className="form-control"
+                      placeholder="Example Beach Cleanup "
+                      value={this.state.eventName}
+                      onChange={this.handleChange}
+                      required
+                    />
+
 
 										<label htmlFor="date" className="col-form-label mt-3">
 											Date:
@@ -205,125 +208,129 @@ export class CreateEvents extends Component {
 							</div>
 						</div>
 
-						<div className="row">
-							<div className="col-md-6" style={{ padding: '0.5em' }}>
-								<div className="card">
-									<div className="card-body">
-										<h2 className="card-title">How to contact you?</h2>
-										<div className="form-group">
-											<label htmlFor="contactname" className="col-form-label">
-												Contact Person:
-											</label>
-											<input
-												type="text"
-												className="form-control"
-												id="contactName"
-												placeholder="Joe Bloggs"
-												name="contactName"
-												value={this.state.contactName}
-												onChange={this.handleChange}
-												required
-											/>
+            <div className="row">
+              <div className="col-md-6" style={{ padding: "0.5em" }}>
+                <div className="card">
+                  <div className="card-body">
+                    <h2 className="card-title">How to contact you?</h2>
+                    <div className="form-group">
+                      <label htmlFor="contactname" className="col-form-label">
+                        Contact Person:
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="contactName"
+                        placeholder="Joe Bloggs"
+                        name="contactName"
+                        value={this.state.contactName}
+                        onChange={this.handleChange}
+                        required
+                      />
 
-											<label htmlFor="email" className="col-form-label">
-												Email
-											</label>
-											<input
-												type="email"
-												className="form-control"
-												name="contactEmail"
-												value={this.state.contactEmail}
-												onChange={this.handleChange}
-												id="email"
-												placeholder="example@gmail.com"
-												required
-											/>
-											<div className="email-feedback" />
-										</div>
-										<div className="form-group">
-											<label htmlFor="tel" className="col-form-label">
-												Phone number
-											</label>
-											<input
-												type="text"
-												className="form-control"
-												name="contactNumber"
-												value={this.state.contactNumber}
-												onChange={this.handleChange}
-												id="tel"
-												placeholder="999-999-9999"
-												required
-											/>
-											<div className="phone-feedback" />
-										</div>
-									</div>
-								</div>
-							</div>
+                      <label htmlFor="email" className="col-form-label">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        name="contactEmail"
+                        value={this.state.contactEmail}
+                        onChange={this.handleChange}
+                        id="email"
+                        placeholder="example@gmail.com"
+                        required
+                      />
+                      <div className="email-feedback" />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="tel" className="col-form-label">
+                        Phone number
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="contactNumber"
+                        value={this.state.contactNumber}
+                        onChange={this.handleChange}
+                        id="tel"
+                        placeholder="999-999-9999"
+                        required
+                      />
+                      <div className="phone-feedback" />
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-							<div className="col-md-6 " style={{ padding: '0.5em' }}>
-								<div className="card">
-									<div className="card-body">
-										<h2 className="card-title">Location:</h2>
-										<div className="form-group">
-											<label htmlFor="address:" className="col-form-label">
-												Address
-											</label>
-											<input
-												type="text"
-												className="form-control"
-												id="address"
-												name="address"
-												value={this.state.address}
-												onChange={this.handleChange}
-												placeholder="249 beckon ave."
-												required
-											/>
-										</div>
-										<div className="form-group">
-											<label htmlFor="city" className="col-form-label">
-												City
-											</label>
-											<input
-												type="text"
-												className="form-control"
-												name="city"
-												value={this.state.city}
-												onChange={this.handleChange}
-												id="city"
-												placeholder="Portsmouth"
-												required
-											/>
+              <div className="col-md-6 " style={{ padding: "0.5em" }}>
+                <div className="card">
+                  <div className="card-body">
+                    <h2 className="card-title">Location:</h2>
+                    <div className="form-group">
+                      <label htmlFor="address:" className="col-form-label">
+                        Address
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="address"
+                        name="address"
+                        value={this.state.address}
+                        onChange={this.handleChange}
+                        placeholder="249 beckon ave."
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="city" className="col-form-label">
+                        City
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="city"
+                        value={this.state.city}
+                        onChange={this.handleChange}
+                        id="city"
+                        placeholder="Portsmouth"
+                        required
+                      />
 
-											<label htmlFor="state" className="col-form-label">
-												State
-											</label>
-											<input
-												type="text"
-												className="form-control"
-												name="state"
-												value={this.state.state}
-												onChange={this.handleChange}
-												id="state"
-												placeholder="NH"
-												required
-											/>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div className="row ">
-							<div className="col-12 text-center">
-								<button type="button" onClick={this.postNewEvent} className="btn btn-success mb-5 mt-3">
-									Create
-								</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		);
-	}
+                      <label htmlFor="state" className="col-form-label">
+                        State
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="state"
+                        value={this.state.state}
+                        onChange={this.handleChange}
+                        id="state"
+                        placeholder="NH"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row ">
+              <div className="col-12 text-center">
+                <button
+                  type="button"
+                  onClick={this.postNewEvent}
+                  className="btn btn-success mb-5 mt-3"
+                >
+                  Create
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default CreateEvents;

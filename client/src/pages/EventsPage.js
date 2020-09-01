@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import EventsCard from "../components/EventsCard"
+import EventsCard from "../components/EventCard";
 
 export class EventsPage extends Component {
   render() {

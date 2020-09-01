@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import Navbar from "./components/NavbarTest";
-import NavBar from "./components/NavBar";
-// import NavBar from "./components/NavbarTest";
 
+import NavBar from "./components/NavBar";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ForgotPasswordVerification from "./components/auth/ForgotPasswordVerification";
 import ChangePassword from "./components/auth/ChangePassword";
@@ -17,7 +15,7 @@ import Ocean from "./pages/Ocean";
 import Rainforest from "./pages/Rainforest";
 import Profile from "./pages/Profile";
 import EventSearch from "./pages/EventSearch";
-// import EventsPage from "./pages/EventsPage";
+import EventsPage from "./pages/EventsPage";
 import EventCreate from "./pages/EventCreate";
 import ViewEventCard from "./pages/ViewEventCard";
 
@@ -25,7 +23,7 @@ import ViewEventCard from "./pages/ViewEventCard";
 
 import Explore from "./pages/Explore";
 import EditProfile from "./pages/EditProfile";
-import UserProfile from "./components/UserProfile"
+import UserProfile from "./components/UserProfile";
 
 import { Auth } from "aws-amplify";
 
@@ -129,13 +127,13 @@ export default class AppTest extends Component {
                       <EventCreate {...props} auth={authProps} />
                     )}
                   />
-                  {/* <Route
+                  <Route
                     exact
                     path="/eventspage"
                     render={(props) => (
                       <EventsPage {...props} auth={authProps} />
                     )}
-                  /> */}
+                  />
                   <Route
                     exact
                     path="/userprofile"
@@ -155,10 +153,12 @@ export default class AppTest extends Component {
                     path="/explore"
                     render={(props) => <Explore {...props} auth={authProps} />}
                   />
-                   <Route
+                  <Route
                     exact
                     path="/vieweventcard"
-                    render={(props) => <ViewEventCard {...props} auth={authProps} />}
+                    render={(props) => (
+                      <ViewEventCard {...props} auth={authProps} />
+                    )}
                   />
                   <Route
                     exact
