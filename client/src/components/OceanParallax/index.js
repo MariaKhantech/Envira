@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import { Parallax } from 'react-parallax';
+import {Parallax, ParallaxLayer} from "react-spring/renderprops-addons"
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import OceanPollutionText from '../OceanPollutionText';
+import {
+    jarallax,
+    jarallaxElement,
+    jarallaxVideo
+} from 'jarallax'
+
 import './style.scss';
+import { urlencoded } from 'body-parser';
 
 export class OceanParallax extends Component {
 	componentDidMount() {}
@@ -49,43 +56,17 @@ export class OceanParallax extends Component {
 		return (
 			<div className="wrapper">
 				{cardDiv}
-				{/* <Parallax bgImage={image1} strength={500}>
-					<div style={{ height: 500 }}>
-						<div style={insideStyles}>HTML inside the parallax</div>
-					</div>
-				</Parallax>
-				<div>|||</div>
-				<Parallax bgImage={image2} strength={500}>
-					<div style={{ height: 500 }} />
-				</Parallax>
-				<div>|||sdsd</div>
-				<Parallax bgImage={image2} strength={500}>
-					<div style={{ height: 500 }} />
-				</Parallax>
-				<div>sdsdasdsadsad</div>
-				<Parallax bgImage={image2} strength={500}>
-					<div style={{ height: 500 }} />
-				</Parallax> */}
+				<Parallax id="parallax1" pages={3} scrolling={false} horizontal ref={ref => (this.parallax = ref)}>
+ 				 <ParallaxLayer  offset={0} speed={0.5}>
+   					 <span style={{ backgroundColor: "white" }} onClick={() => this.parallax.scrollTo(1)}>Layers can contain anything</span>
+ 						 </ParallaxLayer>
 
-				<div id="parallax">
-					<div class="layer1 speed1" />
+						  <ParallaxLayer  offset={0} speed={0.5}>
+   					 <span style={{ backgroundColor: "white" }} onClick={() => this.parallax.scrollTo(1)}>Layers can contain anything</span>
+ 						 </ParallaxLayer>
+					</Parallax>
 
-					<div class="layer2 speed3" />
-
-					<div class="layer3" />
-
-					<div class="layer4 speed2" />
-
-					<div class="layer5 speed4" />
-
-					<div class="layer6" />
-
-					<div class="layer7 speed5" />
-
-					<div class="layer8" />
-
-					<div class="layer9 speed2" />
-				</div>
+				
 			</div>
 		);
 	}

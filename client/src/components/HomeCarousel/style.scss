@@ -1,3 +1,5 @@
+@import "./svgstyles";
+
 .carousel-inner > .carousel-item > img {
 	height: 18rem;
 }
@@ -7,3 +9,10 @@
 	border-color: #e27d60;
 	border-width: 2rem;
 }
+
+.homepgCardBackground {
+	border-style: solid;
+	border-radius: 5px;
+	border-color: #e27d60;
+}
+

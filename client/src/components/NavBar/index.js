@@ -50,13 +50,12 @@ export class NavBar extends Component {
 						href="#"
 						id="navbarDropdown"
 						role="button"
-						data-toggle="dropdown"
-						aria-haspopup="true"
-						aria-expanded="false"
+						data-toggle="collapse"
+						data-target="#submenu2"
 					>
 						Climate Change
 					</a>
-					<div className="dropdown-menu" style={orangeColor} aria-labelledby="navbarDropdown">
+					<div className="collapse" style={orangeColor} id="submenu2" aria-labelledby="navbarDropdown">
 						<a className="dropdown-item text-white" href="/ocean">
 							Ocean
 						</a>
