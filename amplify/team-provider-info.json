@@ -13,7 +13,8 @@
         },
         "categories": {
             "auth": {
-                "enviroplatformf0ee9c03": {}
+                "enviroplatformf0ee9c03": {},
+                "userPoolGroups": {}
             }
         }
     }
