@@ -1,3 +1,28 @@
+.svg-file {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  margin: 20px;
+  height: calc(20px + 6vw);
+  width: calc(20px + 6vw);
+  border: calc(8px + 0.2vw) solid transparent;
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  background-size: cover;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 0 0 5px 5px rgba(133, 220, 186, 0.6);
+          box-shadow: 0 0 5px 5px rgba(133, 220, 186, 0.6);
+}
+
+.oceans {
+  border-radius: 30%;
+  border-color: linear-gradient(#f9f047, #0fd850);
+}
+
+.fires {
+  border-radius: 50% 10%;
+}
+
 .carousel-inner > .carousel-item > img {
   height: 18rem;
 }
@@ -6,5 +31,11 @@
   border-style: double;
   border-color: #e27d60;
   border-width: 2rem;
+}
+
+.homepgCardBackground {
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #e27d60;
 }
 /*# sourceMappingURL=style.css.map */

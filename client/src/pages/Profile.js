@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import UserProfile from "../components/UserProfile";
-// import CompanyProfile from '../components/CompanyProfile';
+ import CompanyProfile from '../components/CompanyProfile';
 
 //component for types of profiles
 export class Profile extends Component {
@@ -19,9 +19,9 @@ export class Profile extends Component {
    render() {
   	let renderedProfile;
   	if (this.state.profileType === 'company') {
-  		renderedProfile = "";
+  		renderedProfile = <CompanyProfile profileType="Company"/>;
   	} else {
-  		renderedProfile = <UserProfile name="MARIA" />;
+  		renderedProfile = <UserProfile profileType="User" />;
   	}
 
   	return <div className = "container-fluid p-0">{renderedProfile} </div>

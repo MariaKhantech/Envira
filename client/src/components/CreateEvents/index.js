@@ -121,7 +121,7 @@ export class CreateEvents extends Component {
 											Date:
 										</label>
 										<input
-											type="text"
+											type="date"
 											id="date"
 											className="form-control"
 											placeholder="September, 15, 2020"
