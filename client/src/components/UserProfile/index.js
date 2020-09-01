@@ -127,8 +127,8 @@ export class UserProfile extends Component {
                       <i className="ni location_pin mr-2"></i>{this.state.state}, {this.state.city}
                     </div>
                     <div className="h5 mt-4">
-                      <i className="ni business_briefcase-24 mr-2"></i>Environmentalist- Activist
-                </div>
+                      <i className="ni business_briefcase-24 mr-2"></i>{this.state.occupation}
+                    </div>
                     <hr />
                     <div>
                       <h5 className="ni business_briefcase-24 mr-2">How to connect:</h5>

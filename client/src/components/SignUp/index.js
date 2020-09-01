@@ -160,15 +160,9 @@ export default class Register extends Component {
       display: "block"
     };
     return <>
-      <div className="container w-75 register">
-        <div className="row">
-          <div className="col-md-4 register-left">
-            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
-            <h3>Welcome</h3>
-            <p>You are 30 seconds away from earning your own money!</p>
-            <a href="/login" className="text-info" type="submit" className="btn btn-light btn-block rounded-pill">Login</a>
-          </div>
-          <div className="col-md-8">
+      <div className="container w-50 register">
+        <div className="row text-center justify-content-center">
+          <div className="col-md-10">
             <div className="card cardStyle bg-light">
               <div className="card-body">
 

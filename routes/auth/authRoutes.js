@@ -55,6 +55,7 @@ router.get('/userProfile/:UserId', (req, res) => {
 //this route is to save the user profile first time
 router.post('/updateUserProfile', (req, res) => {
   console.log(req.body.phoneNumber);
+  console.log(req.body.occupation, req.body.firstName, req.body.lastName, req.body.zipCode, req.body.state)
   db.UserProfile.create({
     UserId: req.body.id,
     first_name: req.body.firstName,
@@ -64,14 +65,14 @@ router.post('/updateUserProfile', (req, res) => {
     zip_code: req.body.zipCode,
     about: req.body.about,
     phone_number: req.body.phoneNumber,
-    occupation:req.body.occupation
+    occupation: req.body.occupation
   })
     .then((data) => {
       res.json(data);
     })
     .catch((err) => {
       if (err) {
-        res.status(500).json(err);
+        res.status(500).json(err.message);
       }
     });
 });

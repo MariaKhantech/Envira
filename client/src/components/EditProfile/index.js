@@ -4,8 +4,6 @@ import Axios from 'axios';
 import { Auth } from 'aws-amplify';
 import ProfileImage from "../ProfileImage"
 
-
-
 export default class UpdateProfile extends Component {
     state = {
         profile: [],
@@ -26,6 +24,7 @@ export default class UpdateProfile extends Component {
             const user = await Auth.currentAuthenticatedUser();
             // get username from user object
             const userDetail = user.username;
+            console.log(userDetail)
             // get the user details for logged in user from the User table 
             Axios.get(`/api/auth/user/${userDetail}`)
                 .then(
@@ -78,8 +77,10 @@ export default class UpdateProfile extends Component {
 
     handleFormSubmit = async (event) => {
         event.preventDefault();
-        const { firstName, lastName, city, state, zipCode, about, phoneNumber,occupation } = this.state
+        const { firstName, lastName, city, state, zipCode, about, phoneNumber, occupation } = this.state
+        const id=this.state.profile.id;
         console.log(this.state.profile.id);
+        debugger
 
         console.log(firstName, lastName)
         Axios.post("/api/auth/updateUserProfile", {
@@ -91,12 +92,12 @@ export default class UpdateProfile extends Component {
             about,
             phoneNumber,
             occupation,
-            id: this.state.profile.id
+            id
         })
             .then((res) => {
                 console.log(res)
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err.message))
     }
 
     handleUpdateFormSubmit = async (event) => {
