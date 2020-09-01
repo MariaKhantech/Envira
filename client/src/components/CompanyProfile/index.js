@@ -1,15 +1,84 @@
 import React, { Component } from 'react';
-import {overviewTab, startRating} from '../profileTabs'
-
+import { overviewTab, startRating } from '../profileTabs'
 import './style.scss';
+import Axios from 'axios';
+import { Auth } from 'aws-amplify';
 
 export class CompanyProfile extends Component {
-  componentDidMount() {
+
+  state = {
+    profile: [],
+    firstName: "",
+    lastName: "",
+    city: "",
+    state: "",
+    phoneNumber: "",
+    occupation: "",
+    about: "",
+    zipCode: "",
+    data: ""
+  }
+
+  async componentDidMount() {
+    try {
+      // get the current logged in user details
+      const user = await Auth.currentAuthenticatedUser();
+      // get username from user object
+      const userDetail = user.username;
+      console.log(userDetail)
+      // get the user details for logged in user from the User table 
+      Axios.get(`/api/auth/user/${userDetail}`)
+        .then(
+          (response) => {
+            this.setState({
+              profile: response.data,
+            });
+            this.getUserProfile()
+          })
+
+        .catch(err => console.log(err))
+    } catch (error) {
+      if (error !== "No current user") {
+        console.log(error);
+      }
+    }
 
   }
+
+  getUserProfile = () => {
+    const UserId = this.state.profile.id
+    console.log(this.state.firstName)
+    Axios.get(`/api/auth/companyProfile/${UserId}`)
+      .then(
+        (response) => {
+          console.log(response.data)
+          this.setState({
+            firstName: response.data.first_name,
+            lastName: response.data.last_name,
+            phoneNumber: response.data.phone_number,
+            city: response.data.city,
+            state: response.data.state,
+            about: response.data.about,
+            zipCode: response.data.zip_code,
+            occupation: response.data.occupation,
+            data: response.data
+          });
+        })
+      .catch(err => console.log(err))
+  }
+
+
+  handleInputChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    this.setState({
+        [name]: value
+    })
+}
+
+
+
   render() {
-
-
 
     return (<div class=" main-content">
       {/* <!--reference https://www.creative-tim.com/bits/bootstrap/user-profile-page-argon-dashboard--> */}
@@ -54,40 +123,40 @@ export class CompanyProfile extends Component {
               <div class="card-body shadow p-3 pt-0 pt-md-4 mt-5">
 
                 <ul class="nav nav-tabs " role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Overview</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Rating</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Event Photos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Comments</a>
-                        </li>
-                    </ul>
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Overview</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Rating</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Event Photos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Comments</a>
+                  </li>
+                </ul>
 
-                    <div class="tab-content">
-	                     <div class="tab-pane active" id="tabs-1" role="tabpanel">
-		                     {overviewTab}
-	                    </div>
-                        <div class="tab-pane " id="tabs-2" role="tabpanel">
-		                     {startRating}
-	                    </div>
-                        <div class="tab-pane " id="tabs-3" role="tabpanel">
-                         <div class="row"> 
-                            <div class="col">
-                                <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                                 <p>images</p>
-                                    </div>
-                                    </div>
-                                    </div>
-	                    </div>
-
-
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                    {overviewTab}
+                  </div>
+                  <div class="tab-pane " id="tabs-2" role="tabpanel">
+                    {startRating}
+                  </div>
+                  <div class="tab-pane " id="tabs-3" role="tabpanel">
+                    <div class="row">
+                      <div class="col">
+                        <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                          <p>images</p>
+                        </div>
+                      </div>
                     </div>
- 
+                  </div>
+
+
+                </div>
+
 
 
                 {/* <div class="row">
