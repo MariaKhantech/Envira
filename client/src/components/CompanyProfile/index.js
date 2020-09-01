@@ -8,14 +8,13 @@ export class CompanyProfile extends Component {
 
   state = {
     profile: [],
-    firstName: "",
-    lastName: "",
-    city: "",
-    state: "",
-    phoneNumber: "",
-    occupation: "",
-    about: "",
-    zipCode: "",
+    companyName: "",
+    contactPersonName: "",
+    companyDescription: "",
+    environmentalFocus: "",
+    companyWebsite: "",
+    companyPhoneNumber: "",
+    companyEmail: "",
     data: ""
   }
 
@@ -59,7 +58,7 @@ export class CompanyProfile extends Component {
             environmentalFocus: response.data.environmental_focus,
             companyWebsite: response.data.website,
             companyPhoneNumber: response.data.phone_number,
-            companyEmail: response.data.email,   
+            companyEmail: response.data.email,
             data: response.data
           });
         })
@@ -71,11 +70,33 @@ export class CompanyProfile extends Component {
     let name = e.target.name;
     let value = e.target.value;
     this.setState({
-        [name]: value
+      [name]: value
     })
-}
+  }
 
+  handleFormSubmit = async (event) => {
+    event.preventDefault();
+    const { companyName, companyDescription, companyEmail, companyWebsite, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
+    const id = this.state.profile.id;
+    console.log(this.state.profile.id);
+    debugger
 
+    console.log(firstName, lastName)
+    Axios.post("/api/auth/updateCompanyProfile", {
+      companyName,
+      companyDescription,
+      companyEmail,
+      companyWebsite,
+      contactPersonName,
+      environmentalFocus,
+      companyPhoneNumber,
+      id
+    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch(err => console.log(err.message))
+  }
 
   render() {
 
