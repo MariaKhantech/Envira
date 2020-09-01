@@ -53,14 +53,13 @@ export class CompanyProfile extends Component {
         (response) => {
           console.log(response.data)
           this.setState({
-            firstName: response.data.first_name,
-            lastName: response.data.last_name,
-            phoneNumber: response.data.phone_number,
-            city: response.data.city,
-            state: response.data.state,
-            about: response.data.about,
-            zipCode: response.data.zip_code,
-            occupation: response.data.occupation,
+            companyName: response.data.company_name,
+            contactPersonName: response.data.contact_person,
+            companyDescription: response.data.company_description,
+            environmentalFocus: response.data.environmental_focus,
+            companyWebsite: response.data.website,
+            companyPhoneNumber: response.data.phone_number,
+            companyEmail: response.data.email,   
             data: response.data
           });
         })
