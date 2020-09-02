@@ -131,13 +131,13 @@ export class NavBar extends Component {
 					)
 				}
 				{this.props.auth.isAuthenticated &&
-					this.state.profile.RoleId === 2 && (<a className="menu-item text-white about" href="/profile">
+					this.state.profile.RoleId === 2 && (<a className="menu-item text-white about" href="/companyprofile">
 						My Account
 					</a>
 					)
 				}
 				{this.props.auth.isAuthenticated &&
-					this.state.profile.RoleId === 3 && (<a className="menu-item text-white about" href="/profile">
+					this.state.profile.RoleId === 3 && (<a className="menu-item text-white about" href="/companyprofile">
 						My Account
 					</a>
 					)
