@@ -165,4 +165,24 @@ router.post('/updateCompanyProfile', (req, res) => {
       }
     });
 });
+
+
+//this route is to get the logged in user event details
+router.get('/userEvent/:UserId', (req, res) => {
+  console.log(req.params.UserId);
+  db.Event.findOne({
+    where: {
+      UserId: req.params.UserId
+    }
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+    });
+});
+
 module.exports = router;

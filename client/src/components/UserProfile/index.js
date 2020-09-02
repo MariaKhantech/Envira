@@ -31,18 +31,20 @@ export class UserProfile extends Component {
             this.setState({
               profile: response.data,
             });
+            // call this function to get logged in user profile details
             this.getUserProfile()
+            // call this function to get logged in user event details
+            this.getUserEvent()
           })
-
         .catch(err => console.log(err))
     } catch (error) {
       if (error !== "No current user") {
         console.log(error);
       }
     }
-
   }
 
+  // get logged in user info from UserProfile model
   getUserProfile = () => {
     const UserId = this.state.profile.id
     Axios.get(`/api/auth/userProfile/${UserId}`)
@@ -62,6 +64,23 @@ export class UserProfile extends Component {
         })
       .catch(err => console.log(err))
   }
+
+  // get logged in user info from Event model
+  getUserEvent = () => {
+    const UserId = this.state.profile.id
+    Axios.get(`/api/auth/userEvent/${UserId}`)
+      .then(
+        (response) => {
+          console.log(response)
+          this.setState({
+            firstName: response.data.first_name,
+            lastName: response.data.last_name,
+            phoneNumber: response.data.phone_number,
+          });
+        })
+      .catch(err => console.log(err))
+  }
+
   render() {
     return (
       <div className=" main-content mb-4">

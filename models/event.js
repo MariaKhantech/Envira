@@ -42,9 +42,9 @@ module.exports = (sequelize, DataTypes) => {
     contact_number: {
       type: DataTypes.INTEGER,
       unique: false,
-      validate: {
-        is: /^ (\+ 0 ? 1\s) ?\(?\d{ 3 } \)?[\s.-]\d{ 3 } [\s.-]\d{ 4 } $/i
-      }
+      // validate: {
+      //   is: /^ (\+ 0 ? 1\s) ?\(?\d{ 3 } \)?[\s.-]\d{ 3 } [\s.-]\d{ 4 } $/i
+      // }
     },
   });
 
