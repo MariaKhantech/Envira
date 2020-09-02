@@ -37,11 +37,6 @@ export class NavBar extends Component {
 		}
 	}
 
-	// check the logged in user roleId
-	// if roleId is 1 then redirect user to userProfile page
-	// if roleId is 2 then redirect user to Profile page
-	// if roleId is 3 then redirect user to Profile page
-
 	handleLogOut = async (event) => {
 		event.preventDefault();
 		try {
@@ -125,6 +120,10 @@ export class NavBar extends Component {
 						</a>
 					</div>
 				</li>
+				{/* check the logged in user roleId
+	if roleId is 1 then redirect user to userProfile page
+	 if roleId is 2 then redirect user to Profile page
+	if roleId is 3 then redirect user to Profile page */}
 				{this.props.auth.isAuthenticated &&
 					this.state.profile.RoleId === 1 && (<a className="menu-item text-white about" href="/userprofile">
 						My Account
@@ -133,6 +132,12 @@ export class NavBar extends Component {
 				}
 				{this.props.auth.isAuthenticated &&
 					this.state.profile.RoleId === 2 && (<a className="menu-item text-white about" href="/profile">
+						My Account
+					</a>
+					)
+				}
+				{this.props.auth.isAuthenticated &&
+					this.state.profile.RoleId === 3 && (<a className="menu-item text-white about" href="/profile">
 						My Account
 					</a>
 					)
