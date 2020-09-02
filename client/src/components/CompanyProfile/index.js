@@ -32,7 +32,7 @@ export class CompanyProfile extends Component {
             this.setState({
               profile: response.data,
             });
-            this.getUserProfile()
+            this.getCompanyProfile()
           })
 
         .catch(err => console.log(err))
@@ -44,9 +44,9 @@ export class CompanyProfile extends Component {
 
   }
 
-  getUserProfile = () => {
+  getCompanyProfile = () => {
     const UserId = this.state.profile.id
-    console.log(this.state.firstName)
+    console.log(this.state.companyName)
     Axios.get(`/api/auth/companyProfile/${UserId}`)
       .then(
         (response) => {
@@ -81,7 +81,7 @@ export class CompanyProfile extends Component {
     console.log(this.state.profile.id);
     debugger
 
-    console.log(firstName, lastName)
+    console.log(companyName, companyDescription)
     Axios.post("/api/auth/updateCompanyProfile", {
       companyName,
       companyDescription,

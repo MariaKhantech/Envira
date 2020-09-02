@@ -29,6 +29,7 @@ export default class UpdateProfile extends Component {
             Axios.get(`/api/auth/user/${userDetail}`)
                 .then(
                     (response) => {
+                        console.log(response)
                         this.setState({
                             profile: response.data,
                         });

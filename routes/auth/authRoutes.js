@@ -121,4 +121,23 @@ router.get('/user/:username', (req, res) => {
     });
 });
 
+
+
+//this route is to get the logged in company profile details
+router.get('/companyProfile/:UserId', (req, res) => {
+  console.log(req.params.UserId);
+  db.CompanyProfile.findOne({
+    where: {
+      UserId: req.params.UserId
+    }
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+    });
+});
 module.exports = router;
