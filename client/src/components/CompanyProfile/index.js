@@ -33,6 +33,8 @@ export class CompanyProfile extends Component {
               profile: response.data,
             });
             this.getCompanyProfile()
+            // call this function to get logged in company event details
+            this.getUserTotalEvent()
           })
         .catch(err => console.log(err))
     } catch (error) {
@@ -63,58 +65,17 @@ export class CompanyProfile extends Component {
       .catch(err => console.log(err))
   }
 
-
-  handleInputChange = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-    this.setState({
-      [name]: value
-    })
-  }
-
-  handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const { companyName, companyDescription, companyEmail, companyWebsite, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
-    const id = this.state.profile.id;
-    console.log(this.state.profile.id);
-    debugger
-
-    console.log(companyName, companyDescription)
-    Axios.post("/api/auth/updateCompanyProfile", {
-      companyName,
-      companyDescription,
-      companyEmail,
-      companyWebsite,
-      contactPersonName,
-      environmentalFocus,
-      companyPhoneNumber,
-      id
-    })
-      .then((res) => {
-        console.log(res)
-      })
-      .catch(err => console.log(err.message))
-  }
-
-  handleUpdateFormSubmit = async (event) => {
-    event.preventDefault();
-    const { companyName, companyDescription, companyEmail, companyWebsite, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
-    const UserId = this.state.profile.id;
-    Axios.put(`/api/auth/updateCompanyProfile/${UserId}`, {
-      companyName,
-      companyDescription,
-      companyEmail,
-      companyWebsite,
-      contactPersonName,
-      environmentalFocus,
-      companyPhoneNumber,
-    })
-
-      .then((res) => {
-        console.log(res)
-        window.location = "/profile";
-      })
-
+  // get logged in company info from EventAttendee model
+  getUserTotalEvent = () => {
+    const UserId = this.state.profile.id
+    Axios.get(`/api/auth/userTotalEvent/${UserId}`)
+      .then(
+        (response) => {
+          console.log(response)
+          this.setState({
+            totalEvent: response.data
+          });
+        })
       .catch(err => console.log(err))
   }
 

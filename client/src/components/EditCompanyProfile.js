@@ -7,14 +7,13 @@ import ProfileImage from "../ProfileImage"
 export default class UpdateProfile extends Component {
     state = {
         profile: [],
-        firstName: "",
-        lastName: "",
-        city: "",
-        state: "",
-        phoneNumber: "",
-        occupation: "",
-        about: "",
-        zipCode: "",
+        companyName: "",
+        contactPersonName: "",
+        companyDescription: "",
+        environmentalFocus: "",
+        companyWebsite: "",
+        companyPhoneNumber: "",
+        companyEmail: "",
         data: ""
     }
 
@@ -29,39 +28,34 @@ export default class UpdateProfile extends Component {
             Axios.get(`/api/auth/user/${userDetail}`)
                 .then(
                     (response) => {
-                        console.log(response)
                         this.setState({
                             profile: response.data,
                         });
-                        this.getUserProfile()
+                        this.getCompanyProfile()
                     })
-
                 .catch(err => console.log(err))
         } catch (error) {
             if (error !== "No current user") {
                 console.log(error);
             }
         }
-
     }
 
-
-    getUserProfile = () => {
+    getCompanyProfile = () => {
         const UserId = this.state.profile.id
-        console.log(this.state.firstName)
-        Axios.get(`/api/auth/userProfile/${UserId}`)
+        console.log(this.state.companyName)
+        Axios.get(`/api/auth/companyProfile/${UserId}`)
             .then(
                 (response) => {
                     console.log(response.data)
                     this.setState({
-                        firstName: response.data.first_name,
-                        lastName: response.data.last_name,
-                        phoneNumber: response.data.phone_number,
-                        city: response.data.city,
-                        state: response.data.state,
-                        about: response.data.about,
-                        zipCode: response.data.zip_code,
-                        occupation: response.data.occupation,
+                        companyName: response.data.company_name,
+                        contactPersonName: response.data.contact_person,
+                        companyDescription: response.data.company_description,
+                        environmentalFocus: response.data.environmental_focus,
+                        companyWebsite: response.data.website,
+                        companyPhoneNumber: response.data.phone_number,
+                        companyEmail: response.data.email,
                         data: response.data
                     });
                 })
@@ -78,21 +72,20 @@ export default class UpdateProfile extends Component {
 
     handleFormSubmit = async (event) => {
         event.preventDefault();
-        const { firstName, lastName, city, state, zipCode, about, phoneNumber, occupation } = this.state
-        const id=this.state.profile.id;
+        const { companyName, companyDescription, companyEmail, companyWebsite, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
+        const id = this.state.profile.id;
         console.log(this.state.profile.id);
         debugger
 
-        console.log(firstName, lastName)
-        Axios.post("/api/auth/updateUserProfile", {
-            firstName,
-            lastName,
-            city,
-            state,
-            zipCode,
-            about,
-            phoneNumber,
-            occupation,
+        console.log(companyName, companyDescription)
+        Axios.post("/api/auth/updateCompanyProfile", {
+            companyName,
+            companyDescription,
+            companyEmail,
+            companyWebsite,
+            contactPersonName,
+            environmentalFocus,
+            companyPhoneNumber,
             id
         })
             .then((res) => {
@@ -103,22 +96,21 @@ export default class UpdateProfile extends Component {
 
     handleUpdateFormSubmit = async (event) => {
         event.preventDefault();
-        const { firstName, lastName, city, state, zipCode, about, phoneNumber, occupation } = this.state
+        const { companyName, companyDescription, companyEmail, companyWebsite, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
         const UserId = this.state.profile.id;
-        Axios.put(`/api/auth/updateUserProfile/${UserId}`, {
-            firstName,
-            lastName,
-            city,
-            state,
-            zipCode,
-            about,
-            phoneNumber,
-            occupation
+        Axios.put(`/api/auth/updateCompanyProfile/${UserId}`, {
+            companyName,
+            companyDescription,
+            companyEmail,
+            companyWebsite,
+            contactPersonName,
+            environmentalFocus,
+            companyPhoneNumber,
         })
 
             .then((res) => {
                 console.log(res)
-                window.location = "/userprofile";
+                window.location = "/profile";
             })
 
             .catch(err => console.log(err))
@@ -131,7 +123,7 @@ export default class UpdateProfile extends Component {
                     <div className="row">
                         <div className="col-md-4 border-right">
                             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-                                <span className="font-weight-bold mb-3">Hello {this.state.firstName}</span>
+                                <span className="font-weight-bold mb-3">Hello {this.state.companyName}</span>
                                 {/* <span className="text-black-50">{this.state.profile.email}</span> */}
                                 <ProfileImage></ProfileImage>
 
@@ -145,16 +137,16 @@ export default class UpdateProfile extends Component {
                                 <div className="row mt-2">
 
                                     <div className="col-md-12">
-                                        <label className="labels">User Name</label>
+                                        <label className="labels">Company User Name</label>
                                         <input type="text" className="form-control" value={this.state.profile.user_name} readOnly />
                                     </div>
                                     <div className="col-md-6">
-                                        <label className="labels">First Name</label>
-                                        <input name="firstName" type="text" className="form-control" placeholder="first name" value={this.state.firstName} onChange={this.handleInputChange} />
+                                        <label className="labels">Company Name</label>
+                                        <input name="firstName" type="text" className="form-control" placeholder="first name" value={this.state.companyName} onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-6">
-                                        <label className="labels">Last Name</label>
-                                        <input name="lastName" type="text" className="form-control" placeholder="last name" value={this.state.lastName} onChange={this.handleInputChange} />
+                                        <label className="labels">Description</label>
+                                        <input name="lastName" type="text" className="form-control" placeholder="last name" value={this.state.companyDescription} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 <div className="row mt-3">
