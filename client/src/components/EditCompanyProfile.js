@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import "./updateProfile.css";
+// import "./updateProfile.css";
 import Axios from 'axios';
 import { Auth } from 'aws-amplify';
-import ProfileImage from "../ProfileImage"
+// import ProfileImage from "../ProfileImage"
 
 export default class UpdateProfile extends Component {
     state = {
@@ -125,7 +125,7 @@ export default class UpdateProfile extends Component {
                             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
                                 <span className="font-weight-bold mb-3">Hello {this.state.companyName}</span>
                                 {/* <span className="text-black-50">{this.state.profile.email}</span> */}
-                                <ProfileImage></ProfileImage>
+                                {/* <ProfileImage></ProfileImage> */}
 
                             </div>
                         </div>
