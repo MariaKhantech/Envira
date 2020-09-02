@@ -152,32 +152,32 @@ export default class UpdateProfile extends Component {
                                 <div className="row mt-3">
                                     <div className="col-md-6">
                                         <label className="labels">Phone Number</label>
-                                        <input name="phoneNumber" value={this.state.phoneNumber} type="tel" className="form-control" placeholder="enter phone number" onChange={this.handleInputChange} /></div>
+                                        <input name="phoneNumber" value={this.state.companyPhoneNumber} type="tel" className="form-control" placeholder="enter phone number" onChange={this.handleInputChange} /></div>
                                     <div className="col-md-6">
-                                        <label className="labels">Email ID</label>
-                                        <input readOnly type="text" className="form-control" value={this.state.profile.email} />
+                                        <label className="labels">Company Email</label>
+                                        <input readOnly type="text" className="form-control" value={this.state.companyEmail} />
                                     </div>
                                     <div className="col-md-12">
-                                        <label className="labels">Occupation</label>
-                                        <input name="occupation" type="text" className="form-control" placeholder="enter occupation" value={this.state.occupation} onChange={this.handleInputChange} /></div>
+                                        <label className="labels">Contact Person</label>
+                                        <input name="occupation" type="text" className="form-control" placeholder="enter occupation" value={this.state.contactPersonName} onChange={this.handleInputChange} /></div>
 
                                     <div className="col-md-12">
-                                        <label className="labels">About</label>
-                                        <textarea name="about" type="text" className="form-control" placeholder="about" value={this.state.about} onChange={this.handleInputChange} /></div>
+                                        <label className="labels">Environmental Focus</label>
+                                        <textarea name="about" type="text" className="form-control" placeholder="about" value={this.state.environmentalFocus} onChange={this.handleInputChange} /></div>
                                 </div>
                                 <div className="row mt-3">
                                     <div className="col-md-4">
-                                        <label className="labels">City</label>
-                                        <input name="city" type="text" className="form-control" placeholder="city" value={this.state.city} onChange={this.handleInputChange} />
+                                        <label className="labels">Website</label>
+                                        <input name="city" type="text" className="form-control" placeholder="city" value={this.state.companyWebsite} onChange={this.handleInputChange} />
                                     </div>
-                                    <div className="col-md-4">
+                                    {/* <div className="col-md-4">
                                         <label className="labels">State/Region</label>
                                         <input name="state" type="text" className="form-control" value={this.state.state} placeholder="state" onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-4">
                                         <label className="labels">Zip Code</label>
                                         <input name="zipCode" type="text" className="form-control" value={this.state.zipCode} placeholder="state" onChange={this.handleInputChange} />
-                                    </div>
+                                    </div> */}
                                 </div>
                                 {!this.state.data && (
                                     <div className="mt-5 text-center">
