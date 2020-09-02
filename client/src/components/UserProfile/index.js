@@ -15,6 +15,7 @@ export class UserProfile extends Component {
     occupation: "",
     about: "",
     zipCode: "",
+    totalEvent: "",
   }
 
 
@@ -34,7 +35,7 @@ export class UserProfile extends Component {
             // call this function to get logged in user profile details
             this.getUserProfile()
             // call this function to get logged in user event details
-            this.getUserEvent()
+            this.getUserTotalEvent()
           })
         .catch(err => console.log(err))
     } catch (error) {
@@ -65,23 +66,22 @@ export class UserProfile extends Component {
       .catch(err => console.log(err))
   }
 
-  // get logged in user info from Event model
-  getUserEvent = () => {
+  // get logged in user info from EventAttendee model
+  getUserTotalEvent = () => {
     const UserId = this.state.profile.id
-    Axios.get(`/api/auth/userEvent/${UserId}`)
+    Axios.get(`/api/auth/userTotalEvent/${UserId}`)
       .then(
         (response) => {
           console.log(response)
           this.setState({
-            firstName: response.data.first_name,
-            lastName: response.data.last_name,
-            phoneNumber: response.data.phone_number,
+            totalEvent: response.data
           });
         })
       .catch(err => console.log(err))
   }
 
   render() {
+    console.log(this.state.totalEvent)
     return (
       <div className=" main-content mb-4">
         {/* <!--reference https://www.creative-tim.com/bits/bootstrap/user-profile-page-argon-dashboard--> */}
@@ -145,7 +145,7 @@ export class UserProfile extends Component {
                     <div className="h5 font-weight-300">
                       <i className="ni location_pin mr-2"></i>{this.state.state}, {this.state.city}
                     </div>
-                    <div className="h5 mt-4">
+                    <div className="h5 mt-1">
                       <i className="ni business_briefcase-24 mr-2"></i>{this.state.occupation}
                     </div>
                     <hr />
@@ -181,7 +181,7 @@ export class UserProfile extends Component {
                       <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div className="row">
                           <div className="col-md-6">
-                            <label>Username:</label>
+                            <label>Company User Name:</label>
                           </div>
                           <div className="col-md-6">
                             <p>{this.state.profile.user_name}</p>
@@ -189,7 +189,7 @@ export class UserProfile extends Component {
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                            <label>Name:</label>
+                            <label>Company Name:</label>
                           </div>
                           <div className="col-md-6">
                             <p>{this.state.firstName} {this.state.lastName}</p>
@@ -232,7 +232,13 @@ export class UserProfile extends Component {
                             <label>Joined Events:</label>
                           </div>
                           <div className="col-md-6">
-                            <p>50</p>
+
+
+                            {/* {this.state.totalEvent.map(event => {
+                              return (<p key={event.id} value={event.id}>{event.id}</p>)
+
+                            })} */}
+
                           </div>
                         </div>
                       </div>
