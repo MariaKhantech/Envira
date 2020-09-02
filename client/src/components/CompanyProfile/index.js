@@ -34,14 +34,12 @@ export class CompanyProfile extends Component {
             });
             this.getCompanyProfile()
           })
-
         .catch(err => console.log(err))
     } catch (error) {
       if (error !== "No current user") {
         console.log(error);
       }
     }
-
   }
 
   getCompanyProfile = () => {
@@ -97,6 +95,29 @@ export class CompanyProfile extends Component {
       })
       .catch(err => console.log(err.message))
   }
+
+  handleUpdateFormSubmit = async (event) => {
+    event.preventDefault();
+    const { companyName, companyDescription, companyEmail, companyWebsite, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
+    const UserId = this.state.profile.id;
+    Axios.put(`/api/auth/updateCompanyProfile/${UserId}`, {
+      companyName,
+      companyDescription,
+      companyEmail,
+      companyWebsite,
+      contactPersonName,
+      environmentalFocus,
+      companyPhoneNumber,
+    })
+
+      .then((res) => {
+        console.log(res)
+        window.location = "/profile";
+      })
+
+      .catch(err => console.log(err))
+  }
+
 
   render() {
 
