@@ -5,8 +5,6 @@ import Articles from "./Articles/index";
 
 import { Row, Col, Tabs, Tab } from "react-bootstrap";
 
-import "./style.css";
-
 export default class ExploreWrapper extends Component {
   constructor(props) {
     super();

@@ -54,50 +54,12 @@ export default class Carousel extends Component {
     ));
 
     const carouselSettings = {
-      // dots: true,
-      // fade: true,
-      // infinite: true,
-      // speed: 500,
-      // slidesToShow: 3,
-      // slidesToScroll: 3,
       dots: true,
       infinite: true,
       adaptiveHeight: true,
       speed: 500,
       slidesToShow: this.props.state.slidesToShow,
       slidesToScroll: this.props.state.slidesToScroll,
-      // responsive: [
-      //   {
-      //     breakpoint: 1024,
-      //     settings: {
-      //       slidesToShow: 3,
-      //       slidesToScroll: 3,
-      //       infinite: true,
-      //       dots: true,
-      //     },
-      //   },
-      //   {
-      //     breakpoint: 992,
-      //     settings: {
-      //       slidesToShow: 1,
-      //       slidesToScroll: 1,
-      //     },
-      //   },
-      //   {
-      //     breakpoint: 600,
-      //     settings: {
-      //       slidesToShow: 1,
-      //       slidesToScroll: 1,
-      //     },
-      //   },
-      //   {
-      //     breakpoint: 480,
-      //     settings: {
-      //       slidesToShow: 1,
-      //       slidesToScroll: 1,
-      //     },
-      //   },
-      // ],
     };
 
     return (

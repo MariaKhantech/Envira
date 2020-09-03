@@ -5,7 +5,7 @@ import Search from "./Search/index";
 import Carousel from "./Carousel/index";
 // import StarRatingComponent from "react-star-rating-component";
 
-import { Row, Col, Fade } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 import "./style.css";
 
@@ -68,7 +68,7 @@ export default class EventsSearch extends Component {
           );
           this.setState({
             eventData: filteredLocation,
-            // colSz: 6,
+
             introTitle: "",
             introText: "",
             showCarousel: true,
@@ -87,7 +87,7 @@ export default class EventsSearch extends Component {
           );
           this.setState({
             eventData: filteredEv,
-            // colSz: 6,
+
             showCarousel: true,
             introTitle: "",
             introText: "",
