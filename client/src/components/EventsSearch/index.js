@@ -1,28 +1,18 @@
 import React, { Component } from "react";
 import Axios from "axios";
+
 import Search from "./Search/index";
 import Carousel from "./Carousel/index";
-import StarRatingComponent from "react-star-rating-component";
+// import StarRatingComponent from "react-star-rating-component";
 
 import Button from "react-bootstrap/Button";
-// import Data from "./Data.json";
-
-// SEE ALL EVENTS
-// on page load user will be presented a search bar <Search /> and when a user selects the dropdown appended to the bar and selects the see all events button the following will happen...
-
-// A <Carousel /> component will be rendered below the search bar
-// Inside the carousel will be <CardDecks/> which will contain three <Cards /> on each slide.
-//  Each <Card /> will display Event data from our event Model (event Org, location, host, contact info, etc)
-// Each <Card /> will also have a "Attend" Button that will register (Post) that the user intends on attending the event.
-// Each <Card /> will also have a "i" button for more information the event (retrieved from the description column from the events Model ) and when selected a modal showing the description will appear
-
-//
 
 export default class EventsSearch extends Component {
   state = {
     filter: "Filter",
     disabled: true,
     searchInput: "",
+    colSz: 10,
     showCarousel: false,
     slidesToShow: 3,
     slidesToScroll: 3,
@@ -31,23 +21,23 @@ export default class EventsSearch extends Component {
     rating: "0",
   };
 
-  onStarClick(nextValue, prevValue, name) {
-    this.setState({ rating: nextValue });
-  }
+  // onStarClick(nextValue) {
+  //   this.setState({ rating: nextValue });
+  // }
 
-  postRating = (event) => {
-    event.preventDefault();
-    Axios.post("/api/rate/eventsearch", {
-      rating: this.state.rating,
-      UserId: 7,
-      EventId: 7,
-    })
-      .then((res) => {
-        console.log(res);
-        this.setState({ rating: "0" });
-      })
-      .catch((err) => console.log(err));
-  };
+  // postRating = (event) => {
+  //   event.preventDefault();
+  //   Axios.post("/api/rate/eventsearch", {
+  //     rating: this.state.rating,
+  //     UserId: 7,
+  //     EventId: 7,
+  //   })
+  //     .then((res) => {
+  //       console.log(res);
+  //       this.setState({ rating: "0" });
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
   onChange = (event) =>
     this.setState({ [event.target.name]: event.target.value });
@@ -60,7 +50,6 @@ export default class EventsSearch extends Component {
     event.preventDefault();
     Axios.get("/api/create/eventcreate").then(
       (response) => {
-        // console.log(response);
         this.setState({
           eventData: response.data,
           madeRequest: true,
@@ -75,7 +64,7 @@ export default class EventsSearch extends Component {
           );
           this.setState({
             eventData: filteredLocation,
-
+            colSz: 6,
             showCarousel: true,
             slidesToShow: filteredLocation.length,
             slidesToScroll: filteredLocation.length,
@@ -92,7 +81,7 @@ export default class EventsSearch extends Component {
           );
           this.setState({
             eventData: filteredEv,
-
+            colSz: 6,
             showCarousel: true,
             slidesToShow: filteredEv.length,
             slidesToScroll: filteredEv.length,
@@ -114,7 +103,6 @@ export default class EventsSearch extends Component {
     event.preventDefault();
     Axios.get("/api/create/eventcreate").then(
       (response) => {
-        // console.log(response);
         this.setState({
           eventData: response.data,
           madeRequest: true,
@@ -127,7 +115,12 @@ export default class EventsSearch extends Component {
       },
       this.setState({ madeRequest: false })
     );
-    this.setState({ showCarousel: true, slidesToShow: 3, slidesToScroll: 3 });
+    this.setState({
+      colSz: 10,
+      showCarousel: true,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+    });
   };
 
   render() {
@@ -149,14 +142,14 @@ export default class EventsSearch extends Component {
           postNewEvent={this.postNewEvent}
           state={this.state}
         />
-        <StarRatingComponent
+        {/* <StarRatingComponent
           name="rating"
           starCount={5}
           value={this.state.rating}
           onStarClick={this.onStarClick.bind(this)}
           style={{ fontSize: "50px" }}
-        />
-        <Button variant="primary" onClick={this.postRating} />
+        /> */}
+        {/* <Button variant="primary" onClick={this.postRating} /> */}
         {renderCarousel}
       </>
     );

@@ -1,1 +1,20 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+#dropdown {
+  border: none;
+  border-radius: 5px 0px 0px 5px !important;
+  height: 2.85rem;
+  background-color: #c38d9e;
+}
+
+#addEvent {
+  border: none;
+  background-color: #e8a87c;
+  border-radius: 0px 5px 5px 0px !important;
+}
+
+#search {
+  border: none;
+}
+
+#searchInput {
+  padding: 10px;
+}
