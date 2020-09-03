@@ -78,10 +78,18 @@ export default class UpdateProfile extends Component {
 
     handleFormSubmit = async (event) => {
         event.preventDefault();
+
         const { firstName, lastName, city, state, zipCode, about, phoneNumber, occupation } = this.state
-        const id=this.state.profile.id;
+        if (!phoneNumber.match(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g)) {
+            console.log("enter correct phone number")
+        }
+        else {
+            console.log("correct number")
+        }
+
+        const id = this.state.profile.id;
         console.log(this.state.profile.id);
-        debugger
+
 
         console.log(firstName, lastName)
         Axios.post("/api/auth/updateUserProfile", {
@@ -103,8 +111,14 @@ export default class UpdateProfile extends Component {
 
     handleUpdateFormSubmit = async (event) => {
         event.preventDefault();
+
         const { firstName, lastName, city, state, zipCode, about, phoneNumber, occupation } = this.state
+        if (!phoneNumber.match(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g)) {
+            console.log("enter correct phone number")
+            
+        }
         const UserId = this.state.profile.id;
+        console.log(UserId)
         Axios.put(`/api/auth/updateUserProfile/${UserId}`, {
             firstName,
             lastName,

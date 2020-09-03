@@ -170,7 +170,7 @@ export class UserProfile extends Component {
                     </div>
 
                     <div className="col-4 text-right">
-                      <a href="editprofile" className="btn btn-sm btn-primary">Edit Profile</a>
+                      <a href="edituserprofile" className="btn btn-sm btn-primary">Edit Profile</a>
                     </div>
                   </div>
                 </div>
@@ -234,7 +234,7 @@ export class UserProfile extends Component {
                           <div className="col-md-6">
 
 
-                            {/* {this.state.totalEvent.map(event => {
+                            {/* {this.state.totalEvent(event => {
                               return (<p key={event.id} value={event.id}>{event.id}</p>)
 
                             })} */}

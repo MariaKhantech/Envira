@@ -55,14 +55,14 @@ router.get('/userProfile/:UserId', (req, res) => {
 //this route is to save the user profile first time
 router.post('/updateUserProfile', (req, res) => {
   console.log(req.body.phoneNumber);
-  console.log(req.body.occupation, req.body.firstName, req.body.lastName, req.body.zipCode, req.body.state)
+  console.log()
   db.UserProfile.create({
     UserId: req.body.id,
     first_name: req.body.firstName,
     last_name: req.body.lastName,
     city: req.body.city,
     state: req.body.state,
-    zip_code: req.body.zipCode,
+    zip_code: req.body.zipCode ? parseInt(req.body.zipCode) : null,
     about: req.body.about,
     phone_number: req.body.phoneNumber,
     occupation: req.body.occupation
@@ -72,6 +72,7 @@ router.post('/updateUserProfile', (req, res) => {
     })
     .catch((err) => {
       if (err) {
+        console.log(err)
         res.status(500).json(err.message);
       }
     });
@@ -87,6 +88,7 @@ router.put('/updateUserProfile/:UserId', (req, res) => {
     zip_code: req.body.zipCode,
     about: req.body.about,
     phone_number: req.body.phoneNumber,
+    occupation: req.body.occupation
   }, {
     where:
       { UserId: req.params.UserId }
