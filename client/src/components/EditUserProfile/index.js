@@ -3,6 +3,8 @@ import "./updateProfile.css";
 import Axios from 'axios';
 import { Auth } from 'aws-amplify';
 import ProfileImage from "../ProfileImage"
+import FormErrors from "../FormErrors";
+import Validate from "../../util/FormValidation";
 
 export default class UpdateProfile extends Component {
     state = {
@@ -15,7 +17,18 @@ export default class UpdateProfile extends Component {
         occupation: "",
         about: "",
         zipCode: "",
-        data: ""
+        data: "",
+        errors: {
+            phonenumber: false
+        }
+    }
+
+    clearErrorState = () => {
+        this.setState({
+            errors: {
+                phonenumber: false
+            }
+        });
     }
 
     async componentDidMount() {
@@ -74,24 +87,22 @@ export default class UpdateProfile extends Component {
         this.setState({
             [name]: value
         })
+        document.getElementById(e.target.id).classList.remove("is-invalid");
     }
 
     handleFormSubmit = async (event) => {
         event.preventDefault();
 
+        // Form validation
+        this.clearErrorState();
+        const error = Validate(event, this.state);
+        if (error) {
+            this.setState({
+                errors: { ...this.state.errors, ...error }
+            });
+        }
         const { firstName, lastName, city, state, zipCode, about, phoneNumber, occupation } = this.state
-        if (!phoneNumber.match(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g)) {
-            console.log("enter correct phone number")
-        }
-        else {
-            console.log("correct number")
-        }
-
         const id = this.state.profile.id;
-        console.log(this.state.profile.id);
-
-
-        console.log(firstName, lastName)
         Axios.post("/api/auth/updateUserProfile", {
             firstName,
             lastName,
@@ -112,30 +123,34 @@ export default class UpdateProfile extends Component {
     handleUpdateFormSubmit = async (event) => {
         event.preventDefault();
 
-        const { firstName, lastName, city, state, zipCode, about, phoneNumber, occupation } = this.state
-        if (!phoneNumber.match(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g)) {
-            console.log("enter correct phone number")
-            
+        // Form validation
+        this.clearErrorState();
+        const error = Validate(event, this.state);
+        if (error) {
+            this.setState({
+                errors: { ...this.state.errors, ...error }
+            });
         }
-        const UserId = this.state.profile.id;
-        console.log(UserId)
-        Axios.put(`/api/auth/updateUserProfile/${UserId}`, {
-            firstName,
-            lastName,
-            city,
-            state,
-            zipCode,
-            about,
-            phoneNumber,
-            occupation
-        })
-
-            .then((res) => {
-                console.log(res)
-                window.location = "/userprofile";
+        else {
+            const { firstName, lastName, city, state, zipCode, about, phoneNumber, occupation } = this.state
+            const UserId = this.state.profile.id;
+            console.log(UserId)
+            Axios.put(`/api/auth/updateUserProfile/${UserId}`, {
+                firstName,
+                lastName,
+                city,
+                state,
+                zipCode,
+                about,
+                phoneNumber,
+                occupation
             })
-
-            .catch(err => console.log(err))
+                .then((res) => {
+                    console.log(res)
+                    window.location = "/userprofile";
+                })
+                .catch(err => console.log(err))
+        }
     }
 
     render() {
@@ -155,6 +170,7 @@ export default class UpdateProfile extends Component {
                             <div className="p-3 py-5">
                                 <div className="d-flex justify-content-between align-items-center mb-3">
                                     <h4 className="text-right">Profile Settings</h4>
+                                    <FormErrors formerrors={this.state.errors} />
                                 </div>
                                 <div className="row mt-2">
 
@@ -162,11 +178,11 @@ export default class UpdateProfile extends Component {
                                         <label className="labels">User Name</label>
                                         <input type="text" className="form-control" value={this.state.profile.user_name} readOnly />
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 mt-1">
                                         <label className="labels">First Name</label>
                                         <input name="firstName" type="text" className="form-control" placeholder="first name" value={this.state.firstName} onChange={this.handleInputChange} />
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 mt-1">
                                         <label className="labels">Last Name</label>
                                         <input name="lastName" type="text" className="form-control" placeholder="last name" value={this.state.lastName} onChange={this.handleInputChange} />
                                     </div>
@@ -174,16 +190,16 @@ export default class UpdateProfile extends Component {
                                 <div className="row mt-3">
                                     <div className="col-md-6">
                                         <label className="labels">Phone Number</label>
-                                        <input name="phoneNumber" value={this.state.phoneNumber} type="tel" className="form-control" placeholder="enter phone number" onChange={this.handleInputChange} /></div>
+                                        <input id="phonenumber" name="phoneNumber" value={this.state.phoneNumber} type="tel" className="form-control" placeholder="enter phone number" onChange={this.handleInputChange} /></div>
                                     <div className="col-md-6">
                                         <label className="labels">Email ID</label>
                                         <input readOnly type="text" className="form-control" value={this.state.profile.email} />
                                     </div>
-                                    <div className="col-md-12">
+                                    <div className="col-md-12 mt-1">
                                         <label className="labels">Occupation</label>
                                         <input name="occupation" type="text" className="form-control" placeholder="enter occupation" value={this.state.occupation} onChange={this.handleInputChange} /></div>
 
-                                    <div className="col-md-12">
+                                    <div className="col-md-12 mt-1">
                                         <label className="labels">About</label>
                                         <textarea name="about" type="text" className="form-control" placeholder="about" value={this.state.about} onChange={this.handleInputChange} /></div>
                                 </div>

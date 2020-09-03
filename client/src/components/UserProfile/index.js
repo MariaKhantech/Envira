@@ -181,7 +181,7 @@ export class UserProfile extends Component {
                       <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div className="row">
                           <div className="col-md-6">
-                            <label>Company User Name:</label>
+                            <label>User Name:</label>
                           </div>
                           <div className="col-md-6">
                             <p>{this.state.profile.user_name}</p>
@@ -189,7 +189,7 @@ export class UserProfile extends Component {
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                            <label>Company Name:</label>
+                            <label>Name:</label>
                           </div>
                           <div className="col-md-6">
                             <p>{this.state.firstName} {this.state.lastName}</p>
@@ -232,12 +232,7 @@ export class UserProfile extends Component {
                             <label>Joined Events:</label>
                           </div>
                           <div className="col-md-6">
-
-
-                            {/* {this.state.totalEvent(event => {
-                              return (<p key={event.id} value={event.id}>{event.id}</p>)
-
-                            })} */}
+                            <p>{this.state.totalEvent.length}</p>
 
                           </div>
                         </div>

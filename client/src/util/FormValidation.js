@@ -23,25 +23,12 @@ function validateForm(event, state) {
     document.getElementById("email").classList.add("is-invalid");
     return { blankfield: true };
   }
-  if (
-    state.hasOwnProperty("verificationcode") &&
-    state.verificationcode === ""
-  ) {
-    document.getElementById("verificationcode").classList.add("is-invalid");
-    return { blankfield: true };
-  }
+ 
   if (state.hasOwnProperty("password") && state.password === "") {
     document.getElementById("password").classList.add("is-invalid");
     return { blankfield: true };
   }
-  if (state.hasOwnProperty("oldpassword") && state.oldpassword === "") {
-    document.getElementById("oldpassword").classList.add("is-invalid");
-    return { blankfield: true };
-  }
-  if (state.hasOwnProperty("newpassword") && state.newpassword === "") {
-    document.getElementById("newpassword").classList.add("is-invalid");
-    return { blankfield: true };
-  }
+  
   if (state.hasOwnProperty("confirmPassword") && state.confirmPassword === "") {
     document.getElementById("confirmpassword").classList.add("is-invalid");
     return { blankfield: true };
@@ -54,6 +41,11 @@ function validateForm(event, state) {
     document.getElementById("password").classList.add("is-invalid");
     document.getElementById("confirmpassword").classList.add("is-invalid");
     return { passwordmatch: true };
+  }
+
+  if (state.hasOwnProperty("phoneNumber") && !state.phoneNumber.match(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g)) {
+    document.getElementById("phonenumber").classList.add("is-invalid");
+    return { phonenumber: true };
   }
 }
 
