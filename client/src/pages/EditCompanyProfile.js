@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import UpdateCompanyProfile from "../components/EditCompanyProfile";
+import UpdateCompanyProfile from "../components/EditCompanyProfile/index";
 
 
 export default class EditCompanyProfile extends Component {
