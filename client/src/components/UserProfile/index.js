@@ -7,14 +7,15 @@ export class UserProfile extends Component {
 
   state = {
     profile: [],
-    first_name: "",
+    firstName: "",
     lastName: "",
     city: "",
     state: "",
     phoneNumber: "",
-    address: "",
+    occupation: "",
     about: "",
     zipCode: "",
+    totalEvent: "",
   }
 
 
@@ -31,18 +32,20 @@ export class UserProfile extends Component {
             this.setState({
               profile: response.data,
             });
+            // call this function to get logged in user profile details
             this.getUserProfile()
+            // call this function to get logged in user event details
+            this.getUserTotalEvent()
           })
-
         .catch(err => console.log(err))
     } catch (error) {
       if (error !== "No current user") {
         console.log(error);
       }
     }
-
   }
 
+  // get logged in user info from UserProfile model
   getUserProfile = () => {
     const UserId = this.state.profile.id
     Axios.get(`/api/auth/userProfile/${UserId}`)
@@ -57,12 +60,28 @@ export class UserProfile extends Component {
             state: response.data.state,
             about: response.data.about,
             zipCode: response.data.zip_code,
-            address: response.data.address,
+            occupation: response.data.occupation,
           });
         })
       .catch(err => console.log(err))
   }
+
+  // get logged in user info from EventAttendee model
+  getUserTotalEvent = () => {
+    const UserId = this.state.profile.id
+    Axios.get(`/api/auth/userTotalEvent/${UserId}`)
+      .then(
+        (response) => {
+          console.log(response)
+          this.setState({
+            totalEvent: response.data
+          });
+        })
+      .catch(err => console.log(err))
+  }
+
   render() {
+    console.log(this.state.totalEvent)
     return (
       <div className=" main-content mb-4">
         {/* <!--reference https://www.creative-tim.com/bits/bootstrap/user-profile-page-argon-dashboard--> */}
@@ -126,9 +145,9 @@ export class UserProfile extends Component {
                     <div className="h5 font-weight-300">
                       <i className="ni location_pin mr-2"></i>{this.state.state}, {this.state.city}
                     </div>
-                    <div className="h5 mt-4">
-                      <i className="ni business_briefcase-24 mr-2"></i>Environmentalist- Activist
-                </div>
+                    <div className="h5 mt-1">
+                      <i className="ni business_briefcase-24 mr-2"></i>{this.state.occupation}
+                    </div>
                     <hr />
                     <div>
                       <h5 className="ni business_briefcase-24 mr-2">How to connect:</h5>
@@ -151,7 +170,7 @@ export class UserProfile extends Component {
                     </div>
 
                     <div className="col-4 text-right">
-                      <a href="editprofile" className="btn btn-sm btn-primary">Edit Profile</a>
+                      <a href="edituserprofile" className="btn btn-sm btn-primary">Edit Profile</a>
                     </div>
                   </div>
                 </div>
@@ -162,7 +181,7 @@ export class UserProfile extends Component {
                       <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div className="row">
                           <div className="col-md-6">
-                            <label>Username:</label>
+                            <label>User Name:</label>
                           </div>
                           <div className="col-md-6">
                             <p>{this.state.profile.user_name}</p>
@@ -197,7 +216,7 @@ export class UserProfile extends Component {
                             <label>Location:</label>
                           </div>
                           <div className="col-md-6">
-                            <p>{this.state.address} {this.state.state} {this.state.city} {this.state.zipCode}</p>
+                            <p>{this.state.state} {this.state.city} {this.state.zipCode}</p>
                           </div>
                         </div>
                         <div className="row">
@@ -213,7 +232,8 @@ export class UserProfile extends Component {
                             <label>Joined Events:</label>
                           </div>
                           <div className="col-md-6">
-                            <p>50</p>
+                            <p>{this.state.totalEvent.length}</p>
+
                           </div>
                         </div>
                       </div>

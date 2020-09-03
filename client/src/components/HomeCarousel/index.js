@@ -103,20 +103,20 @@ export class index extends Component {
 
 				<div className="row">
 					<div className="col">
-						<div class="row">
-							<div class="col-sm-6">
-								<div class="card">
-									<div class="card-body homepgCardBackground">
-										<h5 class="card-title text-center">Latest News on Climate Change</h5>
-									
+						<div className="row">
+							<div className="col-sm-6">
+								<div className="card">
+									<div className="card-body homepgCardBackground">
+										<h5 className="card-title text-center">Latest News on Climate Change</h5>
+
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-6">
-								<div class="card">
-									<div class="card-body homepgCardBackground">
-										<h5 class="card-title text-center">How to utilize Envira</h5>
-										<p class="card-text">
+							<div className="col-sm-6">
+								<div className="card">
+									<div className="card-body homepgCardBackground">
+										<h5 className="card-title text-center">How to utilize Envira</h5>
+										<p className="card-text">
 											Envira is our AI bot that you can interact with in a few ways. You can
 											utilize her to read text off pages for you or ask her questions related to
 											climate change and what she feels about it. Here are some of the questions
