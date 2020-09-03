@@ -71,7 +71,7 @@ export default class index extends Component {
                         />
                     </div>
                 </div> */}
-                <div className="previewComponent">
+                <div className="previewComponent ">
                     <div className="imgPreview">
                         {$imagePreview}
                     </div>

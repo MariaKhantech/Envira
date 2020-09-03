@@ -160,7 +160,7 @@ export default class UpdateProfile extends Component {
                     <div className="row">
                         <div className="col-md-4 border-right">
                             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-                                <span className="font-weight-bold mb-3">Hello {this.state.firstName}</span>
+                                <span className="font-weight-bold mb-3">Hello {this.state.profile.user_name}</span>
                                 {/* <span className="text-black-50">{this.state.profile.email}</span> */}
                                 <ProfileImage></ProfileImage>
 
