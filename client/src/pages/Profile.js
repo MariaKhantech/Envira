@@ -14,6 +14,9 @@ export class Profile extends Component {
   //this function is run when the component is rendered
   componentDidMount() {
     this.setState({ profileType: this.props.auth });
+    // this.setState({ profileType: "company" });
+
+    //use axios to get user object to get the role
   }
 
    render() {
