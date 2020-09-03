@@ -75,7 +75,6 @@ export default class UpdateProfile extends Component {
         const { companyName, companyDescription, companyEmail, companyWebsite, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
         const id = this.state.profile.id;
         console.log(this.state.profile.id);
-        debugger
 
         console.log(companyName, companyDescription)
         Axios.post("/api/auth/updateCompanyProfile", {
@@ -124,7 +123,6 @@ export default class UpdateProfile extends Component {
                         <div className="col-md-4 border-right">
                             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
                                 <span className="font-weight-bold mb-3">Hello {this.state.companyName}</span>
-                                {/* <span className="text-black-50">{this.state.profile.email}</span> */}
                                 {/* <ProfileImage></ProfileImage> */}
 
                             </div>
@@ -136,48 +134,44 @@ export default class UpdateProfile extends Component {
                                 </div>
                                 <div className="row mt-2">
 
-                                    <div className="col-md-12">
-                                        <label className="labels">Company User Name</label>
-                                        <input type="text" className="form-control" value={this.state.profile.user_name} readOnly />
+                                    <div className="col-md-6">
+                                        <label className="labels">User Name</label>
+                                        <input type="text" className="form-control" value={this.state.profile.user_name}  readOnly />
                                     </div>
                                     <div className="col-md-6">
                                         <label className="labels">Company Name</label>
-                                        <input name="firstName" type="text" className="form-control" placeholder="first name" value={this.state.companyName} onChange={this.handleInputChange} />
+                                        <input name="companyName" type="text" className="form-control" placeholder="company name" value={this.state.companyName} onChange={this.handleInputChange} />
                                     </div>
-                                    <div className="col-md-6">
-                                        <label className="labels">Description</label>
-                                        <input name="lastName" type="text" className="form-control" placeholder="last name" value={this.state.companyDescription} onChange={this.handleInputChange} />
-                                    </div>
+
                                 </div>
-                                <div className="row mt-3">
+                                <div className="row mt-2">
                                     <div className="col-md-6">
                                         <label className="labels">Phone Number</label>
-                                        <input name="phoneNumber" value={this.state.companyPhoneNumber} type="tel" className="form-control" placeholder="enter phone number" onChange={this.handleInputChange} /></div>
+                                        <input id="phonenumber" name="companyPhoneNumber" value={this.state.companyPhoneNumber} type="tel" className="form-control" placeholder="company phone number" onChange={this.handleInputChange} /></div>
                                     <div className="col-md-6">
                                         <label className="labels">Company Email</label>
-                                        <input readOnly type="text" className="form-control" value={this.state.companyEmail} />
+                                        <input name="companyEmail" type="text" placeholder="company email" className="form-control" value={this.state.companyEmail} onChange={this.handleInputChange} />
                                     </div>
-                                    <div className="col-md-12">
-                                        <label className="labels">Contact Person</label>
-                                        <input name="occupation" type="text" className="form-control" placeholder="enter occupation" value={this.state.contactPersonName} onChange={this.handleInputChange} /></div>
-
-                                    <div className="col-md-12">
-                                        <label className="labels">Environmental Focus</label>
-                                        <textarea name="about" type="text" className="form-control" placeholder="about" value={this.state.environmentalFocus} onChange={this.handleInputChange} /></div>
                                 </div>
-                                <div className="row mt-3">
-                                    <div className="col-md-4">
+                                <div className="row mt-2">
+                                    <div className="col-md-6 mt-1">
+                                        <label className="labels">Contact Person</label>
+                                        <input name="contactPersonName" type="text" className="form-control" placeholder="contact person" value={this.state.contactPersonName} onChange={this.handleInputChange} />
+                                    </div>
+                                    <div className="col-md-6">
                                         <label className="labels">Website</label>
-                                        <input name="city" type="text" className="form-control" placeholder="city" value={this.state.companyWebsite} onChange={this.handleInputChange} />
+                                        <input name="companyWebsite" type="text" className="form-control" placeholder="company website" value={this.state.companyWebsite} onChange={this.handleInputChange} />
                                     </div>
-                                    {/* <div className="col-md-4">
-                                        <label className="labels">State/Region</label>
-                                        <input name="state" type="text" className="form-control" value={this.state.state} placeholder="state" onChange={this.handleInputChange} />
+                                </div>
+                                <div className="row mt-2">
+                                    <div className="col-md-12 mt-1">
+                                        <label className="labels">Description</label>
+                                        <textarea name="companyDescription" type="text" className="form-control" placeholder="company description" value={this.state.companyDescription} onChange={this.handleInputChange} />
                                     </div>
-                                    <div className="col-md-4">
-                                        <label className="labels">Zip Code</label>
-                                        <input name="zipCode" type="text" className="form-control" value={this.state.zipCode} placeholder="state" onChange={this.handleInputChange} />
-                                    </div> */}
+                                    <div className="col-md-12 mt-1">
+                                        <label className="labels">Environmental Focus</label>
+                                        <textarea name="environmentalFocus" type="text" className="form-control" placeholder="environmental focus details" value={this.state.environmentalFocus} onChange={this.handleInputChange} />
+                                    </div>
                                 </div>
                                 {!this.state.data && (
                                     <div className="mt-5 text-center">

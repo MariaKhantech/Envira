@@ -215,7 +215,7 @@ export class CompanyProfile extends Component {
                   </div>
 
                   <div class="col-4 text-right">
-                    <a href="editprofile" class="btn btn-sm btn-primary">Edit Profile</a>
+                    <a href="editcompanyprofile" class="btn btn-sm btn-primary">Edit Profile</a>
                   </div>
                 </div>
               </div>

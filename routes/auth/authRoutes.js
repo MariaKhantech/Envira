@@ -146,11 +146,11 @@ router.get('/companyProfile/:UserId', (req, res) => {
 //this route is to save the company profile first time
 router.post('/updateCompanyProfile', (req, res) => {
   console.log(req.body.id);
-  console.log(req.body.companyName)
-  db.UserProfile.create({
+  console.log(req.body.companyDescription)
+  db.CompanyProfile.create({
     UserId: req.body.id,
     company_name: req.body.companyName,
-    contact_description: req.body.companyDescription,
+    company_description: req.body.companyDescription,
     email: req.body.companyEmail,
     website: req.body.companyWebsite,
     contact_person: req.body.contactPersonName,
@@ -164,10 +164,34 @@ router.post('/updateCompanyProfile', (req, res) => {
     .catch((err) => {
       if (err) {
         res.status(500).json(err.message);
+        console.log(err)
       }
     });
 });
 
+//this route is to update the company profile
+router.put('/updateUserProfile/:UserId', (req, res) => {
+  db.CompanyProfile.update({
+    company_name: req.body.companyName,
+    company_description: req.body.companyDescription,
+    email: req.body.companyEmail,
+    website: req.body.companyWebsite,
+    contact_person: req.body.contactPersonName,
+    environmental_focus: req.body.environmentalFocus,
+    phone_number: req.body.companyPhoneNumber,
+  }, {
+    where:
+      { UserId: req.params.UserId }
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      if (err) {
+        res.status(500).json(err);
+      }
+    });
+});
 
 //this route is to get the logged in user event details
 router.get('/userTotalEvent/:UserId', (req, res) => {
