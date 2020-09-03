@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import moment from "moment";
-import { Row, Col, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import "./style.css";
 
 export default class Carousel extends Component {
   render() {
     const renderCard = this.props.state.eventData.map((data) => (
-      <div className="contact-box">
+      <div className="contact-box ">
         <img
           alt="image"
           className="img-fluid mx-auto"
@@ -54,52 +54,56 @@ export default class Carousel extends Component {
     ));
 
     const carouselSettings = {
+      // dots: true,
+      // fade: true,
+      // infinite: true,
+      // speed: 500,
+      // slidesToShow: 3,
+      // slidesToScroll: 3,
       dots: true,
       infinite: true,
       adaptiveHeight: true,
       speed: 500,
       slidesToShow: this.props.state.slidesToShow,
       slidesToScroll: this.props.state.slidesToScroll,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            infinite: true,
-            dots: true,
-          },
-        },
-        {
-          breakpoint: 992,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-          },
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-          },
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-          },
-        },
-      ],
+      // responsive: [
+      //   {
+      //     breakpoint: 1024,
+      //     settings: {
+      //       slidesToShow: 3,
+      //       slidesToScroll: 3,
+      //       infinite: true,
+      //       dots: true,
+      //     },
+      //   },
+      //   {
+      //     breakpoint: 992,
+      //     settings: {
+      //       slidesToShow: 1,
+      //       slidesToScroll: 1,
+      //     },
+      //   },
+      //   {
+      //     breakpoint: 600,
+      //     settings: {
+      //       slidesToShow: 1,
+      //       slidesToScroll: 1,
+      //     },
+      //   },
+      //   {
+      //     breakpoint: 480,
+      //     settings: {
+      //       slidesToShow: 1,
+      //       slidesToScroll: 1,
+      //     },
+      //   },
+      // ],
     };
 
     return (
-      <Row>
-        <Col md={this.props.state.colSz} className="mx-auto mt-3">
-          <Slider {...carouselSettings}>{renderCard}</Slider>
-        </Col>
-      </Row>
+      <Slider className="d-flex justify-content-center" {...carouselSettings}>
+        {renderCard}
+      </Slider>
     );
   }
 }

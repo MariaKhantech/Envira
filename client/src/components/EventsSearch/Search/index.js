@@ -26,11 +26,10 @@ export default class Search extends Component {
 
     return (
       <Row>
-        <Col md={8} className="mx-auto mt-5">
+        <Col md={6} className="mx-auto mt-5">
           <InputGroup>
             <InputGroup.Prepend>
               <DropdownButton
-                style={{}}
                 title={filter}
                 id="dropdown"
                 data-tip

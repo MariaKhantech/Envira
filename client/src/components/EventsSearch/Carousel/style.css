@@ -15,10 +15,12 @@
   background-color: #ececec;
   padding: 20px;
   margin-bottom: 20px;
+
   color: #000;
   border-radius: 10px;
   border: 2px solid #e27d60;
   display: block;
+  max-width: 350px !important;
 }
 
 .img-fluid {

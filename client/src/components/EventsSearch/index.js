@@ -5,14 +5,18 @@ import Search from "./Search/index";
 import Carousel from "./Carousel/index";
 // import StarRatingComponent from "react-star-rating-component";
 
-import Button from "react-bootstrap/Button";
+import { Row, Col, Fade } from "react-bootstrap";
+
+import "./style.css";
 
 export default class EventsSearch extends Component {
   state = {
     filter: "Filter",
     disabled: true,
     searchInput: "",
-    colSz: 10,
+    introTitle: "Find and event",
+    introText:
+      " Select a filter using the filter drop down above to search for an event by city, location, event name, or conversely select 'Show All Events'",
     showCarousel: false,
     slidesToShow: 3,
     slidesToScroll: 3,
@@ -64,7 +68,9 @@ export default class EventsSearch extends Component {
           );
           this.setState({
             eventData: filteredLocation,
-            colSz: 6,
+            // colSz: 6,
+            introTitle: "",
+            introText: "",
             showCarousel: true,
             slidesToShow: filteredLocation.length,
             slidesToScroll: filteredLocation.length,
@@ -81,8 +87,10 @@ export default class EventsSearch extends Component {
           );
           this.setState({
             eventData: filteredEv,
-            colSz: 6,
+            // colSz: 6,
             showCarousel: true,
+            introTitle: "",
+            introText: "",
             slidesToShow: filteredEv.length,
             slidesToScroll: filteredEv.length,
             madeRequest: false,
@@ -95,7 +103,7 @@ export default class EventsSearch extends Component {
           error,
         });
       },
-      this.setState({ madeRequest: false, showCarousel: false })
+      this.setState({ madeRequest: false, showCarousel: false, open: false })
     );
   };
 
@@ -116,7 +124,8 @@ export default class EventsSearch extends Component {
       this.setState({ madeRequest: false })
     );
     this.setState({
-      colSz: 10,
+      introTitle: "",
+      introText: "",
       showCarousel: true,
       slidesToShow: 3,
       slidesToScroll: 3,
@@ -142,6 +151,19 @@ export default class EventsSearch extends Component {
           postNewEvent={this.postNewEvent}
           state={this.state}
         />
+
+        <Row>
+          <Col md={9} id="carouselWrap" className="mx-auto mt-3">
+            {/* <Fade in={this.state.open}> */}
+            <div>
+              <h1 className="text-center">{this.state.introTitle}</h1>
+              <p>{this.state.introText}</p>
+            </div>
+            {/* </Fade> */}
+            {renderCarousel}
+          </Col>
+        </Row>
+
         {/* <StarRatingComponent
           name="rating"
           starCount={5}
@@ -150,7 +172,6 @@ export default class EventsSearch extends Component {
           style={{ fontSize: "50px" }}
         /> */}
         {/* <Button variant="primary" onClick={this.postRating} /> */}
-        {renderCarousel}
       </>
     );
   }

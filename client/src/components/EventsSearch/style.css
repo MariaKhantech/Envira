@@ -1,1 +1,5 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+#carouselWrap {
+  box-shadow: 0px 8px 16px 4px #9e9e9e;
+  border-radius: 20px;
+  background-color: rgba(133, 220, 186, 0.7);
+}

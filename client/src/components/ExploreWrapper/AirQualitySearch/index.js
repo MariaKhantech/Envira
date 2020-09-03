@@ -172,7 +172,7 @@ export default class AirQualitySearch extends Component {
               </Button>
             </InputGroup.Append>
           </InputGroup>
-          <Col md={12} className=" wrapper p-4 mb-3">
+          <Col md={12} id="wrapper" className="p-4 mb-3">
             <Container fluid className="px-1 px-md-4 py-5 mx-auto">
               <Fade in={this.state.open}>
                 <Row className="d-flex justify-content-center px-3">
