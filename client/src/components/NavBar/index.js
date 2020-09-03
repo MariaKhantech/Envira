@@ -3,7 +3,7 @@ import { bubble as Menu } from 'react-burger-menu';
 import './style.css';
 import Login from '../Login';
 import { Auth } from 'aws-amplify';
-
+import Axios from 'axios';
 // import { RuleTester } from "eslint";
 
 const orangeColor = {
@@ -11,19 +11,47 @@ const orangeColor = {
 };
 
 export class NavBar extends Component {
+	state = {
+		profile: [],
+	}
+	async componentDidMount() {
+		try {
+			// get the current logged in user details
+			const user = await Auth.currentAuthenticatedUser();
+			// get username from user object
+			const userDetail = user.username;
+			console.log(userDetail)
+			// get the user details for logged in user from the User table 
+			Axios.get(`/api/auth/user/${userDetail}`)
+				.then(
+					(response) => {
+						this.setState({
+							profile: response.data,
+						});
+					})
+				.catch(err => console.log(err))
+		} catch (error) {
+			if (error !== "No current user") {
+				console.log(error);
+			}
+		}
+	}
+
 	handleLogOut = async (event) => {
 		event.preventDefault();
-
 		try {
 			Auth.signOut();
 			this.props.auth.setAuthStatus(false);
 			this.props.auth.setUser(null);
-		} catch (error) {
+			window.location = "/"
+		}
+		catch (error) {
 			console.log(error.message);
 		}
 	};
 
 	render() {
+
 		return (
 			<Menu>
 				<hr style={{ background: 'white' }} />
@@ -31,9 +59,10 @@ export class NavBar extends Component {
 					Home
 				</a>
 				{this.props.auth.isAuthenticated &&
-				this.props.auth.user && (
-					<h5 style={{ textAlign: 'center', color: 'white' }}>Welcome {this.props.auth.user.username}</h5>
-				)}
+					this.props.auth.user && (
+						<h5 style={{ textAlign: 'center', color: 'white' }}>Welcome {this.props.auth.user.username}</h5>
+					)
+				}
 				<hr className="bg-light" style={{ background: 'white' }} />
 				<a className="menu-item text-white about" href="/ocean">
 					About
@@ -91,35 +120,28 @@ export class NavBar extends Component {
 						</a>
 					</div>
 				</li>
-
-				{/* <ul class="nav-item nav-list text-white" style={{ listStyleType: 'none' }}>
-					{/* <li>
-						<a class="" data-toggle="collapse" data-target="#submenu1">
-							Menu Link{' '}
-						</a> */}
-
-				{/* <ul class="nav nav-list collapse" id="submenu1">
-						<li>
-							<a class="accordion-heading" data-toggle="collapse" data-target="#submenu2">
-								Sub Menu Link1{' '}
-								<span class="pull-right">
-									<b class="caret" />
-								</span>
-							</a>
-						</li>
-
-						<li>
-							<a class="accordion-heading" data-toggle="collapse" data-target="#submenu2">
-								Sub Menu Link1{' '}
-								<span class="pull-right">
-									<b class="caret" />
-								</span>
-							</a>
-						</li>
-					</ul> */}
-				{/* </li> */}
-				{/* </ul>  */}
-
+				{/* check the logged in user roleId
+	if roleId is 1 then redirect user to userProfile page
+	 if roleId is 2 then redirect user to Profile page
+	if roleId is 3 then redirect user to Profile page */}
+				{this.props.auth.isAuthenticated &&
+					this.state.profile.RoleId === 1 && (<a className="menu-item text-white about" href="/userprofile">
+						My Account
+					</a>
+					)
+				}
+				{this.props.auth.isAuthenticated &&
+					this.state.profile.RoleId === 2 && (<a className="menu-item text-white about" href="/companyprofile">
+						My Account
+					</a>
+					)
+				}
+				{this.props.auth.isAuthenticated &&
+					this.state.profile.RoleId === 3 && (<a className="menu-item text-white about" href="/companyprofile">
+						My Account
+					</a>
+					)
+				}
 				<hr style={{ background: 'white' }} />
 				{!this.props.auth.isAuthenticated && (
 					<li className="dropdown dropdown-login  order-1 menu-item mt-4">
@@ -128,47 +150,7 @@ export class NavBar extends Component {
 						</button>
 						<ul className="dropdown-menu mt-2">
 							<li className="px-3 py-2">
-								{/* <form className="form">
-								<div className="form-group">
-									<input
-										id="emailInput"
-										placeholder="Email"
-										className="form-control form-control-sm"
-										type="email"
-										required=""
-									/>
-								</div>
-								<div className="form-group">
-									<input
-										id="passwordInput"
-										placeholder="Password"
-										className="form-control form-control-sm"
-										type="password"
-										required=""
-									/>
-								</div>
-								<div className="form-group">
-									<button type="submit" className="btn btn-warning btn-block login-button ">
-										Login
-									</button>
-								</div>
-								<div className="form-group text-center">
-									<small>
-										<a href="/forgotpassword"  className="">
-											Forgot password?
-										</a>
-									</small>
-								</div>
-
-								<div className="form-group text-center">
-									<small>
-										<a href="/signup" className="">
-											<b>register</b>
-										</a>
-									</small>
-								</div>
-							</form> */}
-								<Login username={this.props.username} password={this.props.password} />
+								<Login></Login>
 							</li>
 						</ul>
 					</li>

@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import OceanPollutionText from '../OceanPollutionText';
-import { jarallax, jarallaxElement, jarallaxVideo } from 'jarallax';
+// import {
+//     jarallax,
+//     jarallaxElement,
+//     jarallaxVideo
+// } from 'jarallax'
 
 import './style.scss';
 import { urlencoded } from 'body-parser';

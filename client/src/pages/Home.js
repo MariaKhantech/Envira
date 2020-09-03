@@ -8,7 +8,7 @@ import Axios from 'axios';
 export default class Home extends Component {
 	render() {
 		return (
-			<div class="wrapper">
+			<div className="wrapper">
 				<Carousel />
 				<EnviraBot />
 			</div>
