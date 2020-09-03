@@ -12,6 +12,8 @@ import {
 
 import ReactTooltip from "react-tooltip";
 
+import "./style.css";
+
 export default class Search extends Component {
   render() {
     const { filter, disabled, searchInput } = this.props.state;
@@ -24,13 +26,12 @@ export default class Search extends Component {
 
     return (
       <Row>
-        <Col md={8} className="mx-auto mt-5">
+        <Col md={6} className="mx-auto mt-5">
           <InputGroup>
             <InputGroup.Prepend>
               <DropdownButton
-                variant="primary"
                 title={filter}
-                id="input-group-dropdown-1"
+                id="dropdown"
                 data-tip
                 data-for="filterTip"
               >
@@ -42,15 +43,22 @@ export default class Search extends Component {
                 </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item>
-                  <Button onClick={handleShowAll}>Show All Events</Button>
+                  <Button
+                    style={{ backgroundColor: "#c38d9e", border: "none" }}
+                    onClick={handleShowAll}
+                  >
+                    Show All Events
+                  </Button>
                 </Dropdown.Item>
               </DropdownButton>
+
               <ReactTooltip id="filterTip" place="top" effect="solid">
                 Select a Filter
               </ReactTooltip>
             </InputGroup.Prepend>
             <FormControl
               placeholder="Search for Events"
+              id="searchInput"
               name="searchInput"
               value={searchInput}
               onChange={onChange}
@@ -59,6 +67,8 @@ export default class Search extends Component {
             <InputGroup.Append>
               <Button
                 onClick={handleFilterSubmit}
+                style={{ backgroundColor: "#c38d9e", border: "none" }}
+                id="search"
                 data-tip
                 data-for="searchTip"
               >
@@ -70,9 +80,10 @@ export default class Search extends Component {
               <Button
                 data-tip
                 data-for="addTip"
-                style={{ "background-color": "green" }}
+                id="addEvent"
+                href="/eventCreate"
               >
-                <i className="fa fa-plus"></i>
+                <i className="fa fa-plus" style={{ marginTop: "7px" }}></i>
               </Button>
               <ReactTooltip id="addTip" place="top" effect="solid">
                 Add new event

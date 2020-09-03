@@ -10,4 +10,35 @@
 .slick-next:before {
   color: #000;
 }
+
+.contact-box {
+  background-color: #ececec;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  color: #000;
+  border-radius: 10px;
+  border: 2px solid #e27d60;
+  display: block;
+  max-width: 350px !important;
+}
+
+.img-fluid {
+  border-radius: 10px;
+}
+
+#contactList {
+  list-style: none;
+  background-color: #41b3a3;
+  border-radius: 10px;
+  color: #32325d;
+}
+
+.contact-box-footer {
+  text-align: left;
+  background-color: #41b3a3;
+  border-top: 2px solid #e7eaec;
+  padding: 15px 20px;
+  border-radius: 10px;
+}
 /*# sourceMappingURL=style.css.map */
