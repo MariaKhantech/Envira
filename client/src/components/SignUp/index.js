@@ -81,6 +81,7 @@ export default class Register extends Component {
     }
 
     // AWS Cognito integration here
+    this.setState({ isLoading: true });
     const { username, email, password } = this.state;
     try {
       const newUser = await Auth.signUp({
