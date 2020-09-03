@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import {Parallax, ParallaxLayer} from "react-spring/renderprops-addons"
+import { Parallax, ParallaxLayer } from 'react-spring/renderprops-addons';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import OceanPollutionText from '../OceanPollutionText';
-import {
-    jarallax,
-    jarallaxElement,
-    jarallaxVideo
-} from 'jarallax'
+import { jarallax, jarallaxElement, jarallaxVideo } from 'jarallax';
 
 import './style.scss';
 import { urlencoded } from 'body-parser';
@@ -53,22 +49,7 @@ export class OceanParallax extends Component {
 			</div>
 		);
 
-		return (
-			<div className="wrapper">
-				{cardDiv}
-				<Parallax id="parallax1" pages={3} scrolling={false} horizontal ref={ref => (this.parallax = ref)}>
- 				 <ParallaxLayer  offset={0} speed={0.5}>
-   					 <span style={{ backgroundColor: "white" }} onClick={() => this.parallax.scrollTo(1)}>Layers can contain anything</span>
- 						 </ParallaxLayer>
-
-						  <ParallaxLayer  offset={0} speed={0.5}>
-   					 <span style={{ backgroundColor: "white" }} onClick={() => this.parallax.scrollTo(1)}>Layers can contain anything</span>
- 						 </ParallaxLayer>
-					</Parallax>
-
-				
-			</div>
-		);
+		return <div className="wrapper">{cardDiv}</div>;
 	}
 }
 
