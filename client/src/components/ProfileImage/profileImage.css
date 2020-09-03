@@ -11,7 +11,7 @@ h3{ margin-left: 15px}
     cursor: pointer}
   
 .imgPreview{ text-align: center;
-    margin: 5px 15px;
+    margin: auto;
     height: 150px;
     width: 150px;
     border-left: 1px solid gray;

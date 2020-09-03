@@ -22,8 +22,10 @@ import ViewEventCard from "./pages/ViewEventCard";
 // import CompanyReview from "./pages/CompanyReview";
 
 import Explore from "./pages/Explore";
-import EditProfile from "./pages/EditProfile";
+import EditUserProfile from "./pages/EditUserProfile";
 import UserProfile from "./components/UserProfile";
+import EditCompanyProfile from "./pages/EditCompanyProfile";
+import CompanyProfile from "./components/CompanyProfile";
 
 import { Auth } from "aws-amplify";
 
@@ -96,9 +98,16 @@ export default class AppTest extends Component {
                   />
                   <Route
                     exact
-                    path="/editprofile"
+                    path="/edituserprofile"
                     render={(props) => (
-                      <EditProfile {...props} auth={authProps} />
+                      <EditUserProfile {...props} auth={authProps} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/editcompanyprofile"
+                    render={(props) => (
+                      <EditCompanyProfile {...props} auth={authProps} />
                     )}
                   />
                   <Route
@@ -139,6 +148,13 @@ export default class AppTest extends Component {
                     path="/userprofile"
                     render={(props) => (
                       <UserProfile {...props} auth={authProps} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/companyprofile"
+                    render={(props) => (
+                      <CompanyProfile {...props} auth={authProps} />
                     )}
                   />
                   <Route
