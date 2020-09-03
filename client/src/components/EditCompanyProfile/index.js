@@ -109,7 +109,7 @@ export default class UpdateProfile extends Component {
 
             .then((res) => {
                 console.log(res)
-                window.location = "/profile";
+                window.location = "/companyprofile";
             })
 
             .catch(err => console.log(err))
@@ -136,7 +136,7 @@ export default class UpdateProfile extends Component {
 
                                     <div className="col-md-6">
                                         <label className="labels">User Name</label>
-                                        <input type="text" className="form-control" value={this.state.profile.user_name}  readOnly />
+                                        <input type="text" className="form-control" value={this.state.profile.user_name} readOnly />
                                     </div>
                                     <div className="col-md-6">
                                         <label className="labels">Company Name</label>
@@ -150,7 +150,7 @@ export default class UpdateProfile extends Component {
                                         <input id="phonenumber" name="companyPhoneNumber" value={this.state.companyPhoneNumber} type="tel" className="form-control" placeholder="company phone number" onChange={this.handleInputChange} /></div>
                                     <div className="col-md-6">
                                         <label className="labels">Company Email</label>
-                                        <input name="companyEmail" type="text" placeholder="company email" className="form-control" value={this.state.companyEmail} onChange={this.handleInputChange} />
+                                        <input name="companyEmail" type="email" placeholder="company email" className="form-control" value={this.state.companyEmail} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 <div className="row mt-2">
@@ -160,7 +160,7 @@ export default class UpdateProfile extends Component {
                                     </div>
                                     <div className="col-md-6">
                                         <label className="labels">Website</label>
-                                        <input name="companyWebsite" type="text" className="form-control" placeholder="company website" value={this.state.companyWebsite} onChange={this.handleInputChange} />
+                                        <input name="companyWebsite" type="url" className="form-control" placeholder="company website" value={this.state.companyWebsite} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 <div className="row mt-2">

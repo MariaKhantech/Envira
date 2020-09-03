@@ -28,9 +28,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     // add validation for phone number
     phone_number: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
-      unique: false,
+
     },
 
     // add validation for email

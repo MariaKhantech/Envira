@@ -171,6 +171,7 @@ router.post('/updateCompanyProfile', (req, res) => {
 
 //this route is to update the company profile
 router.put('/updateUserProfile/:UserId', (req, res) => {
+
   db.CompanyProfile.update({
     company_name: req.body.companyName,
     company_description: req.body.companyDescription,
@@ -189,6 +190,7 @@ router.put('/updateUserProfile/:UserId', (req, res) => {
     .catch((err) => {
       if (err) {
         res.status(500).json(err);
+        console.log(err)
       }
     });
 });
