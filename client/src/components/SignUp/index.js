@@ -108,6 +108,7 @@ export default class Register extends Component {
   };
 
   postNewUser = () => {
+    debugger
     console.log(this.state.role)
     Axios.post("/api/auth/signup", {
       username: this.state.username,

@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true,
       },
     },
+    roleId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
 
   // Associating user with events
@@ -27,7 +31,6 @@ module.exports = (sequelize, DataTypes) => {
     User.hasOne(models.UserProfile, { onDelete: 'cascade' });
     User.hasOne(models.CompanyProfile, { onDelete: 'cascade' });
     User.hasMany(models.Rating, { onDelete: 'cascade' });
-    User.belongsTo(models.Role, { foreignKey: { allowNull: false } });
     User.belongsToMany(models.Event, {
       through: 'EventAttendee',
       as: 'events',
