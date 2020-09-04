@@ -23,7 +23,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      unique: false,
+    },
+    website: {
+      type: DataTypes.STRING,
       allowNull: false,
       unique: false,
     },
@@ -57,10 +62,10 @@ module.exports = (sequelize, DataTypes) => {
     Event.hasMany(models.EventComment, { onDelete: "cascade" });
     Event.hasMany(models.Reply, { onDelete: "cascade" });
     Event.belongsToMany(models.User, {
-      through: 'EventAttendee',
-      as: 'events',
-      foreignKey: 'eventId',
-      otherKey: 'userId',
+      through: "EventAttendee",
+      as: "events",
+      foreignKey: "eventId",
+      otherKey: "userId",
     });
   };
 

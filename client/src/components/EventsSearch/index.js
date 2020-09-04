@@ -87,7 +87,6 @@ export default class EventsSearch extends Component {
           );
           this.setState({
             eventData: filteredEv,
-
             showCarousel: true,
             introTitle: "",
             introText: "",
@@ -115,6 +114,7 @@ export default class EventsSearch extends Component {
           eventData: response.data,
           madeRequest: true,
         });
+        console.log(this.state.eventData);
       },
       (error) => {
         this.setState({
@@ -127,8 +127,8 @@ export default class EventsSearch extends Component {
       introTitle: "",
       introText: "",
       showCarousel: true,
-      slidesToShow: 3,
-      slidesToScroll: 3,
+      slidesToShow: 1,
+      slidesToScroll: 1,
     });
   };
 
