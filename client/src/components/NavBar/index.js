@@ -51,7 +51,7 @@ export class NavBar extends Component {
 	};
 
 	render() {
-
+		console.log(this.state.profile)
 		return (
 			<Menu>
 				<hr style={{ background: 'white' }} />
@@ -125,19 +125,19 @@ export class NavBar extends Component {
 	 if roleId is 2 then redirect user to Profile page
 	if roleId is 3 then redirect user to Profile page */}
 				{this.props.auth.isAuthenticated &&
-					this.state.profile.RoleId === 1 && (<a className="menu-item text-white about" href="/userprofile">
+					this.state.profile.roleId === 1 && (<a className="menu-item text-white about" href="/userprofile">
 						My Account
 					</a>
 					)
 				}
 				{this.props.auth.isAuthenticated &&
-					this.state.profile.RoleId === 2 && (<a className="menu-item text-white about" href="/companyprofile">
+					this.state.profile.roleId === 2 && (<a className="menu-item text-white about" href="/companyprofile">
 						My Account
 					</a>
 					)
 				}
 				{this.props.auth.isAuthenticated &&
-					this.state.profile.RoleId === 3 && (<a className="menu-item text-white about" href="/companyprofile">
+					this.state.profile.roleId === 3 && (<a className="menu-item text-white about" href="/companyprofile">
 						My Account
 					</a>
 					)
