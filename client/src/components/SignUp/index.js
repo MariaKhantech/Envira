@@ -131,7 +131,7 @@ export default class Register extends Component {
 
       // this.props.user.userHasAuthenticated(true);
       // this.props.history.push('/login');
-      window.location = "/login"
+      window.location = "/"
     } catch (e) {
       alert(e.message);
       this.setState({ isLoading: false });
@@ -149,7 +149,7 @@ export default class Register extends Component {
             <form onSubmit={this.handleConfirmationSubmit}>
               <div className="form-group input-group text-center">
                 <label htmlFor="confirmationCode" className="mr-2">Confirmation Code:</label>
-                <input name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} required />
+                <input id="confirmationcode" name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} required />
               </div>
               <div className="form-group mx-auto text-center">
                 <button type="submit" className="btn btn-primary btn-md">Submit</button>
