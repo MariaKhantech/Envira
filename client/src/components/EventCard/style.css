@@ -154,4 +154,18 @@ img {
 .google-map {
   width: 500px;
 }
+
+.location-cardStyle {
+  background-color: #85dcba;
+}
+
+.map-style {
+  border-style: solid;
+  border-width: .25em;
+  border-color: #85dcba;
+}
+
+.style-contact-person {
+  background-color: transparent;
+}
 /*# sourceMappingURL=style.css.map */

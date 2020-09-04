@@ -41,8 +41,6 @@
 	box-sizing: border-box;
 }
 
-
-
 #background-cover {
 	// background: url(assets\images\env280262_02.jpg);
 	position: center center;
@@ -61,7 +59,6 @@ nav,
 section {
 	display: block;
 }
-
 
 [tabindex='-1']:focus {
 	outline: 0 !important;
@@ -1435,7 +1432,6 @@ a.text-white:focus {
 	overflow: hidden;
 }
 
-
 @media (min-width: 768px) {
 	.main-content .container-fluid {
 		padding-right: 39px !important;
@@ -1684,10 +1680,6 @@ textarea[resize='horizontal'] {
 	}
 }
 
-
-
-
-
 .progress {
 	overflow: hidden;
 	height: 8px;
@@ -1732,4 +1724,3 @@ p {
 		margin-bottom: 10px;
 	}
 }
-

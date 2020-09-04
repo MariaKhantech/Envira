@@ -70,7 +70,7 @@ export class index extends Component {
 				</div>
 
 				<div class="container mt-5 ">
-					<div class="card flex-row flex-wrap border-0">
+					<div class="card flex-row flex-wrap border-0 style-contact-person">
 						<div class="card-header border-0">
 							<img
 								src="https://st3.depositphotos.com/1694341/14414/i/450/depositphotos_144140695-stock-photo-elon-musk.jpg"
@@ -78,7 +78,7 @@ export class index extends Component {
 								alt=""
 							/>
 						</div>
-						<div class="card-body">
+						<div class="card-body ">
 							<h4>
 								<span>
 									<b>Contact: </b>
@@ -104,28 +104,33 @@ export class index extends Component {
 						</div>
 					</div>
 				</div>
-				<div class="container-fluid mt-5 ">
-					<div class="row mt-5 home-info-section ">
-						<div class="col-5">
-							<div class="section-title">
-								<h2>Location</h2>
-								<p>Get directions to our event center</p>
-							</div>
-							<div class="ct-address">
-								<span>Address:</span>
-								<p>
-									01 Pascale Springs Apt. 339, NY City <br />United State
-								</p>
+				<div className="container-fluid mt-5 ">
+					<div className="row mt-5 home-info-section ">
+						<div className="col-4 text-center">
+							<div className="card border-0  " style={{ width: '10rem;' }}>
+								<div className="card-body shadow-lg p-3 rounded location-cardStyle">
+									<div className="section-title">
+										<h2 className="text-white">Location</h2>
+										<p class="text-white">Get directions to our event center</p>
+									</div>
+									<div class="ct-address">
+										<span class="text-white">Address:</span>
+										<p class="text-white">
+											01 Pascale Springs Apt. 339, NY City <br />United State
+										</p>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="col">
-							<div class="map-responsive">
+
+						<div className="col-6">
+							<div className="map-responsive text-center">
 								<iframe
+									className="rounded map-style"
 									src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=UNH+PORTSMOUTH"
 									width="500"
 									height="300"
 									frameborder="0"
-									style={{ borderStyle: 'solid' }}
 									allowfullscreen
 								/>
 							</div>
