@@ -11,7 +11,7 @@ router.post('/signup', (req, res) => {
   db.User.create({
     user_name: req.body.username,
     email: req.body.email,
-    roleID: req.body.role,
+    roleId: req.body.role,
   })
     .then((dbResponse) => {
       res.json(dbResponse);
