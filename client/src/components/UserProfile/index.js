@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './style.scss';
 import Axios from 'axios';
 import { Auth } from 'aws-amplify';
+import ReviewForm from '../ReviewForm';
 
 export class UserProfile extends Component {
 	state = {
@@ -81,44 +82,44 @@ export class UserProfile extends Component {
 		// const that storest the content of the overview
 		const overviewTab = (
 			<div>
-				<div class="row">
-					<div class="col">
-						<div class="card-profile-stats d-flex justify-content-center mt-md-5">
+				<div className="row">
+					<div className="col">
+						<div className="card-profile-stats d-flex justify-content-center mt-md-5">
 							<div>
-								<span class="heading">10/10</span>
-								<span class="description">AVERAGE EVENT RATINGS</span>
+								<span className="heading">10/10</span>
+								<span className="description">AVERAGE EVENT RATINGS</span>
 							</div>
 							<div>
-								<span class="heading">10</span>
-								<span class="description">Event Photos</span>
+								<span className="heading">10</span>
+								<span className="description">Event Photos</span>
 							</div>
 							<div>
-								<span class="heading">89</span>
-								<span class="description">Event Comments</span>
+								<span className="heading">89</span>
+								<span className="description">Event Comments</span>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="text-center">
+				<div className="text-center">
 					<h3>
-						Greta Thunburg<span class="font-weight-light">, 17</span>
+						Greta Thunburg<span className="font-weight-light">, 17</span>
 					</h3>
-					<div class="h5 font-weight-300">
-						<i class="ni location_pin mr-2" />Stockholm, Sweden
+					<div className="h5 font-weight-300">
+						<i className="ni location_pin mr-2" />Stockholm, Sweden
 					</div>
-					<div class="h5 mt-4">
-						<i class="ni business_briefcase-24 mr-2" />Environmentalist- Activist
+					<div className="h5 mt-4">
+						<i className="ni business_briefcase-24 mr-2" />Environmentalist- Activist
 					</div>
 					<div>
-						<i class="ni education_hat mr-2" />University of Environmentalist
+						<i className="ni education_hat mr-2" />University of Environmentalist
 					</div>
 					<hr />
 					<div>
-						<h5 class="ni business_briefcase-24 mr-2">How to connect:</h5>
-						<i class="fa fa-linkedin-square fa-2x" aria-hidden="true" />
-						<i class="fa fa-facebook-official fa-2x" aria-hidden="true" />
-						<i class="fa fa-twitter-square fa-2x" aria-hidden="true" />
-						<i class="fa fa-meetup fa-2x" aria-hidden="true" />
+						<h5 className="ni business_briefcase-24 mr-2">How to connect:</h5>
+						<i className="fa fa-linkedin-square fa-2x" aria-hidden="true" />
+						<i className="fa fa-facebook-official fa-2x" aria-hidden="true" />
+						<i className="fa fa-twitter-square fa-2x" aria-hidden="true" />
+						<i className="fa fa-meetup fa-2x" aria-hidden="true" />
 					</div>
 				</div>
 			</div>
@@ -128,14 +129,14 @@ export class UserProfile extends Component {
 		//enters the start rating//
 		const startRating = (
 			<div>
-				<div class="row">
-					<div class="col">
-						<div class="card-profile-stats d-flex justify-content-center mt-md-5">
-							<span class="fa fa-star checked" />
-							<span class="fa fa-star checked" />
-							<span class="fa fa-star checked" />
-							<span class="fa fa-star" />
-							<span class="fa fa-star" />
+				<div className="row">
+					<div className="col">
+						<div className="card-profile-stats d-flex justify-content-center mt-md-5">
+							<span className="fa fa-star checked" />
+							<span className="fa fa-star checked" />
+							<span className="fa fa-star checked" />
+							<span className="fa fa-star" />
+							<span className="fa fa-star" />
 						</div>
 					</div>
 				</div>
@@ -223,7 +224,7 @@ export class UserProfile extends Component {
 											<div className="row">
 												<div className="col">
 													<div className="card-profile-stats d-flex justify-content-center mt-md-5">
-														<p>images</p>
+														<ReviewForm />
 													</div>
 												</div>
 											</div>
