@@ -12,8 +12,7 @@ export default class Register extends Component {
     password: "",
     confirmPassword: "",
     email: "",
-    role: "",
-    roleTypes: [],
+    role: "select",
     isLoading: false,
     confirmationCode: "",
     newUser: null,
@@ -35,28 +34,28 @@ export default class Register extends Component {
   }
 
 
-  async componentDidMount() {
-    try {
-      Axios.get("/api/auth/role") //getting role types from role table 
-        .then(
-          (response) => {
-            this.setState({
-              roleTypes: response.data,
-            });
-          },
-          (error) => {
-            this.setState({
-              error
-            });
-          }
-        )
-    }
-    catch (error) {
+  // async componentDidMount() {
+  //   try {
+  //     Axios.get("/api/auth/role") //getting role types from role table 
+  //       .then(
+  //         (response) => {
+  //           this.setState({
+  //             roleTypes: response.data,
+  //           });
+  //         },
+  //         (error) => {
+  //           this.setState({
+  //             error
+  //           });
+  //         }
+  //       )
+  //   }
+  //   catch (error) {
 
-      console.log(error);
+  //     console.log(error);
 
-    }
-  }
+  //   }
+  // }
 
   handleInputChange = (e) => {
     let name = e.target.name;
@@ -159,7 +158,6 @@ export default class Register extends Component {
           </div>
         </div>
       </div>
-
     );
   }
 
@@ -192,10 +190,14 @@ export default class Register extends Component {
                     <div className="input-group-prepend">
                       <span className="input-group-text"> <i className="fa fa-building"></i> </span>
                     </div>
-                    <select name="role" value={this.state.role} onChange={this.handleInputChange} className="form-control">
-                      {this.state.roleTypes.map(role => {
+                    <select id="role" name="role" value={this.state.role} onChange={this.handleInputChange} className="form-control">
+                      {/* {this.state.roleTypes.map(role => {
                         return (<option defaultValue="User" key={role.id} value={role.id}>{role.type}</option>)
-                      })}
+                      })} */}
+                      <option value="select">Select a registration type</option>
+                      <option value="1">User</option>
+                      <option value="2">Company</option>
+                      <option value="3">Non-Profit</option>
                     </select>
                   </div>
 
