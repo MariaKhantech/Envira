@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     website: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: false,
     },
     contact_person: {
