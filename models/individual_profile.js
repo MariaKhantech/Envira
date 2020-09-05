@@ -39,11 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     phone_number: {
       type: DataTypes.STRING,
       unique: false,
-    },
-    profile_image_name: {
-      type: DataTypes.STRING,
-      unique: false,
-    },
+    }
   });
 
   UserProfile.associate = (models) => {

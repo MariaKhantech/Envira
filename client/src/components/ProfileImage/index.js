@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Storage } from "aws-amplify";
+import Axios from 'axios';
 import "./profileImage.css"
 
 export default class index extends Component {
@@ -18,6 +19,14 @@ export default class index extends Component {
         await Storage.put(this.state.selectedFileName, this.state.selectedFile);
         console.log('successfully saved file...');
         console.log('handle uploading-', this.state.selectedFile);
+        
+        Axios.post("/api/auth/updateUserProfile", {
+            id
+        })
+            .then((res) => {
+                console.log(res)
+            })
+            .catch(err => console.log(err.message))
     }
 
     //test for S3//
