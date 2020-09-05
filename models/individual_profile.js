@@ -9,39 +9,40 @@ module.exports = (sequelize, DataTypes) => {
     },
     last_name: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       unique: false,
     },
     // CITY, STATE, and ZIP
     city: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       unique: false,
     },
     state: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       unique: false,
     },
     zip_code: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       unique: false,
     },
     about: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     occupation: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     phone_number: {
       type: DataTypes.STRING,
       unique: false,
-      // validate: {
-      //   is: /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g
-      // }
+    },
+    profile_image_name: {
+      type: DataTypes.STRING,
+      unique: false,
     },
   });
 
