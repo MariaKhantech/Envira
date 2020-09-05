@@ -14,11 +14,11 @@ export default class Carousel extends Component {
           className="img-fluid mx-auto"
           src="http://placehold.it/250x200"
         />
-        <h3 className="mx-auto text-center mt-2" key={data.id} name="event">
+        <h3 className="mx-auto text-center mt-2" name="event">
           <strong>{data.event_name}</strong>
         </h3>
         <h4 class="text-center">
-          <i className="fa fa-calendar ml-1"></i>{" "}
+          <i className="fa fa-calendar ml-1"></i>
           {moment(data.date).format("dddd, MMMM Do YYYY")}
         </h4>
         <ul id="contactList" className="p-1 ">
@@ -44,6 +44,7 @@ export default class Carousel extends Component {
             <Button
               size="sm"
               className="float-right"
+              key={data.id}
               style={{ backgroundColor: "#c38d9e", border: "none" }}
             >
               View

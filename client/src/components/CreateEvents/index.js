@@ -10,77 +10,101 @@ import Button from "react-bootstrap/Button";
 import "./style.scss";
 
 export class CreateEvents extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      eventName: "",
+      date: "",
+      description: "",
+      contactName: "",
+      contactEmail: "",
+      contactNumber: "",
+      website: "",
+      address: "",
+      city: "",
+      state: "",
+      selectedFile: "",
+      selectedFileName: "Choose file",
+      imagePreviewUrl: "",
+      displayUploadButton: false,
+      userData: [],
+    };
+  }
+  //test for S3//
+  saveFile = async () => {
+    // const { file } = this.state;
+    await Storage.put("test3.txt", "hello");
+    console.log("successfully saved file...");
+  };
 
-	constructor(props) {
-		super(props);
-		this.state = {
-			eventName: '',
-			date: new Date(),
-			description: '',
-			contactName: '',
-			contactEmail: '',
-			conactNumber: '',
-			address: '',
-			city: '',
-			state: '',
-			selectedFile: '',
-			selectedFileName: 'Choose file',
-			imagePreviewUrl: '',
-			displayUploadButton: false
-		};
-	}
-	//test for S3//
-	saveFile = async () => {
-		// const { file } = this.state;
-		await Storage.put('test3.txt', 'hello');
-		console.log('successfully saved file...');
-	};
+  uploadFile = (event) => {
+    console.log(event.target);
 
-	uploadFile = (event) => {
-		console.log(event.target);
+    let file = event.target.files[0];
+    let reader = new FileReader();
 
-		let file = event.target.files[0];
-		let reader = new FileReader();
+    reader.onloadend = () => {
+      this.setState({
+        selectedFile: file,
+        selectedFileName: file.name,
+        imagePreviewUrl: reader.result,
+        displayUploadButton: true,
+      });
+    };
+    reader.readAsDataURL(file);
+  };
 
-		reader.onloadend = () => {
-			this.setState({
-				selectedFile: file,
-				selectedFileName: file.name,
-				imagePreviewUrl: reader.result,
-				displayUploadButton: true
-			});
-		};
-		reader.readAsDataURL(file);
-	};
+  uploadEventImagetoS3 = async (event) => {
+    event.preventDefault();
+    event.target.textContent = "Successfully uploaded";
+    event.target.disabled = true;
+    await Storage.put(this.state.selectedFileName, this.state.selectedFile);
+    console.log("successfully saved file...");
+  };
 
-	uploadEventImagetoS3 = async (event) => {
-		event.preventDefault();
-		event.target.textContent = 'Successfully uploaded';
-		event.target.disabled = true;
-		await Storage.put(this.state.selectedFileName, this.state.selectedFile);
-		console.log('successfully saved file...');
-	};
+  // Request to get user info and set state of userData (for userId)
+  async componentDidMount() {
+    try {
+      // get the current logged in user details
+      const user = await Auth.currentAuthenticatedUser();
+      // get username from user object
+      const userDetail = user.username;
+      // get the user details for logged in user from the User table
+      Axios.get(`/api/auth/user/${userDetail}`)
+        .then((response) => {
+          this.setState({
+            userData: response.data,
+          });
+          console.log(this.state.userData);
+        })
+        .catch((err) => console.log(err));
+    } catch (error) {
+      if (error !== "No current user") {
+        console.log(error);
+      }
+    }
+  }
 
-	postNewEvent = async (event) => {
-		event.preventDefault();
-		Axios.post('/api/create/eventcreate', {
-			eventName: this.state.eventName,
-			date: this.state.date,
-			description: this.state.description,
-			contactName: this.state.contactName,
-			contactEmail: this.state.contactEmail,
-			contactNumber: this.state.contactNumber,
-			address: this.state.address,
-			city: this.state.city,
-			state: this.state.state,
-			id: this.state.profile.id
-		})
-			.then((res) => {
-				console.log(res);
-			})
-			.catch((err) => console.log(err));
-	};
-
+  postNewEvent = (event) => {
+    event.preventDefault();
+    Axios.post("/api/create/eventcreate", {
+      eventName: this.state.eventName,
+      date: this.state.date,
+      description: this.state.description,
+      contactPerson: this.state.contactName,
+      contactEmail: this.state.contactEmail,
+      contactNumber: this.state.contactNumber,
+      website: "www.myawesomewebsite.com",
+      address: this.state.address,
+      city: this.state.city,
+      state: this.state.state,
+      id: this.state.userData.id,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
 
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
@@ -119,94 +143,95 @@ export class CreateEvents extends Component {
                       required
                     />
 
+                    <label htmlFor="date" className="col-form-label mt-3">
+                      Date:
+                    </label>
+                    <input
+                      type="date"
+                      id="date"
+                      className="form-control"
+                      placeholder="September, 15, 2020"
+                      name="date"
+                      value={this.state.date}
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group col-md-5">
+                    <label htmlFor="description" className="col-form-label">
+                      Event Description:
+                    </label>
+                    <textarea
+                      className="form-control"
+                      type="text"
+                      id="description"
+                      rows="5"
+                      style={{ resize: "none" }}
+                      name="description"
+                      value={this.state.description}
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </div>
 
-										<label htmlFor="date" className="col-form-label mt-3">
-											Date:
-										</label>
-										<input
-											type="date"
-											id="date"
-											className="form-control"
-											placeholder="September, 15, 2020"
-											name="date"
-											value={this.state.date}
-											onChange={this.handleChange}
-											required
-										/>
-									</div>
-									<div className="form-group col-md-5">
-										<label htmlFor="description" className="col-form-label">
-											Event Description:
-										</label>
-										<textarea
-											className="form-control"
-											type="text"
-											id="description"
-											rows="5"
-											style={{ resize: 'none' }}
-											name="description"
-											value={this.state.description}
-											onChange={this.handleChange}
-											required
-										/>
-									</div>
+                  <div />
+                </div>
+                <hr />
+                <div className="row justify-content-center">
+                  <div className="col-6">
+                    <div className="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                      <input
+                        id="upload"
+                        type="file"
+                        onChange={this.uploadFile}
+                        className="form-control border-0"
+                      />
+                      <label
+                        id="upload-label"
+                        htmlFor="upload"
+                        className="font-weight-light text-muted"
+                      >
+                        {this.state.selectedFileName}
+                      </label>
+                      <div className="input-group-append">
+                        <label
+                          htmlFor="upload"
+                          className="btn btn-secondary m-0 rounded-pill px-4"
+                        >
+                          {" "}
+                          <i className="fa fa-cloud-upload mr-2 text-white" />
+                          <small className="text-uppercase font-weight-bold text-white">
+                            Choose file
+                          </small>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-									<div />
-								</div>
-								<hr />
-								<div className="row justify-content-center">
-									<div className="col-6">
-										<div className="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-											<input
-												id="upload"
-												type="file"
-												onChange={this.uploadFile}
-												className="form-control border-0"
-											/>
-											<label
-												id="upload-label"
-												htmlFor="upload"
-												className="font-weight-light text-muted"
-											>
-												{this.state.selectedFileName}
-											</label>
-											<div className="input-group-append">
-												<label
-													htmlFor="upload"
-													className="btn btn-secondary m-0 rounded-pill px-4"
-												>
-													{' '}
-													<i className="fa fa-cloud-upload mr-2 text-white" />
-													<small className="text-uppercase font-weight-bold text-white">
-														Choose file
-													</small>
-												</label>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div className="row justify-content-center">
-									<p className="font-italic text-center">
-										The image uploaded image will appear below.
-									</p>
-									<div className="image-area mt-4">
-										<img
-											id="imageResult"
-											src={this.state.imagePreviewUrl}
-											alt=""
-											className="img-fluid rounded shadow-sm mx-auto d-block"
-										/>
-									</div>
-								</div>
-								<div
-									className="row justify-content-center mt-2 "
-									style={{ display: this.state.displayUploadButton ? 'block' : 'none' }}
-								>
-									<button onClick={this.uploadEventImagetoS3}>Upload</button>
-								</div>
-							</div>
-						</div>
+                <div className="row justify-content-center">
+                  <p className="font-italic text-center">
+                    The image uploaded image will appear below.
+                  </p>
+                  <div className="image-area mt-4">
+                    <img
+                      id="imageResult"
+                      src={this.state.imagePreviewUrl}
+                      alt=""
+                      className="img-fluid rounded shadow-sm mx-auto d-block"
+                    />
+                  </div>
+                </div>
+                <div
+                  className="row justify-content-center mt-2 "
+                  style={{
+                    display: this.state.displayUploadButton ? "block" : "none",
+                  }}
+                >
+                  <button onClick={this.uploadEventImagetoS3}>Upload</button>
+                </div>
+              </div>
+            </div>
 
             <div className="row">
               <div className="col-md-6" style={{ padding: "0.5em" }}>
