@@ -33,13 +33,13 @@ export default class UpdateProfile extends Component {
         });
     }
 
+    // When the page loads for the first time get the logged in user info
     async componentDidMount() {
         try {
             // get the current logged in user details
             const user = await Auth.currentAuthenticatedUser();
             // get username from user object
             const userDetail = user.username;
-            console.log(userDetail)
             // get the user details for logged in user from the User table 
             Axios.get(`/api/auth/user/${userDetail}`)
                 .then(
@@ -48,6 +48,7 @@ export default class UpdateProfile extends Component {
                         this.setState({
                             profile: response.data,
                         });
+                        // call this function to get the existing user profile details
                         this.getUserProfile()
                     })
                 .catch(err => console.log(err))
@@ -58,14 +59,12 @@ export default class UpdateProfile extends Component {
         }
     }
 
-
+    // call this function to get the existing user profile details
     getUserProfile = () => {
         const UserId = this.state.profile.id
-        console.log(this.state.firstName)
         Axios.get(`/api/auth/userProfile/${UserId}`)
             .then(
                 (response) => {
-                    console.log(response.data)
                     this.setState({
                         firstName: response.data.first_name,
                         lastName: response.data.last_name,
@@ -81,6 +80,7 @@ export default class UpdateProfile extends Component {
             .catch(err => console.log(err))
     }
 
+    // call this function on the input change and update the state
     handleInputChange = (e) => {
         let name = e.target.name;
         let value = e.target.value;
@@ -90,10 +90,11 @@ export default class UpdateProfile extends Component {
         document.getElementById(e.target.id).classList.remove("is-invalid");
     }
 
+    // call this function on form submit when user saves profile for the first time
     handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        // Form validation
+        // check Form validation
         this.clearErrorState();
         const error = Validate(event, this.state);
         if (error) {
@@ -114,19 +115,18 @@ export default class UpdateProfile extends Component {
                 phoneNumber,
                 occupation,
                 id
-            })
-                .then((res) => {
-                    console.log(res)
-                    window.location = "/userprofile";
-                })
-                .catch(err => console.log(err.message))
+            }).then((res) => {
+                console.log(res)
+                window.location = "/userprofile";
+            }).catch(err => console.log(err.message))
         }
     }
 
+    // call this function on form submit when user updates profile
     handleUpdateFormSubmit = async (event) => {
         event.preventDefault();
 
-        // Form validation
+        // check Form validation
         this.clearErrorState();
         const error = Validate(event, this.state);
         if (error) {
@@ -147,12 +147,10 @@ export default class UpdateProfile extends Component {
                 about,
                 phoneNumber,
                 occupation
-            })
-                .then((res) => {
-                    console.log(res)
-                    window.location = "/userprofile";
-                })
-                .catch(err => console.log(err))
+            }).then((res) => {
+                console.log(res)
+                window.location = "/userprofile";
+            }).catch(err => console.log(err))
         }
     }
 
