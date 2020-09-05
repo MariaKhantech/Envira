@@ -109,6 +109,7 @@ export class UserProfile extends Component {
         this.setState({ userRating: res.data });
         console.log(this.state.userRating);
       })
+
       .catch((err) => console.log(err));
   };
 
@@ -205,14 +206,17 @@ export class UserProfile extends Component {
         </div>
       </div>
     );
-    // WILL BE NON-EDITABLE AVERAGE USER RATING (WIP)
-    //   const starRating = (
-    // 	<StarRatingComponent
-    // 	  name="rating"
-    // 	  starCount={5}
-    // 	  // value={this.getAverageRating(this.state.userRating)}
-    // 	/>
-    //   );
+
+    // Get average rating using map and reduce
+    const ratings = this.state.userRating.map((data) => data.rating);
+    const avgRating =
+      ratings.reduce((a, b) => a + parseInt(b), 0) / ratings.length;
+
+    // add avgRating to starRating component value
+    const starRating = (
+      <StarRatingComponent name="rating" starCount={5} value={avgRating} />
+    );
+
     //end of star rating tab//
     return (
       <div className=" main-content mb-4">
@@ -321,7 +325,7 @@ export class UserProfile extends Component {
                     {overviewTab}
                     <div className="tab-pane " id="tabs-2" role="tabpanel" />
                     {postStarRating}
-                    {/* {starRating} */}
+                    {starRating}
                     <div className="tab-pane " id="tabs-3" role="tabpanel">
                       <div className="row">
                         <div className="col">
