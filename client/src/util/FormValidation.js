@@ -15,6 +15,10 @@ function validateForm(event, state) {
     document.getElementById("firstname").classList.add("is-invalid");
     return { blankfield: true };
   }
+  if (state.hasOwnProperty("companyName") && state.companyName === "") {
+    document.getElementById("companyname").classList.add("is-invalid");
+    return { blankfield: true };
+  }
   if (state.hasOwnProperty("lastName") && state.lastName === "") {
     document.getElementById("lastname").classList.add("is-invalid");
     return { blankfield: true };
@@ -48,7 +52,22 @@ function validateForm(event, state) {
     document.getElementById("zipcode").classList.add("is-invalid");
     return { blankfield: true };
   }
-  
+  if (state.hasOwnProperty("contactPersonName") && state.contactPersonName === "") {
+    document.getElementById("contactperson").classList.add("is-invalid");
+    return { blankfield: true };
+  }
+  if (state.hasOwnProperty("website") && state.website === "") {
+    document.getElementById("website").classList.add("is-invalid");
+    return { blankfield: true };
+  }
+  if (state.hasOwnProperty("description") && state.description === "") {
+    document.getElementById("description").classList.add("is-invalid");
+    return { blankfield: true };
+  }
+  if (state.hasOwnProperty("environmentalFocus") && state.environmentalFocus === "") {
+    document.getElementById("envirofocus").classList.add("is-invalid");
+    return { blankfield: true };
+  }
   if (state.hasOwnProperty("password") && state.password === "") {
     document.getElementById("password").classList.add("is-invalid");
     return { blankfield: true };

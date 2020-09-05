@@ -10,11 +10,11 @@ export default class UpdateProfile extends Component {
         profile: [],
         companyName: "",
         contactPersonName: "",
-        companyDescription: "",
+        description: "",
         environmentalFocus: "",
-        companyWebsite: "",
+        website: "",
         companyPhoneNumber: "",
-        companyEmail: "",
+        email: "",
         data: "",
         errors: {
             blankfield: false,
@@ -67,11 +67,11 @@ export default class UpdateProfile extends Component {
                     this.setState({
                         companyName: response.data.company_name,
                         contactPersonName: response.data.contact_person,
-                        companyDescription: response.data.company_description,
+                        description: response.data.company_description,
                         environmentalFocus: response.data.environmental_focus,
-                        companyWebsite: response.data.website,
+                        website: response.data.website,
                         companyPhoneNumber: response.data.phone_number,
-                        companyEmail: response.data.email,
+                        email: response.data.email,
                         data: response.data
                     });
                 })
@@ -101,13 +101,13 @@ export default class UpdateProfile extends Component {
             });
         }
         else {
-            const { companyName, companyDescription, companyEmail, companyWebsite, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
+            const { companyName, description, email, website, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
             const id = this.state.profile.id;
             Axios.post("/api/auth/updateCompanyProfile", {
                 companyName,
-                companyDescription,
-                companyEmail,
-                companyWebsite,
+                description,
+                email,
+                website,
                 contactPersonName,
                 environmentalFocus,
                 companyPhoneNumber,
@@ -131,13 +131,13 @@ export default class UpdateProfile extends Component {
             });
         }
         else {
-            const { companyName, companyDescription, companyEmail, companyWebsite, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
+            const { companyName, description, email, website, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
             const UserId = this.state.profile.id;
             Axios.put(`/api/auth/updateCompanyProfile/${UserId}`, {
                 companyName,
-                companyDescription,
-                companyEmail,
-                companyWebsite,
+                description,
+                email,
+                website,
                 contactPersonName,
                 environmentalFocus,
                 companyPhoneNumber,
@@ -183,7 +183,7 @@ export default class UpdateProfile extends Component {
                                         <input id="phonenumber" id="phonenumber" name="companyPhoneNumber" value={this.state.companyPhoneNumber} type="tel" className="form-control" placeholder="company phone number" onChange={this.handleInputChange} /></div>
                                     <div className="col-md-6">
                                         <label className="labels">Company Email</label>
-                                        <input id="email" name="companyEmail" type="email" placeholder="company email" className="form-control" value={this.state.companyEmail} onChange={this.handleInputChange} />
+                                        <input id="email" name="email" type="email" placeholder="company email" className="form-control" value={this.state.email} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 <div className="row mt-2">
@@ -193,13 +193,13 @@ export default class UpdateProfile extends Component {
                                     </div>
                                     <div className="col-md-6">
                                         <label className="labels">Website</label>
-                                        <input id="website" name="companyWebsite" type="url" className="form-control" placeholder="company website" value={this.state.companyWebsite} onChange={this.handleInputChange} />
+                                        <input id="website" name="website" type="url" className="form-control" placeholder="company website" value={this.state.website} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 <div className="row mt-2">
                                     <div className="col-md-12 mt-1">
                                         <label className="labels">Description</label>
-                                        <textarea id="description" name="companyDescription" type="text" className="form-control" placeholder="company description" value={this.state.companyDescription} onChange={this.handleInputChange} />
+                                        <textarea id="description" name="description" type="text" className="form-control" placeholder="company description" value={this.state.description} onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-12 mt-1">
                                         <label className="labels">Environmental Focus</label>
