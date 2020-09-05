@@ -11,11 +11,11 @@ function validateForm(event, state) {
     document.getElementById("username").classList.add("is-invalid");
     return { blankfield: true };
   }
-  if (state.hasOwnProperty("firstname") && state.firstname === "") {
+  if (state.hasOwnProperty("firstName") && state.firstName === "") {
     document.getElementById("firstname").classList.add("is-invalid");
     return { blankfield: true };
   }
-  if (state.hasOwnProperty("lastname") && state.lastname === "") {
+  if (state.hasOwnProperty("lastName") && state.lastName === "") {
     document.getElementById("lastname").classList.add("is-invalid");
     return { blankfield: true };
   }
@@ -23,20 +23,20 @@ function validateForm(event, state) {
     document.getElementById("email").classList.add("is-invalid");
     return { blankfield: true };
   }
-  if (state.hasOwnProperty("occupation") && state.email === "") {
+  if (state.hasOwnProperty("occupation") && state.ocupation === "") {
     document.getElementById("occupation").classList.add("is-invalid");
     return { blankfield: true };
   }
-  if (state.hasOwnProperty("zipCode") && state.email === "") {
+  if (state.hasOwnProperty("zipCode") && state.zipCode === "") {
     document.getElementById("zipcode").classList.add("is-invalid");
     return { blankfield: true };
   }
-  if (state.hasOwnProperty("about") && state.email === "") {
+  if (state.hasOwnProperty("about") && state.about === "") {
     document.getElementById("about").classList.add("is-invalid");
     return { blankfield: true };
   }
 
-  if (state.hasOwnProperty("state") && state.email === "") {
+  if (state.hasOwnProperty("state") && state.state === "") {
     document.getElementById("state").classList.add("is-invalid");
     return { blankfield: true };
   }

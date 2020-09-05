@@ -19,6 +19,7 @@ export default class UpdateProfile extends Component {
         zipCode: "",
         data: "",
         errors: {
+            blankfield: false,
             phonenumber: false
         }
     }
@@ -26,6 +27,7 @@ export default class UpdateProfile extends Component {
     clearErrorState = () => {
         this.setState({
             errors: {
+                blankfield: false,
                 phonenumber: false
             }
         });
