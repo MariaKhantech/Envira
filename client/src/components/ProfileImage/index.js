@@ -56,14 +56,14 @@ export default class index extends Component {
                 })
             .catch(err => console.log(err))
         Storage.get(this.state.selectedFileName)
-        .then(
-            (response)=>{
-                console.log(response.data)
-                this.setState({
-                    imagePreviewUrl: response.data
-                });  
-            })
-        .catch(err => console.log(err))
+            .then(
+                (response) => {
+                    console.log(response.data)
+                    this.setState({
+                        imagePreviewUrl: response.data
+                    });
+                })
+            .catch(err => console.log(err))
     }
 
     handleImageUpload = async (event) => {
@@ -76,10 +76,12 @@ export default class index extends Component {
         console.log('handle uploading-', this.state.selectedFile);
 
         const { selectedFileName } = this.state
+        console.log(selectedFileName)
         const UserId = this.state.profile.id;
         console.log(UserId)
-        Axios.post(`/api/image/${UserId}`, {
-            selectedFileName
+        Axios.post("/api/auth/image", {
+            selectedFileName,
+            UserId
         })
             .then((res) => {
                 console.log(res)

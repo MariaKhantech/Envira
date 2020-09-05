@@ -210,20 +210,19 @@ router.get('/userTotalEvent/:UserId', (req, res) => {
 });
 
 // this route is save the profile image for logged in user into image model
-router.post('/image/:UserId', (req, res) => {
-
+router.post('/image', (req, res) => {
+  console.log(req.body.selectedFileName)
+  console.log(req.body.UserId)
   db.Image.create({
     image_name: req.body.selectedFileName,
-  }, {
-    where:
-      { UserId: req.params.UserId }
+    UserId: req.body.UserId
   })
     .then((data) => {
       res.json(data);
     })
     .catch((err) => {
+      console.log(err)
       if (err) {
-        console.log(err)
         res.status(500).json(err.message);
       }
     });
