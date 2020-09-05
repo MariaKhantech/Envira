@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-// import "./updateProfile.css";
 import Axios from 'axios';
 import { Auth } from 'aws-amplify';
-// import ProfileImage from "../ProfileImage"
+import ProfileImage from "../ProfileImage"
+import FormErrors from "../FormErrors";
+import Validate from "../../util/FormValidation";
 
 export default class UpdateProfile extends Component {
     state = {
@@ -14,9 +15,24 @@ export default class UpdateProfile extends Component {
         companyWebsite: "",
         companyPhoneNumber: "",
         companyEmail: "",
-        data: ""
+        data: "",
+        errors: {
+            blankfield: false,
+            phonenumber: false
+        }
     }
 
+
+    clearErrorState = () => {
+        this.setState({
+            errors: {
+                blankfield: false,
+                phonenumber: false
+            }
+        });
+    }
+
+    // When the page loads for the first time get the logged in user info
     async componentDidMount() {
         try {
             // get the current logged in user details
@@ -31,6 +47,7 @@ export default class UpdateProfile extends Component {
                         this.setState({
                             profile: response.data,
                         });
+                        // call this function to get the existing company profile details
                         this.getCompanyProfile()
                     })
                 .catch(err => console.log(err))
@@ -41,13 +58,12 @@ export default class UpdateProfile extends Component {
         }
     }
 
+    // call this function to get the existing company profile details
     getCompanyProfile = () => {
         const UserId = this.state.profile.id
-        console.log(this.state.companyName)
         Axios.get(`/api/auth/companyProfile/${UserId}`)
             .then(
                 (response) => {
-                    console.log(response.data)
                     this.setState({
                         companyName: response.data.company_name,
                         contactPersonName: response.data.contact_person,
@@ -62,57 +78,74 @@ export default class UpdateProfile extends Component {
             .catch(err => console.log(err))
     }
 
+    // call this function on the input change and update the state
     handleInputChange = (e) => {
         let name = e.target.name;
         let value = e.target.value;
         this.setState({
             [name]: value
         })
+        document.getElementById(e.target.id).classList.remove("is-invalid");
     }
 
+    // call this function on form submit when company saves profile for the first time
     handleFormSubmit = async (event) => {
         event.preventDefault();
-        const { companyName, companyDescription, companyEmail, companyWebsite, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
-        const id = this.state.profile.id;
-        console.log(this.state.profile.id);
 
-        console.log(companyName, companyDescription)
-        Axios.post("/api/auth/updateCompanyProfile", {
-            companyName,
-            companyDescription,
-            companyEmail,
-            companyWebsite,
-            contactPersonName,
-            environmentalFocus,
-            companyPhoneNumber,
-            id
-        })
-            .then((res) => {
-                console.log(res)
-            })
-            .catch(err => console.log(err.message))
-    }
-
-    handleUpdateFormSubmit = async (event) => {
-        event.preventDefault();
-        const { companyName, companyDescription, companyEmail, companyWebsite, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
-        const UserId = this.state.profile.id;
-        Axios.put(`/api/auth/updateCompanyProfile/${UserId}`, {
-            companyName,
-            companyDescription,
-            companyEmail,
-            companyWebsite,
-            contactPersonName,
-            environmentalFocus,
-            companyPhoneNumber,
-        })
-
-            .then((res) => {
+        // check Form validation
+        this.clearErrorState();
+        const error = Validate(event, this.state);
+        if (error) {
+            this.setState({
+                errors: { ...this.state.errors, ...error }
+            });
+        }
+        else {
+            const { companyName, companyDescription, companyEmail, companyWebsite, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
+            const id = this.state.profile.id;
+            Axios.post("/api/auth/updateCompanyProfile", {
+                companyName,
+                companyDescription,
+                companyEmail,
+                companyWebsite,
+                contactPersonName,
+                environmentalFocus,
+                companyPhoneNumber,
+                id
+            }).then((res) => {
                 console.log(res)
                 window.location = "/companyprofile";
-            })
+            }).catch(err => console.log(err.message))
+        }
+    }
 
-            .catch(err => console.log(err))
+    // call this function on form submit when company updates profile
+    handleUpdateFormSubmit = async (event) => {
+        event.preventDefault();
+        // check Form validation
+        this.clearErrorState();
+        const error = Validate(event, this.state);
+        if (error) {
+            this.setState({
+                errors: { ...this.state.errors, ...error }
+            });
+        }
+        else {
+            const { companyName, companyDescription, companyEmail, companyWebsite, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
+            const UserId = this.state.profile.id;
+            Axios.put(`/api/auth/updateCompanyProfile/${UserId}`, {
+                companyName,
+                companyDescription,
+                companyEmail,
+                companyWebsite,
+                contactPersonName,
+                environmentalFocus,
+                companyPhoneNumber,
+            }).then((res) => {
+                console.log(res)
+                window.location = "/companyprofile";
+            }).catch(err => console.log(err))
+        }
     }
 
     render() {
@@ -123,7 +156,7 @@ export default class UpdateProfile extends Component {
                         <div className="col-md-4 border-right">
                             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
                                 <span className="font-weight-bold mb-3">Hello {this.state.companyName}</span>
-                                {/* <ProfileImage></ProfileImage> */}
+                                <ProfileImage></ProfileImage>
 
                             </div>
                         </div>
@@ -136,41 +169,41 @@ export default class UpdateProfile extends Component {
 
                                     <div className="col-md-6">
                                         <label className="labels">User Name</label>
-                                        <input type="text" className="form-control" value={this.state.profile.user_name} readOnly />
+                                        <input id="username" type="text" className="form-control" value={this.state.profile.user_name} readOnly />
                                     </div>
                                     <div className="col-md-6">
                                         <label className="labels">Company Name</label>
-                                        <input name="companyName" type="text" className="form-control" placeholder="company name" value={this.state.companyName} onChange={this.handleInputChange} />
+                                        <input id="companyname" name="companyName" type="text" className="form-control" placeholder="company name" value={this.state.companyName} onChange={this.handleInputChange} />
                                     </div>
 
                                 </div>
                                 <div className="row mt-2">
                                     <div className="col-md-6">
                                         <label className="labels">Phone Number</label>
-                                        <input id="phonenumber" name="companyPhoneNumber" value={this.state.companyPhoneNumber} type="tel" className="form-control" placeholder="company phone number" onChange={this.handleInputChange} /></div>
+                                        <input id="phonenumber" id="phonenumber" name="companyPhoneNumber" value={this.state.companyPhoneNumber} type="tel" className="form-control" placeholder="company phone number" onChange={this.handleInputChange} /></div>
                                     <div className="col-md-6">
                                         <label className="labels">Company Email</label>
-                                        <input name="companyEmail" type="email" placeholder="company email" className="form-control" value={this.state.companyEmail} onChange={this.handleInputChange} />
+                                        <input id="email" name="companyEmail" type="email" placeholder="company email" className="form-control" value={this.state.companyEmail} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 <div className="row mt-2">
                                     <div className="col-md-6 mt-1">
                                         <label className="labels">Contact Person</label>
-                                        <input name="contactPersonName" type="text" className="form-control" placeholder="contact person" value={this.state.contactPersonName} onChange={this.handleInputChange} />
+                                        <input id="contactperson" name="contactPersonName" type="text" className="form-control" placeholder="contact person" value={this.state.contactPersonName} onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-6">
                                         <label className="labels">Website</label>
-                                        <input name="companyWebsite" type="url" className="form-control" placeholder="company website" value={this.state.companyWebsite} onChange={this.handleInputChange} />
+                                        <input id="website" name="companyWebsite" type="url" className="form-control" placeholder="company website" value={this.state.companyWebsite} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 <div className="row mt-2">
                                     <div className="col-md-12 mt-1">
                                         <label className="labels">Description</label>
-                                        <textarea name="companyDescription" type="text" className="form-control" placeholder="company description" value={this.state.companyDescription} onChange={this.handleInputChange} />
+                                        <textarea id="description" name="companyDescription" type="text" className="form-control" placeholder="company description" value={this.state.companyDescription} onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-12 mt-1">
                                         <label className="labels">Environmental Focus</label>
-                                        <textarea name="environmentalFocus" type="text" className="form-control" placeholder="environmental focus details" value={this.state.environmentalFocus} onChange={this.handleInputChange} />
+                                        <textarea id="envirofocus" name="environmentalFocus" type="text" className="form-control" placeholder="environmental focus details" value={this.state.environmentalFocus} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 {!this.state.data && (
