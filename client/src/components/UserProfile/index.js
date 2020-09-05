@@ -51,7 +51,6 @@ export class UserProfile extends Component {
     Axios.get(`/api/auth/userProfile/${UserId}`)
       .then(
         (response) => {
-          console.log(response)
           this.setState({
             firstName: response.data.first_name,
             lastName: response.data.last_name,
@@ -72,7 +71,6 @@ export class UserProfile extends Component {
     Axios.get(`/api/auth/userTotalEvent/${UserId}`)
       .then(
         (response) => {
-          console.log(response)
           this.setState({
             totalEvent: response.data
           });
@@ -142,11 +140,11 @@ export class UserProfile extends Component {
                     <h3>
                       {this.state.firstName} {this.state.lastName}
                     </h3>
-                    <div className="h5 font-weight-300">
-                      <i className="ni location_pin mr-2"></i>{this.state.state}, {this.state.city}
-                    </div>
-                    <div className="h5 mt-1">
+                    <div className="h6 mt-1">
                       <i className="ni business_briefcase-24 mr-2"></i>{this.state.occupation}
+                    </div>
+                    <div className="h6 font-weight-300">
+                      <i className="ni location_pin mr-2"></i>{this.state.state}, {this.state.city}
                     </div>
                     <hr />
                     <div>
