@@ -141,17 +141,15 @@ router.get('/companyProfile/:UserId', (req, res) => {
 
 //this route is to save the company profile first time
 router.post('/updateCompanyProfile', (req, res) => {
-  console.log(req.body.id);
-  console.log(req.body.companyDescription)
   db.CompanyProfile.create({
     UserId: req.body.id,
     company_name: req.body.companyName,
-    company_description: req.body.companyDescription,
-    email: req.body.companyEmail,
-    website: req.body.companyWebsite,
+    company_description: req.body.description,
+    email: req.body.email,
+    website: req.body.website,
     contact_person: req.body.contactPersonName,
     environmental_focus: req.body.environmentalFocus,
-    phone_number: req.body.companyPhoneNumber,
+    phone_number: req.body.phoneNumber,
 
   })
     .then((data) => {
@@ -170,12 +168,12 @@ router.put('/updateUserProfile/:UserId', (req, res) => {
 
   db.CompanyProfile.update({
     company_name: req.body.companyName,
-    company_description: req.body.companyDescription,
-    email: req.body.companyEmail,
-    website: req.body.companyWebsite,
+    company_description: req.body.description,
+    email: req.body.email,
+    website: req.body.website,
     contact_person: req.body.contactPersonName,
     environmental_focus: req.body.environmentalFocus,
-    phone_number: req.body.companyPhoneNumber,
+    phone_number: req.body.phoneNumber,
   }, {
     where:
       { UserId: req.params.UserId }
