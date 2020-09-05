@@ -13,7 +13,7 @@ export default class UpdateProfile extends Component {
         description: "",
         environmentalFocus: "",
         website: "",
-        companyPhoneNumber: "",
+        phoneNumber: "",
         email: "",
         data: "",
         errors: {
@@ -70,7 +70,7 @@ export default class UpdateProfile extends Component {
                         description: response.data.company_description,
                         environmentalFocus: response.data.environmental_focus,
                         website: response.data.website,
-                        companyPhoneNumber: response.data.phone_number,
+                        phoneNumber: response.data.phone_number,
                         email: response.data.email,
                         data: response.data
                     });
@@ -101,7 +101,7 @@ export default class UpdateProfile extends Component {
             });
         }
         else {
-            const { companyName, description, email, website, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
+            const { companyName, description, email, website, contactPersonName, environmentalFocus, phoneNumber } = this.state
             const id = this.state.profile.id;
             Axios.post("/api/auth/updateCompanyProfile", {
                 companyName,
@@ -110,7 +110,7 @@ export default class UpdateProfile extends Component {
                 website,
                 contactPersonName,
                 environmentalFocus,
-                companyPhoneNumber,
+                phoneNumber,
                 id
             }).then((res) => {
                 console.log(res)
@@ -131,7 +131,7 @@ export default class UpdateProfile extends Component {
             });
         }
         else {
-            const { companyName, description, email, website, contactPersonName, environmentalFocus, companyPhoneNumber } = this.state
+            const { companyName, description, email, website, contactPersonName, environmentalFocus, phoneNumber } = this.state
             const UserId = this.state.profile.id;
             Axios.put(`/api/auth/updateCompanyProfile/${UserId}`, {
                 companyName,
@@ -140,7 +140,7 @@ export default class UpdateProfile extends Component {
                 website,
                 contactPersonName,
                 environmentalFocus,
-                companyPhoneNumber,
+                phoneNumber,
             }).then((res) => {
                 console.log(res)
                 window.location = "/companyprofile";
@@ -180,7 +180,7 @@ export default class UpdateProfile extends Component {
                                 <div className="row mt-2">
                                     <div className="col-md-6">
                                         <label className="labels">Phone Number</label>
-                                        <input id="phonenumber" id="phonenumber" name="companyPhoneNumber" value={this.state.companyPhoneNumber} type="tel" className="form-control" placeholder="company phone number" onChange={this.handleInputChange} /></div>
+                                        <input id="phonenumber" name="phoneNumber" value={this.state.phoneNumber} type="tel" className="form-control" placeholder="company phone number" onChange={this.handleInputChange} /></div>
                                     <div className="col-md-6">
                                         <label className="labels">Company Email</label>
                                         <input id="email" name="email" type="email" placeholder="company email" className="form-control" value={this.state.email} onChange={this.handleInputChange} />
