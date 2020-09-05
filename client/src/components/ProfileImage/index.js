@@ -44,8 +44,8 @@ export default class index extends Component {
 
     getImage = () => {
         const UserId = this.state.profile.id
-        console.log(this.state.firstName)
-        Axios.get(`/api/auth/userProfile/${UserId}`)
+        console.log(this.state.UserId)
+        Axios.get(`/api/auth/image/${UserId}`)
             .then(
                 (response) => {
                     console.log(response.data)
@@ -79,6 +79,7 @@ export default class index extends Component {
         console.log(selectedFileName)
         const UserId = this.state.profile.id;
         console.log(UserId)
+        // post image name in image model
         Axios.post("/api/auth/image", {
             selectedFileName,
             UserId

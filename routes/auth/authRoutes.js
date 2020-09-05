@@ -209,13 +209,32 @@ router.get('/userTotalEvent/:UserId', (req, res) => {
     });
 });
 
-// this route is save the profile image for logged in user into image model
+// this route is to save the profile image for logged in user into image model
 router.post('/image', (req, res) => {
   console.log(req.body.selectedFileName)
   console.log(req.body.UserId)
   db.Image.create({
     image_name: req.body.selectedFileName,
     UserId: req.body.UserId
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err)
+      if (err) {
+        res.status(500).json(err.message);
+      }
+    });
+});
+
+// this route is to get the profile image for logged in user
+router.get('/image/:UserId', (req, res) => {
+  console.log(req.params.UserId)
+  db.Image.findOne({
+    where: {
+      UserId: req.params.UserId
+    }
   })
     .then((data) => {
       res.json(data);
