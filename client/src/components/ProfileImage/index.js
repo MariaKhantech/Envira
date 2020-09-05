@@ -11,7 +11,7 @@ export default class index extends Component {
         imagePreviewUrl: '',
         selectedFileName: 'Choose file',
         displayUploadButton: false,
-        imageName: "",
+        imageName: [],
     }
 
 
@@ -44,27 +44,37 @@ export default class index extends Component {
 
     getImage = () => {
         const UserId = this.state.profile.id
-        console.log(this.state.UserId)
+        console.log(UserId)
         Axios.get(`/api/auth/image/${UserId}`)
             .then(
                 (response) => {
-                    console.log(response.data)
                     this.setState({
-                        selectedFileName: response.data.image_name,
+                        imageName: response.data
 
                     });
+                    console.log(this.state.imageName)
+                    this.getImageFromS3()
                 })
             .catch(err => console.log(err))
-        Storage.get(this.state.selectedFileName)
+
+    }
+
+
+    getImageFromS3 = () => {
+        let fileName = this.state.imageName.image_name
+        console.log(fileName)
+        Storage.get(fileName)
             .then(
-                (response) => {
-                    console.log(response.data)
+                (data) => {
+                    console.log(data)
                     this.setState({
-                        imagePreviewUrl: response.data
+                        imagePreviewUrl: data
                     });
                 })
             .catch(err => console.log(err))
     }
+
+
 
     handleImageUpload = async (event) => {
         event.preventDefault();
