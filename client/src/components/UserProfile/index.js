@@ -112,15 +112,7 @@ export class UserProfile extends Component {
       .catch((err) => console.log(err));
   };
 
-  //   Method to convert user ratings into average (WIP)
-  //   getUserAverage = () => {
-
-  //   };
-
   render() {
-    console.log(this.state.totalEvent);
-    console.log(this.state.userRating);
-
     // const that storest the content of the overview
     const overviewTab = (
       <div>
