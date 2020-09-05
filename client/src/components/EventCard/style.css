@@ -167,5 +167,15 @@ img {
 
 .style-contact-person {
   background-color: transparent;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
 /*# sourceMappingURL=style.css.map */

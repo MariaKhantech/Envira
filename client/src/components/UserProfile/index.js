@@ -192,7 +192,7 @@ export class UserProfile extends Component {
 								</div>
 
 								{/* profile tabs */}
-								<div className="card-body shadow p-3 pt-0 pt-md-4">
+								<div className="card-body shadow p-3 pt-0 pt-md-4 mt-5">
 									<ul className="nav nav-tabs " role="tablist">
 										<li className="nav-item">
 											<a className="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">
@@ -210,15 +210,16 @@ export class UserProfile extends Component {
 											</a>
 										</li>
 										<li className="nav-item">
-											<a className="nav-link" data-toggle="tab" href="#tabs-3" role="tab">
+											<a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab">
 												Comments
 											</a>
 										</li>
 									</ul>
 
 									<div className="tab-content">
-										<div className="tab-pane active" id="tabs-1" role="tabpanel" />
-										{overviewTab}
+										<div className="tab-pane active" id="tabs-1" role="tabpanel">
+											{overviewTab}
+										</div>
 										<div className="tab-pane " id="tabs-2" role="tabpanel" />
 										<div className="tab-pane " id="tabs-3" role="tabpanel">
 											<div className="row">
