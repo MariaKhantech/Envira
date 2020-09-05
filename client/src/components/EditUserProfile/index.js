@@ -101,23 +101,26 @@ export default class UpdateProfile extends Component {
                 errors: { ...this.state.errors, ...error }
             });
         }
-        const { firstName, lastName, city, state, zipCode, about, phoneNumber, occupation } = this.state
-        const id = this.state.profile.id;
-        Axios.post("/api/auth/updateUserProfile", {
-            firstName,
-            lastName,
-            city,
-            state,
-            zipCode,
-            about,
-            phoneNumber,
-            occupation,
-            id
-        })
-            .then((res) => {
-                console.log(res)
+        else {
+            const { firstName, lastName, city, state, zipCode, about, phoneNumber, occupation } = this.state
+            const id = this.state.profile.id;
+            Axios.post("/api/auth/updateUserProfile", {
+                firstName,
+                lastName,
+                city,
+                state,
+                zipCode,
+                about,
+                phoneNumber,
+                occupation,
+                id
             })
-            .catch(err => console.log(err.message))
+                .then((res) => {
+                    console.log(res)
+                    window.location = "/userprofile";
+                })
+                .catch(err => console.log(err.message))
+        }
     }
 
     handleUpdateFormSubmit = async (event) => {
