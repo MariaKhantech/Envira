@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const db = require("../../models");
 
-router.post("/eventsearch", (req, res) => {
+router.post("/userprofile", (req, res) => {
   console.log(req.body.rating);
   console.log(req.body.UserId);
   console.log(req.body.EventId);
@@ -19,11 +19,10 @@ router.post("/eventsearch", (req, res) => {
     });
 });
 
-router.get("/eventsearch/:UserId/EventId:", (req, res) => {
+router.get("/userprofile/:UserId", (req, res) => {
   db.Rating.findAll({
     where: {
       UserId: req.params.UserId,
-      EventId: req.params.EventId,
     },
   })
     .then((dbResponse) => {

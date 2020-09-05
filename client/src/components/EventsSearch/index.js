@@ -3,7 +3,6 @@ import Axios from "axios";
 
 import Search from "./Search/index";
 import Carousel from "./Carousel/index";
-// import StarRatingComponent from "react-star-rating-component";
 
 import { Row, Col } from "react-bootstrap";
 
@@ -22,26 +21,7 @@ export default class EventsSearch extends Component {
     slidesToScroll: 3,
     eventData: [],
     madeRequest: false,
-    rating: "0",
   };
-
-  // onStarClick(nextValue) {
-  //   this.setState({ rating: nextValue });
-  // }
-
-  // postRating = (event) => {
-  //   event.preventDefault();
-  //   Axios.post("/api/rate/eventsearch", {
-  //     rating: this.state.rating,
-  //     UserId: 7,
-  //     EventId: 7,
-  //   })
-  //     .then((res) => {
-  //       console.log(res);
-  //       this.setState({ rating: "0" });
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
 
   onChange = (event) =>
     this.setState({ [event.target.name]: event.target.value });
