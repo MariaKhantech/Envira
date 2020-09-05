@@ -14,7 +14,6 @@ export default class index extends Component {
         imageName: [],
     }
 
-
     async componentDidMount() {
         try {
             // get the current logged in user details
@@ -39,7 +38,6 @@ export default class index extends Component {
             }
         }
     }
-
 
 
     getImage = () => {
@@ -138,19 +136,6 @@ export default class index extends Component {
         }
         return (
             <>
-                {/* <div className="row justify-content-center">
-                    <p className="font-italic text-center">
-                        The image will be uploaded here
-									</p>
-                    <div className="image-area mt-4">
-                        <img
-                            id="imageResult"
-                            src={this.state.imagePreviewUrl}
-                            alt=""
-                            className="img-fluid rounded shadow-sm mx-auto d-block"
-                        />
-                    </div>
-                </div> */}
                 <div className="previewComponent ">
                     <div className="imgPreview">
                         {$imagePreview}

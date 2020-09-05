@@ -23,12 +23,32 @@ function validateForm(event, state) {
     document.getElementById("email").classList.add("is-invalid");
     return { blankfield: true };
   }
- 
+  if (state.hasOwnProperty("occupation") && state.email === "") {
+    document.getElementById("occupation").classList.add("is-invalid");
+    return { blankfield: true };
+  }
+  if (state.hasOwnProperty("zipCode") && state.email === "") {
+    document.getElementById("zipcode").classList.add("is-invalid");
+    return { blankfield: true };
+  }
+  if (state.hasOwnProperty("about") && state.email === "") {
+    document.getElementById("about").classList.add("is-invalid");
+    return { blankfield: true };
+  }
+
+  if (state.hasOwnProperty("state") && state.email === "") {
+    document.getElementById("state").classList.add("is-invalid");
+    return { blankfield: true };
+  }
+  if (state.hasOwnProperty("city") && state.email === "") {
+    document.getElementById("city").classList.add("is-invalid");
+    return { blankfield: true };
+  }
   if (state.hasOwnProperty("password") && state.password === "") {
     document.getElementById("password").classList.add("is-invalid");
     return { blankfield: true };
   }
-  
+
   if (state.hasOwnProperty("confirmPassword") && state.confirmPassword === "") {
     document.getElementById("confirmpassword").classList.add("is-invalid");
     return { blankfield: true };

@@ -174,15 +174,15 @@ export default class UpdateProfile extends Component {
 
                                     <div className="col-md-12">
                                         <label className="labels">User Name</label>
-                                        <input type="text" className="form-control" value={this.state.profile.user_name} readOnly />
+                                        <input id="username" type="text" className="form-control" value={this.state.profile.user_name} readOnly />
                                     </div>
                                     <div className="col-md-6 mt-1">
                                         <label className="labels">First Name</label>
-                                        <input name="firstName" type="text" className="form-control" placeholder="first name" value={this.state.firstName} onChange={this.handleInputChange} />
+                                        <input id="firstname" name="firstName" type="text" className="form-control" placeholder="first name" value={this.state.firstName} onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-6 mt-1">
                                         <label className="labels">Last Name</label>
-                                        <input name="lastName" type="text" className="form-control" placeholder="last name" value={this.state.lastName} onChange={this.handleInputChange} />
+                                        <input id="lastname" name="lastName" type="text" className="form-control" placeholder="last name" value={this.state.lastName} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 <div className="row mt-3">
@@ -195,24 +195,24 @@ export default class UpdateProfile extends Component {
                                     </div>
                                     <div className="col-md-12 mt-1">
                                         <label className="labels">Occupation</label>
-                                        <input name="occupation" type="text" className="form-control" placeholder="enter occupation" value={this.state.occupation} onChange={this.handleInputChange} /></div>
+                                        <input id="occupation" name="occupation" type="text" className="form-control" placeholder="enter occupation" value={this.state.occupation} onChange={this.handleInputChange} /></div>
 
                                     <div className="col-md-12 mt-1">
                                         <label className="labels">About</label>
-                                        <textarea name="about" type="text" className="form-control" placeholder="about" value={this.state.about} onChange={this.handleInputChange} /></div>
+                                        <textarea id="about" name="about" type="text" className="form-control" placeholder="about" value={this.state.about} onChange={this.handleInputChange} /></div>
                                 </div>
                                 <div className="row mt-3">
                                     <div className="col-md-4">
                                         <label className="labels">City</label>
-                                        <input name="city" type="text" className="form-control" placeholder="city" value={this.state.city} onChange={this.handleInputChange} />
+                                        <input id="city" name="city" type="text" className="form-control" placeholder="city" value={this.state.city} onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-4">
                                         <label className="labels">State/Region</label>
-                                        <input name="state" type="text" className="form-control" value={this.state.state} placeholder="state" onChange={this.handleInputChange} />
+                                        <input id="state" name="state" type="text" className="form-control" value={this.state.state} placeholder="state" onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-4">
                                         <label className="labels">Zip Code</label>
-                                        <input name="zipCode" type="text" className="form-control" value={this.state.zipCode} placeholder="state" onChange={this.handleInputChange} />
+                                        <input id="zipcode" name="zipCode" type="text" className="form-control" value={this.state.zipCode} placeholder="state" onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 {!this.state.data && (
