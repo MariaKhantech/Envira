@@ -19,16 +19,16 @@ function validateForm(event, state) {
     document.getElementById("lastname").classList.add("is-invalid");
     return { blankfield: true };
   }
+  if (state.hasOwnProperty("phoneNumber") && state.phoneNumber === "") {
+    document.getElementById("phonenumber").classList.add("is-invalid");
+    return { blankfield: true };
+  }
   if (state.hasOwnProperty("email") && state.email === "") {
     document.getElementById("email").classList.add("is-invalid");
     return { blankfield: true };
   }
-  if (state.hasOwnProperty("occupation") && state.ocupation === "") {
+  if (state.hasOwnProperty("occupation") && state.occupation === "") {
     document.getElementById("occupation").classList.add("is-invalid");
-    return { blankfield: true };
-  }
-  if (state.hasOwnProperty("zipCode") && state.zipCode === "") {
-    document.getElementById("zipcode").classList.add("is-invalid");
     return { blankfield: true };
   }
   if (state.hasOwnProperty("about") && state.about === "") {
@@ -36,14 +36,19 @@ function validateForm(event, state) {
     return { blankfield: true };
   }
 
+  if (state.hasOwnProperty("city") && state.city === "") {
+    document.getElementById("city").classList.add("is-invalid");
+    return { blankfield: true };
+  }
   if (state.hasOwnProperty("state") && state.state === "") {
     document.getElementById("state").classList.add("is-invalid");
     return { blankfield: true };
   }
-  if (state.hasOwnProperty("city") && state.email === "") {
-    document.getElementById("city").classList.add("is-invalid");
+  if (state.hasOwnProperty("zipCode") && state.zipCode === "") {
+    document.getElementById("zipcode").classList.add("is-invalid");
     return { blankfield: true };
   }
+  
   if (state.hasOwnProperty("password") && state.password === "") {
     document.getElementById("password").classList.add("is-invalid");
     return { blankfield: true };
