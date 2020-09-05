@@ -2,8 +2,6 @@ const router = require('express').Router();
 const db = require('../../models');
 
 // Route for signing up a user.
-// Sequelize User Model. If the user is created successfully, proceed
-//  to log the user in, otherwise send back an error
 router.post('/signup', (req, res) => {
   console.log(req.body.username);
   console.log(req.body.role);
@@ -123,8 +121,6 @@ router.get('/user/:username', (req, res) => {
     });
 });
 
-
-
 //this route is to get the logged in company profile details
 router.get('/companyProfile/:UserId', (req, res) => {
   console.log(req.params.UserId);
@@ -212,5 +208,27 @@ router.get('/userTotalEvent/:UserId', (req, res) => {
       }
     });
 });
+
+// this route is save the profile image for logged in user into image model
+router.post('/image/:UserId', (req, res) => {
+
+  db.Image.create({
+    image_name: req.body.selectedFileName,
+  }, {
+    where:
+      { UserId: req.params.UserId }
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      if (err) {
+        console.log(err)
+        res.status(500).json(err.message);
+      }
+    });
+});
+
+
 
 module.exports = router;

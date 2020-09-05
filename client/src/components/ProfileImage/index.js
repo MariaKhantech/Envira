@@ -1,14 +1,69 @@
 import React, { Component } from 'react'
+import { Auth } from 'aws-amplify';
 import { Storage } from "aws-amplify";
 import Axios from 'axios';
 import "./profileImage.css"
 
 export default class index extends Component {
     state = {
+        profile: [],
         selectedFile: '',
         imagePreviewUrl: '',
         selectedFileName: 'Choose file',
-        displayUploadButton: false
+        displayUploadButton: false,
+        imageName: "",
+    }
+
+
+    async componentDidMount() {
+        try {
+            // get the current logged in user details
+            const user = await Auth.currentAuthenticatedUser();
+            // get username from user object
+            const userDetail = user.username;
+            console.log(userDetail)
+            // get the user details for logged in user from the User table 
+            Axios.get(`/api/auth/user/${userDetail}`)
+                .then(
+                    (response) => {
+                        console.log(response)
+                        this.setState({
+                            profile: response.data,
+                        });
+                        this.getImage()
+                    })
+                .catch(err => console.log(err))
+        } catch (error) {
+            if (error !== "No current user") {
+                console.log(error);
+            }
+        }
+    }
+
+
+
+    getImage = () => {
+        const UserId = this.state.profile.id
+        console.log(this.state.firstName)
+        Axios.get(`/api/auth/userProfile/${UserId}`)
+            .then(
+                (response) => {
+                    console.log(response.data)
+                    this.setState({
+                        selectedFileName: response.data.image_name,
+
+                    });
+                })
+            .catch(err => console.log(err))
+        Storage.get(this.state.selectedFileName)
+        .then(
+            (response)=>{
+                console.log(response.data)
+                this.setState({
+                    imagePreviewUrl: response.data
+                });  
+            })
+        .catch(err => console.log(err))
     }
 
     handleImageUpload = async (event) => {
@@ -19,9 +74,12 @@ export default class index extends Component {
         await Storage.put(this.state.selectedFileName, this.state.selectedFile);
         console.log('successfully saved file...');
         console.log('handle uploading-', this.state.selectedFile);
-        
-        Axios.post("/api/auth/updateUserProfile", {
-            id
+
+        const { selectedFileName } = this.state
+        const UserId = this.state.profile.id;
+        console.log(UserId)
+        Axios.post(`/api/image/${UserId}`, {
+            selectedFileName
         })
             .then((res) => {
                 console.log(res)

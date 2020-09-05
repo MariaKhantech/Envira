@@ -48,14 +48,12 @@ export default class UpdateProfile extends Component {
                         });
                         this.getUserProfile()
                     })
-
                 .catch(err => console.log(err))
         } catch (error) {
             if (error !== "No current user") {
                 console.log(error);
             }
         }
-
     }
 
 
