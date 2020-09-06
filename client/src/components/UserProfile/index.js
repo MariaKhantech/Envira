@@ -19,8 +19,6 @@ export class UserProfile extends Component {
     about: "",
     zipCode: "",
     totalEvent: "",
-    rating: 0,
-    disabled: true,
     userRating: [],
   };
 
@@ -79,25 +77,6 @@ export class UserProfile extends Component {
         this.setState({
           totalEvent: response.data,
         });
-      })
-      .catch((err) => console.log(err));
-  };
-
-  //   click method to change star value
-  onStarClick(nextValue) {
-    this.setState({ rating: nextValue, disabled: false });
-  }
-
-  //   Post request to submit rating to DB
-  postRating = (event) => {
-    event.preventDefault();
-    Axios.post("/api/rate/userprofile", {
-      rating: this.state.rating,
-      UserId: this.state.profile.id,
-    })
-      .then((res) => {
-        console.log(res);
-        this.setState({ rating: "0", disabled: true });
       })
       .catch((err) => console.log(err));
   };
@@ -163,49 +142,6 @@ export class UserProfile extends Component {
       </div>
     );
     //end of the overview tab //
-
-    //enters the start rating//
-    // Popover to display rating was posted
-    const popover = (
-      <Popover id="popover-basic">
-        <Popover.Title>Rating Posted!</Popover.Title>
-      </Popover>
-    );
-    // Variable to post star ratings
-    const postStarRating = (
-      <div>
-        <div class="row">
-          <div class="col">
-            <div
-              class="card-profile-stats d-flex justify-content-center mt-md-5"
-              style={{ fontSize: "28px" }}
-            >
-              <StarRatingComponent
-                name="rating"
-                starCount={5}
-                value={this.state.rating}
-                onStarClick={this.onStarClick.bind(this)}
-              />
-            </div>
-            <OverlayTrigger
-              delay={{ show: 250, hide: 350 }}
-              placement="right"
-              overlay={popover}
-            >
-              <Button
-                disabled={this.state.disabled}
-                variant="primary"
-                sz="sm"
-                className="float-center"
-                onClick={this.postRating}
-              >
-                Post Rating
-              </Button>
-            </OverlayTrigger>
-          </div>
-        </div>
-      </div>
-    );
 
     // Get average rating using map and reduce
     const ratings = this.state.userRating.map((data) => data.rating);
@@ -324,7 +260,6 @@ export class UserProfile extends Component {
                     />
                     {overviewTab}
                     <div className="tab-pane " id="tabs-2" role="tabpanel" />
-                    {postStarRating}
                     {starRating}
                     <div className="tab-pane " id="tabs-3" role="tabpanel">
                       <div className="row">

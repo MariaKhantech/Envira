@@ -112,14 +112,26 @@ export default class EventsSearch extends Component {
     });
   };
 
+  handleViewEvent = (event) => {
+    event.preventDefault();
+    let selectedEvent = {
+      id: event.target.value,
+    };
+    console.log(selectedEvent);
+    localStorage.setItem("eventId", JSON.stringify(selectedEvent));
+    window.location = "/eventspage";
+  };
+
   render() {
     let renderCarousel = null;
     if (this.state.showCarousel === true) {
-      renderCarousel = <Carousel state={this.state} />;
+      renderCarousel = (
+        <Carousel state={this.state} handleViewEvent={this.handleViewEvent} />
+      );
     } else if (this.state.showCarousel === "") {
       renderCarousel = null;
     }
-    console.log(this.state.rating);
+    console.log(this.state.eventData);
 
     return (
       <>
@@ -134,24 +146,13 @@ export default class EventsSearch extends Component {
 
         <Row>
           <Col md={9} id="carouselWrap" className="mx-auto mt-3">
-            {/* <Fade in={this.state.open}> */}
             <div>
               <h1 className="text-center">{this.state.introTitle}</h1>
               <p>{this.state.introText}</p>
             </div>
-            {/* </Fade> */}
             {renderCarousel}
           </Col>
         </Row>
-
-        {/* <StarRatingComponent
-          name="rating"
-          starCount={5}
-          value={this.state.rating}
-          onStarClick={this.onStarClick.bind(this)}
-          style={{ fontSize: "50px" }}
-        /> */}
-        {/* <Button variant="primary" onClick={this.postRating} /> */}
       </>
     );
   }
