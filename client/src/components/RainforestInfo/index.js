@@ -6,63 +6,62 @@ import './style.scss';
 
 export class RainforestInfo extends Component {
 	render() {
-    const particles = 
+		const particles = (
+			<Particles
+				params={{
+					particles: {
+						number: {
+							value: 75,
+							density: {
+								enable: false
+							}
+						},
+						size: {
+							value: 5,
+							random: true,
+							anim: {
+								speed: 8,
+								size_min: 0.3
+							}
+						},
+						line_linked: {
+							enable: false
+						},
+						move: {
+							random: true,
+							speed: 1,
+							direction: 'top',
+							out_mode: 'out'
+						}
+					},
+					interactivity: {
+						events: {
+							onhover: {
+								enable: true,
+								mode: 'bubble'
+							},
+							onclick: {
+								enable: true,
+								mode: 'repulse'
+							}
+						},
+						modes: {
+							bubble: {
+								distance: 250,
+								duration: 2,
+								size: 0,
+								opacity: 0
+							},
+							repulse: {
+								distance: 400,
+								duration: 4
+							}
+						}
+					}
+				}}
+			/>
+		);
 
-    <Particles
-        params={{
-          "particles": {
-              "number": {
-                  "value": 75,
-                  "density": {
-                      "enable": false
-                  }
-              },
-              "size": {
-                  "value": 5,
-                  "random": true,
-                  "anim": {
-                      "speed": 8,
-                      "size_min": 0.3
-                  }
-              },
-              "line_linked": {
-                  "enable": false
-              },
-              "move": {
-                  "random": true,
-                  "speed": 1,
-                  "direction": "top",
-                  "out_mode": "out"
-              }
-          },
-          "interactivity": {
-              "events": {
-                  "onhover": {
-                      "enable": true,
-                      "mode": "bubble"
-                  },
-                  "onclick": {
-                      "enable": true,
-                      "mode": "repulse"
-                  }
-              },
-              "modes": {
-                  "bubble": {
-                      "distance": 250,
-                      "duration": 2,
-                      "size": 0,
-                      "opacity": 0
-                  },
-                  "repulse": {
-                      "distance": 400,
-                      "duration": 4
-                  }
-              }
-          }
-      }} />;
-    
-
-    
 		return (
 			<div className="RainforestWrapper">
 				<div className="container-fluid entire-container">
@@ -243,7 +242,7 @@ export class RainforestInfo extends Component {
 								height="500"
 								src="https://www.youtube.com/embed/icgEDDrlR28?controls=0"
 								frameborder="0"
-								allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+								allow="accelerometer; autoplay=1; encrypted-media; gyroscope;"
 								allowfullscreen
 							/>
 						</div>
@@ -325,14 +324,10 @@ export class RainforestInfo extends Component {
 					</Parallax>
 
 					<Parallax
-						bgImage={
-              'https://cdn.pixabay.com/photo/2019/06/14/09/05/ape-4273153_960_720.jpg'
-             
-						}
+						bgImage={'https://cdn.pixabay.com/photo/2019/06/14/09/05/ape-4273153_960_720.jpg'}
 						strength={500}
 					>
-             {particles}
-				
+						{particles}
 					</Parallax>
 
 					<Parallax strength={500}>

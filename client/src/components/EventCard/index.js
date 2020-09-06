@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReviewComment from '../ReviewForm';
+import ImageGallery from 'react-image-gallery';
 import './style.scss';
 
 export class index extends Component {
@@ -26,6 +27,21 @@ export class index extends Component {
 			height: '800px',
 			overflowY: 'scroll'
 		};
+
+		const images = [
+			{
+			  original: 'https://picsum.photos/id/1018/1000/600/',
+			  thumbnail: 'https://picsum.photos/id/1018/250/150/',
+			},
+			{
+			  original: 'https://picsum.photos/id/1015/1000/600/',
+			  thumbnail: 'https://picsum.photos/id/1015/250/150/',
+			},
+			{
+			  original: 'https://picsum.photos/id/1019/1000/600/',
+			  thumbnail: 'https://picsum.photos/id/1019/250/150/',
+			},
+		  ];
 
 		return (
 			<div class="wrapper2">
@@ -69,6 +85,9 @@ export class index extends Component {
 						</div>
 						<h1 class="display-4 text-white">Event Name</h1>
 						<p class="lead text-white"> EVENT DATE</p>
+						<p class="lead">
+    					<a class="btn btn-primary btn-lg" style={{marginTop:'8rem'}} href="#" role="button">Join Event</a>
+  </p>
 					</div>
 				</div>
 
@@ -121,6 +140,14 @@ export class index extends Component {
 							</div>
 						</div>
 					</div>
+
+					 <div class="container mt-5 text-center text-white">
+						<h1 class = "text-white">Event Attendees</h1>
+						{/* <section>
+						<ImageGallery items={images} />
+						</section> */}
+					</div>
+
 				</div>
 
 				<div className="row justify-content-center mb-5" style={{ marginTop: '5rem' }}>

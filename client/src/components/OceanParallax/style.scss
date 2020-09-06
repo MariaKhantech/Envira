@@ -1,13 +1,8 @@
-// @import "./parallaxfish";
+@import "./animatedOcean";
 
 #card-image {
 	width: 18rem;
 }
-
-// .card-body {
-//     background-color: #fdfaed ;
-
-// }
 
 .card-header {
 	border: 4px;
@@ -15,3 +10,57 @@
 	border-color: #004080;
 }
 
+.ocean-floor-img {
+	height: 600px;
+}
+
+#tsparticles {
+	position: absolute !important;
+	width: 100%;
+}
+.diver {
+	position: absolute;
+	height: 50px;
+	top: 20%;
+	animation: animateForward 25s linear infinite;
+}
+
+@keyframes animateForward {
+	0% {
+		transform: translateY(-50px);
+		left: -25%;
+	}
+	25% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(50px);
+	}
+	75% {
+		transform: translateY(0px);
+	}
+	100% {
+		transform: translateY(-50px);
+		left: 110%;
+	}
+}
+
+@keyframes animateBackward {
+	0% {
+		transform: translateY(-50px);
+		right: -25%;
+	}
+	25% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(50px);
+	}
+	75% {
+		transform: translateY(0px);
+	}
+	100% {
+		transform: translateY(-50px);
+		right: 110%;
+	}
+}
