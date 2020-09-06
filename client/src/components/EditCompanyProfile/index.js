@@ -132,6 +132,7 @@ export default class UpdateProfile extends Component {
         }
         else {
             const { companyName, description, email, website, contactPersonName, environmentalFocus, phoneNumber } = this.state
+            console.log(website)
             const UserId = this.state.profile.id;
             Axios.put(`/api/auth/updateCompanyProfile/${UserId}`, {
                 companyName,
@@ -162,6 +163,7 @@ export default class UpdateProfile extends Component {
                         </div>
                         <div className="col-md-8 border-right">
                             <div className="p-3 py-5">
+                                <FormErrors formerrors={this.state.errors} />
                                 <div className="d-flex justify-content-between align-items-center mb-3">
                                     <h4 className="text-right">Profile Settings</h4>
                                 </div>

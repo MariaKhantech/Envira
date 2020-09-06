@@ -164,8 +164,8 @@ router.post('/updateCompanyProfile', (req, res) => {
 });
 
 //this route is to update the company profile
-router.put('/updateUserProfile/:UserId', (req, res) => {
-
+router.put('/updateCompanyProfile/:UserId', (req, res) => {
+  console.log(req.body.website)
   db.CompanyProfile.update({
     company_name: req.body.companyName,
     company_description: req.body.description,
@@ -182,9 +182,10 @@ router.put('/updateUserProfile/:UserId', (req, res) => {
       res.json(data);
     })
     .catch((err) => {
+      console.log(err)
       if (err) {
         res.status(500).json(err);
-        console.log(err)
+        res.status(404).json(err);
       }
     });
 });

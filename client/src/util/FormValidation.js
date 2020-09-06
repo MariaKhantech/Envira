@@ -23,6 +23,10 @@ function validateForm(event, state) {
     document.getElementById("lastname").classList.add("is-invalid");
     return { blankfield: true };
   }
+  // if (state.hasOwnProperty("role") && state.role === "") {
+  //   document.getElementById("role").classList.add("is-invalid");
+  //   return { blankfield: true };
+  // }
   if (state.hasOwnProperty("phoneNumber") && state.phoneNumber === "") {
     document.getElementById("phonenumber").classList.add("is-invalid");
     return { blankfield: true };
@@ -90,6 +94,10 @@ function validateForm(event, state) {
   if (state.hasOwnProperty("phoneNumber") && !state.phoneNumber.match(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/g)) {
     document.getElementById("phonenumber").classList.add("is-invalid");
     return { phonenumber: true };
+  }
+  if (state.hasOwnProperty("website") && !state.website.match(/(https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/)) {
+    document.getElementById("website").classList.add("is-invalid");
+    return { website: true };
   }
 }
 
