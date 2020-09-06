@@ -1,13 +1,19 @@
 @import "./animatedOcean";
 
+$sand-color: #fff7ed;
+$ocean-blue-color: #004080;
+
 #card-image {
 	width: 18rem;
+}
+.body-color {
+	background-color: $sand-color !important;
 }
 
 .card-header {
 	border: 4px;
 	border-style: solid;
-	border-color: #004080;
+	border-color: $ocean-blue-color;
 }
 
 .ocean-floor-img {
@@ -22,7 +28,7 @@
 	position: absolute;
 	height: 50px;
 	top: 20%;
-	animation: animateForward 25s linear infinite;
+	animation: animateForward 50s linear infinite;
 }
 
 @keyframes animateForward {
