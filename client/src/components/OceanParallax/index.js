@@ -120,141 +120,146 @@ export class OceanParallax extends Component {
 				<div>
 					<Parallax strength={500}>
 						<div style={{ height: '600px' }} />
-
-						<div className="card mb-3 body-color" style={{ maxWidth: '540px;' }}>
-							<div className="row no-gutters mt-5">
-								<div className="col-md-4 mt-5">
-									<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-										<ol class="carousel-indicators">
-											<li
-												data-target="#carouselExampleIndicators"
-												data-slide-to="0"
-												class="active"
-											/>
-											<li data-target="#carouselExampleIndicators" data-slide-to="1" />
-											<li data-target="#carouselExampleIndicators" data-slide-to="2" />
-										</ol>
-										<div class="carousel-inner">
-											<div class="carousel-item active">
-												<img
-													src="https://cdn.pixabay.com/photo/2018/04/04/11/39/dead-bird-3289550_960_720.jpg"
-													class="d-block w-100"
-													alt="..."
+						<div class="container">
+							<div className="card mb-3 body-color" style={{ maxWidth: '540px;' }}>
+								<div className="row no-gutters mt-5">
+									<div className="col-md-4 mt-5">
+										<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+											<ol class="carousel-indicators">
+												<li
+													data-target="#carouselExampleIndicators"
+													data-slide-to="0"
+													class="active"
 												/>
+												<li data-target="#carouselExampleIndicators" data-slide-to="1" />
+												<li data-target="#carouselExampleIndicators" data-slide-to="2" />
+											</ol>
+											<div class="carousel-inner">
+												<div class="carousel-item active">
+													<img
+														src="https://cdn.pixabay.com/photo/2018/04/04/11/39/dead-bird-3289550_960_720.jpg"
+														class="d-block w-100"
+														alt="..."
+													/>
+												</div>
+												<div class="carousel-item">
+													<img
+														src="https://cdn.pixabay.com/photo/2015/01/31/17/37/oil-rig-explosion-618704_960_720.jpg"
+														class="d-block w-100"
+														alt="..."
+													/>
+												</div>
+												<div class="carousel-item">
+													<img
+														src="https://cdn.pixabay.com/photo/2018/01/06/16/07/waters-3065288_960_720.jpg"
+														class="d-block w-100"
+														alt="..."
+													/>
+												</div>
 											</div>
-											<div class="carousel-item">
-												<img
-													src="https://cdn.pixabay.com/photo/2015/01/31/17/37/oil-rig-explosion-618704_960_720.jpg"
-													class="d-block w-100"
-													alt="..."
-												/>
-											</div>
-											<div class="carousel-item">
-												<img
-													src="https://cdn.pixabay.com/photo/2018/01/06/16/07/waters-3065288_960_720.jpg"
-													class="d-block w-100"
-													alt="..."
-												/>
-											</div>
+											<a
+												class="carousel-control-prev"
+												href="#carouselExampleIndicators"
+												role="button"
+												data-slide="prev"
+											>
+												<span class="carousel-control-prev-icon" aria-hidden="true" />
+												<span class="sr-only">Previous</span>
+											</a>
+											<a
+												class="carousel-control-next"
+												href="#carouselExampleIndicators"
+												role="button"
+												data-slide="next"
+											>
+												<span class="carousel-control-next-icon" aria-hidden="true" />
+												<span class="sr-only">Next</span>
+											</a>
 										</div>
-										<a
-											class="carousel-control-prev"
-											href="#carouselExampleIndicators"
-											role="button"
-											data-slide="prev"
-										>
-											<span class="carousel-control-prev-icon" aria-hidden="true" />
-											<span class="sr-only">Previous</span>
-										</a>
-										<a
-											class="carousel-control-next"
-											href="#carouselExampleIndicators"
-											role="button"
-											data-slide="next"
-										>
-											<span class="carousel-control-next-icon" aria-hidden="true" />
-											<span class="sr-only">Next</span>
-										</a>
 									</div>
-								</div>
-								<div className="col-md-8">
-									<div className="card-body">
-										<h1 class="card-title">Oceans Plastic Pollution</h1>
-										<p className="card-text">
-											This is a wider card with supporting text below as a natural lead-in to
-											additional content. This content is a little bit longer.
-										</p>
-										<p className="card-text" />
+									<div className="col-md-8">
+										<div className="card-body">
+											<h1 class="card-title">Oceans Plastic Pollution</h1>
+											<p className="card-text">
+												This is a wider card with supporting text below as a natural lead-in to
+												additional content. This content is a little bit longer.
+											</p>
+											<p className="card-text" />
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
-						<div className="card mb-3 body-color" style={{ maxWidth: '540px;' }}>
-							<div className="row no-gutters mt-5">
-								<div className="col-md-8">
-									<div className="card-body">
-										<h1 class="card-title">Oceans Plastic Pollution</h1>
-										<p className="card-text">
-											This is a wider card with supporting text below as a natural lead-in to
-											additional content. This content is a little bit longer.
-										</p>
-										<p className="card-text" />
-									</div>
-								</div>
-
-								<div className="col-md-4 mt-5">
-									<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-										<ol class="carousel-indicators">
-											<li
-												data-target="#carouselExampleIndicators"
-												data-slide-to="0"
-												class="active"
-											/>
-											<li data-target="#carouselExampleIndicators" data-slide-to="1" />
-											<li data-target="#carouselExampleIndicators" data-slide-to="2" />
-										</ol>
-										<div class="carousel-inner">
-											<div class="carousel-item active">
-												<img
-													src="https://cdn.pixabay.com/photo/2018/04/04/11/39/dead-bird-3289550_960_720.jpg"
-													class="d-block w-100"
-													alt="..."
-												/>
-											</div>
-											<div class="carousel-item">
-												<img
-													src="https://cdn.pixabay.com/photo/2015/01/31/17/37/oil-rig-explosion-618704_960_720.jpg"
-													class="d-block w-100"
-													alt="..."
-												/>
-											</div>
-											<div class="carousel-item">
-												<img
-													src="https://cdn.pixabay.com/photo/2018/01/06/16/07/waters-3065288_960_720.jpg"
-													class="d-block w-100"
-													alt="..."
-												/>
-											</div>
+							<div className="card mb-3 body-color" style={{ maxWidth: '540px;' }}>
+								<div className="row no-gutters mt-5">
+									<div className="col-md-8">
+										<div className="card-body">
+											<h1 class="card-title">Oceans Plastic Pollution</h1>
+											<p className="card-text">
+												This is a wider card with supporting text below as a natural lead-in to
+												additional content. This content is a little bit longer.
+											</p>
+											<p className="card-text" />
 										</div>
-										<a
-											class="carousel-control-prev"
-											href="#carouselExampleIndicators"
-											role="button"
-											data-slide="prev"
+									</div>
+
+									<div className="col-md-4 mt-5">
+										<div
+											id="carouselExampleIndicators mr-5"
+											class="carousel slide"
+											data-ride="carousel"
 										>
-											<span class="carousel-control-prev-icon" aria-hidden="true" />
-											<span class="sr-only">Previous</span>
-										</a>
-										<a
-											class="carousel-control-next"
-											href="#carouselExampleIndicators"
-											role="button"
-											data-slide="next"
-										>
-											<span class="carousel-control-next-icon" aria-hidden="true" />
-											<span class="sr-only">Next</span>
-										</a>
+											<ol class="carousel-indicators">
+												<li
+													data-target="#carouselExampleIndicators"
+													data-slide-to="0"
+													class="active"
+												/>
+												<li data-target="#carouselExampleIndicators" data-slide-to="1" />
+												<li data-target="#carouselExampleIndicators" data-slide-to="2" />
+											</ol>
+											<div class="carousel-inner">
+												<div class="carousel-item active">
+													<img
+														src="https://cdn.pixabay.com/photo/2018/04/04/11/39/dead-bird-3289550_960_720.jpg"
+														class="d-block w-100"
+														alt="..."
+													/>
+												</div>
+												<div class="carousel-item">
+													<img
+														src="https://cdn.pixabay.com/photo/2015/01/31/17/37/oil-rig-explosion-618704_960_720.jpg"
+														class="d-block w-100"
+														alt="..."
+													/>
+												</div>
+												<div class="carousel-item">
+													<img
+														src="https://cdn.pixabay.com/photo/2018/01/06/16/07/waters-3065288_960_720.jpg"
+														class="d-block w-100"
+														alt="..."
+													/>
+												</div>
+											</div>
+											<a
+												class="carousel-control-prev"
+												href="#carouselExampleIndicators"
+												role="button"
+												data-slide="prev"
+											>
+												<span class="carousel-control-prev-icon" aria-hidden="true" />
+												<span class="sr-only">Previous</span>
+											</a>
+											<a
+												class="carousel-control-next"
+												href="#carouselExampleIndicators"
+												role="button"
+												data-slide="next"
+											>
+												<span class="carousel-control-next-icon" aria-hidden="true" />
+												<span class="sr-only">Next</span>
+											</a>
+										</div>
 									</div>
 								</div>
 							</div>
