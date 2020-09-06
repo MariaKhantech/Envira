@@ -5,7 +5,7 @@ export class index extends Component {
 	render() {
 		return (
 			<div className="container">
-				<div id="carouselExampleCaptions" className="carousel slide homepage mt-2" data-ride="carousel">
+				<div id="carouselExampleCaptions" className="carousel homepage mt-2" data-ride="carousel">
 					<ol className="carousel-indicators">
 						<li data-target="#carouselExampleCaptions" data-slide-to="0" className="active" />
 						<li data-target="#carouselExampleCaptions" data-slide-to="1" />
@@ -18,7 +18,7 @@ export class index extends Component {
 								className="d-block w-100"
 								alt="orangutans displaced from deforestation"
 							/>
-							<div className="carousel-caption d-none d-md-block">
+							<div className="carousel-caption d-md-block">
 								<h2 className="text-white">Forest Fires & Deforestation</h2>
 								<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 							</div>
@@ -29,7 +29,7 @@ export class index extends Component {
 								className="d-block w-100"
 								alt="Trash that has been left at the beach"
 							/>
-							<div className="carousel-caption d-none d-md-block">
+							<div className="carousel-caption d-md-block">
 								<h5>Second slide label</h5>
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 							</div>
@@ -40,7 +40,7 @@ export class index extends Component {
 								className="d-block w-100"
 								alt="City with poor air quality"
 							/>
-							<div className="carousel-caption d-none d-md-block">
+							<div className="carousel-caption d-md-block">
 								<h5>Third slide label</h5>
 								<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
 							</div>

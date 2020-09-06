@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReviewComment from "../ReviewForm";
+import ImageGallery from "react-image-gallery";
 import Axios from "axios";
 import "./style.scss";
 
@@ -22,8 +23,8 @@ export class index extends Component {
       { name: <ReviewComment /> },
       { name: <ReviewComment /> },
     ];
-    this.setState({ reviewArray });
     this.getEventData();
+    this.setState({ reviewArray });
   }
 
   getEventData = () => {
@@ -66,6 +67,21 @@ export class index extends Component {
     const contactNumber = this.state.eventData.map(
       (data) => data.contact_number
     );
+
+    const images = [
+      {
+        original: "https://picsum.photos/id/1018/1000/600/",
+        thumbnail: "https://picsum.photos/id/1018/250/150/",
+      },
+      {
+        original: "https://picsum.photos/id/1015/1000/600/",
+        thumbnail: "https://picsum.photos/id/1015/250/150/",
+      },
+      {
+        original: "https://picsum.photos/id/1019/1000/600/",
+        thumbnail: "https://picsum.photos/id/1019/250/150/",
+      },
+    ];
 
     return (
       <div class="wrapper2">
@@ -110,8 +126,18 @@ export class index extends Component {
                 </p>
               </div>
             </div>
-            <h1 class="display-4 text-white">{eventName}</h1>
-            <p class="lead text-white"> {date}</p>
+            <h1 class="display-4 text-white">Event Name</h1>
+            <p class="lead text-white"> {eventName}</p>
+            <p class="lead">
+              <a
+                class="btn btn-primary btn-lg"
+                style={{ marginTop: "8rem" }}
+                href="#"
+                role="button"
+              >
+                Join Event
+              </a>
+            </p>
           </div>
         </div>
 
@@ -160,6 +186,13 @@ export class index extends Component {
               </div>
             </div>
           </div>
+
+          <div class="container mt-5 text-center text-white">
+            <h1 class="text-white">Event Attendees</h1>
+            {/* <section>
+						<ImageGallery items={images} />
+						</section> */}
+          </div>
         </div>
 
         <div
@@ -178,6 +211,7 @@ export class index extends Component {
                   <p class="text-white">
                     {address}, {city} {eventState}
                     <br />
+                    United State
                   </p>
                 </div>
               </div>

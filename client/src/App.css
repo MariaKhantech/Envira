@@ -1,27 +1,26 @@
 body {
-	font-family: #85dcba;
-	/* background-color: #85dcba; */
-	background-color: #fff7ed !important;
-	background-repeat: repeat;
-	background-size: cover;
-	width: auto;
-	height: 100vh;
-	overflow-x: hidden;
+  /* background-color: #85dcba; */
+  background-color: #fff7ed !important;
+  background-repeat: repeat;
+  background-size: cover;
+  width: auto;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 .signup {
-	padding-top: 100px;
+  padding-top: 100px;
 }
 
 .signupForm {
-	background-color: #c2c1bf;
-	border: 0.5px solid grey;
-	border-radius: 20px;
-	padding: 10px;
-	font-family: inherit;
-	font-size: 20px;
-	-webkit-box-shadow: 10px 10px 5px grey;
-	box-shadow: 10px 10px 5px grey;
-	font-style: italic;
+  background-color: #c2c1bf;
+  border: 0.5px solid grey;
+  border-radius: 20px;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 20px;
+  -webkit-box-shadow: 10px 10px 5px grey;
+          box-shadow: 10px 10px 5px grey;
+  font-style: italic;
 }
 /*# sourceMappingURL=App.css.map */
