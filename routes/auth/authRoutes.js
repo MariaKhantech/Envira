@@ -227,6 +227,26 @@ router.post('/image', (req, res) => {
     });
 });
 
+// this route is to update the profile image for logged in user into image model
+router.put('/image/:UserId', (req, res) => {
+  db.Image.update({
+    image_name: req.body.selectedFileName,
+  }, {
+    where: {
+      UserId: req.params.UserId
+    }
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err)
+      if (err) {
+        res.status(500).json(err.message);
+      }
+    });
+});
+
 // this route is to get the profile image for logged in user
 router.get('/image/:UserId', (req, res) => {
   console.log(req.params.UserId)

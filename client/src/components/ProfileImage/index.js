@@ -10,7 +10,6 @@ export default class index extends Component {
         selectedFile: '',
         imagePreviewUrl: '',
         selectedFileName: 'Choose file',
-        displayUploadButton: false,
         imageName: [],
     }
 
@@ -39,7 +38,6 @@ export default class index extends Component {
         }
     }
 
-
     getImage = () => {
         const UserId = this.state.profile.id
         console.log(UserId)
@@ -57,7 +55,6 @@ export default class index extends Component {
 
     }
 
-
     getImageFromS3 = () => {
         let fileName = this.state.imageName.image_name
         console.log(fileName)
@@ -72,13 +69,9 @@ export default class index extends Component {
             .catch(err => console.log(err))
     }
 
-
-
     handleImageUpload = async (event) => {
         event.preventDefault();
         // save image in S3
-        event.target.textContent = 'Successfully uploaded';
-        event.target.disabled = true;
         await Storage.put(this.state.selectedFileName, this.state.selectedFile);
         console.log('successfully saved file...');
         console.log('handle uploading-', this.state.selectedFile);
@@ -98,12 +91,25 @@ export default class index extends Component {
             .catch(err => console.log(err.message))
     }
 
-    //test for S3//
-    saveFile = async () => {
-        // const { file } = this.state;
-        await Storage.put('test3.txt', 'hello');
+    handleImageUpdate = async (event) => {
+        event.preventDefault();
+        // save image in S3
+        await Storage.put(this.state.selectedFileName, this.state.selectedFile);
         console.log('successfully saved file...');
-    };
+
+        const { selectedFileName } = this.state
+        console.log(selectedFileName)
+        const UserId = this.state.profile.id;
+        console.log(UserId)
+        // post image name in image model
+        Axios.put(`/api/auth/image/${UserId}`, {
+            selectedFileName,
+        })
+            .then((res) => {
+                console.log(res)
+            })
+            .catch(err => console.log(err.message))
+    }
 
     handleImageChange = (event) => {
         event.preventDefault();
@@ -123,8 +129,6 @@ export default class index extends Component {
 
         reader.readAsDataURL(file)
     }
-
-
 
     render() {
         let { imagePreviewUrl } = this.state;
@@ -169,14 +173,17 @@ export default class index extends Component {
                                 </label>
                             </div>
                         </div>
-
                     </div>
-                    <div
-                        className="row justify-content-center mt-2 "
-                        style={{ display: this.state.displayUploadButton ? 'block' : 'none' }}
-                    >
-                        <button onClick={this.handleImageUpload}>Upload</button>
-                    </div>
+                    {!this.state.imageName && (
+                        <div className="row justify-content-center mt-2 ">
+                            <button onClick={this.handleImageUpload} className="btn btn-primary">Upload</button>
+                        </div>
+                    )}
+                    {this.state.imageName && (
+                        <div className="row justify-content-center mt-2 ">
+                            <button onClick={this.handleImageUpdate} className="btn btn-primary">Update</button>
+                        </div>
+                    )}
                 </div>
             </>
         )
