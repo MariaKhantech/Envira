@@ -109,15 +109,12 @@ export class OceanParallax extends Component {
 			<div class="ocean-wrapper">
 				{cardDiv}
 				<div class="container-fluid ocean-para">
-					<div className="card text-center ocean-para">
+					<div className="card text-center ocean-para oceanParticles">
 						<img className="ocean-floor-img" src="../assets/imgs/oceanfloor.png" />
 						<img className="diver" src="../assets/imgs/diver.png" />
 
-						{particles}
+						<div className="oceanParticles">{particles}</div>
 					</div>
-					{/* <div class="article overlay" style={{ backgroundImage: `url(${oceanFloor})` }}>
-						<h1>Text</h1>
-					</div> */}
 				</div>
 			</div>
 		);
