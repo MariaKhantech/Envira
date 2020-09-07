@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const db = require("../../models");
 
-router.post("/userprofile", (req, res) => {
+router.post("/event", (req, res) => {
   console.log(req.body.rating);
 
   db.Rating.create({

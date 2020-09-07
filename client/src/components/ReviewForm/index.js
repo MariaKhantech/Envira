@@ -16,7 +16,7 @@ export class ReviewForm extends Component {
     event.preventDefault();
     const id = JSON.parse(localStorage.getItem("eventId")).id;
     console.log(id);
-    Axios.post(`/api/rate/userprofile`, {
+    Axios.post(`/api/rate/event`, {
       rating: this.state.rating,
       EventId: id,
     })
