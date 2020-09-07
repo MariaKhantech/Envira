@@ -6,7 +6,7 @@ import { Auth } from 'aws-amplify';
 import { Storage } from "aws-amplify";
 
 
-export class CompanyProfile extends Component {
+export default class CompanyProfile extends Component {
 
   state = {
     profile: [],
@@ -17,7 +17,6 @@ export class CompanyProfile extends Component {
     companyWebsite: "",
     companyPhoneNumber: "",
     companyEmail: "",
-    data: "",
     imagePreviewUrl: '',
     imageName: [],
   }
@@ -64,7 +63,6 @@ export class CompanyProfile extends Component {
             companyWebsite: response.data.website,
             companyPhoneNumber: response.data.phone_number,
             companyEmail: response.data.email,
-            data: response.data
           });
         })
       .catch(err => console.log(err))
@@ -117,7 +115,7 @@ export class CompanyProfile extends Component {
 
 
   render() {
-    const myStyle= {
+    const myStyle = {
       width: "304px",
       height: "200px",
     }
@@ -146,7 +144,7 @@ export class CompanyProfile extends Component {
                 <div className="col-lg-3 order-lg-2">
                   <div className="card-profile-image">
                     <a href="#">
-                      <img style={myStyle} src={this.state.imagePreviewUrl} className="rounded-circle" />
+                      <img style={myStyle} src={this.state.imagePreviewUrl} alt={this.state.imageName.image_name} className="rounded-circle" />
                     </a>
 
                   </div>
@@ -355,4 +353,3 @@ export class CompanyProfile extends Component {
   }
 }
 
-export default CompanyProfile;
