@@ -126,8 +126,8 @@ export class index extends Component {
                 </p>
               </div>
             </div>
-            <h1 class="display-4 text-white">Event Name</h1>
-            <p class="lead text-white"> {eventName}</p>
+            <h1 class="display-4 text-white">{eventName}</h1>
+            <p class="lead text-white">{date}</p>
             <p class="lead">
               <a
                 class="btn btn-primary btn-lg"

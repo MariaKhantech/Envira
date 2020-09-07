@@ -9,22 +9,23 @@ export class ReviewForm extends Component {
   state = {
     rating: 0,
     disabled: true,
-    // eventData: [],
   };
 
   //   //   Post request to submit rating to DB
-  //   postRating = (event) => {
-  //     event.preventDefault();
-  //     Axios.post("/api/rate/userprofile", {
-  //       rating: this.state.rating,
-  //       id: this.state.profile.id,
-  //     })
-  //       .then((res) => {
-  //         console.log(res);
-  //         this.setState({ rating: "0", disabled: true });
-  //       })
-  //       .catch((err) => console.log(err));
-  //   };
+  postRating = (event) => {
+    event.preventDefault();
+    const id = JSON.parse(localStorage.getItem("eventId")).id;
+    console.log(id);
+    Axios.post(`/api/rate/userprofile`, {
+      rating: this.state.rating,
+      EventId: id,
+    })
+      .then((res) => {
+        console.log(res);
+        this.setState({ rating: "0", disabled: true });
+      })
+      .catch((err) => console.log(err));
+  };
   //   click method to change star value
   onStarClick(nextValue) {
     this.setState({ rating: nextValue, disabled: false });
@@ -104,23 +105,7 @@ export class ReviewForm extends Component {
         </div>
         <div className="col-12 text-center">
           {postStarRating}
-          {/* <div className="review-block-rate">
-						<button type="button" className="btn btn-warning btn-xs" aria-label="Left Align">
-							<span className="glyphicon glyphicon-star" aria-hidden="true" />
-						</button>
-						<button type="button" className="btn btn-warning btn-xs" aria-label="Left Align">
-							<span className="glyphicon glyphicon-star" aria-hidden="true" />
-						</button>
-						<button type="button" className="btn btn-warning btn-xs" aria-label="Left Align">
-							<span className="glyphicon glyphicon-star" aria-hidden="true" />
-						</button>
-						<button type="button" className="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-							<span className="glyphicon glyphicon-star" aria-hidden="true" />
-						</button>
-						<button type="button" className="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-							<span className="glyphicon glyphicon-star" aria-hidden="true" />
-						</button>
-					</div> */}
+
           <div className="review-block-title">this was nice in buy</div>
           <div className="review-block-description">
             this was nice in buy. this was nice in buy. this was nice in buy.
