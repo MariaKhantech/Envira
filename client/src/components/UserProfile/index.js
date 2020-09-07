@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import "./style.scss";
-import Axios from "axios";
-import { Auth } from "aws-amplify";
+import React, { Component } from 'react';
+import './style.scss';
+import Axios from 'axios';
+import { Auth } from 'aws-amplify';
+import { Storage } from "aws-amplify";
 import ReviewForm from "../ReviewForm";
-
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 import StarRatingComponent from "react-star-rating-component";
 
-export class UserProfile extends Component {
+export default class UserProfile extends Component {
   state = {
     profile: [],
     firstName: "",
@@ -19,8 +19,10 @@ export class UserProfile extends Component {
     about: "",
     zipCode: "",
     totalEvent: "",
+    imagePreviewUrl: '',
+    imageName: [],
     userRating: [],
-  };
+  }
 
   async componentDidMount() {
     try {
@@ -30,16 +32,18 @@ export class UserProfile extends Component {
       const userDetail = user.username;
       // get the user details for logged in user from the User table
       Axios.get(`/api/auth/user/${userDetail}`)
-        .then((response) => {
-          this.setState({
-            profile: response.data,
-          });
-          // call this function to get logged in user profile details
-          this.getUserProfile();
-          // call this function to get logged in user event details
-          this.getUserTotalEvent();
-          this.getUserRating();
-        })
+        .then(
+          (response) => {
+            this.setState({
+              profile: response.data,
+            });
+            // call this function to get logged in user profile details
+            this.getUserProfile()
+            // call this function to get logged in user event details
+            this.getUserTotalEvent()
+            this.getImage()
+            this.getUserRating();
+          })
         .catch((err) => console.log(err));
     } catch (error) {
       if (error !== "No current user") {
@@ -52,47 +56,72 @@ export class UserProfile extends Component {
   getUserProfile = () => {
     const UserId = this.state.profile.id;
     Axios.get(`/api/auth/userProfile/${UserId}`)
-      .then((response) => {
-        console.log(response);
-        this.setState({
-          firstName: response.data.first_name,
-          lastName: response.data.last_name,
-          phoneNumber: response.data.phone_number,
-          city: response.data.city,
-          state: response.data.state,
-          about: response.data.about,
-          zipCode: response.data.zip_code,
-          occupation: response.data.occupation,
-        });
-      })
-      .catch((err) => console.log(err));
-  };
+      .then(
+        (response) => {
+          this.setState({
+            firstName: response.data.first_name,
+            lastName: response.data.last_name,
+            phoneNumber: response.data.phone_number,
+            city: response.data.city,
+            state: response.data.state,
+            about: response.data.about,
+            zipCode: response.data.zip_code,
+            occupation: response.data.occupation,
+          });
+        })
+      .catch(err => console.log(err))
+  }
 
   // get logged in user info from EventAttendee model
   getUserTotalEvent = () => {
     const UserId = this.state.profile.id;
     Axios.get(`/api/auth/userTotalEvent/${UserId}`)
-      .then((response) => {
-        console.log(response);
-        this.setState({
-          totalEvent: response.data,
-        });
-      })
-      .catch((err) => console.log(err));
-  };
+      .then(
+        (response) => {
+          this.setState({
+            totalEvent: response.data
+          });
+        })
+      .catch(err => console.log(err))
+  }
 
-  //  Get request to return user ratings from DB
-  getUserRating = () => {
-    Axios.get(`/api/rate/userprofile/${this.state.profile.id}`)
-      .then((res) => {
-        this.setState({ userRating: res.data });
-        console.log(this.state.userRating);
-      })
+  getImage = () => {
+    const UserId = this.state.profile.id
+    console.log(UserId)
+    Axios.get(`/api/auth/image/${UserId}`)
+      .then(
+        (response) => {
+          this.setState({
+            imageName: response.data
 
-      .catch((err) => console.log(err));
-  };
+          });
+          console.log(this.state.imageName)
+          this.getImageFromS3()
+        })
+      .catch(err => console.log(err))
+
+  }
+
+  getImageFromS3 = () => {
+    let fileName = this.state.imageName.image_name
+    console.log(fileName)
+    Storage.get(fileName)
+      .then(
+        (data) => {
+          console.log(data)
+          this.setState({
+            imagePreviewUrl: data
+          });
+        })
+      .catch(err => console.log(err))
+  }
 
   render() {
+    const myStyle = {
+      width: "304px",
+      height: "200px",
+    }
+    console.log(this.state.totalEvent)
     // const that storest the content of the overview
     const overviewTab = (
       <div>
@@ -188,10 +217,7 @@ export class UserProfile extends Component {
                   <div className="col-lg-3 order-lg-2">
                     <div className="card-profile-image">
                       <a href="#">
-                        <img
-                          src="https://i.guim.co.uk/img/media/d2d6b9cc8326a99daee0f47ad3b94cca738e4ecd/0_229_3500_2101/master/3500.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5078627d8ad593949b1bb03d7653d615"
-                          className="rounded-circle"
-                        />
+                        <img style={myStyle} src={this.state.imagePreviewUrl} alt={this.state.imageName.image_name} className="rounded-circle" />
                       </a>
                     </div>
                   </div>
@@ -270,6 +296,26 @@ export class UserProfile extends Component {
                         </div>
                       </div>
                     </div>
+                  </div>
+                  <div className="text-center">
+                    <h3>
+                      {this.state.firstName} {this.state.lastName}
+                    </h3>
+                    <div className="h6 mt-1">
+                      <i className="ni business_briefcase-24 mr-2"></i>{this.state.occupation}
+                    </div>
+                    <div className="h6 font-weight-300">
+                      <i className="ni location_pin mr-2"></i>{this.state.state}, {this.state.city}
+                    </div>
+                    <hr />
+                    <div>
+                      <h5 className="ni business_briefcase-24 mr-2">How to connect:</h5>
+                      <i className="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
+                      <i className="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
+                      <i className="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+                      <i className="fa fa-meetup fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <hr className="my-4" />
                   </div>
                 </div>
               </div>
@@ -400,5 +446,3 @@ export class UserProfile extends Component {
     );
   }
 }
-
-export default UserProfile;

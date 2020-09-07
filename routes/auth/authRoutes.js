@@ -2,8 +2,6 @@ const router = require('express').Router();
 const db = require('../../models');
 
 // Route for signing up a user.
-// Sequelize User Model. If the user is created successfully, proceed
-//  to log the user in, otherwise send back an error
 router.post('/signup', (req, res) => {
   console.log(req.body.username);
   console.log(req.body.role);
@@ -123,8 +121,6 @@ router.get('/user/:username', (req, res) => {
     });
 });
 
-
-
 //this route is to get the logged in company profile details
 router.get('/companyProfile/:UserId', (req, res) => {
   console.log(req.params.UserId);
@@ -145,17 +141,15 @@ router.get('/companyProfile/:UserId', (req, res) => {
 
 //this route is to save the company profile first time
 router.post('/updateCompanyProfile', (req, res) => {
-  console.log(req.body.id);
-  console.log(req.body.companyDescription)
   db.CompanyProfile.create({
     UserId: req.body.id,
     company_name: req.body.companyName,
-    company_description: req.body.companyDescription,
-    email: req.body.companyEmail,
-    website: req.body.companyWebsite,
+    company_description: req.body.description,
+    email: req.body.email,
+    website: req.body.website,
     contact_person: req.body.contactPersonName,
     environmental_focus: req.body.environmentalFocus,
-    phone_number: req.body.companyPhoneNumber,
+    phone_number: req.body.phoneNumber,
 
   })
     .then((data) => {
@@ -170,16 +164,16 @@ router.post('/updateCompanyProfile', (req, res) => {
 });
 
 //this route is to update the company profile
-router.put('/updateUserProfile/:UserId', (req, res) => {
-
+router.put('/updateCompanyProfile/:UserId', (req, res) => {
+  console.log(req.body.website)
   db.CompanyProfile.update({
     company_name: req.body.companyName,
-    company_description: req.body.companyDescription,
-    email: req.body.companyEmail,
-    website: req.body.companyWebsite,
+    company_description: req.body.description,
+    email: req.body.email,
+    website: req.body.website,
     contact_person: req.body.contactPersonName,
     environmental_focus: req.body.environmentalFocus,
-    phone_number: req.body.companyPhoneNumber,
+    phone_number: req.body.phoneNumber,
   }, {
     where:
       { UserId: req.params.UserId }
@@ -188,9 +182,10 @@ router.put('/updateUserProfile/:UserId', (req, res) => {
       res.json(data);
     })
     .catch((err) => {
+      console.log(err)
       if (err) {
         res.status(500).json(err);
-        console.log(err)
+        res.status(404).json(err);
       }
     });
 });
@@ -212,5 +207,65 @@ router.get('/userTotalEvent/:UserId', (req, res) => {
       }
     });
 });
+
+// this route is to save the profile image for logged in user into image model
+router.post('/image', (req, res) => {
+  console.log(req.body.selectedFileName)
+  console.log(req.body.UserId)
+  db.Image.create({
+    image_name: req.body.selectedFileName,
+    UserId: req.body.UserId
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err)
+      if (err) {
+        res.status(500).json(err.message);
+      }
+    });
+});
+
+// this route is to update the profile image for logged in user into image model
+router.put('/image/:UserId', (req, res) => {
+  db.Image.update({
+    image_name: req.body.selectedFileName,
+  }, {
+    where: {
+      UserId: req.params.UserId
+    }
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err)
+      if (err) {
+        res.status(500).json(err.message);
+      }
+    });
+});
+
+// this route is to get the profile image for logged in user
+router.get('/image/:UserId', (req, res) => {
+  console.log(req.params.UserId)
+  db.Image.findOne({
+    where: {
+      UserId: req.params.UserId
+    }
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log(err)
+      if (err) {
+        res.status(500).json(err.message);
+      }
+    });
+});
+
+
 
 module.exports = router;
