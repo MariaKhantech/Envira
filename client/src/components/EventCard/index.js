@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReviewComment from "../ReviewForm";
 import ImageGallery from "react-image-gallery";
+import moment from "moment";
 import Axios from "axios";
 import "./style.scss";
 
@@ -156,8 +157,12 @@ export class index extends Component {
                 </p>
               </div>
             </div>
-            <h1 class="display-4 text-white">Event Name</h1>
-            <p class="lead text-white"> {eventName}</p>
+
+            <h1 class="display-4 text-white">{eventName}</h1>
+            <p class="lead text-white">
+              {moment(date).format("dddd, MMMM Do YYYY")}
+            </p>
+
             <p class="lead">
               <a
                 class="btn btn-primary btn-lg"
