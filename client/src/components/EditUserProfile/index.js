@@ -19,6 +19,7 @@ export default class UpdateProfile extends Component {
         zipCode: "",
         data: "",
         errors: {
+            blankfield: false,
             phonenumber: false
         }
     }
@@ -26,18 +27,19 @@ export default class UpdateProfile extends Component {
     clearErrorState = () => {
         this.setState({
             errors: {
+                blankfield: false,
                 phonenumber: false
             }
         });
     }
 
+    // When the page loads for the first time get the logged in user info
     async componentDidMount() {
         try {
             // get the current logged in user details
             const user = await Auth.currentAuthenticatedUser();
             // get username from user object
             const userDetail = user.username;
-            console.log(userDetail)
             // get the user details for logged in user from the User table 
             Axios.get(`/api/auth/user/${userDetail}`)
                 .then(
@@ -46,26 +48,23 @@ export default class UpdateProfile extends Component {
                         this.setState({
                             profile: response.data,
                         });
+                        // call this function to get the existing user profile details
                         this.getUserProfile()
                     })
-
                 .catch(err => console.log(err))
         } catch (error) {
             if (error !== "No current user") {
                 console.log(error);
             }
         }
-
     }
 
-
+    // call this function to get the existing user profile details
     getUserProfile = () => {
         const UserId = this.state.profile.id
-        console.log(this.state.firstName)
         Axios.get(`/api/auth/userProfile/${UserId}`)
             .then(
                 (response) => {
-                    console.log(response.data)
                     this.setState({
                         firstName: response.data.first_name,
                         lastName: response.data.last_name,
@@ -81,6 +80,7 @@ export default class UpdateProfile extends Component {
             .catch(err => console.log(err))
     }
 
+    // call this function on the input change and update the state
     handleInputChange = (e) => {
         let name = e.target.name;
         let value = e.target.value;
@@ -90,10 +90,11 @@ export default class UpdateProfile extends Component {
         document.getElementById(e.target.id).classList.remove("is-invalid");
     }
 
+    // call this function on form submit when user saves profile for the first time
     handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        // Form validation
+        // check Form validation
         this.clearErrorState();
         const error = Validate(event, this.state);
         if (error) {
@@ -101,29 +102,31 @@ export default class UpdateProfile extends Component {
                 errors: { ...this.state.errors, ...error }
             });
         }
-        const { firstName, lastName, city, state, zipCode, about, phoneNumber, occupation } = this.state
-        const id = this.state.profile.id;
-        Axios.post("/api/auth/updateUserProfile", {
-            firstName,
-            lastName,
-            city,
-            state,
-            zipCode,
-            about,
-            phoneNumber,
-            occupation,
-            id
-        })
-            .then((res) => {
+        else {
+            const { firstName, lastName, city, state, zipCode, about, phoneNumber, occupation } = this.state
+            const id = this.state.profile.id;
+            Axios.post("/api/auth/updateUserProfile", {
+                firstName,
+                lastName,
+                city,
+                state,
+                zipCode,
+                about,
+                phoneNumber,
+                occupation,
+                id
+            }).then((res) => {
                 console.log(res)
-            })
-            .catch(err => console.log(err.message))
+                window.location = "/userprofile";
+            }).catch(err => console.log(err.message))
+        }
     }
 
+    // call this function on form submit when user updates profile
     handleUpdateFormSubmit = async (event) => {
         event.preventDefault();
 
-        // Form validation
+        // check Form validation
         this.clearErrorState();
         const error = Validate(event, this.state);
         if (error) {
@@ -144,12 +147,10 @@ export default class UpdateProfile extends Component {
                 about,
                 phoneNumber,
                 occupation
-            })
-                .then((res) => {
-                    console.log(res)
-                    window.location = "/userprofile";
-                })
-                .catch(err => console.log(err))
+            }).then((res) => {
+                console.log(res)
+                window.location = "/userprofile";
+            }).catch(err => console.log(err))
         }
     }
 
@@ -176,15 +177,15 @@ export default class UpdateProfile extends Component {
 
                                     <div className="col-md-12">
                                         <label className="labels">User Name</label>
-                                        <input type="text" className="form-control" value={this.state.profile.user_name} readOnly />
+                                        <input id="username" type="text" className="form-control" value={this.state.profile.user_name} readOnly />
                                     </div>
                                     <div className="col-md-6 mt-1">
                                         <label className="labels">First Name</label>
-                                        <input name="firstName" type="text" className="form-control" placeholder="first name" value={this.state.firstName} onChange={this.handleInputChange} />
+                                        <input id="firstname" name="firstName" type="text" className="form-control" placeholder="first name" value={this.state.firstName} onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-6 mt-1">
                                         <label className="labels">Last Name</label>
-                                        <input name="lastName" type="text" className="form-control" placeholder="last name" value={this.state.lastName} onChange={this.handleInputChange} />
+                                        <input id="lastname" name="lastName" type="text" className="form-control" placeholder="last name" value={this.state.lastName} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 <div className="row mt-3">
@@ -197,24 +198,24 @@ export default class UpdateProfile extends Component {
                                     </div>
                                     <div className="col-md-12 mt-1">
                                         <label className="labels">Occupation</label>
-                                        <input name="occupation" type="text" className="form-control" placeholder="enter occupation" value={this.state.occupation} onChange={this.handleInputChange} /></div>
+                                        <input id="occupation" name="occupation" type="text" className="form-control" placeholder="enter occupation" value={this.state.occupation} onChange={this.handleInputChange} /></div>
 
                                     <div className="col-md-12 mt-1">
                                         <label className="labels">About</label>
-                                        <textarea name="about" type="text" className="form-control" placeholder="about" value={this.state.about} onChange={this.handleInputChange} /></div>
+                                        <textarea id="about" name="about" type="text" className="form-control" placeholder="about" value={this.state.about} onChange={this.handleInputChange} /></div>
                                 </div>
                                 <div className="row mt-3">
                                     <div className="col-md-4">
                                         <label className="labels">City</label>
-                                        <input name="city" type="text" className="form-control" placeholder="city" value={this.state.city} onChange={this.handleInputChange} />
+                                        <input id="city" name="city" type="text" className="form-control" placeholder="city" value={this.state.city} onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-4">
                                         <label className="labels">State/Region</label>
-                                        <input name="state" type="text" className="form-control" value={this.state.state} placeholder="state" onChange={this.handleInputChange} />
+                                        <input id="state" name="state" type="text" className="form-control" value={this.state.state} placeholder="state" onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-4">
                                         <label className="labels">Zip Code</label>
-                                        <input name="zipCode" type="text" className="form-control" value={this.state.zipCode} placeholder="state" onChange={this.handleInputChange} />
+                                        <input id="zipcode" name="zipCode" type="text" className="form-control" value={this.state.zipCode} placeholder="state" onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 {!this.state.data && (
