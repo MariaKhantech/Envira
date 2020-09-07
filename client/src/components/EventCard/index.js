@@ -9,6 +9,8 @@ export class index extends Component {
 		this.state = {
 			reviewArray: []
 		};
+
+		this.initializeCountdown = this.initializeCountdown.bind(this);
 	}
 
 	//load any data here like comments
@@ -21,27 +23,43 @@ export class index extends Component {
 			{ name: <ReviewComment /> }
 		];
 		this.setState({ reviewArray });
+		//setting date for testing
+		let date = new Date();
+		date.setDate(30);
+		this.initializeCountdown(date);
 	}
+
+	//initialize the countdouwn
+	initializeCountdown(endtime) {
+		var timeinterval = setInterval(function() {
+			var t = Date.parse(endtime) - Date.parse(new Date());
+			var seconds = Math.floor((t / 1000) % 60);
+			var minutes = Math.floor((t / 1000 / 60) % 60);
+			var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+			var days = Math.floor(t / (1000 * 60 * 60 * 24));
+			var t = {
+				total: t,
+				days: days,
+				hours: hours,
+				minutes: minutes,
+				seconds: seconds
+			};
+
+			document.querySelector('.days > .value').innerText = t.days;
+			document.querySelector('.hours > .value').innerText = t.hours;
+			document.querySelector('.minutes > .value').innerText = t.minutes;
+			document.querySelector('.seconds > .value').innerText = t.seconds;
+			if (t.total <= 0) {
+				clearInterval(timeinterval);
+			}
+		}, 1000);
+	}
+
 	render() {
 		const scrollingContainer = {
 			height: '800px',
 			overflowY: 'scroll'
 		};
-
-		const images = [
-			{
-			  original: 'https://picsum.photos/id/1018/1000/600/',
-			  thumbnail: 'https://picsum.photos/id/1018/250/150/',
-			},
-			{
-			  original: 'https://picsum.photos/id/1015/1000/600/',
-			  thumbnail: 'https://picsum.photos/id/1015/250/150/',
-			},
-			{
-			  original: 'https://picsum.photos/id/1019/1000/600/',
-			  thumbnail: 'https://picsum.photos/id/1019/250/150/',
-			},
-		  ];
 
 		return (
 			<div class="wrapper2">
@@ -86,8 +104,10 @@ export class index extends Component {
 						<h1 class="display-4 text-white">Event Name</h1>
 						<p class="lead text-white"> EVENT DATE</p>
 						<p class="lead">
-    					<a class="btn btn-primary btn-lg" style={{marginTop:'8rem'}} href="#" role="button">Join Event</a>
-  </p>
+							<a class="btn btn-primary btn-lg" style={{ marginTop: '8rem' }} href="#" role="button">
+								Join Event
+							</a>
+						</p>
 					</div>
 				</div>
 
@@ -141,13 +161,12 @@ export class index extends Component {
 						</div>
 					</div>
 
-					 <div class="container mt-5 text-center text-white">
-						<h1 class = "text-white">Event Attendees</h1>
+					<div class="container mt-5 text-center text-white">
+						<h1 class="text-white">Event Attendees</h1>
 						{/* <section>
 						<ImageGallery items={images} />
 						</section> */}
 					</div>
-
 				</div>
 
 				<div className="row justify-content-center mb-5" style={{ marginTop: '5rem' }}>
