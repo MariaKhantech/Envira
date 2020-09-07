@@ -3,6 +3,8 @@ import { overviewTab, startRating } from '../profileTabs'
 import './style.scss';
 import Axios from 'axios';
 import { Auth } from 'aws-amplify';
+import { Storage } from "aws-amplify";
+
 
 export class CompanyProfile extends Component {
 
@@ -15,7 +17,9 @@ export class CompanyProfile extends Component {
     companyWebsite: "",
     companyPhoneNumber: "",
     companyEmail: "",
-    data: ""
+    data: "",
+    imagePreviewUrl: '',
+    imageName: [],
   }
 
   async componentDidMount() {
@@ -35,6 +39,7 @@ export class CompanyProfile extends Component {
             this.getCompanyProfile()
             // call this function to get logged in company event details
             this.getUserTotalEvent()
+            this.getImage()
           })
         .catch(err => console.log(err))
     } catch (error) {
@@ -79,9 +84,43 @@ export class CompanyProfile extends Component {
       .catch(err => console.log(err))
   }
 
+  getImage = () => {
+    const UserId = this.state.profile.id
+    console.log(UserId)
+    Axios.get(`/api/auth/image/${UserId}`)
+      .then(
+        (response) => {
+          this.setState({
+            imageName: response.data
+
+          });
+          console.log(this.state.imageName)
+          this.getImageFromS3()
+        })
+      .catch(err => console.log(err))
+
+  }
+
+  getImageFromS3 = () => {
+    let fileName = this.state.imageName.image_name
+    console.log(fileName)
+    Storage.get(fileName)
+      .then(
+        (data) => {
+          console.log(data)
+          this.setState({
+            imagePreviewUrl: data
+          });
+        })
+      .catch(err => console.log(err))
+  }
+
 
   render() {
-
+    const myStyle= {
+      width: "304px",
+      height: "200px",
+    }
     return (<div className=" main-content">
       {/* <!--reference https://www.creative-tim.com/bits/bootstrap/user-profile-page-argon-dashboard--> */}
       {/* <!-- Header --> */}
@@ -92,7 +131,7 @@ export class CompanyProfile extends Component {
         <div className="container-fluid d-flex align-items-center">
           <div className="row">
             <div className="col-lg-7 col-md-10">
-              <h1 className="display-2 text-black">Greta Thunburg</h1>
+              <h1 className="display-2 text-black">{this.state.companyName}</h1>
               <p className="text-black mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
             </div>
           </div>
@@ -107,8 +146,9 @@ export class CompanyProfile extends Component {
                 <div className="col-lg-3 order-lg-2">
                   <div className="card-profile-image">
                     <a href="#">
-                      <img src="https://i.guim.co.uk/img/media/d2d6b9cc8326a99daee0f47ad3b94cca738e4ecd/0_229_3500_2101/master/3500.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5078627d8ad593949b1bb03d7653d615" className="rounded-circle" />
+                      <img style={myStyle} src={this.state.imagePreviewUrl} className="rounded-circle" />
                     </a>
+
                   </div>
                 </div>
               </div>
