@@ -9,6 +9,7 @@ export class ReviewForm extends Component {
   state = {
     rating: 0,
     disabled: true,
+
   };
 
   //   //   Post request to submit rating to DB
@@ -26,6 +27,7 @@ export class ReviewForm extends Component {
       })
       .catch((err) => console.log(err));
   };
+
   //   click method to change star value
   onStarClick(nextValue) {
     this.setState({ rating: nextValue, disabled: false });
@@ -105,7 +107,6 @@ export class ReviewForm extends Component {
         </div>
         <div className="col-12 text-center">
           {postStarRating}
-
           <div className="review-block-title">this was nice in buy</div>
           <div className="review-block-description">
             this was nice in buy. this was nice in buy. this was nice in buy.
