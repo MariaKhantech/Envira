@@ -4,6 +4,8 @@ import { Storage } from "aws-amplify";
 import Axios from 'axios';
 import "./profileImage.css"
 
+
+
 export default class index extends Component {
     state = {
         profile: [],
@@ -11,15 +13,29 @@ export default class index extends Component {
         imagePreviewUrl: '',
         selectedFileName: 'Choose file',
         imageName: [],
+        successMessage: ""
+
     }
 
+    // this function is to display the success message
+    setSuccessMessage(message) {
+        this.setState({
+            successMessage: message
+        });
+        setTimeout(() => {
+            this.setState({
+                successMessage: ''
+            });
+        }, 3000)
+    }
+
+    // When the page loads for the first time get the logged in user info
     async componentDidMount() {
         try {
             // get the current logged in user details
             const user = await Auth.currentAuthenticatedUser();
             // get username from user object
             const userDetail = user.username;
-            console.log(userDetail)
             // get the user details for logged in user from the User table 
             Axios.get(`/api/auth/user/${userDetail}`)
                 .then(
@@ -28,6 +44,7 @@ export default class index extends Component {
                         this.setState({
                             profile: response.data,
                         });
+                        // call this function to get the logged in user's existing image
                         this.getImage()
                     })
                 .catch(err => console.log(err))
@@ -38,9 +55,9 @@ export default class index extends Component {
         }
     }
 
+    // get the user image image form database
     getImage = () => {
         const UserId = this.state.profile.id
-        console.log(UserId)
         Axios.get(`/api/auth/image/${UserId}`)
             .then(
                 (response) => {
@@ -48,20 +65,18 @@ export default class index extends Component {
                         imageName: response.data
 
                     });
-                    console.log(this.state.imageName)
+                    // call this function to get the image from S3
                     this.getImageFromS3()
                 })
             .catch(err => console.log(err))
-
     }
 
+    // get the image from S3
     getImageFromS3 = () => {
         let fileName = this.state.imageName.image_name
-        console.log(fileName)
         Storage.get(fileName)
             .then(
                 (data) => {
-                    console.log(data)
                     this.setState({
                         imagePreviewUrl: data
                     });
@@ -69,55 +84,42 @@ export default class index extends Component {
             .catch(err => console.log(err))
     }
 
+    // upload image into S3 also save image name in image model
     handleImageUpload = async (event) => {
         event.preventDefault();
         // save image in S3
         await Storage.put(this.state.selectedFileName, this.state.selectedFile);
-        console.log('successfully saved file...');
-        console.log('handle uploading-', this.state.selectedFile);
-
         const { selectedFileName } = this.state
-        console.log(selectedFileName)
         const UserId = this.state.profile.id;
-        console.log(UserId)
         // post image name in image model
         Axios.post("/api/auth/image", {
             selectedFileName,
             UserId
-        })
-            .then((res) => {
-                console.log(res)
-            })
-            .catch(err => console.log(err.message))
+        }).then(() => {
+            this.setSuccessMessage('Image uploaded successfully');
+        }).catch(err => console.log(err.message))
     }
 
+    // upload image into S3 also update image name in image model
     handleImageUpdate = async (event) => {
         event.preventDefault();
         // save image in S3
         await Storage.put(this.state.selectedFileName, this.state.selectedFile);
-        console.log('successfully saved file...');
-
         const { selectedFileName } = this.state
-        console.log(selectedFileName)
         const UserId = this.state.profile.id;
-        console.log(UserId)
         // post image name in image model
         Axios.put(`/api/auth/image/${UserId}`, {
             selectedFileName,
-        })
-            .then((res) => {
-                console.log(res)
-            })
-            .catch(err => console.log(err.message))
+        }).then(() => {
+            this.setSuccessMessage('Image uploaded successfully');
+        }).catch(err => console.log(err.message))
     }
 
+    // call this function on the input change and update the state
     handleImageChange = (event) => {
         event.preventDefault();
-
         let reader = new FileReader();
         let file = event.target.files[0];
-        console.log(reader)
-
         reader.onloadend = () => {
             this.setState({
                 selectedFile: file,
@@ -126,7 +128,6 @@ export default class index extends Component {
                 displayUploadButton: true
             });
         }
-
         reader.readAsDataURL(file)
     }
 
@@ -140,31 +141,28 @@ export default class index extends Component {
         }
         return (
             <>
+                <div className="text-success">{this.state.successMessage}</div>
                 <div className="previewComponent ">
                     <div className="imgPreview">
                         {$imagePreview}
                     </div>
                     <div className="row justify-content-center mt-5">
-
                         <div className="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                             <input
                                 id="upload"
                                 type="file"
                                 onChange={this.handleImageChange}
-                                className="form-control border-0"
-                            />
+                                className="form-control border-0" />
                             <label
                                 id="upload-label"
                                 htmlFor="upload"
-                                className="font-weight-light text-muted"
-                            >
+                                className="font-weight-light text-muted">
                                 {this.state.selectedFileName}
                             </label>
                             <div className="input-group-append">
                                 <label
                                     htmlFor="upload"
-                                    className="btn btn-secondary m-0 rounded-pill px-2"
-                                >
+                                    className="btn btn-secondary m-0 rounded-pill px-2">
                                     {' '}
                                     <i className="fa fa-cloud-upload mr-1 text-white" />
                                     <small className="text-uppercase font-weight-bold text-white">
