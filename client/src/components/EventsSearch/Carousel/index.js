@@ -7,6 +7,7 @@ import "./style.css";
 
 export default class Carousel extends Component {
   render() {
+    const { handleViewEvent } = this.props;
     const renderCard = this.props.state.eventData.map((data) => (
       <div className="contact-box ">
         <img
@@ -45,6 +46,8 @@ export default class Carousel extends Component {
               size="sm"
               className="float-right"
               key={data.id}
+              value={data.id}
+              onClick={handleViewEvent}
               style={{ backgroundColor: "#c38d9e", border: "none" }}
             >
               View
