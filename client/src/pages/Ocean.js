@@ -40,16 +40,27 @@ export class Ocean extends Component {
 			overflow: 'hidden'
 		};
 
+		const videoStyle = {
+			position: 'relative',
+			inset: '0px',
+			width: '100%',
+			height: '1080px',
+			maxWidth: 'none',
+			maxHeight: 'none',
+			margin: '-131.5px 0px 0px'
+		};
+
 		return (
 			<div>
-				<Jumbotron fluid className="embed-responsive-16by9 mb-0" style={jumbotronStyle}>
+				<Jumbotron fluid className=" mb-0" style={jumbotronStyle}>
 					<iframe
 						width="100%"
-						height="100%"
-						src="https://www.youtube.com/embed/6zrn4-FfbXw?autoplay=0"
+						height="auto"
+						src="https://www.youtube.com/embed/6zrn4-FfbXw?autohide=1&amp;rel=0&amp;autoplay=1&amp;playsinline=1&amp;iv_load_policy=3&amp;modestbranding=1&amp;controls=0&amp;showinfo=0&amp;disablekb=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1"
 						frameBorder="0"
 						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-						allowFullScreen
+						allowFullScreen="1"
+						style={videoStyle}
 					/>
 				</Jumbotron>
 				<OceanParallax />

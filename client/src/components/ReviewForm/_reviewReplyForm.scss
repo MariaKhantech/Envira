@@ -1,0 +1,27 @@
+$red-orange: #e27d60;
+$orange: #e8a87c;
+$darker-green: #41b3a3;
+
+.animated {
+	-webkit-transition: height 0.2s;
+	-moz-transition: height 0.2s;
+	transition: height 0.2s;
+}
+
+.stars {
+	margin: 20px 0;
+	font-size: 24px;
+	color: #d17581;
+}
+
+.leave-reviewbtn {
+	background-color: $red-orange;
+}
+
+.cancel-btn {
+	background-color: $red-orange;
+}
+
+.save-btn {
+	background-color: $darker-green;
+}

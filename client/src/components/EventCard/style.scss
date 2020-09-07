@@ -1,5 +1,7 @@
 @import "./eventcardtimer";
 
+$light-green: #85dcba;
+
 .background-img {
 	background-image: url("https://images.unsplash.com/photo-1500964757637-c85e8a162699?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1378&q=80");
 	background-size: cover;
@@ -43,4 +45,25 @@ img {
 
 .google-map {
 	width: 500px;
+}
+
+.location-cardStyle {
+	background-color: $light-green;
+}
+
+.map-style {
+	border-style: solid;
+	border-width: .25em;
+	border-color: $light-green;
+}
+.style-contact-person {
+	background-color: transparent;
+	width: max-content;
+}
+
+.container-fluid {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
 }

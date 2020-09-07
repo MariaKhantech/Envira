@@ -3,7 +3,6 @@ import Axios from "axios";
 
 import Search from "./Search/index";
 import Carousel from "./Carousel/index";
-// import StarRatingComponent from "react-star-rating-component";
 
 import { Row, Col } from "react-bootstrap";
 
@@ -22,26 +21,7 @@ export default class EventsSearch extends Component {
     slidesToScroll: 3,
     eventData: [],
     madeRequest: false,
-    rating: "0",
   };
-
-  // onStarClick(nextValue) {
-  //   this.setState({ rating: nextValue });
-  // }
-
-  // postRating = (event) => {
-  //   event.preventDefault();
-  //   Axios.post("/api/rate/eventsearch", {
-  //     rating: this.state.rating,
-  //     UserId: 7,
-  //     EventId: 7,
-  //   })
-  //     .then((res) => {
-  //       console.log(res);
-  //       this.setState({ rating: "0" });
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
 
   onChange = (event) =>
     this.setState({ [event.target.name]: event.target.value });
@@ -87,7 +67,6 @@ export default class EventsSearch extends Component {
           );
           this.setState({
             eventData: filteredEv,
-
             showCarousel: true,
             introTitle: "",
             introText: "",
@@ -115,6 +94,7 @@ export default class EventsSearch extends Component {
           eventData: response.data,
           madeRequest: true,
         });
+        console.log(this.state.eventData);
       },
       (error) => {
         this.setState({
@@ -132,14 +112,26 @@ export default class EventsSearch extends Component {
     });
   };
 
+  handleViewEvent = (event) => {
+    event.preventDefault();
+    let selectedEvent = {
+      id: event.target.value,
+    };
+    console.log(selectedEvent);
+    localStorage.setItem("eventId", JSON.stringify(selectedEvent));
+    window.location = "/eventspage";
+  };
+
   render() {
     let renderCarousel = null;
     if (this.state.showCarousel === true) {
-      renderCarousel = <Carousel state={this.state} />;
+      renderCarousel = (
+        <Carousel state={this.state} handleViewEvent={this.handleViewEvent} />
+      );
     } else if (this.state.showCarousel === "") {
       renderCarousel = null;
     }
-    console.log(this.state.rating);
+    console.log(this.state.eventData);
 
     return (
       <>
@@ -154,24 +146,13 @@ export default class EventsSearch extends Component {
 
         <Row>
           <Col md={9} id="carouselWrap" className="mx-auto mt-3">
-            {/* <Fade in={this.state.open}> */}
             <div>
               <h1 className="text-center">{this.state.introTitle}</h1>
               <p>{this.state.introText}</p>
             </div>
-            {/* </Fade> */}
             {renderCarousel}
           </Col>
         </Row>
-
-        {/* <StarRatingComponent
-          name="rating"
-          starCount={5}
-          value={this.state.rating}
-          onStarClick={this.onStarClick.bind(this)}
-          style={{ fontSize: "50px" }}
-        /> */}
-        {/* <Button variant="primary" onClick={this.postRating} /> */}
       </>
     );
   }

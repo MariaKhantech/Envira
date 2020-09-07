@@ -1,17 +1,150 @@
-// @import "./parallaxfish";
+@import "./animatedOcean";
+
+$sand-color: #fff7ed;
+$ocean-blue-color: #004080;
 
 #card-image {
 	width: 18rem;
 }
-
-// .card-body {
-//     background-color: #fdfaed ;
-
-// }
+.body-color {
+	background-color: $sand-color !important;
+}
+.background-longCard {
+	background-color: $ocean-blue-color;
+}
 
 .card-header {
 	border: 4px;
 	border-style: solid;
-	border-color: #004080;
+	border-color: $ocean-blue-color;
 }
 
+.ocean-floor-img {
+	height: 600px;
+}
+
+.oceanParticles {
+	position: absolute !important;
+	width: 100%;
+}
+.diver {
+	position: absolute;
+	height: 50px;
+	top: 10%;
+	animation: animateForward 50s linear infinite;
+}
+
+.long-fish {
+	position: absolute;
+	height: 70px;
+	top: 30%;
+	animation: animateForward 15s linear infinite;
+}
+
+.group-fish {
+	position: absolute;
+	height: 50px;
+	top: 50%;
+	animation: animateBackward 35s linear infinite;
+}
+
+.orange-fish {
+	position: absolute;
+	height: 50px;
+	top: 40%;
+	animation: animateBackward 25s linear infinite;
+}
+
+.blue-fish {
+	position: absolute;
+	height: 80px;
+	top: 20%;
+	animation: animateBackward 30s linear infinite;
+}
+
+.bottle-trash {
+	position: absolute;
+	height: 30px;
+	left: 40%;
+	animation: animateDown 25s linear infinite;
+}
+.slurpee-trash {
+	position: absolute;
+	height: 30px;
+	left: 90%;
+	animation: animateDown 15s linear infinite;
+}
+
+.clearbag-trash {
+	position: absolute;
+	height: 30px;
+	left: 10%;
+	animation: animateDown 35s linear infinite;
+}
+
+.bluebag-trash {
+	position: absolute;
+	height: 30px;
+	left: 65%;
+	animation: animateDown 30s linear infinite;
+}
+
+@keyframes animateForward {
+	0% {
+		transform: translateY(-50px);
+		left: -25%;
+	}
+	25% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(50px);
+	}
+	75% {
+		transform: translateY(0px);
+	}
+	100% {
+		transform: translateY(-50px);
+		left: 110%;
+	}
+}
+
+@keyframes animateBackward {
+	0% {
+		transform: translateY(-50px);
+		right: -25%;
+	}
+	25% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(50px);
+	}
+	75% {
+		transform: translateY(0px);
+	}
+	100% {
+		transform: translateY(-50px);
+		right: 110%;
+	}
+}
+
+@keyframes animateDown {
+	0% {
+		transform: translateX(-50px);
+		top: 0%;
+	}
+	25% {
+		transform: translateX(0px);
+	}
+	50% {
+		transform: translateX(50px);
+	}
+	75% {
+		transform: translateX(100px);
+	}
+	100% {
+		transform: translateX(150px);
+		top: 95%;
+	}
+}

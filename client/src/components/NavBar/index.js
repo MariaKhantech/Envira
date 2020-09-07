@@ -12,26 +12,25 @@ const orangeColor = {
 
 export class NavBar extends Component {
 	state = {
-		profile: [],
-	}
+		profile: []
+	};
 	async componentDidMount() {
 		try {
 			// get the current logged in user details
 			const user = await Auth.currentAuthenticatedUser();
 			// get username from user object
 			const userDetail = user.username;
-			console.log(userDetail)
-			// get the user details for logged in user from the User table 
+			console.log(userDetail);
+			// get the user details for logged in user from the User table
 			Axios.get(`/api/auth/user/${userDetail}`)
-				.then(
-					(response) => {
-						this.setState({
-							profile: response.data,
-						});
-					})
-				.catch(err => console.log(err))
+				.then((response) => {
+					this.setState({
+						profile: response.data
+					});
+				})
+				.catch((err) => console.log(err));
 		} catch (error) {
-			if (error !== "No current user") {
+			if (error !== 'No current user') {
 				console.log(error);
 			}
 		}
@@ -43,15 +42,14 @@ export class NavBar extends Component {
 			Auth.signOut();
 			this.props.auth.setAuthStatus(false);
 			this.props.auth.setUser(null);
-			window.location = "/"
-		}
-		catch (error) {
+			window.location = '/';
+		} catch (error) {
 			console.log(error.message);
 		}
 	};
 
 	render() {
-		console.log(this.state.profile)
+		console.log(this.state.profile);
 		return (
 			<Menu>
 				<hr style={{ background: 'white' }} />
@@ -59,10 +57,9 @@ export class NavBar extends Component {
 					Home
 				</a>
 				{this.props.auth.isAuthenticated &&
-					this.props.auth.user && (
-						<h5 style={{ textAlign: 'center', color: 'white' }}>Welcome {this.props.auth.user.username}</h5>
-					)
-				}
+				this.props.auth.user && (
+					<h5 style={{ textAlign: 'center', color: 'white' }}>Welcome {this.props.auth.user.username}</h5>
+				)}
 				<hr className="bg-light" style={{ background: 'white' }} />
 				<a className="menu-item text-white about" href="/ocean">
 					About
@@ -87,7 +84,7 @@ export class NavBar extends Component {
 						<a className="dropdown-item text-white" href="/ocean">
 							Ocean
 						</a>
-						<a className="dropdown-item text-white" href="#">
+						<a className="dropdown-item text-white" href="/rainforest">
 							Rainforest
 						</a>
 						<a className="dropdown-item text-white" href="#">
@@ -125,23 +122,23 @@ export class NavBar extends Component {
 	 if roleId is 2 then redirect user to Profile page
 	if roleId is 3 then redirect user to Profile page */}
 				{this.props.auth.isAuthenticated &&
-					this.state.profile.roleId === 1 && (<a className="menu-item text-white about" href="/userprofile">
+				this.state.profile.roleId === 1 && (
+					<a className="menu-item text-white about" href="/userprofile">
 						My Account
 					</a>
-					)
-				}
+				)}
 				{this.props.auth.isAuthenticated &&
-					this.state.profile.roleId === 2 && (<a className="menu-item text-white about" href="/companyprofile">
+				this.state.profile.roleId === 2 && (
+					<a className="menu-item text-white about" href="/companyprofile">
 						My Account
 					</a>
-					)
-				}
+				)}
 				{this.props.auth.isAuthenticated &&
-					this.state.profile.roleId === 3 && (<a className="menu-item text-white about" href="/companyprofile">
+				this.state.profile.roleId === 3 && (
+					<a className="menu-item text-white about" href="/companyprofile">
 						My Account
 					</a>
-					)
-				}
+				)}
 				<hr style={{ background: 'white' }} />
 				{!this.props.auth.isAuthenticated && (
 					<li className="dropdown dropdown-login  order-1 menu-item mt-4">
@@ -150,7 +147,7 @@ export class NavBar extends Component {
 						</button>
 						<ul className="dropdown-menu mt-2">
 							<li className="px-3 py-2">
-								<Login></Login>
+								<Login />
 							</li>
 						</ul>
 					</li>

@@ -1,14 +1,14 @@
 $font-style: 'Poppins', sans-serif;
-$neutral-yellow: #85dcba;
+$neutral-green: #85dcba;
 body {
-	font-family: $neutral-yellow;
 	/* background-color: #85dcba; */
 	background-color: #fff7ed !important;
-
+	font-family: 'Slabo 27px', serif;
 	background-repeat: repeat;
 	background-size: cover;
 	width: auto;
 	height: 100vh;
+	overflow-x: hidden;
 }
 
 // html {

@@ -1,10 +1,254 @@
+.ocean-para {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(-10%, #00d2ff), color-stop(75%, #3a47d5));
+  background: linear-gradient(180deg, #00d2ff -10%, #3a47d5 75%);
+}
+
 #card-image {
   width: 18rem;
+}
+
+.body-color {
+  background-color: #fff7ed !important;
+}
+
+.background-longCard {
+  background-color: #004080;
 }
 
 .card-header {
   border: 4px;
   border-style: solid;
   border-color: #004080;
+}
+
+.ocean-floor-img {
+  height: 600px;
+}
+
+.oceanParticles {
+  position: absolute !important;
+  width: 100%;
+}
+
+.diver {
+  position: absolute;
+  height: 50px;
+  top: 10%;
+  -webkit-animation: animateForward 50s linear infinite;
+          animation: animateForward 50s linear infinite;
+}
+
+.long-fish {
+  position: absolute;
+  height: 70px;
+  top: 30%;
+  -webkit-animation: animateForward 15s linear infinite;
+          animation: animateForward 15s linear infinite;
+}
+
+.group-fish {
+  position: absolute;
+  height: 50px;
+  top: 50%;
+  -webkit-animation: animateBackward 35s linear infinite;
+          animation: animateBackward 35s linear infinite;
+}
+
+.orange-fish {
+  position: absolute;
+  height: 50px;
+  top: 40%;
+  -webkit-animation: animateBackward 25s linear infinite;
+          animation: animateBackward 25s linear infinite;
+}
+
+.blue-fish {
+  position: absolute;
+  height: 80px;
+  top: 20%;
+  -webkit-animation: animateBackward 30s linear infinite;
+          animation: animateBackward 30s linear infinite;
+}
+
+.bottle-trash {
+  position: absolute;
+  height: 30px;
+  left: 40%;
+  -webkit-animation: animateDown 25s linear infinite;
+          animation: animateDown 25s linear infinite;
+}
+
+.slurpee-trash {
+  position: absolute;
+  height: 30px;
+  left: 90%;
+  -webkit-animation: animateDown 15s linear infinite;
+          animation: animateDown 15s linear infinite;
+}
+
+.clearbag-trash {
+  position: absolute;
+  height: 30px;
+  left: 10%;
+  -webkit-animation: animateDown 35s linear infinite;
+          animation: animateDown 35s linear infinite;
+}
+
+.bluebag-trash {
+  position: absolute;
+  height: 30px;
+  left: 65%;
+  -webkit-animation: animateDown 30s linear infinite;
+          animation: animateDown 30s linear infinite;
+}
+
+@-webkit-keyframes animateForward {
+  0% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+    left: -25%;
+  }
+  25% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  50% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+  75% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  100% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+    left: 110%;
+  }
+}
+
+@keyframes animateForward {
+  0% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+    left: -25%;
+  }
+  25% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  50% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+  75% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  100% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+    left: 110%;
+  }
+}
+
+@-webkit-keyframes animateBackward {
+  0% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+    right: -25%;
+  }
+  25% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  50% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+  75% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  100% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+    right: 110%;
+  }
+}
+
+@keyframes animateBackward {
+  0% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+    right: -25%;
+  }
+  25% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  50% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+  75% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  100% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+    right: 110%;
+  }
+}
+
+@-webkit-keyframes animateDown {
+  0% {
+    -webkit-transform: translateX(-50px);
+            transform: translateX(-50px);
+    top: 0%;
+  }
+  25% {
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
+  50% {
+    -webkit-transform: translateX(50px);
+            transform: translateX(50px);
+  }
+  75% {
+    -webkit-transform: translateX(100px);
+            transform: translateX(100px);
+  }
+  100% {
+    -webkit-transform: translateX(150px);
+            transform: translateX(150px);
+    top: 95%;
+  }
+}
+
+@keyframes animateDown {
+  0% {
+    -webkit-transform: translateX(-50px);
+            transform: translateX(-50px);
+    top: 0%;
+  }
+  25% {
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
+  50% {
+    -webkit-transform: translateX(50px);
+            transform: translateX(50px);
+  }
+  75% {
+    -webkit-transform: translateX(100px);
+            transform: translateX(100px);
+  }
+  100% {
+    -webkit-transform: translateX(150px);
+            transform: translateX(150px);
+    top: 95%;
+  }
 }
 /*# sourceMappingURL=style.css.map */

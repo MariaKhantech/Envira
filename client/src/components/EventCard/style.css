@@ -82,7 +82,6 @@
 
 .centerIt {
   position: absolute;
-  top: 50%;
   left: 50%;
   -webkit-transform: translateX(-50%) translateY(-50%);
           transform: translateX(-50%) translateY(-50%);
@@ -153,5 +152,29 @@ img {
 
 .google-map {
   width: 500px;
+}
+
+.location-cardStyle {
+  background-color: #85dcba;
+}
+
+.map-style {
+  border-style: solid;
+  border-width: .25em;
+  border-color: #85dcba;
+}
+
+.style-contact-person {
+  background-color: transparent;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
 /*# sourceMappingURL=style.css.map */
