@@ -44,7 +44,7 @@ export class OceanParallax extends Component {
 						</div>
 					</div>
 
-					<p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<div className="card-footer background-longCard">2 days ago</div>
 				</div>
 			</div>
 		);
@@ -109,9 +109,17 @@ export class OceanParallax extends Component {
 			<div class="ocean-wrapper">
 				{cardDiv}
 				<div class="container-fluid ocean-para">
-					<div className="card text-center ocean-para oceanParticles">
-						<img className="ocean-floor-img" src="../assets/imgs/oceanfloor.png" />
-						<img className="diver" src="../assets/imgs/diver.png" />
+					<div className="card text-center ocean-para ">
+						<img className="ocean-floor-img" src="../assets/imgs/ocean/oceanfloor.png" />
+						<img className="diver diver1" src="../assets/imgs//ocean/diver.png" />
+						<img className="long-fish" src="../assets/imgs/ocean/long-fish.png" />
+						<img className="group-fish" src="../assets/imgs/ocean/group-fish.png" />
+						<img className="orange-fish" src="../assets/imgs/ocean/orange-fish.png" />
+						<img className="blue-fish" src="../assets/imgs/ocean/blue-fish.png" />
+						<img className="bottle-trash" src="../assets/imgs/ocean/trash/bottle.png" />
+						<img className="slurpee-trash" src="../assets/imgs/ocean/trash/slurpee.png" />
+						<img className="clearbag-trash" src="../assets/imgs/ocean/trash/clearbag.png" />
+						<img className="bluebag-trash" src="../assets/imgs/ocean/trash/bluebag.png" />
 
 						<div className="oceanParticles">{particles}</div>
 					</div>
@@ -119,7 +127,6 @@ export class OceanParallax extends Component {
 
 				<div>
 					<Parallax strength={500}>
-						<div style={{ height: '600px' }} />
 						<div class="container">
 							<div className="card mb-3 body-color" style={{ maxWidth: '540px;' }}>
 								<div className="row no-gutters mt-5">
