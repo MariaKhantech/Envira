@@ -12,6 +12,7 @@ export class index extends Component {
       eventId: "",
       eventData: [],
     };
+    this.initializeCountdown = this.initializeCountdown.bind(this);
   }
 
   //load any data here like comments
@@ -25,7 +26,36 @@ export class index extends Component {
     ];
     this.getEventData();
     this.setState({ reviewArray });
+      //setting date for testing
+		let date = new Date();
+		date.setDate(30);
+		this.initializeCountdown(date);
   }
+      //initialize the countdouwn
+	initializeCountdown(endtime) {
+		var timeinterval = setInterval(function() {
+			var t = Date.parse(endtime) - Date.parse(new Date());
+			var seconds = Math.floor((t / 1000) % 60);
+			var minutes = Math.floor((t / 1000 / 60) % 60);
+			var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+			var days = Math.floor(t / (1000 * 60 * 60 * 24));
+			var t = {
+				total: t,
+				days: days,
+				hours: hours,
+				minutes: minutes,
+				seconds: seconds
+			};
+
+			document.querySelector('.days > .value').innerText = t.days;
+			document.querySelector('.hours > .value').innerText = t.hours;
+			document.querySelector('.minutes > .value').innerText = t.minutes;
+			document.querySelector('.seconds > .value').innerText = t.seconds;
+			if (t.total <= 0) {
+				clearInterval(timeinterval);
+			}
+		}, 1000);
+	}
 
   getEventData = () => {
     const id = JSON.parse(localStorage.getItem("eventId")).id;
