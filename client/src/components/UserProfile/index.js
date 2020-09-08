@@ -235,8 +235,8 @@ export default class UserProfile extends Component {
 										<a href="#" className="btn btn-sm btn-info mr-4">
 											Events
 										</a>
-										<a href="#" className="btn btn-sm btn-default float-right">
-											Message
+										<a href="/eventCreate" className="btn btn-sm btn-default float-right">
+											Create Event
 										</a>
 									</div>
 								</div>

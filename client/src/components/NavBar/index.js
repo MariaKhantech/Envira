@@ -142,10 +142,14 @@ export class NavBar extends Component {
 				<hr style={{ background: 'white' }} />
 				{!this.props.auth.isAuthenticated && (
 					<li className="dropdown dropdown-login  order-1 menu-item mt-4">
-						<button type="button" data-toggle="dropdown" className="btn btn-outline-light dropdown-toggle ">
+						<button
+							type="button"
+							data-toggle="dropdown"
+							className="btn btn-outline-light dropdown-toggle text-white"
+						>
 							Login <span className="caret" />
 						</button>
-						<ul className="dropdown-menu mt-2">
+						<ul className="dropdown-menu mt-2 login-back">
 							<li className="px-3 py-2">
 								<Login />
 							</li>
