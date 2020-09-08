@@ -109,6 +109,15 @@ export default class UserProfile extends Component {
 			.catch((err) => console.log(err));
 	};
 
+	getUserRating = () => {
+		Axios.get(`/api/rate/userprofile/${this.state.profile.id}`)
+			.then((res) => {
+				this.setState({ userRating: res.data });
+				console.log(this.state.userRating);
+			})
+			.catch((err) => console.log(err));
+	};
+
 	render() {
 		const myStyle = {
 			width: '304px',
@@ -235,8 +244,8 @@ export default class UserProfile extends Component {
 										<a href="#" className="btn btn-sm btn-info mr-4">
 											Events
 										</a>
-										<a href="/eventCreate" className="btn btn-sm btn-default float-right">
-											Create Event
+										<a href="#" className="btn btn-sm btn-default float-right">
+											Message
 										</a>
 									</div>
 								</div>

@@ -12,7 +12,7 @@ import {
 
 import ReactTooltip from "react-tooltip";
 
-import "./style.css";
+import "./search.css";
 
 export default class Search extends Component {
   render() {

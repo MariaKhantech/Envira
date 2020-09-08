@@ -141,7 +141,7 @@ export class index extends Component {
 						</div>
 
 						<h1 class="display-4 text-white">{eventName}</h1>
-						<p class="lead text-white">{moment(date).format('dddd, MMMM Do YYYY')}</p>
+						<p class="lead text-white">{date}</p>
 
 						<p class="lead">
 							<a class="btn btn-primary btn-lg" style={{ marginTop: '8rem' }} href="#" role="button">

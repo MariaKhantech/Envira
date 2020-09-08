@@ -118,6 +118,7 @@ export class NavBar extends Component {
 					</div>
 				</li>
 				{/* check the logged in user roleId
+
 	if roleId is 1 then redirect user to userProfile page
 	 if roleId is 2 then redirect user to Profile page
 	if roleId is 3 then redirect user to Profile page */}
@@ -142,14 +143,10 @@ export class NavBar extends Component {
 				<hr style={{ background: 'white' }} />
 				{!this.props.auth.isAuthenticated && (
 					<li className="dropdown dropdown-login  order-1 menu-item mt-4">
-						<button
-							type="button"
-							data-toggle="dropdown"
-							className="btn btn-outline-light dropdown-toggle text-white"
-						>
+						<button type="button" data-toggle="dropdown" className="btn btn-outline-light dropdown-toggle ">
 							Login <span className="caret" />
 						</button>
-						<ul className="dropdown-menu mt-2 login-back">
+						<ul className="dropdown-menu mt-2">
 							<li className="px-3 py-2">
 								<Login />
 							</li>

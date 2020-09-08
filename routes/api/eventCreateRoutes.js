@@ -51,6 +51,17 @@ router.get('/eventcreate', (req, res) => {
 				res.status(500).json(err);
 			}
 		});
+
+	// router.get('/attendevent', (req, res) => {
+	//   db.Event.findAll({
+	//     include: [
+	//       {
+	//         model: db.User,
+	//         as ''
+	//       }
+	//     ]
+	//   })
+	// })
 });
 
 module.exports = router;

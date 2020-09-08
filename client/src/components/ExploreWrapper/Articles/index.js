@@ -4,7 +4,7 @@ import { Row, Col, Button } from "react-bootstrap";
 
 import Axios from "axios";
 
-import "./style.css";
+import "./articles.css";
 
 export default class Articles extends Component {
   state = {

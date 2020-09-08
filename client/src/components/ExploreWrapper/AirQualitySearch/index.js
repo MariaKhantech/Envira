@@ -17,7 +17,7 @@ import ReactTooltip from "react-tooltip";
 
 import Axios from "axios";
 
-import "./style.css";
+import "./aqiSearch.css";
 
 export default class AirQualitySearch extends Component {
   state = {
@@ -180,11 +180,12 @@ export default class AirQualitySearch extends Component {
                     <h2 className="mr-auto ml-4 mt-3 mb-0">
                       City/Station: {currentCity}
                     </h2>
-                    <p className="mr-auto ml-4 mb-0 med-font">
+                    <p className="mr-auto ml-4 mb-0" id="med-font">
                       Current Status: {this.state.status}
                     </p>
                     <h1
-                      className="mr-auto ml-4 large-font text-white"
+                      className="mr-auto ml-4 t text-white"
+                      id="large-font"
                       data-tip
                       data-for="chartTip"
                       style={aqiBox}
@@ -365,7 +366,7 @@ export default class AirQualitySearch extends Component {
                         </p>
                       </ListGroup.Item>
                     </ListGroup>
-                    <p className="date mr-4 text-right mb-4">
+                    <p className=" mr-4 text-right mb-4" id="date">
                       Last Update: {this.state.date}
                     </p>
                   </Card>
