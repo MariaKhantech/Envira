@@ -13,7 +13,7 @@ router.post('/eventcreate', (req, res) => {
 	console.log(req.body.contactEmail);
 	console.log(req.body.contactNumber);
 	console.log(req.body.id);
-	console.log('asdsadsdasdsa');
+	console.log(req.body.image);
 
 	db.Event
 		.create({
@@ -27,12 +27,11 @@ router.post('/eventcreate', (req, res) => {
 			contact_person: req.body.contactPerson,
 			contact_email: req.body.contactEmail,
 			contact_number: req.body.contactNumber,
-			UserId: req.body.id
+			UserId: req.body.id,
+			image: req.body.image
 		})
 		.then((dbResponse) => {
-			console.log('asdsadsdasdsa');
 			res.json(dbResponse);
-			console.log('asdsadsdasdsa');
 			console.log(dbResponse);
 		})
 		.catch((err) => {

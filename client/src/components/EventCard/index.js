@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReviewComment from '../ReviewForm';
+import { Storage } from 'aws-amplify';
 import ImageGallery from 'react-image-gallery';
 import moment from 'moment';
 import Axios from 'axios';
@@ -11,7 +12,9 @@ export class index extends Component {
 		this.state = {
 			reviewArray: [],
 			eventId: '',
-			eventData: []
+			eventData: [],
+			image: '',
+			imageUrl: ''
 		};
 		this.initializeCountdown = this.initializeCountdown.bind(this);
 	}
@@ -72,6 +75,20 @@ export class index extends Component {
 
 				this.setState({ eventData: filteredId });
 				console.log(this.state.eventData);
+
+				const image = this.state.eventData.map((data) => data.image);
+				this.setState({ image: image });
+
+				this.getImageUrl();
+			})
+			.catch((err) => console.log(err));
+	};
+
+	getImageUrl = () => {
+		Storage.get(this.state.image)
+			.then((data) => {
+				// console.log(data);
+				this.setState({ imageUrl: data });
 			})
 			.catch((err) => console.log(err));
 	};
@@ -93,6 +110,22 @@ export class index extends Component {
 		const contactPerson = this.state.eventData.map((data) => data.contact_person);
 		const contactEmail = this.state.eventData.map((data) => data.contact_email);
 		const contactNumber = this.state.eventData.map((data) => data.contact_number);
+		console.log(this.state.imageUrl);
+
+		const images = [
+			{
+				original: 'https://picsum.photos/id/1018/1000/600/',
+				thumbnail: 'https://picsum.photos/id/1018/250/150/'
+			},
+			{
+				original: 'https://picsum.photos/id/1015/1000/600/',
+				thumbnail: 'https://picsum.photos/id/1015/250/150/'
+			},
+			{
+				original: 'https://picsum.photos/id/1019/1000/600/',
+				thumbnail: 'https://picsum.photos/id/1019/250/150/'
+			}
+		];
 
 		//google image asrc address
 		const googleMapUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=${address}+${city}+${eventState}`;
@@ -181,10 +214,7 @@ export class index extends Component {
 					<div class="row justify-content-center">
 						<div class="col-3 ">
 							<figure>
-								<img
-									class="event-img"
-									src="https://images.unsplash.com/photo-1554265352-d7fd5129be15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-								/>
+								<img class="event-img" src={this.state.imageUrl} />
 							</figure>
 						</div>
 						<div class="col-4">
