@@ -19,8 +19,6 @@ export class UserProfile extends Component {
 		about: '',
 		zipCode: '',
 		totalEvent: '',
-		rating: 0,
-		disabled: true,
 		userRating: []
 	};
 
@@ -79,25 +77,6 @@ export class UserProfile extends Component {
 				this.setState({
 					totalEvent: response.data
 				});
-			})
-			.catch((err) => console.log(err));
-	};
-
-	//   click method to change star value
-	onStarClick(nextValue) {
-		this.setState({ rating: nextValue, disabled: false });
-	}
-
-	//   Post request to submit rating to DB
-	postRating = (event) => {
-		event.preventDefault();
-		Axios.post('/api/rate/userprofile', {
-			rating: this.state.rating,
-			UserId: this.state.profile.id
-		})
-			.then((res) => {
-				console.log(res);
-				this.setState({ rating: '0', disabled: true });
 			})
 			.catch((err) => console.log(err));
 	};
@@ -163,66 +142,30 @@ export class UserProfile extends Component {
 		);
 		//end of the overview tab //
 
-		//enters the start rating//
-		// Popover to display rating was posted
-		const popover = (
-			<Popover id="popover-basic">
-				<Popover.Title>Rating Posted!</Popover.Title>
-			</Popover>
-		);
-		// Variable to post star ratings
-		const postStarRating = (
-			<div>
-				<div class="row">
-					<div class="col">
-						<div
-							class="card-profile-stats d-flex justify-content-center mt-md-5"
-							style={{ fontSize: '28px' }}
-						>
-							<StarRatingComponent
-								name="rating"
-								starCount={5}
-								value={this.state.rating}
-								onStarClick={this.onStarClick.bind(this)}
-							/>
-						</div>
-						<OverlayTrigger delay={{ show: 250, hide: 350 }} placement="right" overlay={popover}>
-							<Button
-								class="button-design"
-								disabled={this.state.disabled}
-								variant="primary"
-								sz="sm"
-								className="float-center"
-								onClick={this.postRating}
-							>
-								Post Rating
-							</Button>
-						</OverlayTrigger>
-					</div>
-				</div>
-			</div>
-		);
-		// WILL BE NON-EDITABLE AVERAGE USER RATING (WIP)
-		//   const starRating = (
-		// 	<StarRatingComponent
-		// 	  name="rating"
-		// 	  starCount={5}
-		// 	  // value={this.getAverageRating(this.state.userRating)}
-		// 	/>
-		//   );
+		// Get average rating using map and reduce
+		const ratings = this.state.userRating.map((data) => data.rating);
+		const avgRating = ratings.reduce((a, b) => a + parseInt(b), 0) / ratings.length;
+
+		// add avgRating to starRating component value
+		const starRating = <StarRatingComponent name="rating" starCount={5} value={avgRating} />;
+
 		//end of star rating tab//
 		return (
 			<div className=" main-content mb-4">
 				{/* <!--reference https://www.creative-tim.com/bits/bootstrap/user-profile-page-argon-dashboard--> */}
 				{/* <!-- Header --> */}
-				<div className="header header-design pb-8 pt-5 pt-lg-8 d-flex align-items-center" id="background-cover">
+				<div className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" id="background-cover">
 					{/* <!-- Mask --> */}
 					<span className="mask bg-gradient-default opacity-8" />
 					{/* <!-- Header container --> */}
-					<div className="container-fluid container-design d-flex align-items-center">
+					<div className="container-fluid d-flex align-items-center">
 						<div className="row">
 							<div className="col-lg-7 col-md-10">
-								<h1 className="display-2 text-black h1-design">{this.state.profile.user_name}</h1>
+								<h1 className="display-2 text-black">{this.state.profile.user_name}</h1>
+								<p className="text-black mt-0 mb-5">
+									This is your profile page. You can see the progress you've made with your work and
+									manage your projects or assigned tasks
+								</p>
 							</div>
 						</div>
 					</div>
@@ -235,7 +178,7 @@ export class UserProfile extends Component {
 								<div className="row justify-content-center">
 									<div className="col-lg-3 order-lg-2">
 										<div className="card-profile-image">
-											<a class="a-design" class="a-design" href="#">
+											<a href="#">
 												<img
 													src="https://i.guim.co.uk/img/media/d2d6b9cc8326a99daee0f47ad3b94cca738e4ecd/0_229_3500_2101/master/3500.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5078627d8ad593949b1bb03d7653d615"
 													className="rounded-circle"
@@ -246,19 +189,11 @@ export class UserProfile extends Component {
 								</div>
 								<div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
 									<div className="d-flex justify-content-between">
-										<a
-											class="a-design"
-											href="#"
-											className="btn-design btn btn-sm btm-sm-design btn-info mr-4"
-										>
+										<a href="#" className="btn btn-sm btn-info mr-4">
 											Events
 										</a>
-										<a
-											class="a-design"
-											href="#"
-											className="btn-design btn btn-sm btm-sm-design btn-default float-right"
-										>
-											Create Event
+										<a href="#" className="btn btn-sm btn-default float-right">
+											Message
 										</a>
 									</div>
 								</div>
@@ -316,8 +251,7 @@ export class UserProfile extends Component {
 										<div className="tab-pane active" id="tabs-1" role="tabpanel" />
 										{overviewTab}
 										<div className="tab-pane " id="tabs-2" role="tabpanel" />
-										{postStarRating}
-										{/* {starRating} */}
+										{starRating}
 										<div className="tab-pane " id="tabs-3" role="tabpanel">
 											<div className="row">
 												<div className="col">
@@ -336,7 +270,7 @@ export class UserProfile extends Component {
 								<div className="card-header bg-white border-0">
 									<div className="row align-items-center">
 										<div className="col-8">
-											<h3 className="mb-0 h1-design">Profile</h3>
+											<h3 className="mb-0">Profile</h3>
 										</div>
 
 										<div className="col-4 text-right">
