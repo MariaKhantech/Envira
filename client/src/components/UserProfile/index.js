@@ -121,7 +121,19 @@ export default class UserProfile extends Component {
       width: "304px",
       height: "200px",
     }
-    console.log(this.state.totalEvent)
+    const imgPreview = {
+      textAlign: "center",
+      margin: "auto",
+      height: "150px",
+      width: "150px",
+      borderLeft: "1px solid gray",
+      borderRight: "1px solid gray",
+      borderTop: "5px solid gray",
+      borderBottom: "5px solid gray",
+      borderRadius: 50,
+    }
+
+
     // const that storest the content of the overview
     const overviewTab = (
       <div>
@@ -145,19 +157,19 @@ export default class UserProfile extends Component {
         </div>
         <div className="text-center">
           <h3>
-            Greta Thunburg<span className="font-weight-light">, 17</span>
+            {this.state.firstName} {this.state.lastName}
           </h3>
           <div className="h5 font-weight-300">
             <i className="ni location_pin mr-2" />
-            Stockholm, Sweden
+            {this.state.state}, {this.state.city}
           </div>
           <div className="h5 mt-4">
             <i className="ni business_briefcase-24 mr-2" />
-            Environmentalist- Activist
+            {this.state.occupation}
           </div>
           <div>
             <i className="ni education_hat mr-2" />
-            University of Environmentalist
+
           </div>
           <hr />
           <div>
@@ -216,9 +228,15 @@ export default class UserProfile extends Component {
                 <div className="row justify-content-center">
                   <div className="col-lg-3 order-lg-2">
                     <div className="card-profile-image">
-                      <a href="#">
-                        <img style={myStyle} src={this.state.imagePreviewUrl} alt={this.state.imageName.image_name} className="rounded-circle" />
-                      </a>
+                      {!this.state.imageName && (
+
+                        <img style={imgPreview} src="https://via.placeholder.com/150" className="rounded-circle" alt="edit profile to change image" />
+
+                      )}
+
+                      {this.state.imageName && (
+                        <img style={myStyle, imgPreview} src={this.state.imagePreviewUrl} className="rounded-circle" />
+                      )}
                     </div>
                   </div>
                 </div>
@@ -422,6 +440,7 @@ export default class UserProfile extends Component {
                               rows="4"
                               className="form-control form-control-alternative"
                               value={this.state.about}
+                              readOnly
                             />
                           </div>
                         </div>
