@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
-
+import { Storage } from "aws-amplify";
 import Search from "./Search/index";
 import Carousel from "./Carousel/index";
 
@@ -20,6 +20,8 @@ export default class EventsSearch extends Component {
     slidesToShow: 3,
     slidesToScroll: 3,
     eventData: [],
+    images: [],
+    imagePreviewUrl: [],
     madeRequest: false,
   };
 
@@ -94,7 +96,11 @@ export default class EventsSearch extends Component {
           eventData: response.data,
           madeRequest: true,
         });
-        console.log(this.state.eventData);
+        const image = this.state.eventData.map((data) => data.image);
+        this.setState({ images: image });
+        console.log(this.state.images);
+
+        this.getImageUrl();
       },
       (error) => {
         this.setState({
@@ -107,8 +113,8 @@ export default class EventsSearch extends Component {
       introTitle: "",
       introText: "",
       showCarousel: true,
-      slidesToShow: 3,
-      slidesToScroll: 3,
+      slidesToShow: 1,
+      slidesToScroll: 1,
     });
   };
 
@@ -122,19 +128,43 @@ export default class EventsSearch extends Component {
     window.location = "/eventspage";
   };
 
+  getImageUrl = () => {
+    for (let i = 0; i < this.state.images.length; i++) {
+      Storage.get(this.state.images[i])
+        .then((data) => {
+          // console.log(data);
+          this.state.imagePreviewUrl.push(data);
+          console.log(this.state.imagePreviewUrl);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   render() {
     let renderCarousel = null;
     if (this.state.showCarousel === true) {
       renderCarousel = (
-        <Carousel state={this.state} handleViewEvent={this.handleViewEvent} />
+        <Carousel
+          state={this.state}
+          handleViewEvent={this.handleViewEvent}
+          getImageUrl={this.state.getImageUrl}
+        />
       );
     } else if (this.state.showCarousel === "") {
       renderCarousel = null;
     }
-    console.log(this.state.eventData);
+
+    const image = this.state.imagePreviewUrl.map((data, i) => (
+      <img alt="image" src={data} key={i} />
+    ));
+
+    console.log(image);
+
+    console.log(this.state.imagePreviewUrl);
 
     return (
       <>
+        {image}
         <Search
           onChange={this.onChange}
           handleFilterOption={this.handleFilterOption}

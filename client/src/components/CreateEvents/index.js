@@ -99,6 +99,7 @@ export class CreateEvents extends Component {
       city: this.state.city,
       state: this.state.state,
       id: this.state.userData.id,
+      image: this.state.selectedFileName,
     })
       .then((res) => {
         console.log(res);
@@ -116,6 +117,7 @@ export class CreateEvents extends Component {
     this.setState({ [target.name]: target.value });
   };
   render() {
+    console.log(this.state.selectedFileName);
     var styles = {
       backgroundImage:
         "url('https://images.unsplash.com/photo-1562591970-254bc62245c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')",
