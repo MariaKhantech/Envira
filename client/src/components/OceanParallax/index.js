@@ -125,13 +125,18 @@ export class OceanParallax extends Component {
 					</div>
 				</div>
 
-				<div>
+				<div class="background2">
 					<Parallax strength={500}>
-						<div class="container">
-							<div className="card mb-3 body-color" style={{ maxWidth: '540px;' }}>
-								<div className="row no-gutters mt-5">
-									<div className="col-md-4 mt-5">
-										<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+						<div class="container border-0">
+							<div className="card mb-3 body-color mt-5" style={{ maxWidth: '540px;' }}>
+								<div className="row no-gutters mb-3 mt-3">
+									<div className="col-md-4">
+										<div
+											id="carouselExampleIndicators"
+											style={{ width: '90%', paddingLeft: '35px' }}
+											class="carousel slide"
+											data-ride="carousel"
+										>
 											<ol class="carousel-indicators">
 												<li
 													data-target="#carouselExampleIndicators"
@@ -145,21 +150,21 @@ export class OceanParallax extends Component {
 												<div class="carousel-item active">
 													<img
 														src="https://cdn.pixabay.com/photo/2018/04/04/11/39/dead-bird-3289550_960_720.jpg"
-														class="d-block w-100"
+														class="d-block w-100 img-fluid"
 														alt="..."
 													/>
 												</div>
 												<div class="carousel-item">
 													<img
 														src="https://cdn.pixabay.com/photo/2015/01/31/17/37/oil-rig-explosion-618704_960_720.jpg"
-														class="d-block w-100"
+														class="d-block w-100 img-fluid"
 														alt="..."
 													/>
 												</div>
 												<div class="carousel-item">
 													<img
 														src="https://cdn.pixabay.com/photo/2018/01/06/16/07/waters-3065288_960_720.jpg"
-														class="d-block w-100"
+														class="d-block w-100 img-fluid"
 														alt="..."
 													/>
 												</div>
@@ -198,7 +203,7 @@ export class OceanParallax extends Component {
 							</div>
 
 							<div className="card mb-3 body-color" style={{ maxWidth: '540px;' }}>
-								<div className="row no-gutters mt-5">
+								<div className="row no-gutters mt-3 mb-5">
 									<div className="col-md-8">
 										<div className="card-body">
 											<h1 class="card-title">Oceans Plastic Pollution</h1>
@@ -213,6 +218,7 @@ export class OceanParallax extends Component {
 									<div className="col-md-4 mt-5">
 										<div
 											id="carouselExampleIndicators mr-5"
+											style={{ width: '90%' }}
 											class="carousel slide"
 											data-ride="carousel"
 										>
@@ -229,21 +235,21 @@ export class OceanParallax extends Component {
 												<div class="carousel-item active">
 													<img
 														src="https://cdn.pixabay.com/photo/2018/04/04/11/39/dead-bird-3289550_960_720.jpg"
-														class="d-block w-100"
+														class="d-block w-100 img-fluid"
 														alt="..."
 													/>
 												</div>
 												<div class="carousel-item">
 													<img
 														src="https://cdn.pixabay.com/photo/2015/01/31/17/37/oil-rig-explosion-618704_960_720.jpg"
-														class="d-block w-100"
+														class="d-block w-100 img-fluid"
 														alt="..."
 													/>
 												</div>
 												<div class="carousel-item">
 													<img
 														src="https://cdn.pixabay.com/photo/2018/01/06/16/07/waters-3065288_960_720.jpg"
-														class="d-block w-100"
+														class="d-block w-100 img-fluid"
 														alt="..."
 													/>
 												</div>
