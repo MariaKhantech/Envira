@@ -102,6 +102,12 @@ export class CreateEvents extends Component {
     })
       .then((res) => {
         console.log(res);
+        let newEvent = {
+          id: res.data.id,
+        };
+        console.log(newEvent);
+        localStorage.setItem("eventId", JSON.stringify(newEvent));
+        window.location = "/eventspage";
       })
       .catch((err) => console.log(err));
   };
