@@ -45,11 +45,16 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     contact_number: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       unique: false,
       // validate: {
       //   is: /^ (\+ 0 ? 1\s) ?\(?\d{ 3 } \)?[\s.-]\d{ 3 } [\s.-]\d{ 4 } $/i
       // }
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
     },
   });
 

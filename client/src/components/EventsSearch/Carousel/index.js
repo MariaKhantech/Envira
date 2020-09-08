@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import moment from "moment";
+import { Storage } from "aws-amplify";
 import { Button } from "react-bootstrap";
 
 import "./carousel.css";
@@ -8,13 +9,18 @@ import "./carousel.css";
 export default class Carousel extends Component {
   render() {
     const { handleViewEvent } = this.props;
+
+    const image = this.props.state.imagePreviewUrl.map((data, i) => (
+      <img alt="image" src={data} key={i} />
+    ));
+
     const renderCard = this.props.state.eventData.map((data) => (
       <div id="contact-box">
         <img
           alt="image"
           className="img-fluid mx-auto"
           style={{ borderRadius: "10px" }}
-          src="http://placehold.it/250x200"
+          // src={}
         />
         <h3 className="mx-auto text-center mt-2" name="event">
           <strong>{data.event_name}</strong>
@@ -69,6 +75,7 @@ export default class Carousel extends Component {
 
     return (
       <Slider className="d-flex justify-content-center" {...carouselSettings}>
+        {image}
         {renderCard}
       </Slider>
     );
