@@ -65,9 +65,9 @@ export class NavBar extends Component {
 					About
 				</a>
 
-				<a className="menu-item text-white about" href="#">
-					Events
-				</a>
+        <a className="menu-item text-white about" href="/eventsearch">
+          Events
+        </a>
 
 				<li className="nav-item dropdown">
 					<a
