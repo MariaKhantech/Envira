@@ -99,31 +99,32 @@ export class NavBar extends Component {
           </div>
         </li>
 
-        <li className="nav-item dropdown">
-          <a
-            className="nav-link dropdown-toggle text-white"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-toggle="collapse"
-            data-target="#submenu1"
-          >
-            Company Pollution
-          </a>
-          <div className="collapse" id="submenu1">
-            <a className="dropdown-item " href="#">
-              Action
-            </a>
-            <a className="dropdown-item " href="#">
-              Another action
-            </a>
-            <div className="dropdown-divider" />
-            <a className="dropdown-item " href="#">
-              Something else here
-            </a>
-          </div>
-        </li>
-        {/* check the logged in user roleId
+				<li className="nav-item dropdown">
+					<a
+						className="nav-link dropdown-toggle text-white"
+						href="#"
+						id="navbarDropdown"
+						role="button"
+						data-toggle="collapse"
+						data-target="#submenu1"
+					>
+						Pollution
+					</a>
+					<div className="collapse" id="submenu1">
+						<a className="dropdown-item text-white" href="#">
+							Air Quality
+						</a>
+						<a className="dropdown-item text-white" href="#">
+							Water Contaminants
+						</a>
+						<div className="dropdown-divider" />
+						<a className="dropdown-item text-white" href="#">
+							Climate Change Articles
+						</a>
+					</div>
+				</li>
+				{/* check the logged in user roleId
+
 	if roleId is 1 then redirect user to userProfile page
 	 if roleId is 2 then redirect user to Profile page
 	if roleId is 3 then redirect user to Profile page */}
