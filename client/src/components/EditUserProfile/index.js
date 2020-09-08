@@ -176,45 +176,45 @@ export default class UpdateProfile extends Component {
                                 <div className="row mt-2">
 
                                     <div className="col-md-12">
-                                        <label className="labels">User Name</label>
+                                        <label className="editFormlabels">User Name</label>
                                         <input id="username" type="text" className="form-control" value={this.state.profile.user_name} readOnly />
                                     </div>
                                     <div className="col-md-6 mt-1">
-                                        <label className="labels">First Name</label>
+                                        <label className="editFormlabels">First Name</label>
                                         <input id="firstname" name="firstName" type="text" className="form-control" placeholder="first name" value={this.state.firstName} onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-6 mt-1">
-                                        <label className="labels">Last Name</label>
+                                        <label className="editFormlabels">Last Name</label>
                                         <input id="lastname" name="lastName" type="text" className="form-control" placeholder="last name" value={this.state.lastName} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
                                 <div className="row mt-3">
                                     <div className="col-md-6">
-                                        <label className="labels">Phone Number</label>
+                                        <label className="editFormlabels">Phone Number</label>
                                         <input id="phonenumber" name="phoneNumber" value={this.state.phoneNumber} type="tel" className="form-control" placeholder="enter phone number" onChange={this.handleInputChange} /></div>
                                     <div className="col-md-6">
-                                        <label className="labels">Email ID</label>
+                                        <label className="editFormlabels">Email ID</label>
                                         <input readOnly type="text" className="form-control" value={this.state.profile.email} />
                                     </div>
                                     <div className="col-md-12 mt-1">
-                                        <label className="labels">Occupation</label>
+                                        <label className="editFormlabels">Occupation</label>
                                         <input id="occupation" name="occupation" type="text" className="form-control" placeholder="enter occupation" value={this.state.occupation} onChange={this.handleInputChange} /></div>
 
                                     <div className="col-md-12 mt-1">
-                                        <label className="labels">About</label>
+                                        <label className="editFormlabels">About</label>
                                         <textarea id="about" name="about" type="text" className="form-control" placeholder="about" value={this.state.about} onChange={this.handleInputChange} /></div>
                                 </div>
                                 <div className="row mt-3">
                                     <div className="col-md-4">
-                                        <label className="labels">City</label>
+                                        <label className="editFormlabels">City</label>
                                         <input id="city" name="city" type="text" className="form-control" placeholder="city" value={this.state.city} onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-4">
-                                        <label className="labels">State/Region</label>
+                                        <label className="editFormlabels">State/Region</label>
                                         <input id="state" name="state" type="text" className="form-control" value={this.state.state} placeholder="state" onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-4">
-                                        <label className="labels">Zip Code</label>
+                                        <label className="editFormlabels">Zip Code</label>
                                         <input id="zipcode" name="zipCode" type="text" className="form-control" value={this.state.zipCode} placeholder="state" onChange={this.handleInputChange} />
                                     </div>
                                 </div>

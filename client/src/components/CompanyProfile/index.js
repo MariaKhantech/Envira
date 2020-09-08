@@ -64,7 +64,64 @@ export default class CompanyProfile extends Component {
 			.catch((err) => console.log(err));
 	};
 
+
+	// get logged in user info from EventAttendee model
+	getUserTotalEvent = () => {
+		const UserId = this.state.profile.id;
+		Axios.get(`/api/auth/userTotalEvent/${UserId}`)
+			.then((response) => {
+				this.setState({
+					totalEvent: response.data
+				});
+			})
+			.catch((err) => console.log(err));
+	};
+
+	getImage = () => {
+		const UserId = this.state.profile.id;
+		console.log(UserId);
+		Axios.get(`/api/auth/image/${UserId}`)
+			.then((response) => {
+				this.setState({
+					imageName: response.data
+				});
+				console.log(this.state.imageName);
+				this.getImageFromS3();
+			})
+			.catch((err) => console.log(err));
+	};
+
+
+	getImageFromS3 = () => {
+		let fileName = this.state.imageName.image_name;
+		console.log(fileName);
+		Storage.get(fileName)
+			.then((data) => {
+				console.log(data);
+				this.setState({
+					imagePreviewUrl: data
+				});
+			})
+			.catch((err) => console.log(err));
+	};
+
 	render() {
+
+		const myStyle = {
+			width: '304px',
+			height: '200px'
+		};
+		const imgPreview = {
+			textAlign: 'center',
+			margin: 'auto',
+			height: '150px',
+			width: '150px',
+			borderLeft: '1px solid gray',
+			borderRight: '1px solid gray',
+			borderTop: '5px solid gray',
+			borderBottom: '5px solid gray',
+			borderRadius: 50
+		};
 		return (
 			<div className=" main-content">
 				{/* <!--reference https://www.creative-tim.com/bits/bootstrap/user-profile-page-argon-dashboard--> */}
@@ -89,12 +146,22 @@ export default class CompanyProfile extends Component {
 								<div className="row justify-content-center">
 									<div className="col-lg-3 order-lg-2">
 										<div className="card-profile-image">
-											<a class="a-design" href="#">
+											{!this.state.imageName && (
 												<img
-													src="https://i.guim.co.uk/img/media/d2d6b9cc8326a99daee0f47ad3b94cca738e4ecd/0_229_3500_2101/master/3500.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5078627d8ad593949b1bb03d7653d615"
+													style={imgPreview}
+													src="https://via.placeholder.com/150"
+													className="rounded-circle"
+													alt="edit profile to change image"
+												/>
+											)}
+
+											{this.state.imageName && (
+												<img
+													style={(myStyle, imgPreview)}
+													src={this.state.imagePreviewUrl}
 													className="rounded-circle"
 												/>
-											</a>
+											)}
 										</div>
 									</div>
 								</div>
