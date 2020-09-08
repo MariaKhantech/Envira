@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import './style.scss';
 
 export class index extends Component {
+	componentDidMount() {
+		//intro audio
+		// let welcomeAudio = new Audio(
+		// 	'https://envirabucket215241-dev.s3.amazonaws.com/polly/welcome-message.69983da5-1526-4a5c-892a-dc34bb8270a0.mp3'
+		// );
+		// welcomeAudio.play();
+	}
+
 	render() {
 		return (
 			<div className="container">
@@ -108,7 +116,6 @@ export class index extends Component {
 								<div className="card">
 									<div className="card-body homepgCardBackground">
 										<h5 className="card-title text-center">Latest News on Climate Change</h5>
-
 									</div>
 								</div>
 							</div>

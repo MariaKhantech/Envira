@@ -9,7 +9,9 @@ $navbar-color: #daad86;
 	left: 36px;
 	top: 36px;
 }
-
+.login-back {
+	background-color: $navbar-color !important;
+}
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
 	background: $navbar-background-color;

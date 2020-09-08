@@ -64,7 +64,6 @@ export default class CompanyProfile extends Component {
 			.catch((err) => console.log(err));
 	};
 
-
 	// get logged in user info from EventAttendee model
 	getUserTotalEvent = () => {
 		const UserId = this.state.profile.id;
@@ -91,7 +90,6 @@ export default class CompanyProfile extends Component {
 			.catch((err) => console.log(err));
 	};
 
-
 	getImageFromS3 = () => {
 		let fileName = this.state.imageName.image_name;
 		console.log(fileName);
@@ -106,7 +104,6 @@ export default class CompanyProfile extends Component {
 	};
 
 	render() {
-
 		const myStyle = {
 			width: '304px',
 			height: '200px'
@@ -177,7 +174,7 @@ export default class CompanyProfile extends Component {
 										</a>
 										<a
 											class="a-design"
-											href="#"
+											href="/eventCreate"
 											className="btn-design btn btn-sm btm-sm-design btn-default float-right"
 										>
 											Create Event
