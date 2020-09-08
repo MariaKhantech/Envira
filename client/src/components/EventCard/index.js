@@ -27,36 +27,36 @@ export class index extends Component {
     ];
     this.getEventData();
     this.setState({ reviewArray });
-      //setting date for testing
-		let date = new Date();
-		date.setDate(30);
-		this.initializeCountdown(date);
+    //setting date for testing
+    let date = new Date();
+    date.setDate(30);
+    this.initializeCountdown(date);
   }
-      //initialize the countdouwn
-	initializeCountdown(endtime) {
-		var timeinterval = setInterval(function() {
-			var t = Date.parse(endtime) - Date.parse(new Date());
-			var seconds = Math.floor((t / 1000) % 60);
-			var minutes = Math.floor((t / 1000 / 60) % 60);
-			var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-			var days = Math.floor(t / (1000 * 60 * 60 * 24));
-			var t = {
-				total: t,
-				days: days,
-				hours: hours,
-				minutes: minutes,
-				seconds: seconds
-			};
+  //initialize the countdouwn
+  initializeCountdown(endtime) {
+    var timeinterval = setInterval(function () {
+      var t = Date.parse(endtime) - Date.parse(new Date());
+      var seconds = Math.floor((t / 1000) % 60);
+      var minutes = Math.floor((t / 1000 / 60) % 60);
+      var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+      var days = Math.floor(t / (1000 * 60 * 60 * 24));
+      var t = {
+        total: t,
+        days: days,
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds,
+      };
 
-			document.querySelector('.days > .value').innerText = t.days;
-			document.querySelector('.hours > .value').innerText = t.hours;
-			document.querySelector('.minutes > .value').innerText = t.minutes;
-			document.querySelector('.seconds > .value').innerText = t.seconds;
-			if (t.total <= 0) {
-				clearInterval(timeinterval);
-			}
-		}, 1000);
-	}
+      document.querySelector(".days > .value").innerText = t.days;
+      document.querySelector(".hours > .value").innerText = t.hours;
+      document.querySelector(".minutes > .value").innerText = t.minutes;
+      document.querySelector(".seconds > .value").innerText = t.seconds;
+      if (t.total <= 0) {
+        clearInterval(timeinterval);
+      }
+    }, 1000);
+  }
 
   getEventData = () => {
     const id = JSON.parse(localStorage.getItem("eventId")).id;
@@ -159,9 +159,7 @@ export class index extends Component {
             </div>
 
             <h1 class="display-4 text-white">{eventName}</h1>
-            <p class="lead text-white">
-              {moment(date).format("dddd, MMMM Do YYYY")}
-            </p>
+            <p class="lead text-white">{date}</p>
 
             <p class="lead">
               <a
