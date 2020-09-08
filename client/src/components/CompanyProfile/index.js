@@ -119,6 +119,17 @@ export default class CompanyProfile extends Component {
       width: "304px",
       height: "200px",
     }
+    const imgPreview = {
+      textAlign: "center",
+      margin: "auto",
+      height: "150px",
+      width: "150px",
+      borderLeft: "1px solid gray",
+      borderRight: "1px solid gray",
+      borderTop: "5px solid gray",
+      borderBottom: "5px solid gray",
+      borderRadius: 50,
+    }
     return (<div className=" main-content">
       {/* <!--reference https://www.creative-tim.com/bits/bootstrap/user-profile-page-argon-dashboard--> */}
       {/* <!-- Header --> */}
@@ -143,15 +154,19 @@ export default class CompanyProfile extends Component {
               <div className="row justify-content-center">
                 <div className="col-lg-3 order-lg-2">
                   <div className="card-profile-image">
-                    <a href="#">
-                      <img style={myStyle} src={this.state.imagePreviewUrl} alt={this.state.imageName.image_name} className="rounded-circle" />
-                    </a>
+                    {!this.state.imageName && (
+
+                      <img style={imgPreview} src="https://via.placeholder.com/150" className="rounded-circle" alt="edit profile to change image" />
+
+                    )}
+
+                    {this.state.imageName && (
+                      <img style={myStyle, imgPreview} src={this.state.imagePreviewUrl} className="rounded-circle" />
+                    )}
 
                   </div>
                 </div>
               </div>
-
-
 
               <div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                 <div className="d-flex justify-content-between">

@@ -67,7 +67,7 @@ export default class ForgotPasswordVerification extends Component {
                       <input onChange={this.handleInputChange} placeholder="Please enter password" type="password" name="newPassword" value={this.state.newPassword} className="form-control" />
                     </div>
                     <div className="form-group">
-                      <label className="mt-2 font-weight-bold">Email/User Name:</label><br />
+                      <label className="mt-2 font-weight-bold">User Name:</label><br />
                       <input onChange={this.handleInputChange} placeholder="Please enter email or user name" type="text" name="email" value={this.state.email} className="form-control" />
                     </div>
                     <div style={myStyle}>{this.state.cognitoErrors}</div>
