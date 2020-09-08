@@ -72,25 +72,25 @@ export default class Login extends Component {
         return (
             <>
                 <form className="form" onSubmit={this.handleFormSubmit} >
-                    <h3 className="text-center ">Login</h3>
+                    <h3 className="text-center text-white">Login</h3>
 
                     <div className="form-group">
-                        <label className="font-weight-bold">Username:</label><br />
+                        <label className="font-weight-bold text-white">Username:</label><br />
                         <input id="username" onChange={this.handleInputChange} type="text" name="username" id="username" className="form-control" value={this.state.username} />
                     </div>
                     <div className="form-group">
-                        <label className="font-weight-bold">Password:</label><br />
+                        <label className="font-weight-bold text-white">Password:</label><br />
                         <input id="password" onChange={this.handleInputChange} type="password" name="password" id="password" className="form-control" value={this.state.password} />
                     </div>
                     <FormErrors formerrors={this.state.errors} />
                     <div className="form-group mx-auto text-center">
-                        <button type="submit" name="submit" className="btn btn-info btn-lg">Login</button>
+                        <button type="submit" name="submit" className="font-weight-bold btn-login btn btn-info text-white">Login</button>
                     </div>
                     <div id="register-link" className="text-center">
-                        <small><a href="/forgotpassword" className="text-info">Forgot Password</a></small>
+                        <small><a href="/forgotpassword" className="text-info text-white font-weight-bold ">Forgot Password </a></small>
                     </div>
                     <div id="register-link" className="text-center">
-                        <small><a href="/signup" className="text-info">Register</a></small>
+                        <small><a href="/signup" className="text-info font-weight-bold  text-white">Register</a></small>
                     </div>
                 </form>
             </>
