@@ -11,7 +11,7 @@
   color: #000;
 }
 
-.contact-box {
+#contact-box {
   background-color: #ececec;
   padding: 20px;
   margin-bottom: 20px;
@@ -23,10 +23,6 @@
   max-width: 350px !important;
 }
 
-.img-fluid {
-  border-radius: 10px;
-}
-
 #contactList {
   list-style: none;
   background-color: #41b3a3;
@@ -34,7 +30,7 @@
   color: #32325d;
 }
 
-.contact-box-footer {
+#contact-box-footer {
   text-align: left;
   background-color: #41b3a3;
   border-top: 2px solid #e7eaec;

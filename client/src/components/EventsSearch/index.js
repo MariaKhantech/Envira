@@ -6,7 +6,7 @@ import Carousel from "./Carousel/index";
 
 import { Row, Col } from "react-bootstrap";
 
-import "./style.css";
+import "./eventSearch.css";
 
 export default class EventsSearch extends Component {
   state = {

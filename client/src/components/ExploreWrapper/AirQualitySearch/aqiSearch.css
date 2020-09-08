@@ -22,21 +22,14 @@
   margin-bottom: 50px;
 }
 
-.med-font {
+#med-font {
   font-size: 28px;
 }
 
-.large-font {
+#large-font {
   font-size: 60px;
 }
 
-.date {
+#date {
   font-size: 20px;
-}
-
-.h5 {
-  font-size: 22px;
-}
-.h6 {
-  font-size: 15px;
 }
