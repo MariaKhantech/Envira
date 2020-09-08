@@ -2,6 +2,12 @@
 
 $sand-color: #fff7ed;
 $ocean-blue-color: #004080;
+$dark-blue-color: #001a33;
+$ocean-floor-color: #0d2d52;
+
+.background2 {
+	background-color: $ocean-floor-color;
+}
 
 #card-image {
 	width: 18rem;

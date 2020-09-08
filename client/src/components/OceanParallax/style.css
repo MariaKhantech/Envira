@@ -3,6 +3,10 @@
   background: linear-gradient(180deg, #00d2ff -10%, #3a47d5 75%);
 }
 
+.background2 {
+  background-color: #0d2d52;
+}
+
 #card-image {
   width: 18rem;
 }
