@@ -102,18 +102,18 @@ export class NavBar extends Component {
 						data-toggle="collapse"
 						data-target="#submenu1"
 					>
-						Company Pollution
+						Pollution
 					</a>
 					<div className="collapse" id="submenu1">
-						<a className="dropdown-item " href="#">
-							Action
+						<a className="dropdown-item text-white" href="#">
+							Air Quality
 						</a>
-						<a className="dropdown-item " href="#">
-							Another action
+						<a className="dropdown-item text-white" href="#">
+							Water Contaminants
 						</a>
 						<div className="dropdown-divider" />
-						<a className="dropdown-item " href="#">
-							Something else here
+						<a className="dropdown-item text-white" href="#">
+							Climate Change Articles
 						</a>
 					</div>
 				</li>
