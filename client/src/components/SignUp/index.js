@@ -33,30 +33,6 @@ export default class Register extends Component {
     });
   }
 
-
-  // async componentDidMount() {
-  //   try {
-  //     Axios.get("/api/auth/role") //getting role types from role table 
-  //       .then(
-  //         (response) => {
-  //           this.setState({
-  //             roleTypes: response.data,
-  //           });
-  //         },
-  //         (error) => {
-  //           this.setState({
-  //             error
-  //           });
-  //         }
-  //       )
-  //   }
-  //   catch (error) {
-
-  //     console.log(error);
-
-  //   }
-  // }
-
   handleInputChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -65,7 +41,6 @@ export default class Register extends Component {
     })
     document.getElementById(e.target.id).classList.remove("is-invalid");
   }
-
 
   handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -78,33 +53,33 @@ export default class Register extends Component {
         errors: { ...this.state.errors, ...error }
       });
     }
-
-    // AWS Cognito integration here
-    this.setState({ isLoading: true });
-    const { username, email, password } = this.state;
-    try {
-      const newUser = await Auth.signUp({
-        username,
-        password,
-        attributes: {
-          email: email
-        }
-      });
-      this.setState({ newUser })
-      //call this function to post data in user model
-      this.postNewUser();
-    } catch (error) {
-      let err = null;
-      !error.message ? err = { "message": error } : err = error;
-      console.log(err);
-      this.setState({
-        errors: {
-          ...this.state.errors,
-          cognito: err
-        }
-      });
+    else {
+      // AWS Cognito integration here
+      this.setState({ isLoading: true });
+      const { username, email, password } = this.state;
+      try {
+        const newUser = await Auth.signUp({
+          username,
+          password,
+          attributes: {
+            email: email
+          }
+        });
+        this.setState({ newUser })
+        //call this function to post data in user model
+        this.postNewUser();
+      } catch (error) {
+        let err = null;
+        !error.message ? err = { "message": error } : err = error;
+        console.log(err);
+        this.setState({
+          errors: {
+            ...this.state.errors,
+            cognito: err
+          }
+        });
+      }
     }
-
   };
 
   postNewUser = () => {

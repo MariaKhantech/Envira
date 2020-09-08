@@ -1,13 +1,11 @@
 const router = require("express").Router();
 const db = require("../../models");
 
-router.post("/userprofile", (req, res) => {
+router.post("/event", (req, res) => {
   console.log(req.body.rating);
-  console.log(req.body.UserId);
-  console.log(req.body.EventId);
+
   db.Rating.create({
     rating: req.body.rating,
-    UserId: req.body.UserId,
     EventId: req.body.EventId,
   })
     .then((dbResponse) => {

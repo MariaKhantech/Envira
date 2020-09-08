@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Event, { onDelete: 'cascade' });
     User.hasMany(models.EventComment, { onDelete: 'cascade' });
     User.hasOne(models.UserProfile, { onDelete: 'cascade' });
+    User.hasOne(models.Image, { onDelete: 'cascade' });
     User.hasOne(models.CompanyProfile, { onDelete: 'cascade' });
     User.hasMany(models.Rating, { onDelete: 'cascade' });
     User.belongsToMany(models.Event, {

@@ -3,7 +3,7 @@ import React from "react";
 function FormErrors(props) {
     if (
         props.formerrors &&
-        (props.formerrors.blankfield || props.formerrors.passwordmatch || props.formerrors.phonenumber)
+        (props.formerrors.blankfield || props.formerrors.passwordmatch || props.formerrors.phonenumber || props.formerrors.website)
     ) {
         return (
             <div className="error container text-danger">
@@ -17,6 +17,9 @@ function FormErrors(props) {
                 </div>
                 <div className="row text-danger">
                     {props.formerrors.phonenumber ? "Please enter correct phone number" : ""}
+                </div>
+                <div className="row text-danger">
+                    {props.formerrors.website ? "Please enter correct website" : ""}
                 </div>
             </div>
         );

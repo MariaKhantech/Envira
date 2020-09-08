@@ -107,8 +107,8 @@ export default class EventsSearch extends Component {
       introTitle: "",
       introText: "",
       showCarousel: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
+      slidesToShow: 3,
+      slidesToScroll: 3,
     });
   };
 

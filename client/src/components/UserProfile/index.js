@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import './style.scss';
 import Axios from 'axios';
 import { Auth } from 'aws-amplify';
+import { Storage } from 'aws-amplify';
 import ReviewForm from '../ReviewForm';
-
 import { Popover, OverlayTrigger, Button } from 'react-bootstrap';
 import StarRatingComponent from 'react-star-rating-component';
 
-export class UserProfile extends Component {
+export default class UserProfile extends Component {
 	state = {
 		profile: [],
 		firstName: '',
@@ -19,6 +19,8 @@ export class UserProfile extends Component {
 		about: '',
 		zipCode: '',
 		totalEvent: '',
+		imagePreviewUrl: '',
+		imageName: [],
 		userRating: []
 	};
 
@@ -38,6 +40,7 @@ export class UserProfile extends Component {
 					this.getUserProfile();
 					// call this function to get logged in user event details
 					this.getUserTotalEvent();
+					this.getImage();
 					this.getUserRating();
 				})
 				.catch((err) => console.log(err));
@@ -53,7 +56,6 @@ export class UserProfile extends Component {
 		const UserId = this.state.profile.id;
 		Axios.get(`/api/auth/userProfile/${UserId}`)
 			.then((response) => {
-				console.log(response);
 				this.setState({
 					firstName: response.data.first_name,
 					lastName: response.data.last_name,
@@ -73,7 +75,6 @@ export class UserProfile extends Component {
 		const UserId = this.state.profile.id;
 		Axios.get(`/api/auth/userTotalEvent/${UserId}`)
 			.then((response) => {
-				console.log(response);
 				this.setState({
 					totalEvent: response.data
 				});
@@ -81,17 +82,50 @@ export class UserProfile extends Component {
 			.catch((err) => console.log(err));
 	};
 
-	//  Get request to return user ratings from DB
-	getUserRating = () => {
-		Axios.get(`/api/rate/userprofile/${this.state.profile.id}`)
-			.then((res) => {
-				this.setState({ userRating: res.data });
-				console.log(this.state.userRating);
+	getImage = () => {
+		const UserId = this.state.profile.id;
+		console.log(UserId);
+		Axios.get(`/api/auth/image/${UserId}`)
+			.then((response) => {
+				this.setState({
+					imageName: response.data
+				});
+				console.log(this.state.imageName);
+				this.getImageFromS3();
+			})
+			.catch((err) => console.log(err));
+	};
+
+	getImageFromS3 = () => {
+		let fileName = this.state.imageName.image_name;
+		console.log(fileName);
+		Storage.get(fileName)
+			.then((data) => {
+				console.log(data);
+				this.setState({
+					imagePreviewUrl: data
+				});
 			})
 			.catch((err) => console.log(err));
 	};
 
 	render() {
+		const myStyle = {
+			width: '304px',
+			height: '200px'
+		};
+		const imgPreview = {
+			textAlign: 'center',
+			margin: 'auto',
+			height: '150px',
+			width: '150px',
+			borderLeft: '1px solid gray',
+			borderRight: '1px solid gray',
+			borderTop: '5px solid gray',
+			borderBottom: '5px solid gray',
+			borderRadius: 50
+		};
+
 		// const that storest the content of the overview
 		const overviewTab = (
 			<div>
@@ -114,24 +148,23 @@ export class UserProfile extends Component {
 					</div>
 				</div>
 				<div className="text-center">
-					<h3 class="h1-design">
-						Greta Thunburg<span className="font-weight-light">, 17</span>
+					<h3>
+						{this.state.firstName} {this.state.lastName}
 					</h3>
-					<div className="h5 h5-special font-weight-300">
+					<div className="h5 font-weight-300">
 						<i className="ni location_pin mr-2" />
-						Stockholm, Sweden
+						{this.state.state}, {this.state.city}
 					</div>
-					<div className="h5 h5-special mt-4">
+					<div className="h5 mt-4">
 						<i className="ni business_briefcase-24 mr-2" />
-						Environmentalist- Activist
+						{this.state.occupation}
 					</div>
 					<div>
 						<i className="ni education_hat mr-2" />
-						University of Environmentalist
 					</div>
-					<hr class="hr-design" />
+					<hr />
 					<div>
-						<h5 hclassName="ni business_briefcase-24 mr-2 h5-special">How to connect:</h5>
+						<h5 className="ni business_briefcase-24 mr-2">How to connect:</h5>
 						<i className="fa fa-linkedin-square fa-2x" aria-hidden="true" />
 						<i className="fa fa-facebook-official fa-2x" aria-hidden="true" />
 						<i className="fa fa-twitter-square fa-2x" aria-hidden="true" />
@@ -178,12 +211,22 @@ export class UserProfile extends Component {
 								<div className="row justify-content-center">
 									<div className="col-lg-3 order-lg-2">
 										<div className="card-profile-image">
-											<a href="#">
+											{!this.state.imageName && (
 												<img
-													src="https://i.guim.co.uk/img/media/d2d6b9cc8326a99daee0f47ad3b94cca738e4ecd/0_229_3500_2101/master/3500.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=5078627d8ad593949b1bb03d7653d615"
+													style={imgPreview}
+													src="https://via.placeholder.com/150"
+													className="rounded-circle"
+													alt="edit profile to change image"
+												/>
+											)}
+
+											{this.state.imageName && (
+												<img
+													style={(myStyle, imgPreview)}
+													src={this.state.imagePreviewUrl}
 													className="rounded-circle"
 												/>
-											</a>
+											)}
 										</div>
 									</div>
 								</div>
@@ -261,6 +304,28 @@ export class UserProfile extends Component {
 												</div>
 											</div>
 										</div>
+									</div>
+									<div className="text-center">
+										<h3>
+											{this.state.firstName} {this.state.lastName}
+										</h3>
+										<div className="h6 mt-1">
+											<i className="ni business_briefcase-24 mr-2" />
+											{this.state.occupation}
+										</div>
+										<div className="h6 font-weight-300">
+											<i className="ni location_pin mr-2" />
+											{this.state.state}, {this.state.city}
+										</div>
+										<hr />
+										<div>
+											<h5 className="ni business_briefcase-24 mr-2">How to connect:</h5>
+											<i className="fa fa-linkedin-square fa-2x" aria-hidden="true" />
+											<i className="fa fa-facebook-official fa-2x" aria-hidden="true" />
+											<i className="fa fa-twitter-square fa-2x" aria-hidden="true" />
+											<i className="fa fa-meetup fa-2x" aria-hidden="true" />
+										</div>
+										<hr className="my-4" />
 									</div>
 								</div>
 							</div>
@@ -362,11 +427,12 @@ export class UserProfile extends Component {
 												{/* <h6 className="heading-small text-muted mb-4">About me</h6> */}
 												<div className="pl-lg-4">
 													<div className="form-group focused">
-														<label class="label-design">About Me</label>
+														<label>About Me</label>
 														<textarea
 															rows="4"
 															className="form-control form-control-alternative"
 															value={this.state.about}
+															readOnly
 														/>
 													</div>
 												</div>
@@ -391,5 +457,3 @@ export class UserProfile extends Component {
 		);
 	}
 }
-
-export default UserProfile;
