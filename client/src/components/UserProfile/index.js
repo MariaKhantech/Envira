@@ -134,6 +134,11 @@ export default class UserProfile extends Component {
 			borderBottom: '5px solid gray',
 			borderRadius: 50
 		};
+		// add avgRating to starRating component value
+		// Get average rating using map and reduce
+		const ratings = this.state.userRating.map((data) => data.rating);
+		const avgRating = ratings.reduce((a, b) => a + parseInt(b), 0) / ratings.length;
+		const starRating = <StarRatingComponent name="rating" starCount={5} value={avgRating} />;
 
 		// const that storest the content of the overview
 		const overviewTab = (
@@ -142,6 +147,7 @@ export default class UserProfile extends Component {
 					<div className="col">
 						<div className="card-profile-stats d-flex justify-content-center mt-md-5">
 							<div>
+								<span className="heading" />
 								<span className="heading">10/10</span>
 								<span className="description">AVERAGE EVENT RATINGS</span>
 							</div>
@@ -184,13 +190,6 @@ export default class UserProfile extends Component {
 		);
 		//end of the overview tab //
 
-		// Get average rating using map and reduce
-		const ratings = this.state.userRating.map((data) => data.rating);
-		const avgRating = ratings.reduce((a, b) => a + parseInt(b), 0) / ratings.length;
-
-		// add avgRating to starRating component value
-		const starRating = <StarRatingComponent name="rating" starCount={5} value={avgRating} />;
-
 		//end of star rating tab//
 		return (
 			<div className=" main-content mb-4">
@@ -202,12 +201,8 @@ export default class UserProfile extends Component {
 					{/* <!-- Header container --> */}
 					<div className="container-fluid d-flex align-items-center">
 						<div className="row">
-							<div className="col-lg-7 col-md-10">
-								<h1 className="display-2 text-black">{this.state.profile.user_name}</h1>
-								<p className="text-black mt-0 mb-5">
-									This is your profile page. You can see the progress you've made with your work and
-									manage your projects or assigned tasks
-								</p>
+							<div className="col-lg-7 col-md-10 mx-auto">
+								<h1 className="display-2 text-dark text-center">{this.state.profile.user_name}</h1>
 							</div>
 						</div>
 					</div>
@@ -223,7 +218,7 @@ export default class UserProfile extends Component {
 											{!this.state.imageName && (
 												<img
 													style={imgPreview}
-													src="https://via.placeholder.com/150"
+													src="../assets/imgs/avatarimg.png"
 													className="rounded-circle"
 													alt="edit profile to change image"
 												/>
@@ -251,7 +246,7 @@ export default class UserProfile extends Component {
 								</div>
 
 								{/* profile tabs */}
-								<div className="card-body shadow p-3 pt-0 pt-md-4">
+								<div className="card-body shadow p-3 pt-0 pt-md-4 mt-5">
 									<ul className="nav nav-tabs ul-design" role="tablist">
 										<li className="nav-item">
 											<a
@@ -300,10 +295,12 @@ export default class UserProfile extends Component {
 									</ul>
 
 									<div className="tab-content">
-										<div className="tab-pane active" id="tabs-1" role="tabpanel" />
-										{overviewTab}
-										<div className="tab-pane " id="tabs-2" role="tabpanel" />
-										{starRating}
+										<div className="tab-pane active" id="tabs-1" role="tabpanel">
+											{overviewTab}
+										</div>
+										<div className="tab-pane " id="tabs-2" role="tabpanel">
+											<p>probably delete this</p>
+										</div>
 										<div className="tab-pane " id="tabs-3" role="tabpanel">
 											<div className="row">
 												<div className="col">
@@ -313,28 +310,6 @@ export default class UserProfile extends Component {
 												</div>
 											</div>
 										</div>
-									</div>
-									<div className="text-center">
-										<h3>
-											{this.state.firstName} {this.state.lastName}
-										</h3>
-										<div className="h6 mt-1">
-											<i className="ni business_briefcase-24 mr-2" />
-											{this.state.occupation}
-										</div>
-										<div className="h6 font-weight-300">
-											<i className="ni location_pin mr-2" />
-											{this.state.state}, {this.state.city}
-										</div>
-										<hr />
-										<div>
-											<h5 className="ni business_briefcase-24 mr-2">How to connect:</h5>
-											<i className="fa fa-linkedin-square fa-2x" aria-hidden="true" />
-											<i className="fa fa-facebook-official fa-2x" aria-hidden="true" />
-											<i className="fa fa-twitter-square fa-2x" aria-hidden="true" />
-											<i className="fa fa-meetup fa-2x" aria-hidden="true" />
-										</div>
-										<hr className="my-4" />
 									</div>
 								</div>
 							</div>
