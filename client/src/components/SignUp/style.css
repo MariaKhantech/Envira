@@ -1,3 +1,13 @@
+.create-btn {
+  background-color: #85dcba;
+}
+
+.border-style-signup {
+  border-style: solid;
+  border-color: #85dcba;
+  border-radius: 5px;
+}
+
 .register-left {
   text-align: center;
   color: #fff;
@@ -34,27 +44,27 @@
 @-webkit-keyframes mover {
   0% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
   100% {
     -webkit-transform: translateY(-20px);
-            transform: translateY(-20px);
+    transform: translateY(-20px);
   }
 }
 
 @keyframes mover {
   0% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
   100% {
     -webkit-transform: translateY(-20px);
-            transform: translateY(-20px);
+    transform: translateY(-20px);
   }
 }
 
 .register {
-  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+  background: -webkit-linear-gradient(left, #daad86, #e27d60);
   margin-top: 8%;
   padding: 3%;
 }
@@ -63,10 +73,13 @@
   border: 0;
   border-radius: 50px 0px 0px 50px;
 }
+
 .cardConfirm {
   border: 0;
   border-radius: 50px;
 }
+
 .signup {
   padding-top: 100px;
 }
+/*# sourceMappingURL=style.css.map */

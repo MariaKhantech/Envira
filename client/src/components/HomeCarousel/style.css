@@ -27,6 +27,11 @@
   height: 18rem;
 }
 
+.ice-caps {
+  height: 300px;
+  width: 350px;
+}
+
 .homepage {
   border-style: double;
   border-color: #e27d60;
