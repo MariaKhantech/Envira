@@ -138,12 +138,12 @@ export default class Register extends Component {
 
   renderForm() {
     return <>
-      <div className="container w-50 register">
+      <div className="container w-50 register border-style-signup">
         <div className="row text-center justify-content-center">
           <div className="col-md-10">
             <div className="card cardStyle bg-light">
               <div className="card-body">
-                <h4 className="card-title mt-3 text-center">Create Account</h4>
+                <h4 className="card-title mt-3 text-center">Registration</h4>
                 <FormErrors formerrors={this.state.errors} />
 
                 <form onSubmit={this.handleFormSubmit}>
@@ -170,7 +170,7 @@ export default class Register extends Component {
                         return (<option defaultValue="User" key={role.id} value={role.id}>{role.type}</option>)
                       })} */}
                       <option value="select">Select a registration type</option>
-                      <option value="1">User</option>
+                      <option value="1">Individual</option>
                       <option value="2">Company</option>
                       <option value="3">Non-Profit</option>
                     </select>
@@ -190,7 +190,7 @@ export default class Register extends Component {
                     <input id="confirmpassword" name="confirmPassword" value={this.state.confirmPassword} onChange={this.handleInputChange} className="form-control" placeholder="Confirm password" type="password" />
                   </div>
                   <div className="form-group mx-auto text-center">
-                    <button type="submit" className="btn btn-primary btn-lg"> Create Account  </button>
+                    <button type="submit" className="btn border-0 btn-primary btn-lg create-btn text-dark"> Create Account  </button>
                   </div>
                 </form>
               </div>

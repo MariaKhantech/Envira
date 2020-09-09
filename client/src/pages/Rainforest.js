@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
-import RainforestInfo from "../components/RainforestInfo"
+import React, { Component } from 'react';
+import RainforestInfo from '../components/RainforestInfo';
+import Robot from '../components/EnviraBot';
 
 export class Rainforest extends Component {
 	render() {
 		return (
 			<div>
-			<RainforestInfo />
+				<RainforestInfo />
+				<Robot />
 			</div>
-		)
+		);
 	}
 }
 
-export default Rainforest
+export default Rainforest;

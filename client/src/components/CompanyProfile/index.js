@@ -130,7 +130,7 @@ export default class CompanyProfile extends Component {
 					<div className="container-fluid container-design d-flex align-items-center">
 						<div className="row">
 							<div className="col-lg-7 col-md-10">
-								<h1 className="h1-design h1-special display-2 text-black">Greta Thunburg</h1>
+								<h1 className="h1-design h1-special display-2 text-dark mx-auto">Greta Thunburg</h1>
 							</div>
 						</div>
 					</div>
@@ -146,7 +146,7 @@ export default class CompanyProfile extends Component {
 											{!this.state.imageName && (
 												<img
 													style={imgPreview}
-													src="https://via.placeholder.com/150"
+													src="../assets/imgs/avatarimg.png"
 													className="rounded-circle"
 													alt="edit profile to change image"
 												/>
