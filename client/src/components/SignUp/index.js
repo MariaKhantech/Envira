@@ -16,10 +16,11 @@ export default class Register extends Component {
     isLoading: false,
     confirmationCode: "",
     newUser: null,
+    ErrorMessage: "",
     errors: {
       cognito: null,
       blankfield: false,
-      passwordmatch: false
+      passwordmatch: false,
     }
   }
 
@@ -33,6 +34,17 @@ export default class Register extends Component {
     });
   }
 
+  emailErrorMessage(message) {
+    this.setState({
+      ErrorMessage: message
+    });
+    setTimeout(() => {
+      this.setState({
+        ErrorMessage: ''
+      });
+    }, 4000)
+  }
+
   handleInputChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -42,7 +54,7 @@ export default class Register extends Component {
     document.getElementById(e.target.id).classList.remove("is-invalid");
   }
 
-  handleFormSubmit = async (event) => {
+  handleFormSubmit = (event) => {
     event.preventDefault();
 
     // Form validation
@@ -54,33 +66,35 @@ export default class Register extends Component {
       });
     }
     else {
-      // AWS Cognito integration here
-      this.setState({ isLoading: true });
-      const { username, email, password } = this.state;
-      try {
-        const newUser = await Auth.signUp({
-          username,
-          password,
-          attributes: {
-            email: email
-          }
-        });
-        this.setState({ newUser })
-        //call this function to post data in user model
-        this.postNewUser();
-      } catch (error) {
-        let err = null;
-        !error.message ? err = { "message": error } : err = error;
-        console.log(err);
-        this.setState({
-          errors: {
-            ...this.state.errors,
-            cognito: err
-          }
-        });
-      }
+      this.postNewUser();
     }
   };
+
+  userSignup = async () => {
+    this.setState({ isLoading: true });
+    const { username, email, password } = this.state;
+    try {
+      const newUser = await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email: email
+        }
+      });
+      this.setState({ newUser })
+    } catch (error) {
+      let err = null;
+      !error.message ? err = { "message": error } : err = error;
+      console.log(err);
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          cognito: err
+        }
+      });
+    }
+  }
+
 
   postNewUser = () => {
     console.log(this.state.role)
@@ -90,9 +104,12 @@ export default class Register extends Component {
       email: this.state.email
     })
       .then((res) => {
-        console.log(res)
+        this.userSignup();
       })
-      .catch(err => console.log(err))
+      .catch((err) => {
+        this.emailErrorMessage('Email address or user name already in use');
+
+      })
   }
 
   handleConfirmationSubmit = async event => {
@@ -145,7 +162,7 @@ export default class Register extends Component {
               <div className="card-body">
                 <h4 className="card-title mt-3 text-center">Registration</h4>
                 <FormErrors formerrors={this.state.errors} />
-
+                <div className="text-danger">{this.state.ErrorMessage}</div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">

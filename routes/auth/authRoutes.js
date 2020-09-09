@@ -1,4 +1,5 @@
 const router = require('express').Router();
+var Sequelize = require('sequelize');
 const db = require('../../models');
 
 // Route for signing up a user.
@@ -14,6 +15,10 @@ router.post('/signup', (req, res) => {
     .then((dbResponse) => {
       res.json(dbResponse);
       console.log(dbResponse);
+    })
+    .catch(Sequelize.ValidationError, (err) =>{
+      // respond with validation errors
+      res.status(422).send(err.errors);
     })
     .catch((err) => {
       res.json(err);
