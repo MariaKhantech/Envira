@@ -173,10 +173,13 @@ export class index extends Component {
 											<li>What is the current temperature of the planet?</li>
 										</ul>
 										<p class="card-text text-center">
-											Envira can read off text to you. When you see the robot{' '}
-											<i class="fas fa-robot" /> icon, you can click on this button to have Envira
-											read the information to you. More interactions can be had with Envira. These
-											are just some tips to start!
+											Envira can read off text to you. When you see the robot &nbsp;
+											<span>
+												<i class="text-danger fas fa-robot" />
+											</span>
+											&nbsp; icon, you can click on this button to have Envira read the
+											information to you. More interactions can be had with Envira. These are just
+											some tips to start!
 										</p>
 									</div>
 								</div>
