@@ -46,7 +46,6 @@ export class CreateEvents extends Component {
     });
   }
 
-
   uploadFile = (event) => {
     console.log(event.target);
 

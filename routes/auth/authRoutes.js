@@ -4,9 +4,6 @@ const db = require('../../models');
 
 // Route for signing up a user.
 router.post('/signup', (req, res) => {
-  console.log(req.body.username);
-  console.log(req.body.role);
-
   db.User.create({
     user_name: req.body.username,
     email: req.body.email,
@@ -16,7 +13,7 @@ router.post('/signup', (req, res) => {
       res.json(dbResponse);
       console.log(dbResponse);
     })
-    .catch(Sequelize.ValidationError, (err) =>{
+    .catch(Sequelize.ValidationError, (err) => {
       // respond with validation errors
       res.status(422).send(err.errors);
     })
