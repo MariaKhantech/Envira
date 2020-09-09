@@ -3,6 +3,7 @@ import Amplify, { Interactions } from 'aws-amplify';
 import { ChatBot, AmplifyTheme } from 'aws-amplify-react';
 // import awsconfig from '../../aws-exports';
 import Robot from '../Robot';
+import Shake from 'react-reveal/Shake';
 import './style.scss';
 // Amplify.configure(awsconfig);
 
@@ -29,7 +30,9 @@ export class EnviraBot extends Component {
 		};
 		return (
 			<div className="envirabot">
+				<Shake>
 				<Robot />
+				</Shake>
 				<ChatBot
 					title="My Bot"
 					theme={myTheme}

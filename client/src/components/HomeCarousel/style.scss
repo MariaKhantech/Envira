@@ -1,7 +1,9 @@
 @import "./svgstyles";
+$neutral-green:  #85dcba;
+$light-orange: #daad86;
 
 .carousel-inner > .carousel-item > img {
-	height: 18rem;
+	height: 25rem;
 }
 .ice-caps {
 	height: 300px;
@@ -9,13 +11,30 @@
 }
 
 .homepage {
-	border-style: double;
+	border-style: solid;
 	border-color: #e27d60;
-	border-width: 2rem;
+	border-width: 1rem;
+	margin-top: 0 !important;
 }
 
 .homepgCardBackground {
 	border-style: solid;
 	border-radius: 5px;
 	border-color: #e27d60;
+}
+
+.greenHcard {
+	background: $neutral-green;
+}
+.orangeHcard {
+	background: $light-orange;
+}
+
+.icon-Hsize {
+	width: 50px;
+	height: 50px;
+}
+.h1-Hstyle {
+	background: #1261A0;
+	padding: 2rem;
 }
