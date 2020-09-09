@@ -1,7 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  // For user profile card
   const UserProfile = sequelize.define('UserProfile', {
-    // FIRST AND LAST NAME
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -12,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: false,
     },
-    // CITY, STATE, and ZIP
     city: {
       type: DataTypes.STRING,
       allowNull: false,

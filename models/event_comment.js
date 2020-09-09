@@ -7,47 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     },
 
   });
-
-  // userId,eventId and companyId are foreign keys
-
-  // define relationship between event and comment
-  // An event can have many comments
-
-  
+   
  EventComment.associate = (models) => { 
   EventComment.belongsTo(models.User, {foreignKey: {allowNull: false}});
   EventComment.belongsTo(models.Event, {foreignKey: {allowNull: false}});
   EventComment.hasMany(models.Reply, {foreignKey: {allowNull: false}});
 }; 
 
-
-  // EventComment.associate = (models) => {
-  //   EventComment.belongsTo(models.Event, {
-  //     foreignKey: {
-  //       allowNull: false,
-  //     },
-  //   });
-  // };
-
-  // EventComment.associate = (models) => {
-  //   EventComment.hasMany(models.Reply, {
-  //     foreignKey: {
-  //       allowNull: false,
-  //     },
-  //   });
-  // };
-
-
-  // // define relationship between user and comment
-  // // A user can post many comments
-  // EventComment.associate = (models) => {
-  //   EventComment.belongsTo(models.User, {
-  //     foreignKey: {
-  //       allowNull: false,
-  //     },
-  //   });
-  // };
-
-
-  return EventComment;
+ return EventComment;
 };

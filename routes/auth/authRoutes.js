@@ -11,7 +11,6 @@ router.post('/signup', (req, res) => {
   })
     .then((dbResponse) => {
       res.json(dbResponse);
-      console.log(dbResponse);
     })
     .catch(Sequelize.ValidationError, (err) => {
       // respond with validation errors
@@ -22,21 +21,8 @@ router.post('/signup', (req, res) => {
     });
 });
 
-router.get('/role', (req, res) => {
-  db.Role.findAll({})
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((err) => {
-      if (err) {
-        res.status(500).json(err);
-      }
-    });
-});
-
 //this route is to get the logged in user profile details
 router.get('/userProfile/:UserId', (req, res) => {
-  console.log(req.params.UserId);
   db.UserProfile.findOne({
     where: {
       UserId: req.params.UserId
@@ -54,8 +40,6 @@ router.get('/userProfile/:UserId', (req, res) => {
 
 //this route is to save the user profile first time
 router.post('/updateUserProfile', (req, res) => {
-  console.log(req.body.phoneNumber);
-  console.log()
   db.UserProfile.create({
     UserId: req.body.id,
     first_name: req.body.firstName,
@@ -72,7 +56,6 @@ router.post('/updateUserProfile', (req, res) => {
     })
     .catch((err) => {
       if (err) {
-        console.log(err)
         res.status(500).json(err.message);
       }
     });
@@ -103,10 +86,8 @@ router.put('/updateUserProfile/:UserId', (req, res) => {
     });
 });
 
-
 // this route is to get logged in user information
 router.get('/user/:username', (req, res) => {
-  console.log(req.params.username);
   db.User.findOne({
     where: {
       user_name: req.params.username
@@ -114,7 +95,6 @@ router.get('/user/:username', (req, res) => {
   })
     .then((data) => {
       res.json(data);
-      console.log(data)
     })
     .catch((err) => {
       if (err) {
@@ -125,7 +105,6 @@ router.get('/user/:username', (req, res) => {
 
 //this route is to get the logged in company profile details
 router.get('/companyProfile/:UserId', (req, res) => {
-  console.log(req.params.UserId);
   db.CompanyProfile.findOne({
     where: {
       UserId: req.params.UserId
@@ -160,14 +139,12 @@ router.post('/updateCompanyProfile', (req, res) => {
     .catch((err) => {
       if (err) {
         res.status(500).json(err.message);
-        console.log(err)
       }
     });
 });
 
 //this route is to update the company profile
 router.put('/updateCompanyProfile/:UserId', (req, res) => {
-  console.log(req.body.website)
   db.CompanyProfile.update({
     company_name: req.body.companyName,
     company_description: req.body.description,
@@ -184,7 +161,6 @@ router.put('/updateCompanyProfile/:UserId', (req, res) => {
       res.json(data);
     })
     .catch((err) => {
-      console.log(err)
       if (err) {
         res.status(500).json(err);
         res.status(404).json(err);
@@ -194,7 +170,6 @@ router.put('/updateCompanyProfile/:UserId', (req, res) => {
 
 //this route is to get the logged in user event details
 router.get('/userTotalEvent/:UserId', (req, res) => {
-  console.log(req.params.UserId);
   db.Event.findAll({
     where: {
       UserId: req.params.UserId
@@ -212,8 +187,6 @@ router.get('/userTotalEvent/:UserId', (req, res) => {
 
 // this route is to save the profile image for logged in user into image model
 router.post('/image', (req, res) => {
-  console.log(req.body.selectedFileName)
-  console.log(req.body.UserId)
   db.Image.create({
     image_name: req.body.selectedFileName,
     UserId: req.body.UserId
@@ -222,7 +195,6 @@ router.post('/image', (req, res) => {
       res.json(data);
     })
     .catch((err) => {
-      console.log(err)
       if (err) {
         res.status(500).json(err.message);
       }
@@ -242,7 +214,6 @@ router.put('/image/:UserId', (req, res) => {
       res.json(data);
     })
     .catch((err) => {
-      console.log(err)
       if (err) {
         res.status(500).json(err.message);
       }
@@ -251,7 +222,6 @@ router.put('/image/:UserId', (req, res) => {
 
 // this route is to get the profile image for logged in user
 router.get('/image/:UserId', (req, res) => {
-  console.log(req.params.UserId)
   db.Image.findOne({
     where: {
       UserId: req.params.UserId
@@ -261,13 +231,10 @@ router.get('/image/:UserId', (req, res) => {
       res.json(data);
     })
     .catch((err) => {
-      console.log(err)
       if (err) {
         res.status(500).json(err.message);
       }
     });
 });
-
-
 
 module.exports = router;

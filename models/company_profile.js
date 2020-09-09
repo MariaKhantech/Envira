@@ -26,13 +26,10 @@ module.exports = (sequelize, DataTypes) => {
       unique: false,
       isUrl: true,
     },
-    // add validation for phone number
     phone_number: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-
-    // add validation for email
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -40,7 +37,6 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  //   Company Profile will belong to --> Company (company_id)
   CompanyProfile.associate = (models) => {
     CompanyProfile.belongsTo(models.User, {
       foreignKey: {
