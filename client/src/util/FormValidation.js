@@ -23,16 +23,17 @@ function validateForm(event, state) {
     document.getElementById("lastname").classList.add("is-invalid");
     return { blankfield: true };
   }
-  // if (state.hasOwnProperty("role") && state.role === "") {
-  //   document.getElementById("role").classList.add("is-invalid");
-  //   return { blankfield: true };
-  // }
+
   if (state.hasOwnProperty("phoneNumber") && state.phoneNumber === "") {
     document.getElementById("phonenumber").classList.add("is-invalid");
     return { blankfield: true };
   }
   if (state.hasOwnProperty("email") && state.email === "") {
     document.getElementById("email").classList.add("is-invalid");
+    return { blankfield: true };
+  }
+  if (state.hasOwnProperty("role") && state.role === "select") {
+    document.getElementById("role").classList.add("is-invalid");
     return { blankfield: true };
   }
   if (state.hasOwnProperty("occupation") && state.occupation === "") {
