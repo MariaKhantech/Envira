@@ -4,7 +4,6 @@ import Axios from "axios";
 import { Auth } from "aws-amplify";
 import { Storage } from "aws-amplify";
 import ReviewForm from "../ReviewForm";
-import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 import StarRatingComponent from "react-star-rating-component";
 
 export default class UserProfile extends Component {
@@ -249,7 +248,7 @@ export default class UserProfile extends Component {
                 </div>
                 <div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                   <div className="d-flex justify-content-between">
-                    <a href="#" className="btn btn-sm btn-info mr-4">
+                    <a href="/eventsearch" className="btn btn-sm btn-info mr-4">
                       Events
                     </a>
                     <a href="#" className="btn btn-sm btn-default float-right">

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ReviewComment from "../ReviewForm";
 import { Storage } from "aws-amplify";
+import { Popover, OverlayTrigger, Button } from "react-bootstrap";
+import StarRatingComponent from "react-star-rating-component";
 import ImageGallery from "react-image-gallery";
 import moment from "moment";
 import Axios from "axios";
@@ -12,9 +14,15 @@ export class index extends Component {
     this.state = {
       reviewArray: [],
       eventId: "",
+      userId: "",
       eventData: [],
-      image: "",
-      imageUrl: "",
+      eventImage: "",
+      eventImageUrl: "",
+      profileImage: "",
+      profileImageUrl: "",
+      rating: 0,
+      disabled: true,
+      userRating: [],
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
   }
@@ -29,6 +37,7 @@ export class index extends Component {
       { name: <ReviewComment /> },
     ];
     this.getEventData();
+
     this.setState({ reviewArray });
     //setting date for testing
     let date = new Date();
@@ -78,21 +87,86 @@ export class index extends Component {
         this.setState({ eventData: filteredId });
         console.log(this.state.eventData);
 
+        const UserId = this.state.eventData.map((data) => data.UserId);
         const image = this.state.eventData.map((data) => data.image);
-        this.setState({ image: image });
+        this.setState({ eventImage: image, userId: UserId });
 
-        this.getImageUrl();
+        this.getEventImageUrl();
+        this.getProfileImage(this.state.userId);
+        this.getUserRating();
       })
       .catch((err) => console.log(err));
   };
 
-  getImageUrl = () => {
-    Storage.get(this.state.image)
-      .then((data) => {
-        // console.log(data);
-        this.setState({ imageUrl: data });
+  getProfileImage = (userId) => {
+    Axios.get(`/api/auth/image/${userId}`)
+      .then((response) => {
+        this.setState({
+          profileImage: response.data,
+        });
+        console.log(this.state.profileImage);
+        this.getProfileImageUrl();
       })
       .catch((err) => console.log(err));
+  };
+
+  getProfileImageUrl = () => {
+    let fileName = this.state.profileImage.image_name;
+    console.log(fileName);
+    Storage.get(fileName)
+      .then((data) => {
+        console.log(data);
+        this.setState({
+          profileImageUrl: data,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  getEventImageUrl = () => {
+    Storage.get(this.state.eventImage)
+      .then((data) => {
+        // console.log(data);
+        this.setState({ eventImageUrl: data });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  //   //   Post request to submit rating to DB
+  postRating = (event) => {
+    event.preventDefault();
+    const id = JSON.parse(localStorage.getItem("eventId")).id;
+    console.log(id);
+    Axios.post(`/api/rate/event`, {
+      rating: this.state.rating,
+      EventId: id,
+      UserId: this.state.userId,
+    })
+      .then((res) => {
+        console.log(res);
+        this.setState({ rating: "0", disabled: true });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  //   click method to change star value
+  onStarClick(nextValue) {
+    this.setState({ rating: nextValue, disabled: false });
+  }
+
+  getUserRating = () => {
+    Axios.get(`/api/rate/userprofile/${this.state.userId}`)
+      .then((res) => {
+        this.setState({ userRating: res.data });
+        console.log(this.state.userRating);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  starRating = () => {
+    this.state.userRating.map((data) => (
+      <StarRatingComponent name="rating" starCount={5} value={data.rating} />
+    ));
   };
 
   render() {
@@ -107,6 +181,7 @@ export class index extends Component {
     const city = this.state.eventData.map((data) => data.city);
     const eventState = this.state.eventData.map((data) => data.state);
     const date = this.state.eventData.map((data) => data.date);
+
     const website = this.state.eventData.map((data) => data.website);
     const contactPerson = this.state.eventData.map(
       (data) => data.contact_person
@@ -116,7 +191,43 @@ export class index extends Component {
       (data) => data.contact_number
     );
 
-    console.log(this.state.imageUrl);
+    // Popover to display rating was posted
+    const popover = (
+      <Popover id="popover-basic">
+        <Popover.Title>Rating Posted!</Popover.Title>
+      </Popover>
+    );
+    // Variable to post star ratings
+    const postStarRating = (
+      <>
+        <div
+          class="card-profile-stats d-flex justify-content-center mt-md-5"
+          style={{ fontSize: "28px" }}
+        >
+          <StarRatingComponent
+            name="rating"
+            starCount={5}
+            value={this.state.rating}
+            onStarClick={this.onStarClick.bind(this)}
+          />
+        </div>
+        <OverlayTrigger
+          delay={{ show: 250, hide: 350 }}
+          placement="top"
+          overlay={popover}
+        >
+          <Button
+            disabled={this.state.disabled}
+            variant="primary"
+            size="sm"
+            className="float-center"
+            onClick={this.postRating}
+          >
+            Post Rating
+          </Button>
+        </OverlayTrigger>
+      </>
+    );
 
     const images = [
       {
@@ -133,6 +244,8 @@ export class index extends Component {
       },
     ];
 
+    //google image asrc address
+    const googleMapUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=${address}+${city}+${eventState}`;
     return (
       <div class="wrapper2">
         <div class="container-fluid ">
@@ -142,11 +255,7 @@ export class index extends Component {
           >
             <div class="card flex-row  float-right border-0 style-contact-person">
               <div class="border-0">
-                <img
-                  src="https://st3.depositphotos.com/1694341/14414/i/450/depositphotos_144140695-stock-photo-elon-musk.jpg"
-                  height="300px"
-                  alt=""
-                />
+                <img src={this.state.profileImageUrl} height="300px" alt="" />
               </div>
               <div class="card-body ">
                 <h4>
@@ -223,7 +332,7 @@ export class index extends Component {
           <div class="row justify-content-center">
             <div class="col-3 ">
               <figure>
-                <img class="event-img" src={this.state.imageUrl} />
+                <img class="event-img" src={this.state.eventImageUrl} />
               </figure>
             </div>
             <div class="col-4">
@@ -271,7 +380,7 @@ export class index extends Component {
             <div className="map-responsive text-center">
               <iframe
                 className="rounded map-style"
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=UNH+PORTSMOUTH"
+                src={googleMapUrl}
                 width="500"
                 height="300"
                 frameborder="0"
@@ -320,6 +429,7 @@ export class index extends Component {
                           >
                             Save
                           </button>
+                          {postStarRating}
                         </div>
                       </form>
                     </div>

@@ -7,6 +7,14 @@
   top: 36px;
 }
 
+.background-login {
+  background-color: #daad86 !important;
+}
+
+.btn-login {
+  background-color: #85dcba;
+}
+
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
   background: #e27d60;
