@@ -4,6 +4,8 @@ import { Storage } from "aws-amplify";
 import Axios from "axios";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Button from "react-bootstrap/Button";
+import FormErrors from "../FormErrors";
+import Validate from "../../util/FormValidation";
 // import 'react-date-range/dist/theme/default.css';
 // import 'react-date-range/dist/styles.css';
 // import { DateRange } from 'react-date-range';
@@ -28,14 +30,22 @@ export class CreateEvents extends Component {
       imagePreviewUrl: "",
       displayUploadButton: false,
       userData: [],
+      errors: {
+        blankfield: false,
+        phonenumber: false
+      }
     };
   }
-  //test for S3//
-  saveFile = async () => {
-    // const { file } = this.state;
-    await Storage.put("test3.txt", "hello");
-    console.log("successfully saved file...");
-  };
+
+  clearErrorState = () => {
+    this.setState({
+      errors: {
+        blankfield: false,
+        phonenumber: false
+      }
+    });
+  }
+
 
   uploadFile = (event) => {
     console.log(event.target);
@@ -87,34 +97,46 @@ export class CreateEvents extends Component {
 
   postNewEvent = (event) => {
     event.preventDefault();
-    Axios.post("/api/create/eventcreate", {
-      eventName: this.state.eventName,
-      date: this.state.date,
-      description: this.state.description,
-      contactPerson: this.state.contactName,
-      contactEmail: this.state.contactEmail,
-      contactNumber: this.state.contactNumber,
-      website: this.state.website,
-      address: this.state.address,
-      city: this.state.city,
-      state: this.state.state,
-      id: this.state.userData.id,
-      image: this.state.selectedFileName,
-    })
-      .then((res) => {
-        console.log(res);
-        let newEvent = {
-          id: res.data.id,
-        };
-        console.log(newEvent);
-        localStorage.setItem("eventId", JSON.stringify(newEvent));
-        window.location = "/eventspage";
+
+    // check Form validation
+    this.clearErrorState();
+    const error = Validate(event, this.state);
+    if (error) {
+      this.setState({
+        errors: { ...this.state.errors, ...error }
+      });
+    } else {
+      Axios.post("/api/create/eventcreate", {
+        eventName: this.state.eventName,
+        date: this.state.date,
+        description: this.state.description,
+        contactPerson: this.state.contactName,
+        contactEmail: this.state.contactEmail,
+        contactNumber: this.state.contactNumber,
+        website: this.state.website,
+        address: this.state.address,
+        city: this.state.city,
+        state: this.state.state,
+        id: this.state.userData.id,
+        image: this.state.selectedFileName,
       })
-      .catch((err) => console.log(err));
+        .then((res) => {
+          console.log(res);
+          let newEvent = {
+            id: res.data.id,
+          };
+          console.log(newEvent);
+          localStorage.setItem("eventId", JSON.stringify(newEvent));
+          window.location = "/eventspage";
+        })
+        .catch((err) => console.log(err));
+    }
+
   };
 
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
+    document.getElementById(target.id).classList.remove("is-invalid");
   };
   render() {
     console.log(this.state.selectedFileName);
@@ -134,6 +156,7 @@ export class CreateEvents extends Component {
 
                 {/*link these!*/}
               </Jumbotron>
+              <FormErrors formerrors={this.state.errors} />
               <div className="card-body">
                 <div className="row justify-content-center">
                   <div className="form-group col-md-5">
@@ -206,6 +229,7 @@ export class CreateEvents extends Component {
                         type="file"
                         onChange={this.uploadFile}
                         className="form-control border-0"
+                        required
                       />
                       <label
                         id="upload-label"
