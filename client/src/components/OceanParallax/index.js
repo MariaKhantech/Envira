@@ -116,7 +116,7 @@ export class OceanParallax extends Component {
 			<div class="ocean-wrapper">
 				{cardDiv}
 				<div class="container-fluid ocean-para">
-					<div className="card text-center ocean-para ">
+					<div className="card text-center ocean-para border-0 ">
 						<img className="ocean-floor-img" src="../assets/imgs/ocean/oceanfloor.png" />
 						<img className="diver diver1" src="../assets/imgs//ocean/diver.png" />
 						<img className="long-fish" src="../assets/imgs/ocean/long-fish.png" />
