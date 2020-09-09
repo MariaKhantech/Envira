@@ -5,6 +5,16 @@ import Particles from 'react-particles-js';
 import './style.scss';
 
 export class RainforestInfo extends Component {
+	enviraAudio() {
+		let ForestFiresAudio = new Audio(
+			'https://envirabucket215241-dev.s3.amazonaws.com/polly/forest-fires.ed367291-bbcf-4606-8d61-11399fc93bb3.mp3'
+		);
+		ForestFiresAudio.play();
+	}
+	// enviraAmazon() {
+	// 	let AmazonAudio = new Audio('');
+	// 	ForestFiresAudio.play();
+	// }
 	render() {
 		const particles = (
 			<Particles
@@ -72,10 +82,7 @@ export class RainforestInfo extends Component {
 						style={{ backgroundImage: `url(${forestBackground})` }}
 					>
 						<h1 className="display-4 text-white text-center">Forest fires & Deforestation</h1>
-						<p className="lead text-white text-center">
-							This is a simple hero unit, a simple jumbotron-style component for calling extra attention
-							to featured content or information.
-						</p>
+						<p className="lead text-white text-center">The effects of climate change and deforestation</p>
 					</div>
 
 					{/* forest fires */}
@@ -164,7 +171,7 @@ export class RainforestInfo extends Component {
 									<div class="col-md-8">
 										<div class="card-body forest-fire-card ">
 											<h2 class="card-title text-white ">Forest Fires</h2>
-											<p class="card-text text-white text-right">
+											<p class="card-text text-white">
 												For the United States as a country, the total number of acres burned by
 												wildfires and the average acres burned per fire has been ticking up in
 												recent decades. From 2000 to 2018, wildfires burned more than twice as
@@ -173,21 +180,29 @@ export class RainforestInfo extends Component {
 
 											<p class="text-white">
 												In Alaska, temperatures are rising twice as fast as the rest of the
-												country, wildfires have been increasing in frequency and size, these
-												forests evolved with fire. Four of the ten largest fire years on record
-												have occurred in the past 15 years, burning over 2 million acres in each
-												of those large fire years.
+												country. Wildfires have increased in frequency and size. Four of the ten
+												most considerable fire years on record have occurred in the past 15
+												years, burning over 2 million acres in each large fire.
 											</p>
 
 											<p class="text-white">
-												As the climate continues to warm, wild fires will increase over the next
-												couple decades. We must take swift action in order to improve forest and
-												fire management practices and reduce our reliance on fossil fuels to
-												limit the risks of worsening wildfires and move towards re-newable
-												energy.
+												As the climate continues to warm, wildfires will increase over the next
+												couple of decades. We must take swift action to improve forest and fire
+												management practices and reduce our reliance on fossil fuels to limit
+												the risks of worsening wildfires and move towards renewable energy. On a
+												really hot day, when drought is at it's peak, something as small as a
+												spark from a train car's wheel striking the track can ignite a raging
+												wildfire. Fires also occur naturally, ignited by heat from the sun or a
+												lightning strike.
 											</p>
 											<p class="card-text">
-												<small class="text-muted">Last updated 3 mins ago</small>
+												<button
+													type="button"
+													onClick={this.enviraAudio}
+													class="btn btn-outline-danger float-right text-danger"
+												>
+													<i class="fas fa-robot" />
+												</button>
 											</p>
 										</div>
 									</div>
@@ -203,18 +218,18 @@ export class RainforestInfo extends Component {
 											<h2 class="card-title text-white">Amazon Rainforest Fires</h2>
 											<p class="card-text text-white">
 												Thousands of fires are burning across a southern swath of the Amazon.
-												They belch smoke and soot, blanketing those who live downwind with
-												thick, dirty air, hurting wildlife in their path and destroying part of
-												one the most important carbon storehouses left on the planet.
+												They emit smoke and soot, blanketing those who live downwind with thick,
+												dirty air, hurting wildlife in their path, and destroying one of the
+												most crucial carbon storehouses left on the planet.
 											</p>
 
 											<p class="text-white ">
 												About 76,000 fires were burning across the Brazilian Amazon at last
-												official count, an increase of over 80 percent over the same time period
-												last year, according to data from Brazil’s National Institute for Space
-												Research (INPE). Since then, even more fires have appeared in the
+												official count, an increase of over 80 percent over the same period the
+												previous year, according to data from Brazil’s National Institute for
+												Space Research (INPE). Since then, even more, fires have appeared in the
 												satellite imagery that scientists use to assess the extent and intensity
-												of burning, and they expect the number to increase over coming months as
+												of burning. They expect the number to increase over the coming months as
 												the dry season intensifies.
 											</p>
 											<p class="card-text">

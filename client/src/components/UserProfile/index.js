@@ -144,7 +144,7 @@ export default class UserProfile extends Component {
 			<div>
 				<div className="row">
 					<div className="col">
-						<div className="card-profile-stats d-flex justify-content-center mt-md-5">
+						<div className="card-profile-stats card-style-plus d-flex justify-content-center mt-md-5">
 							<div>
 								<span className="heading" />
 								<span className="heading">10/10</span>
@@ -210,10 +210,10 @@ export default class UserProfile extends Component {
 				<div className=" mt-7">
 					<div className="row">
 						<div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 col-12 ">
-							<div className="card card-profile shadow ">
+							<div className="card card-style-plus card-profile shadow ">
 								<div className="row justify-content-center">
 									<div className="col-lg-3 order-lg-2">
-										<div className="card-profile-image">
+										<div className="card-profile-image card-style-plus">
 											{!this.state.imageName && (
 												<img
 													style={imgPreview}

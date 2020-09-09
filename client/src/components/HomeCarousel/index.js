@@ -147,7 +147,7 @@ export class index extends Component {
 										<button
 											type="button"
 											onClick={this.enviraAudio}
-											class="btn btn-outline-info float-right"
+											class="btn btn-outline-danger float-right text-danger"
 										>
 											<i class="fas fa-robot" />
 										</button>

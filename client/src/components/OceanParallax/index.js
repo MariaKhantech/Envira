@@ -25,22 +25,29 @@ export class OceanParallax extends Component {
 			'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80';
 
 		let cardDiv = (
-			<div className="card text-center ">
+			<div className="card text-center border-0">
 				<div className="card-header" style={{ background: '#001a33' }}>
 					<OceanPollutionText />
 				</div>
 				<div className="card-body body-color">
-					<h5 className="card-title">Special title treatment</h5>
-					<div class="card">
-						<div class="card-body body-color">This is some text within a card body.</div>
-					</div>
-					<div className="card" id="card-image">
-						<div className="card-body body-color">
-							<img
-								className="card-img border rounded float-left"
-								src="/assets/imgs/svg/scientist.svg"
-								alt="Card image cap"
-							/>
+					<h3 className="card-title">Plastic</h3>
+					<div class="card border-0">
+						<div class="card-body body-color ">
+							<img src="../assets/imgs/treeplastic.jpg" class="rounded float-left" alt="..." />
+							<div class="col-10">
+								<h5>
+									If I told you that there will be more plastic in the ocean than fish 2050 would you
+									believe me?
+								</h5>
+								<p class="ml-2">
+									8 million tons of plastic is thrown into the ocean annually. By 2050 there will be
+									more plastic in the oceans than fish. Which means people that consume seafood will
+									be consuming more plastic. There are currently 800 species worldwide affected by
+									marine debris. Everything from seabirds, sea turtules to fins and marine mamals.
+									They get entangled with plastic. Many of these animals ingesting plastic debris
+									causing suffocation, starvation and drowning.
+								</p>
+							</div>
 						</div>
 					</div>
 
