@@ -16,10 +16,11 @@ export default class Register extends Component {
     isLoading: false,
     confirmationCode: "",
     newUser: null,
+    ErrorMessage: "",
     errors: {
       cognito: null,
       blankfield: false,
-      passwordmatch: false
+      passwordmatch: false,
     }
   }
 
@@ -33,6 +34,17 @@ export default class Register extends Component {
     });
   }
 
+  emailErrorMessage(message) {
+    this.setState({
+      ErrorMessage: message
+    });
+    setTimeout(() => {
+      this.setState({
+        ErrorMessage: ''
+      });
+    }, 4000)
+  }
+
   handleInputChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -42,7 +54,7 @@ export default class Register extends Component {
     document.getElementById(e.target.id).classList.remove("is-invalid");
   }
 
-  handleFormSubmit = async (event) => {
+  handleFormSubmit = (event) => {
     event.preventDefault();
 
     // Form validation
@@ -54,33 +66,35 @@ export default class Register extends Component {
       });
     }
     else {
-      // AWS Cognito integration here
-      this.setState({ isLoading: true });
-      const { username, email, password } = this.state;
-      try {
-        const newUser = await Auth.signUp({
-          username,
-          password,
-          attributes: {
-            email: email
-          }
-        });
-        this.setState({ newUser })
-        //call this function to post data in user model
-        this.postNewUser();
-      } catch (error) {
-        let err = null;
-        !error.message ? err = { "message": error } : err = error;
-        console.log(err);
-        this.setState({
-          errors: {
-            ...this.state.errors,
-            cognito: err
-          }
-        });
-      }
+      this.postNewUser();
     }
   };
+
+  userSignup = async () => {
+    this.setState({ isLoading: true });
+    const { username, email, password } = this.state;
+    try {
+      const newUser = await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email: email
+        }
+      });
+      this.setState({ newUser })
+    } catch (error) {
+      let err = null;
+      !error.message ? err = { "message": error } : err = error;
+      console.log(err);
+      this.setState({
+        errors: {
+          ...this.state.errors,
+          cognito: err
+        }
+      });
+    }
+  }
+
 
   postNewUser = () => {
     console.log(this.state.role)
@@ -90,9 +104,12 @@ export default class Register extends Component {
       email: this.state.email
     })
       .then((res) => {
-        console.log(res)
+        this.userSignup();
       })
-      .catch(err => console.log(err))
+      .catch((err) => {
+        this.emailErrorMessage('Email address or user name already in use');
+
+      })
   }
 
   handleConfirmationSubmit = async event => {
@@ -116,23 +133,27 @@ export default class Register extends Component {
 
   renderConfirmationForm() {
     return (
+      <>
+        <div className="container mt-5 ">
+          <div className="row justify-content-center align-items-center">
+            <div className="col-md-6 border mt-2 shadow-lg p-3 mb-5 bg-white rounded">
+              <h6 className="text-center">Please check your email for the confirmation code.</h6>
+              <div className="col-md-12 mt-3">
+                <form onSubmit={this.handleConfirmationSubmit}>
+                  <div className="form-group input-group justify-content-center mt-2">
+                    <label htmlFor="confirmationCode" className="mr-1">Confirmation Code:</label>
+                    <input id="confirmationcode" name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} required />
+                  </div>
+                  <div className="form-group mx-auto text-center">
+                    <button type="submit" className="btn btn-primary btn-md">Submit</button>
+                  </div>
+                </form>
+              </div>
 
-      <div className="container mt-5">
-        <div className="row justify-content-center align-items-center">
-          <div className="col-md-7 border mt-2 shadow-lg p-3 mb-5 bg-white rounded">
-            <h3 className="font-weight-normal text-center mb-2">Please check your email for the code.</h3>
-            <form onSubmit={this.handleConfirmationSubmit}>
-              <div className="form-group input-group text-center">
-                <label htmlFor="confirmationCode" className="mr-2">Confirmation Code:</label>
-                <input id="confirmationcode" name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} required />
-              </div>
-              <div className="form-group mx-auto text-center">
-                <button type="submit" className="btn btn-primary btn-md">Submit</button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -145,7 +166,7 @@ export default class Register extends Component {
               <div className="card-body">
                 <h4 className="card-title mt-3 text-center">Registration</h4>
                 <FormErrors formerrors={this.state.errors} />
-
+                <div className="text-danger">{this.state.ErrorMessage}</div>
                 <form onSubmit={this.handleFormSubmit}>
                   <div className="form-group input-group">
                     <div className="input-group-prepend">
