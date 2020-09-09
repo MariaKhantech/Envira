@@ -26,6 +26,7 @@ export default class ExploreWrapper extends Component {
             fill
             className="justify-content-center"
             onSelect={this.handleSelect}
+            id="aqi"
           >
             <Tab eventKey={1} title="Air Quality Index Search">
               <AirQualitySearch />
