@@ -4,7 +4,6 @@ import Axios from "axios";
 import { Auth } from "aws-amplify";
 import { Storage } from "aws-amplify";
 import ReviewForm from "../ReviewForm";
-import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 import StarRatingComponent from "react-star-rating-component";
 
 export default class UserProfile extends Component {

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ReviewComment from "../ReviewForm";
 import { Storage } from "aws-amplify";
+import { Popover, OverlayTrigger, Button } from "react-bootstrap";
+import StarRatingComponent from "react-star-rating-component";
 import ImageGallery from "react-image-gallery";
 import moment from "moment";
 import Axios from "axios";
@@ -18,6 +20,9 @@ export class index extends Component {
       eventImageUrl: "",
       profileImage: "",
       profileImageUrl: "",
+      rating: 0,
+      disabled: true,
+      userRating: [],
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
   }
@@ -88,6 +93,7 @@ export class index extends Component {
 
         this.getEventImageUrl();
         this.getProfileImage(this.state.userId);
+        this.getUserRating();
       })
       .catch((err) => console.log(err));
   };
@@ -126,6 +132,43 @@ export class index extends Component {
       .catch((err) => console.log(err));
   };
 
+  //   //   Post request to submit rating to DB
+  postRating = (event) => {
+    event.preventDefault();
+    const id = JSON.parse(localStorage.getItem("eventId")).id;
+    console.log(id);
+    Axios.post(`/api/rate/event`, {
+      rating: this.state.rating,
+      EventId: id,
+      UserId: this.state.userId,
+    })
+      .then((res) => {
+        console.log(res);
+        this.setState({ rating: "0", disabled: true });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  //   click method to change star value
+  onStarClick(nextValue) {
+    this.setState({ rating: nextValue, disabled: false });
+  }
+
+  getUserRating = () => {
+    Axios.get(`/api/rate/userprofile/${this.state.userId}`)
+      .then((res) => {
+        this.setState({ userRating: res.data });
+        console.log(this.state.userRating);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  starRating = () => {
+    this.state.userRating.map((data) => (
+      <StarRatingComponent name="rating" starCount={5} value={data.rating} />
+    ));
+  };
+
   render() {
     const scrollingContainer = {
       height: "800px",
@@ -146,6 +189,44 @@ export class index extends Component {
     const contactEmail = this.state.eventData.map((data) => data.contact_email);
     const contactNumber = this.state.eventData.map(
       (data) => data.contact_number
+    );
+
+    // Popover to display rating was posted
+    const popover = (
+      <Popover id="popover-basic">
+        <Popover.Title>Rating Posted!</Popover.Title>
+      </Popover>
+    );
+    // Variable to post star ratings
+    const postStarRating = (
+      <>
+        <div
+          class="card-profile-stats d-flex justify-content-center mt-md-5"
+          style={{ fontSize: "28px" }}
+        >
+          <StarRatingComponent
+            name="rating"
+            starCount={5}
+            value={this.state.rating}
+            onStarClick={this.onStarClick.bind(this)}
+          />
+        </div>
+        <OverlayTrigger
+          delay={{ show: 250, hide: 350 }}
+          placement="top"
+          overlay={popover}
+        >
+          <Button
+            disabled={this.state.disabled}
+            variant="primary"
+            size="sm"
+            className="float-center"
+            onClick={this.postRating}
+          >
+            Post Rating
+          </Button>
+        </OverlayTrigger>
+      </>
     );
 
     const images = [
@@ -348,6 +429,7 @@ export class index extends Component {
                           >
                             Save
                           </button>
+                          {postStarRating}
                         </div>
                       </form>
                     </div>
