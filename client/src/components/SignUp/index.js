@@ -133,23 +133,27 @@ export default class Register extends Component {
 
   renderConfirmationForm() {
     return (
+      <>
+        <div className="container mt-5 ">
+          <div className="row justify-content-center align-items-center">
+            <div className="col-md-6 border mt-2 shadow-lg p-3 mb-5 bg-white rounded">
+              <h6 className="text-center">Please check your email for the confirmation code.</h6>
+              <div className="col-md-12 mt-3">
+                <form onSubmit={this.handleConfirmationSubmit}>
+                  <div className="form-group input-group justify-content-center mt-2">
+                    <label htmlFor="confirmationCode" className="mr-1">Confirmation Code:</label>
+                    <input id="confirmationcode" name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} required />
+                  </div>
+                  <div className="form-group mx-auto text-center">
+                    <button type="submit" className="btn btn-primary btn-md">Submit</button>
+                  </div>
+                </form>
+              </div>
 
-      <div className="container mt-5">
-        <div className="row justify-content-center align-items-center">
-          <div className="col-md-7 border mt-2 shadow-lg p-3 mb-5 bg-white rounded">
-            <h3 className="font-weight-normal text-center mb-2">Please check your email for the code.</h3>
-            <form onSubmit={this.handleConfirmationSubmit}>
-              <div className="form-group input-group text-center">
-                <label htmlFor="confirmationCode" className="mr-2">Confirmation Code:</label>
-                <input id="confirmationcode" name="confirmationCode" type="tel" value={this.state.confirmationCode} onChange={this.handleInputChange} required />
-              </div>
-              <div className="form-group mx-auto text-center">
-                <button type="submit" className="btn btn-primary btn-md">Submit</button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
