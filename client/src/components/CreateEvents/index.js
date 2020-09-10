@@ -100,6 +100,8 @@ export class CreateEvents extends Component {
     const {
       history: { push },
     } = this.props;
+
+    event.preventDefault();
     // check Form validation
     this.clearErrorState();
     const error = Validate(event, this.state);
