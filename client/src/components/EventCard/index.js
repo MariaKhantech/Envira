@@ -71,8 +71,12 @@ export class index extends Component {
   }
 
   getEventData = () => {
-    const id = JSON.parse(localStorage.getItem("eventId")).id;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get("eventId");
+
     console.log(id);
+
     this.setState({ eventId: id });
 
     Axios.get(`/api/create/eventcreate`)
@@ -135,8 +139,9 @@ export class index extends Component {
   //   //   Post request to submit rating to DB
   postRating = (event) => {
     event.preventDefault();
-    const id = JSON.parse(localStorage.getItem("eventId")).id;
-    console.log(id);
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const id = urlParams.get("eventId");
     Axios.post(`/api/rate/event`, {
       rating: this.state.rating,
       EventId: id,
@@ -180,7 +185,9 @@ export class index extends Component {
     const address = this.state.eventData.map((data) => data.address);
     const city = this.state.eventData.map((data) => data.city);
     const eventState = this.state.eventData.map((data) => data.state);
-    const date = this.state.eventData.map((data) => data.date);
+    const date = this.state.eventData.map((data) =>
+      moment(data.date).format("dddd, MMMM Do YYYY")
+    );
 
     const website = this.state.eventData.map((data) => data.website);
     const contactPerson = this.state.eventData.map(
