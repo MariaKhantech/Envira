@@ -127,7 +127,7 @@ router.post('/updateCompanyProfile', (req, res) => {
     company_name: req.body.companyName,
     company_description: req.body.description,
     email: req.body.email,
-    website: req.body.website,
+    website: req.body.companyWebsite,
     contact_person: req.body.contactPersonName,
     environmental_focus: req.body.environmentalFocus,
     phone_number: req.body.phoneNumber,
@@ -137,6 +137,7 @@ router.post('/updateCompanyProfile', (req, res) => {
       res.json(data);
     })
     .catch((err) => {
+      console.log(err)
       if (err) {
         res.status(500).json(err.message);
       }
