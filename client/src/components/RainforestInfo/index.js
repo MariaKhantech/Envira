@@ -72,6 +72,16 @@ export class RainforestInfo extends Component {
 			/>
 		);
 
+		const videoStyle = {
+			position: 'relative',
+			inset: '0px',
+			width: '100%',
+			height: '1080px',
+			maxWidth: 'none',
+			maxHeight: 'none',
+			margin: '-250px 0px 0px'
+		};
+
 		return (
 			<div className="RainforestWrapper">
 				<div className="container-fluid entire-container">
@@ -251,14 +261,15 @@ export class RainforestInfo extends Component {
 					</section>
 
 					<Parallax bgImage={`${forestBackground}`} strength={500}>
-						<div style={{ height: 500 }}>
+					<div style={{ height: 600 }}>
 							<iframe
 								width="100%"
-								height="500"
-								src="https://www.youtube.com/embed/icgEDDrlR28?controls=0"
+								height="auto"
+								src="https://www.youtube.com/embed/icgEDDrlR28?autohide=1&amp;rel=0&amp;autoplay=0&amp;playsinline=1&amp;iv_load_policy=3&amp;modestbranding=1&amp;controls=0&amp;showinfo=0&amp;disablekb=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1"
 								frameborder="0"
-								allow="accelerometer; autoplay=1; encrypted-media; gyroscope;"
-								allowfullscreen
+								allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+								allowfullscreen='1'
+								style={videoStyle}
 							/>
 						</div>
 					</Parallax>
