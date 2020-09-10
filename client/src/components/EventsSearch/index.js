@@ -79,7 +79,7 @@ export default class EventsSearch extends Component {
     if (this.state.searchInput === "") {
       this.setState({
         showModal: true,
-        modalText: "Please Enter a search input!",
+        modalText: "Please enter a search input!",
       });
     } else {
       Axios.get("/api/create/eventcreate").then(
