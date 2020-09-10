@@ -16,7 +16,8 @@ export default class CompanyProfile extends Component {
 		companyPhoneNumber: '',
 		companyEmail: '',
 		imagePreviewUrl: '',
-		imageName: []
+		imageName: [],
+		totalEvent: ''
 	};
 
 	async componentDidMount() {
@@ -25,7 +26,7 @@ export default class CompanyProfile extends Component {
 			const user = await Auth.currentAuthenticatedUser();
 			// get username from user object
 			const userDetail = user.username;
-			console.log(userDetail);
+
 			// get the user details for logged in user from the User table
 			Axios.get(`/api/auth/user/${userDetail}`)
 				.then((response) => {
@@ -45,12 +46,11 @@ export default class CompanyProfile extends Component {
 		}
 	}
 
+	// get logged in compnay profile details
 	getCompanyProfile = () => {
 		const UserId = this.state.profile.id;
-		console.log(this.state.companyName);
 		Axios.get(`/api/auth/companyProfile/${UserId}`)
 			.then((response) => {
-				console.log(response.data);
 				this.setState({
 					companyName: response.data.company_name,
 					contactPersonName: response.data.contact_person,
@@ -64,7 +64,7 @@ export default class CompanyProfile extends Component {
 			.catch((err) => console.log(err));
 	};
 
-	// get logged in user info from EventAttendee model
+	// get logged in company info from EventAttendee model
 	getUserTotalEvent = () => {
 		const UserId = this.state.profile.id;
 		Axios.get(`/api/auth/userTotalEvent/${UserId}`)
@@ -76,26 +76,24 @@ export default class CompanyProfile extends Component {
 			.catch((err) => console.log(err));
 	};
 
+	// get logged in company profile image
 	getImage = () => {
 		const UserId = this.state.profile.id;
-		console.log(UserId);
 		Axios.get(`/api/auth/image/${UserId}`)
 			.then((response) => {
 				this.setState({
 					imageName: response.data
 				});
-				console.log(this.state.imageName);
 				this.getImageFromS3();
 			})
 			.catch((err) => console.log(err));
 	};
 
+	// get imag
 	getImageFromS3 = () => {
 		let fileName = this.state.imageName.image_name;
-		console.log(fileName);
 		Storage.get(fileName)
 			.then((data) => {
-				console.log(data);
 				this.setState({
 					imagePreviewUrl: data
 				});
@@ -130,7 +128,7 @@ export default class CompanyProfile extends Component {
 					<div className="container-fluid container-design d-flex align-items-center">
 						<div className="row">
 							<div className="col-lg-7 col-md-10">
-								<h1 className="h1-design h1-special display-2 text-dark mx-auto">Greta Thunburg</h1>
+								<h1 className="h1-design h1-special display-2 text-dark mx-auto">{this.state.profile.user_name}</h1>
 							</div>
 						</div>
 					</div>
@@ -367,6 +365,7 @@ export default class CompanyProfile extends Component {
 														<label class="label-design">Current Event:</label>
 													</div>
 													<div className="col-md-6">
+														{/* add code here */}
 														<p class="p-design">N/A</p>
 													</div>
 												</div>
@@ -375,7 +374,7 @@ export default class CompanyProfile extends Component {
 														<label class="label-design">Joined Events:</label>
 													</div>
 													<div className="col-md-6">
-														<p class="p-design">50</p>
+														<p class="p-design">{this.state.totalEvent.length}</p>
 													</div>
 												</div>
 											</div>
