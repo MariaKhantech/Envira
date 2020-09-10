@@ -54,72 +54,72 @@ export default class UserProfile extends Component {
 		}
 	}
 
-	// get logged in user info from UserProfile model
-	getUserProfile = () => {
-		const UserId = this.state.profile.id;
-		Axios.get(`/api/auth/userProfile/${UserId}`)
-			.then((response) => {
-				this.setState({
-					firstName: response.data.first_name,
-					lastName: response.data.last_name,
-					phoneNumber: response.data.phone_number,
-					city: response.data.city,
-					state: response.data.state,
-					about: response.data.about,
-					zipCode: response.data.zip_code,
-					occupation: response.data.occupation
-				});
-			})
-			.catch((err) => console.log(err));
-	};
+  // get logged in user info from UserProfile model
+  getUserProfile = () => {
+    const UserId = this.state.profile.id;
+    Axios.get(`/api/auth/userProfile/${UserId}`)
+      .then((response) => {
+        this.setState({
+          firstName: response.data.first_name,
+          lastName: response.data.last_name,
+          phoneNumber: response.data.phone_number,
+          city: response.data.city,
+          state: response.data.state,
+          about: response.data.about,
+          zipCode: response.data.zip_code,
+          occupation: response.data.occupation,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
 
-	// get logged in user info from EventAttendee model
-	getUserTotalEvent = () => {
-		const UserId = this.state.profile.id;
-		Axios.get(`/api/auth/userTotalEvent/${UserId}`)
-			.then((response) => {
-				this.setState({
-					totalEvent: response.data
-				});
-			})
-			.catch((err) => console.log(err));
-	};
+  // get logged in user info from EventAttendee model
+  getUserTotalEvent = () => {
+    const UserId = this.state.profile.id;
+    Axios.get(`/api/auth/userTotalEvent/${UserId}`)
+      .then((response) => {
+        this.setState({
+          totalEvent: response.data,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
 
-	getImage = () => {
-		const UserId = this.state.profile.id;
-		console.log(UserId);
-		Axios.get(`/api/auth/image/${UserId}`)
-			.then((response) => {
-				this.setState({
-					imageName: response.data
-				});
-				console.log(this.state.imageName);
-				this.getImageFromS3();
-			})
-			.catch((err) => console.log(err));
-	};
+  getImage = () => {
+    const UserId = this.state.profile.id;
+    console.log(UserId);
+    Axios.get(`/api/auth/image/${UserId}`)
+      .then((response) => {
+        this.setState({
+          imageName: response.data,
+        });
+        console.log(this.state.imageName);
+        this.getImageFromS3();
+      })
+      .catch((err) => console.log(err));
+  };
 
-	getImageFromS3 = () => {
-		let fileName = this.state.imageName.image_name;
-		console.log(fileName);
-		Storage.get(fileName)
-			.then((data) => {
-				console.log(data);
-				this.setState({
-					imagePreviewUrl: data
-				});
-			})
-			.catch((err) => console.log(err));
-	};
+  getImageFromS3 = () => {
+    let fileName = this.state.imageName.image_name;
+    console.log(fileName);
+    Storage.get(fileName)
+      .then((data) => {
+        console.log(data);
+        this.setState({
+          imagePreviewUrl: data,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
 
-	getUserRating = () => {
-		Axios.get(`/api/rate/userprofile/${this.state.profile.id}`)
-			.then((res) => {
-				this.setState({ userRating: res.data });
-				console.log(this.state.userRating);
-			})
-			.catch((err) => console.log(err));
-	};
+  getUserRating = () => {
+    Axios.get(`/api/rate/userprofile/${this.state.profile.id}`)
+      .then((res) => {
+        this.setState({ userRating: res.data });
+        console.log(this.state.userRating);
+      })
+      .catch((err) => console.log(err));
+  };
 
 	// get logged in user info from Event model
 	getUserEvents = () => {
@@ -383,114 +383,119 @@ export default class UserProfile extends Component {
 											<h3 className="mb-0">Profile</h3>
 										</div>
 
-										<div className="col-4 text-right">
-											<a
-												class="a-design"
-												href="edituserprofile"
-												className="btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary"
-											>
-												Edit Profile
-											</a>
-										</div>
-									</div>
-								</div>
-								{/* <!--reference https://bootsnipp.com/snippets/K0ZmK--> */}
-								<div className="card-body shadow-lg p-3">
-									<div className="col-md-8">
-										<div className="tab-content profile-tab" id="myTabContent">
-											<div
-												className="tab-pane fade show active"
-												id="home"
-												role="tabpanel"
-												aria-labelledby="home-tab"
-											>
-												<div className="row">
-													<div className="col-md-6">
-														<label class="label-design">User Name:</label>
-													</div>
-													<div className="col-md-6">
-														<p class="p-design">{this.state.profile.user_name}</p>
-													</div>
-												</div>
-												<div className="row">
-													<div className="col-md-6">
-														<label class="label-design">Name:</label>
-													</div>
-													<div className="col-md-6">
-														<p class="p-design">
-															{this.state.firstName} {this.state.lastName}
-														</p>
-													</div>
-												</div>
-												<div className="row">
-													<div className="col-md-6">
-														<label class="label-design">Email:</label>
-													</div>
-													<div className="col-md-6">
-														<p class="p-design">{this.state.profile.email}</p>
-													</div>
-												</div>
-												<div className="row">
-													<div className="col-md-6">
-														<label class="label-design">Phone:</label>
-													</div>
-													<div className="col-md-6">
-														<p class="p-design">{this.state.phoneNumber}</p>
-													</div>
-												</div>
-												<div className="row">
-													<div className="col-md-6">
-														<label class="label-design">Location:</label>
-													</div>
-													<div className="col-md-6">
-														<p class="p-design">
-															{this.state.state} {this.state.city} {this.state.zipCode}
-														</p>
-													</div>
-												</div>
-												<div className="row">
-													<div className="col-md-6">
-														<label class="label-design">Current Event:</label>
-													</div>
-													<div className="col-md-6">
-														<p class="p-design">N/A</p>
-													</div>
-												</div>
-												<div className="row">
-													<div className="col-md-6">
-														<label class="label-design">Joined Events:</label>
-													</div>
-													<div className="col-md-6">
-														<p class="p-design">{this.state.totalEvent.length}</p>
-													</div>
-												</div>
-											</div>
+                    <div className="col-4 text-right">
+                      <a
+                        class="a-design"
+                        href="edituserprofile"
+                        className="btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary"
+                      >
+                        Edit Profile
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                {/* <!--reference https://bootsnipp.com/snippets/K0ZmK--> */}
+                <div className="card-body shadow-lg p-3">
+                  <div className="col-md-8">
+                    <div className="tab-content profile-tab" id="myTabContent">
+                      <div
+                        className="tab-pane fade show active"
+                        id="home"
+                        role="tabpanel"
+                        aria-labelledby="home-tab"
+                      >
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label class="label-design">User Name:</label>
+                          </div>
+                          <div className="col-md-6">
+                            <p class="p-design">
+                              {this.state.profile.user_name}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label class="label-design">Name:</label>
+                          </div>
+                          <div className="col-md-6">
+                            <p class="p-design">
+                              {this.state.firstName} {this.state.lastName}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label class="label-design">Email:</label>
+                          </div>
+                          <div className="col-md-6">
+                            <p class="p-design">{this.state.profile.email}</p>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label class="label-design">Phone:</label>
+                          </div>
+                          <div className="col-md-6">
+                            <p class="p-design">{this.state.phoneNumber}</p>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label class="label-design">Location:</label>
+                          </div>
+                          <div className="col-md-6">
+                            <p class="p-design">
+                              {this.state.state} {this.state.city}{" "}
+                              {this.state.zipCode}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label class="label-design">Current Event:</label>
+                          </div>
+                          <div className="col-md-6">
+                            <p class="p-design">N/A</p>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label class="label-design">Joined Events:</label>
+                          </div>
+                          <div className="col-md-6">
+                            <p class="p-design">
+                              {this.state.totalEvent.length}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
 
-											<hr className="my-4" />
-											{/* <!-- Description --> */}
-											<form>
-												{/* <h6 className="heading-small text-muted mb-4">About me</h6> */}
-												<div className="pl-lg-4">
-													<div className="form-group focused">
-														<label>About Me</label>
-														<textarea
-															rows="4"
-															className="form-control form-control-alternative"
-															value={this.state.about}
-															readOnly
-														/>
-													</div>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+                      <hr className="my-4" />
+                      {/* <!-- Description --> */}
+                      <form>
+                        {/* <h6 className="heading-small text-muted mb-4">About me</h6> */}
+                        <div className="pl-lg-4">
+                          <div className="form-group focused">
+                            <label>About Me</label>
+                            <textarea
+                              rows="4"
+                              className="form-control form-control-alternative"
+                              value={this.state.about}
+                              readOnly
+                            />
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-				{/* <footer className="footer">
+        {/* <footer className="footer">
         <div className="row align-items-center justify-content-xl-between">
           <div className="col-xl-6 m-auto text-center">
 
@@ -498,7 +503,7 @@ export default class UserProfile extends Component {
         </div>
 
       </footer> */}
-			</div>
-		);
-	}
+      </div>
+    );
+  }
 }

@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ForgotPasswordVerification from "./components/auth/ForgotPasswordVerification";
-import ChangePassword from "./components/auth/ChangePassword";
 import ChangePasswordConfirm from "./components/auth/ChangePasswordConfirm";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
@@ -196,13 +195,6 @@ export default class AppTest extends Component {
                     path="/forgotpasswordverification"
                     render={(props) => (
                       <ForgotPasswordVerification {...props} auth={authProps} />
-                    )}
-                  />
-                  <Route
-                    exact
-                    path="/changepassword"
-                    render={(props) => (
-                      <ChangePassword {...props} auth={authProps} />
                     )}
                   />
                   <Route

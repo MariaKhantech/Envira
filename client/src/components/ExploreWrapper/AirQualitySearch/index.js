@@ -43,7 +43,7 @@ export default class AirQualitySearch extends Component {
     event.preventDefault();
 
     Axios.get(
-      `https://api.waqi.info/feed/${this.state.cityInput}/?token=e76fff504230a5ff145917055b7138ef3159918d`
+      `https://api.waqi.info/feed/${this.state.cityInput}/?token=e6e31a62a9defccb8a38e8f3b7defd42e8d929c6`
     ).then(
       (response) => {
         this.setState({
@@ -172,6 +172,7 @@ export default class AirQualitySearch extends Component {
               </Button>
             </InputGroup.Append>
           </InputGroup>
+
           <Col md={12} id="wrapper" className="p-4 mb-3">
             <Container fluid className="px-1 px-md-4 py-5 mx-auto">
               <Fade in={this.state.open}>

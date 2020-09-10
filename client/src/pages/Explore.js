@@ -5,10 +5,6 @@ import ExploreWrapper from "../components/ExploreWrapper/index";
 // Change to get explore page on maria's branch
 export default class Explore extends Component {
   render() {
-    return (
-      <Container>
-        <ExploreWrapper />
-      </Container>
-    );
+    return <ExploreWrapper />;
   }
 }

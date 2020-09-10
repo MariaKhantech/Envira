@@ -16,7 +16,14 @@ import "./search.css";
 
 export default class Search extends Component {
   render() {
-    const { filter, disabled, searchInput } = this.props.state;
+    const {
+      filter,
+      href,
+      buttonDisabled,
+      searchDisabled,
+      alertTip,
+      searchInput,
+    } = this.props.state;
     const {
       handleFilterOption,
       onChange,
@@ -26,7 +33,7 @@ export default class Search extends Component {
 
     return (
       <Row>
-        <Col md={6} className="mx-auto mt-5">
+        <Col md={8} className="mx-auto mt-5">
           <InputGroup>
             <InputGroup.Prepend>
               <DropdownButton
@@ -62,7 +69,7 @@ export default class Search extends Component {
               name="searchInput"
               value={searchInput}
               onChange={onChange}
-              disabled={disabled}
+              disabled={searchDisabled}
             />
             <InputGroup.Append>
               <Button
@@ -77,16 +84,25 @@ export default class Search extends Component {
               <ReactTooltip id="searchTip" place="top" effect="solid">
                 Search
               </ReactTooltip>
-              <Button
-                data-tip
-                data-for="addTip"
-                id="addEvent"
-                href="/eventCreate"
-              >
-                <i className="fa fa-plus" style={{ marginTop: "7px" }}></i>
+
+              <Button disabled={buttonDisabled} id="addEvent">
+                <a
+                  style={{ textDecoration: "none", color: "#fff" }}
+                  data-tip
+                  data-for="alertTip"
+                  href={href}
+                >
+                  Create New Event
+                </a>
               </Button>
-              <ReactTooltip id="addTip" place="top" effect="solid">
-                Add new event
+
+              <ReactTooltip
+                disable={alertTip}
+                id="alertTip"
+                place="top"
+                effect="solid"
+              >
+                Please login to create an event
               </ReactTooltip>
             </InputGroup.Append>
           </InputGroup>

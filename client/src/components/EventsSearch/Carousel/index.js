@@ -1,26 +1,20 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import moment from "moment";
-import { Storage } from "aws-amplify";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 import "./carousel.css";
 
 export default class Carousel extends Component {
   render() {
-    const { handleViewEvent } = this.props;
-
-    const image = this.props.state.imagePreviewUrl.map((data, i) => (
-      <img alt="image" src={data} key={i} />
-    ));
-
     const renderCard = this.props.state.eventData.map((data) => (
       <div id="contact-box">
         <img
           alt="image"
           className="img-fluid mx-auto"
           style={{ borderRadius: "10px" }}
-          // src={}
+          src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${data.image}`}
         />
         <h3 className="mx-auto text-center mt-2" name="event">
           <strong>{data.event_name}</strong>
@@ -49,16 +43,19 @@ export default class Carousel extends Component {
               {data.city}
               <i className="ml-1 fa fa-map-pin"></i>
             </small>
-            <Button
-              size="sm"
-              className="float-right"
-              key={data.id}
-              value={data.id}
-              onClick={handleViewEvent}
-              style={{ backgroundColor: "#c38d9e", border: "none" }}
+            <Link
+              to={{ pathname: "/eventspage", search: `?eventId=${data.id}` }}
             >
-              View
-            </Button>
+              <Button
+                size="sm"
+                className="float-right"
+                key={data.id}
+                value={data.id}
+                style={{ backgroundColor: "#c38d9e", border: "none" }}
+              >
+                View
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -75,7 +72,6 @@ export default class Carousel extends Component {
 
     return (
       <Slider className="d-flex justify-content-center" {...carouselSettings}>
-        {image}
         {renderCard}
       </Slider>
     );
