@@ -13,7 +13,8 @@ export default class EventsSearch extends Component {
     profile: [],
     href: "/eventcreate",
     filter: "Filter",
-    alertTip: true,
+    alertTip1: true,
+    alertTip2: true,
     buttonDisabled: false,
     searchDisabled: true,
     searchInput: "",
@@ -44,7 +45,12 @@ export default class EventsSearch extends Component {
     } catch (error) {
       if (error !== "No current user") {
         console.log(error);
-        this.setState({ buttonDisabled: true, alertTip: false, href: "#" });
+        this.setState({
+          buttonDisabled: true,
+          alertTip1: false,
+          alertTip2: false,
+          href: "#",
+        });
       }
     }
   }
@@ -58,58 +64,62 @@ export default class EventsSearch extends Component {
 
   handleFilterSubmit = (event) => {
     event.preventDefault();
-    Axios.get("/api/create/eventcreate").then(
-      (response) => {
-        this.setState({
-          eventData: response.data,
-          madeRequest: true,
-        });
-
-        if (
-          this.state.filter === "Location" &&
-          this.state.madeRequest === true
-        ) {
-          const filteredLocation = this.state.eventData.filter(
-            (detail) => detail.city === this.state.searchInput
-          );
+    if (this.state.searchInput === "") {
+      alert("Enter INput");
+    } else {
+      Axios.get("/api/create/eventcreate").then(
+        (response) => {
           this.setState({
-            eventData: filteredLocation,
+            eventData: response.data,
+            madeRequest: true,
+          });
 
-            introTitle: "",
-            introText: "",
-            showCarousel: true,
-            slidesToShow: filteredLocation.length,
-            slidesToScroll: filteredLocation.length,
-            madeRequest: false,
-            searchInput: "",
-          });
-        }
-        if (
-          this.state.filter === "Event Name" &&
-          this.state.madeRequest === true
-        ) {
-          const filteredEv = this.state.eventData.filter(
-            (detail) => detail.event_name === this.state.searchInput
-          );
+          if (
+            this.state.filter === "Location" &&
+            this.state.madeRequest === true
+          ) {
+            const filteredLocation = this.state.eventData.filter(
+              (detail) => detail.city === this.state.searchInput
+            );
+            this.setState({
+              eventData: filteredLocation,
+
+              introTitle: "",
+              introText: "",
+              showCarousel: true,
+              slidesToShow: filteredLocation.length,
+              slidesToScroll: filteredLocation.length,
+              madeRequest: false,
+              searchInput: "",
+            });
+          }
+          if (
+            this.state.filter === "Event Name" &&
+            this.state.madeRequest === true
+          ) {
+            const filteredEv = this.state.eventData.filter(
+              (detail) => detail.event_name === this.state.searchInput
+            );
+            this.setState({
+              eventData: filteredEv,
+              showCarousel: true,
+              introTitle: "",
+              introText: "",
+              slidesToShow: filteredEv.length,
+              slidesToScroll: filteredEv.length,
+              madeRequest: false,
+              searchInput: "",
+            });
+          }
+        },
+        (error) => {
           this.setState({
-            eventData: filteredEv,
-            showCarousel: true,
-            introTitle: "",
-            introText: "",
-            slidesToShow: filteredEv.length,
-            slidesToScroll: filteredEv.length,
-            madeRequest: false,
-            searchInput: "",
+            error,
           });
-        }
-      },
-      (error) => {
-        this.setState({
-          error,
-        });
-      },
-      this.setState({ madeRequest: false, showCarousel: false, open: false })
-    );
+        },
+        this.setState({ madeRequest: false, showCarousel: false, open: false })
+      );
+    }
   };
 
   handleShowAll = (event) => {

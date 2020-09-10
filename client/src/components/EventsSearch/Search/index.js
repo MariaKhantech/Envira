@@ -21,7 +21,8 @@ export default class Search extends Component {
       href,
       buttonDisabled,
       searchDisabled,
-      alertTip,
+      alertTip1,
+      alertTip2,
       searchInput,
     } = this.props.state;
     const {
@@ -37,10 +38,11 @@ export default class Search extends Component {
           <InputGroup>
             <InputGroup.Prepend>
               <DropdownButton
+                disabled={buttonDisabled}
                 title={filter}
                 id="dropdown"
                 data-tip
-                data-for="filterTip"
+                data-for="alertTip1"
               >
                 <Dropdown.Item onClick={handleFilterOption}>
                   Event Name
@@ -59,8 +61,13 @@ export default class Search extends Component {
                 </Dropdown.Item>
               </DropdownButton>
 
-              <ReactTooltip id="filterTip" place="top" effect="solid">
-                Select a Filter
+              <ReactTooltip
+                disable={alertTip1}
+                id="alertTip1"
+                place="top"
+                effect="solid"
+              >
+                Please login to search for an event
               </ReactTooltip>
             </InputGroup.Prepend>
             <FormControl
@@ -73,23 +80,19 @@ export default class Search extends Component {
             />
             <InputGroup.Append>
               <Button
+                disabled={buttonDisabled}
                 onClick={handleFilterSubmit}
                 style={{ backgroundColor: "#c38d9e", border: "none" }}
                 id="search"
-                data-tip
-                data-for="searchTip"
               >
                 <i className="fa fa-search"></i>
               </Button>
-              <ReactTooltip id="searchTip" place="top" effect="solid">
-                Search
-              </ReactTooltip>
 
               <Button disabled={buttonDisabled} id="addEvent">
                 <a
                   style={{ textDecoration: "none", color: "#fff" }}
                   data-tip
-                  data-for="alertTip"
+                  data-for="alertTip2"
                   href={href}
                 >
                   Create New Event
@@ -97,8 +100,8 @@ export default class Search extends Component {
               </Button>
 
               <ReactTooltip
-                disable={alertTip}
-                id="alertTip"
+                disable={alertTip2}
+                id="alertTip2"
                 place="top"
                 effect="solid"
               >
