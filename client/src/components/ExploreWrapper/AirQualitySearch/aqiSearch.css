@@ -5,6 +5,11 @@
   padding: 0px;
 }
 
+#searchCol {
+  background-color: #ececec;
+  border-bottom: 3px solid #e27d60;
+}
+
 #title {
   color: #32325d;
   background-color: #ececec;

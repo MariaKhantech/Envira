@@ -22,27 +22,35 @@ export default class ExploreWrapper extends Component {
   render() {
     return (
       <>
-        <Jumbotron id="jumbo">
+        <Jumbotron id="jumbo2">
           <Container fluid>
             <h1 class="display-4 text-white">Pollution Information</h1>
           </Container>
         </Jumbotron>
         <Row>
-          <Col md={8} className="mx-auto mt-2" id="tabs">
+          <Col md={8} className="mx-auto mt-2 mb-5" id="searchCol">
             <Tabs
               activeKey={this.state.activeTab}
               fill
-              className="justify-content-center"
+              className="justify-content-center pollutionTabs"
               onSelect={this.handleSelect}
               id="aqi"
             >
-              <Tab eventKey={1} title="Air Quality Index Search">
+              <Tab
+                eventKey={1}
+                title="Air Quality Index Search"
+                className="pollutionTabs"
+              >
                 <AirQualitySearch />
               </Tab>
-              <Tab eventKey={2} title="EPA Information">
+              <Tab
+                eventKey={2}
+                title="EPA Information"
+                className="pollutionTabs"
+              >
                 <EpaInfo />
               </Tab>
-              <Tab eventKey={3} title="Articles">
+              <Tab eventKey={3} title="Articles" className="pollutionTabs">
                 <Articles />
               </Tab>
             </Tabs>
