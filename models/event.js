@@ -47,9 +47,6 @@ module.exports = (sequelize, DataTypes) => {
     contact_number: {
       type: DataTypes.STRING,
       unique: false,
-      // validate: {
-      //   is: /^ (\+ 0 ? 1\s) ?\(?\d{ 3 } \)?[\s.-]\d{ 3 } [\s.-]\d{ 4 } $/i
-      // }
     },
     image: {
       type: DataTypes.STRING,
@@ -57,10 +54,6 @@ module.exports = (sequelize, DataTypes) => {
       unique: false,
     },
   });
-
-  // one user can create many events....one to many relationship
-  // We're saying that an Event should belong to an User
-  // An Event can't be created without an User due to the foreign key constraint
 
   Event.associate = (models) => {
     Event.belongsTo(models.User, { foreignKey: { allowNull: false } });
@@ -74,28 +67,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  // Event.associate = (models) => {
-  //   Event.belongsTo(models.User, {
-  //      foreignKey: {
-  //       allowNull: false,
-  //     },
-  //   });
-  // };
-
-  // // An event can have many comments.....one to many relationship
-  // // Associating event with comments
-  // // When an event is deleted, also delete any associated comments
-  // // An event can have many comments
-  // Event.associate = (models) => {
-  //   Event.hasMany(models.EventComment, {
-  //     onDelete: 'cascade',
-  //   });
-  // };
-  // // When an event is deleted, also delete any associated reply
-  // Event.associate = (models) => {
-  //   Event.hasMany(models.Reply, {
-  //     onDelete: 'cascade',
-  //   });
-  // };
   return Event;
 };
