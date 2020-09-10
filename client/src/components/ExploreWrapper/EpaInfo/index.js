@@ -9,12 +9,12 @@ export default class EpaInfo extends Component {
   render() {
     return (
       <Row>
-        <Col md={12} id="wrapper" className="mx-auto mt-3">
-          <Row>
-            <Col id="title" md={12}>
-              <h2 className="text-center">EPA Envirofact Tools</h2>
-            </Col>
-          </Row>
+        {/* <Row>
+          <Col id="title" md={12}>
+            <h2 className="text-center">EPA Envirofact Tools</h2>
+          </Col>
+        </Row> */}
+        <Col md={12} id="wrapper" className="mx-auto mt-3 mb-3">
           <Row className="mx-auto mt-3" id="tileRow">
             <Col
               sm={12}

@@ -3,7 +3,9 @@ import AirQualitySearch from "./AirQualitySearch/index";
 import EpaInfo from "./EpaInfo/index";
 import Articles from "./Articles/index";
 
-import { Row, Col, Tabs, Tab } from "react-bootstrap";
+import { Row, Col, Tabs, Tab, Jumbotron, Container } from "react-bootstrap";
+
+import "./exploreWrapper.css";
 
 export default class ExploreWrapper extends Component {
   constructor(props) {
@@ -19,27 +21,34 @@ export default class ExploreWrapper extends Component {
 
   render() {
     return (
-      <Row>
-        <Col md={8} className="mx-auto mt-5">
-          <Tabs
-            activeKey={this.state.activeTab}
-            fill
-            className="justify-content-center"
-            onSelect={this.handleSelect}
-            id="aqi"
-          >
-            <Tab eventKey={1} title="Air Quality Index Search">
-              <AirQualitySearch />
-            </Tab>
-            <Tab eventKey={2} title="EPA Information">
-              <EpaInfo />
-            </Tab>
-            <Tab eventKey={3} title="Articles">
-              <Articles />
-            </Tab>
-          </Tabs>
-        </Col>
-      </Row>
+      <>
+        <Jumbotron id="jumbo">
+          <Container fluid>
+            <h1 class="display-4 text-white">Pollution Information</h1>
+          </Container>
+        </Jumbotron>
+        <Row>
+          <Col md={8} className="mx-auto mt-2" id="tabs">
+            <Tabs
+              activeKey={this.state.activeTab}
+              fill
+              className="justify-content-center"
+              onSelect={this.handleSelect}
+              id="aqi"
+            >
+              <Tab eventKey={1} title="Air Quality Index Search">
+                <AirQualitySearch />
+              </Tab>
+              <Tab eventKey={2} title="EPA Information">
+                <EpaInfo />
+              </Tab>
+              <Tab eventKey={3} title="Articles">
+                <Articles />
+              </Tab>
+            </Tabs>
+          </Col>
+        </Row>
+      </>
     );
   }
 
