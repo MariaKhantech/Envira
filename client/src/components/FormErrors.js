@@ -15,10 +15,10 @@ function FormErrors(props) {
                 <div className="row justify-content-center text-danger">
                     {props.formerrors.blankfield ? "All fields are required" : ""}
                 </div>
-                <div className="row text-danger">
+                <div className="row justify-content-center text-danger">
                     {props.formerrors.phonenumber ? "Please enter correct phone number" : ""}
                 </div>
-                <div className="row text-danger">
+                <div className="row justify-content-center text-danger">
                     {props.formerrors.website ? "Please enter correct website" : ""}
                 </div>
             </div>

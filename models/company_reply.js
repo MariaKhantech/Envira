@@ -20,16 +20,5 @@ module.exports = (sequelize, DataTypes) => {
   };
 
 
-  // define relationship between user and comment
-  // A user can post many comments
-  // CompanyReply.associate = (models) => {
-  //   CompanyReply.belongsTo(models.User, {
-  //     foreignKey: {
-  //       allowNull: false,
-  //     },
-  //   });
-  // };
-
-
   return CompanyReply;
 };

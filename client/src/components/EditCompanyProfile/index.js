@@ -18,7 +18,8 @@ export default class UpdateProfile extends Component {
         data: "",
         errors: {
             blankfield: false,
-            phonenumber: false
+            phonenumber: false,
+            website:false
         }
     }
 
@@ -194,7 +195,7 @@ export default class UpdateProfile extends Component {
                                         <input id="contactperson" name="contactPersonName" type="text" className="form-control" placeholder="contact person" value={this.state.contactPersonName} onChange={this.handleInputChange} />
                                     </div>
                                     <div className="col-md-6">
-                                        <label className="labels">companyWebsite</label>
+                                        <label className="labels">Website</label>
                                         <input id="companywebsite" name="companyWebsite" type="url" className="form-control" placeholder="companywebsite" value={this.state.companyWebsite} onChange={this.handleInputChange} />
                                     </div>
                                 </div>
