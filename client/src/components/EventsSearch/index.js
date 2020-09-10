@@ -4,7 +4,15 @@ import Axios from "axios";
 import Search from "./Search/index";
 import Carousel from "./Carousel/index";
 
-import { Row, Col, Modal, Button, Jumbotron, Container } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Modal,
+  Button,
+  Jumbotron,
+  Container,
+  Card,
+} from "react-bootstrap";
 
 import "./eventSearch.css";
 
@@ -18,12 +26,10 @@ export default class EventsSearch extends Component {
     buttonDisabled: false,
     searchDisabled: true,
     searchInput: "",
-    introTitle: "Find and event",
-    introText:
-      " Select a filter using the filter drop down above to search for an event by city, location, event name, or conversely select 'Show All Events'",
     showModal: false,
     modalText: "",
     showCarousel: false,
+    showIntroCard: true,
     slidesToShow: 3,
     slidesToScroll: 3,
     eventData: [],
@@ -74,9 +80,6 @@ export default class EventsSearch extends Component {
       this.setState({
         showModal: true,
         modalText: "Please Enter a search input!",
-        introTitle: "Find and event",
-        introText:
-          " Select a filter using the filter drop down above to search for an event by city, location, event name, or conversely select 'Show All Events'",
       });
     } else {
       Axios.get("/api/create/eventcreate").then(
@@ -99,15 +102,12 @@ export default class EventsSearch extends Component {
                 showModal: true,
                 modalText: `No results found for ${this.state.searchInput}, please enter a valid location and try again`,
                 searchInput: "",
-                introTitle: "Find and event",
-                introText:
-                  " Select a filter using the filter drop down above to search for an event by city, location, event name, or conversely select 'Show All Events'",
+                showIntroCard: true,
               });
             } else {
               this.setState({
                 eventData: filteredLocation,
-                introTitle: "",
-                introText: "",
+                showIntroCard: false,
                 showCarousel: true,
                 slidesToShow: filteredLocation.length,
                 slidesToScroll: filteredLocation.length,
@@ -127,18 +127,15 @@ export default class EventsSearch extends Component {
               this.setState({
                 madeRequest: false,
                 showModal: true,
+                showIntroCard: true,
                 modalText: `No results found for ${this.state.searchInput}, please enter a valid event name and try again`,
                 searchInput: "",
-                introTitle: "Find and event",
-                introText:
-                  " Select a filter using the filter drop down above to search for an event by city, location, event name, or conversely select 'Show All Events'",
               });
             } else {
               this.setState({
                 eventData: filteredEv,
+                showIntroCard: false,
                 showCarousel: true,
-                introTitle: "",
-                introText: "",
                 slidesToShow: filteredEv.length,
                 slidesToScroll: filteredEv.length,
                 madeRequest: false,
@@ -165,38 +162,95 @@ export default class EventsSearch extends Component {
           eventData: response.data,
           madeRequest: true,
         });
+
+        if (this.state.eventData == "") {
+          this.setState({
+            showModal: true,
+            modalText: `No events to show at this time!`,
+            searchInput: "",
+            showIntroCard: true,
+          });
+        } else {
+          this.setState({
+            introTitle: "",
+            introText: "",
+            showIntroCard: false,
+            showCarousel: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            madeRequest: false,
+          });
+        }
       },
       (error) => {
         this.setState({
           error,
         });
-      },
-      this.setState({ madeRequest: false })
+      }
     );
-    if (this.state.eventData == "") {
-      this.setState({
-        showModal: true,
-        modalText: `No events to show at this time!`,
-        searchInput: "",
-        introTitle: "Find and event",
-        introText:
-          " Select a filter using the filter drop down above to search for an event by city, location, event name, or conversely select 'Show All Events'",
-      });
-    } else {
-      this.setState({
-        introTitle: "",
-        introText: "",
-        showCarousel: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      });
-    }
   };
 
   render() {
     let renderCarousel = null;
+    let renderIntroCard = (
+      <Row>
+        <Col md={8} className="mx-auto mt-3 mb-3">
+          <Card className="mx-auto" id="introCard">
+            <Card.Header id="introCardHeader">
+              <Card.Title
+                className="text-center mt-2"
+                style={{ fontSize: "28px" }}
+              >
+                How to Use Event Search
+              </Card.Title>
+            </Card.Header>
+            <Card.Body>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item" id="searchIns">
+                  Select the <strong>"Filter"</strong> dropdown located next to
+                  the search bar
+                </li>
+                <li className="list-group-item" id="searchIns">
+                  To browse by event name select <strong>"Event Name"</strong>,
+                  enter the name of the event you wish to view in the search
+                  bar, and then select the search button
+                </li>
+                <li className="list-group-item" id="searchIns">
+                  To browse by location select <strong>"Location"</strong>,
+                  enter the name of a city in the search bar, and then select
+                  the search button
+                </li>
+                <li className="list-group-item" id="searchIns">
+                  To browse all events select <strong>"Show All Events"</strong>
+                  and all events will be displayed
+                </li>
+              </ul>
+
+              <ul className="list-group list-group-flush mt-2">
+                <li className="list-group-item" id="otherIns">
+                  When you find an event you are interested in finding out more
+                  information on select the <strong>"View"</strong> button
+                  located on the event preview card and you will be redirected
+                  to the event's full page.
+                </li>
+                <li className="list-group-item" id="otherIns">
+                  If you wish to create an event select the
+                  <strong>"Create New Event"</strong> button and you will be
+                  directed to the "event create page";
+                </li>
+              </ul>
+            </Card.Body>
+            <Card.Footer id="introCardFooter" className="text-body text-center">
+              Please note: You must be logged in to search and create events!
+            </Card.Footer>
+          </Card>
+        </Col>
+      </Row>
+    );
+
     if (this.state.showCarousel === true) {
       renderCarousel = <Carousel state={this.state} />;
+      renderIntroCard = null;
     } else if (this.state.showCarousel === "") {
       renderCarousel = null;
     }
@@ -219,11 +273,8 @@ export default class EventsSearch extends Component {
         />
 
         <Row>
-          <Col md={9} id="carouselWrap" className="mx-auto mt-3">
-            <div>
-              <h1 className="text-center">{this.state.introTitle}</h1>
-              <p>{this.state.introText}</p>
-            </div>
+          <Col md={9} id="carouselWrap" className="mx-auto mt-3 mb-5">
+            {renderIntroCard}
             {renderCarousel}
           </Col>
         </Row>
