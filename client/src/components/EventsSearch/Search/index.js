@@ -34,7 +34,7 @@ export default class Search extends Component {
 
     return (
       <Row>
-        <Col md={8} className="mx-auto mt-5">
+        <Col md={9} className="mx-auto mt-2">
           <InputGroup>
             <InputGroup.Prepend>
               <DropdownButton

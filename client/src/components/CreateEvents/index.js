@@ -102,11 +102,14 @@ export class CreateEvents extends Component {
     Axios.get(`/api/create/eventcreate`)
       .then((response) => {
         this.setState({ eventData: response.data });
-        const mapId = this.state.eventData.map((data) => data.id);
-        const lastId = mapId[mapId.length - 1];
-        const newId = lastId + 1;
-        this.setState({ newEventId: newId });
-
+        if (this.state.eventData == "") {
+          this.setState({ newEventId: 1 });
+        } else {
+          const mapId = this.state.eventData.map((data) => data.id);
+          const lastId = mapId[mapId.length - 1];
+          const newId = lastId + 1;
+          this.setState({ newEventId: newId });
+        }
         console.log(this.state.newEventId);
       })
       .catch((err) => console.log(err));

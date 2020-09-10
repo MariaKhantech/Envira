@@ -4,7 +4,7 @@ import Axios from "axios";
 import Search from "./Search/index";
 import Carousel from "./Carousel/index";
 
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Modal, Button, Jumbotron, Container } from "react-bootstrap";
 
 import "./eventSearch.css";
 
@@ -21,6 +21,8 @@ export default class EventsSearch extends Component {
     introTitle: "Find and event",
     introText:
       " Select a filter using the filter drop down above to search for an event by city, location, event name, or conversely select 'Show All Events'",
+    showModal: false,
+    modalText: "",
     showCarousel: false,
     slidesToShow: 3,
     slidesToScroll: 3,
@@ -62,10 +64,20 @@ export default class EventsSearch extends Component {
     this.setState({ filter: event.target.innerHTML, searchDisabled: false });
   };
 
+  handleCloseModal = () => {
+    this.setState({ showModal: false });
+  };
+
   handleFilterSubmit = (event) => {
     event.preventDefault();
     if (this.state.searchInput === "") {
-      alert("Enter INput");
+      this.setState({
+        showModal: true,
+        modalText: "Please Enter a search input!",
+        introTitle: "Find and event",
+        introText:
+          " Select a filter using the filter drop down above to search for an event by city, location, event name, or conversely select 'Show All Events'",
+      });
     } else {
       Axios.get("/api/create/eventcreate").then(
         (response) => {
@@ -81,17 +93,28 @@ export default class EventsSearch extends Component {
             const filteredLocation = this.state.eventData.filter(
               (detail) => detail.city === this.state.searchInput
             );
-            this.setState({
-              eventData: filteredLocation,
-
-              introTitle: "",
-              introText: "",
-              showCarousel: true,
-              slidesToShow: filteredLocation.length,
-              slidesToScroll: filteredLocation.length,
-              madeRequest: false,
-              searchInput: "",
-            });
+            if (filteredLocation == "") {
+              this.setState({
+                madeRequest: false,
+                showModal: true,
+                modalText: `No results found for ${this.state.searchInput}, please enter a valid location and try again`,
+                searchInput: "",
+                introTitle: "Find and event",
+                introText:
+                  " Select a filter using the filter drop down above to search for an event by city, location, event name, or conversely select 'Show All Events'",
+              });
+            } else {
+              this.setState({
+                eventData: filteredLocation,
+                introTitle: "",
+                introText: "",
+                showCarousel: true,
+                slidesToShow: filteredLocation.length,
+                slidesToScroll: filteredLocation.length,
+                madeRequest: false,
+                searchInput: "",
+              });
+            }
           }
           if (
             this.state.filter === "Event Name" &&
@@ -100,16 +123,28 @@ export default class EventsSearch extends Component {
             const filteredEv = this.state.eventData.filter(
               (detail) => detail.event_name === this.state.searchInput
             );
-            this.setState({
-              eventData: filteredEv,
-              showCarousel: true,
-              introTitle: "",
-              introText: "",
-              slidesToShow: filteredEv.length,
-              slidesToScroll: filteredEv.length,
-              madeRequest: false,
-              searchInput: "",
-            });
+            if (filteredEv == "") {
+              this.setState({
+                madeRequest: false,
+                showModal: true,
+                modalText: `No results found for ${this.state.searchInput}, please enter a valid event name and try again`,
+                searchInput: "",
+                introTitle: "Find and event",
+                introText:
+                  " Select a filter using the filter drop down above to search for an event by city, location, event name, or conversely select 'Show All Events'",
+              });
+            } else {
+              this.setState({
+                eventData: filteredEv,
+                showCarousel: true,
+                introTitle: "",
+                introText: "",
+                slidesToShow: filteredEv.length,
+                slidesToScroll: filteredEv.length,
+                madeRequest: false,
+                searchInput: "",
+              });
+            }
           }
         },
         (error) => {
@@ -138,13 +173,24 @@ export default class EventsSearch extends Component {
       },
       this.setState({ madeRequest: false })
     );
-    this.setState({
-      introTitle: "",
-      introText: "",
-      showCarousel: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    });
+    if (this.state.eventData == "") {
+      this.setState({
+        showModal: true,
+        modalText: `No events to show at this time!`,
+        searchInput: "",
+        introTitle: "Find and event",
+        introText:
+          " Select a filter using the filter drop down above to search for an event by city, location, event name, or conversely select 'Show All Events'",
+      });
+    } else {
+      this.setState({
+        introTitle: "",
+        introText: "",
+        showCarousel: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      });
+    }
   };
 
   render() {
@@ -157,6 +203,12 @@ export default class EventsSearch extends Component {
 
     return (
       <>
+        <Jumbotron id="jumbo1">
+          <Container fluid>
+            <h1 class="display-4 text-white">Event Search</h1>
+          </Container>
+        </Jumbotron>
+
         <Search
           onChange={this.onChange}
           handleFilterOption={this.handleFilterOption}
@@ -175,6 +227,18 @@ export default class EventsSearch extends Component {
             {renderCarousel}
           </Col>
         </Row>
+
+        <Modal show={this.state.showModal} onHide={this.handleCloseModal}>
+          <Modal.Header closeButton id="errorHeader">
+            <Modal.Title>ERROR!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body id="errorBody">{this.state.modalText} </Modal.Body>
+          <Modal.Footer id="errorFooter">
+            <Button id="errorBtn" onClick={this.handleCloseModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </>
     );
   }
