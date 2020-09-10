@@ -21,9 +21,7 @@ export default class EventsSearch extends Component {
     profile: [],
     href: "/eventcreate",
     filter: "Filter",
-    alertTip1: true,
     alertTip2: true,
-    buttonDisabled: false,
     searchDisabled: true,
     searchInput: "",
     showModal: false,
@@ -54,8 +52,6 @@ export default class EventsSearch extends Component {
       if (error !== "No current user") {
         console.log(error);
         this.setState({
-          buttonDisabled: true,
-          alertTip1: false,
           alertTip2: false,
           href: "#",
         });
@@ -241,7 +237,7 @@ export default class EventsSearch extends Component {
               </ul>
             </Card.Body>
             <Card.Footer id="introCardFooter" className="text-body text-center">
-              Please note: You must be logged in to search and create events!
+              Please note: You must be logged in to create events!
             </Card.Footer>
           </Card>
         </Col>

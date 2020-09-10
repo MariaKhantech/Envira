@@ -38,11 +38,10 @@ export default class Search extends Component {
           <InputGroup>
             <InputGroup.Prepend>
               <DropdownButton
-                disabled={buttonDisabled}
                 title={filter}
                 id="dropdown"
                 data-tip
-                data-for="alertTip1"
+                data-for="filterSelect"
               >
                 <Dropdown.Item onClick={handleFilterOption}>
                   Event Name
@@ -61,13 +60,8 @@ export default class Search extends Component {
                 </Dropdown.Item>
               </DropdownButton>
 
-              <ReactTooltip
-                disable={alertTip1}
-                id="alertTip1"
-                place="top"
-                effect="solid"
-              >
-                Please login to search for an event
+              <ReactTooltip id="filterSelect" place="top" effect="solid">
+                Select a Filter
               </ReactTooltip>
             </InputGroup.Prepend>
             <FormControl
@@ -80,7 +74,6 @@ export default class Search extends Component {
             />
             <InputGroup.Append>
               <Button
-                disabled={buttonDisabled}
                 onClick={handleFilterSubmit}
                 style={{ backgroundColor: "#c38d9e", border: "none" }}
                 id="search"
