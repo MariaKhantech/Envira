@@ -55,7 +55,7 @@ export default class Articles extends Component {
     ));
 
     return (
-      <Row className="mt-2">
+      <Row className="mt-3">
         <Col
           md={12}
           id="wrapper"
