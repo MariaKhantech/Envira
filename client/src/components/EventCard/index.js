@@ -23,6 +23,7 @@ export class index extends Component {
       rating: 0,
       disabled: true,
       userRating: [],
+   
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
   }
@@ -42,7 +43,7 @@ export class index extends Component {
     //setting date for testing
     let date = new Date();
     date.setDate(30);
-    this.initializeCountdown(date);
+  
   }
   //initialize the countdouwn
   initializeCountdown(endtime) {
@@ -88,6 +89,8 @@ export class index extends Component {
           (detail) => detail.id == this.state.eventId
         );
 
+  ;
+
         this.setState({ eventData: filteredId });
         console.log(this.state.eventData);
 
@@ -96,36 +99,28 @@ export class index extends Component {
         this.setState({ eventImage: image, userId: UserId });
 
         this.getEventImageUrl();
-        this.getProfileImage(this.state.userId);
+        this.getUserImageUrl(this.state.userId);
         this.getUserRating();
+
+              //loads the countdown clock
+				const eventDate = this.state.eventData.map((data) => data.date);
+				let date = new Date(eventDate);
+				this.initializeCountdown(date)
       })
       .catch((err) => console.log(err));
   };
 
-  getProfileImage = (userId) => {
-    Axios.get(`/api/auth/image/${userId}`)
-      .then((response) => {
-        this.setState({
-          profileImage: response.data,
-        });
-        console.log(this.state.profileImage);
-        this.getProfileImageUrl();
-      })
-      .catch((err) => console.log(err));
-  };
-
-  getProfileImageUrl = () => {
-    let fileName = this.state.profileImage.image_name;
-    console.log(fileName);
-    Storage.get(fileName)
-      .then((data) => {
-        console.log(data);
-        this.setState({
-          profileImageUrl: data,
-        });
-      })
-      .catch((err) => console.log(err));
-  };
+ 	//get the image name from Images table whihc holds the user profile image
+   getUserImageUrl = (userId) => {
+		Axios.get(`/api/auth/image/${userId}`)
+			.then((response) => {
+				this.setState({
+					profileImageUrl: `https://envirabucket215241-dev.s3.amazonaws.com/public/${response.data.image_name}`
+				});
+				
+			})
+			.catch((err) => console.log(err));
+	}
 
   getEventImageUrl = () => {
     Storage.get(this.state.eventImage)
@@ -235,21 +230,6 @@ export class index extends Component {
         </OverlayTrigger>
       </>
     );
-
-    const images = [
-      {
-        original: "https://picsum.photos/id/1018/1000/600/",
-        thumbnail: "https://picsum.photos/id/1018/250/150/",
-      },
-      {
-        original: "https://picsum.photos/id/1015/1000/600/",
-        thumbnail: "https://picsum.photos/id/1015/250/150/",
-      },
-      {
-        original: "https://picsum.photos/id/1019/1000/600/",
-        thumbnail: "https://picsum.photos/id/1019/250/150/",
-      },
-    ];
 
     //google image asrc address
     const googleMapUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=${address}+${city}+${eventState}`;
