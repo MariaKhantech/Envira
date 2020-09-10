@@ -38,7 +38,9 @@ export default class Articles extends Component {
           </Col>
 
           <Col md={5} className="" style={{ margin: "-10px 0px 0px 10px" }}>
-            <p className="text-left">{data.lead_paragraph}</p>
+            <p className="text-left" style={{ fontSize: "16px" }}>
+              {data.lead_paragraph}
+            </p>
             <Button
               style={{ backgroundColor: "#41b3a3", border: "none" }}
               className="float-left"
@@ -57,12 +59,12 @@ export default class Articles extends Component {
         <Col
           md={12}
           id="wrapper"
-          className="mx-auto p-3 overflow-auto"
-          // style={{
-          //   overflow: "scroll",
-          //   maxWidth: "750px",
-          //   maxHeight: "600px",
-          // }}
+          className="mx-auto p-3"
+          style={{
+            overflow: "scroll",
+            maxWidth: "850px",
+            maxHeight: "600px",
+          }}
         >
           {renderArticles}
         </Col>
