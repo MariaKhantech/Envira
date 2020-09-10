@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import { Storage } from "aws-amplify";
 import Axios from "axios";
@@ -31,7 +31,6 @@ export class CreateEvents extends Component {
       imagePreviewUrl: "",
       displayUploadButton: false,
       userData: [],
-      eventData: [],
       newEventId: "",
       errors: {
         blankfield: false,
@@ -95,29 +94,12 @@ export class CreateEvents extends Component {
         console.log(error);
       }
     }
-    this.getEventData();
   }
 
-  getEventData = () => {
-    Axios.get(`/api/create/eventcreate`)
-      .then((response) => {
-        this.setState({ eventData: response.data });
-        if (this.state.eventData == "") {
-          this.setState({ newEventId: 1 });
-        } else {
-          const mapId = this.state.eventData.map((data) => data.id);
-          const lastId = mapId[mapId.length - 1];
-          const newId = lastId + 1;
-          this.setState({ newEventId: newId });
-        }
-        console.log(this.state.newEventId);
-      })
-      .catch((err) => console.log(err));
-  };
-
   postNewEvent = (event) => {
-    event.preventDefault();
-
+    const {
+      history: { push },
+    } = this.props;
     // check Form validation
     this.clearErrorState();
     const error = Validate(event, this.state);
@@ -143,8 +125,13 @@ export class CreateEvents extends Component {
         .then((res) => {
           console.log(res);
           this.setState({ eventId: res.data.id });
-
           console.log(this.state.eventId);
+          setTimeout(() => {
+            push({
+              pathname: "/eventspage",
+              search: `?eventId=${this.state.eventId}`,
+            });
+          }, 1000);
         })
         .catch((err) => console.log(err));
     }
@@ -408,15 +395,7 @@ export class CreateEvents extends Component {
                   onClick={this.postNewEvent}
                   className="btn btn-success mb-5 mt-3"
                 >
-                  <Link
-                    to={{
-                      pathname: "/eventspage",
-                      search: `?eventId=${this.state.newEventId}`,
-                    }}
-                    style={{ textDecoration: "none", color: "#fff" }}
-                  >
-                    Create
-                  </Link>
+                  Create
                 </button>
               </div>
             </div>
@@ -427,4 +406,4 @@ export class CreateEvents extends Component {
   }
 }
 
-export default CreateEvents;
+export default withRouter(CreateEvents);
