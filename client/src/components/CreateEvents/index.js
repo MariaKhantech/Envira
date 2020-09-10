@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import { Storage } from "aws-amplify";
 import Axios from "axios";
 import Jumbotron from "react-bootstrap/Jumbotron";
-import Button from "react-bootstrap/Button";
 import FormErrors from "../FormErrors";
 import Validate from "../../util/FormValidation";
+
 // import 'react-date-range/dist/theme/default.css';
 // import 'react-date-range/dist/styles.css';
 // import { DateRange } from 'react-date-range';
@@ -30,10 +31,12 @@ export class CreateEvents extends Component {
       imagePreviewUrl: "",
       displayUploadButton: false,
       userData: [],
+      eventData: [],
+      newEventId: "",
       errors: {
         blankfield: false,
-        phonenumber: false
-      }
+        phonenumber: false,
+      },
     };
   }
 
@@ -41,10 +44,10 @@ export class CreateEvents extends Component {
     this.setState({
       errors: {
         blankfield: false,
-        phonenumber: false
-      }
+        phonenumber: false,
+      },
     });
-  }
+  };
 
   uploadFile = (event) => {
     console.log(event.target);
@@ -92,7 +95,22 @@ export class CreateEvents extends Component {
         console.log(error);
       }
     }
+    this.getEventData();
   }
+
+  getEventData = () => {
+    Axios.get(`/api/create/eventcreate`)
+      .then((response) => {
+        this.setState({ eventData: response.data });
+        const mapId = this.state.eventData.map((data) => data.id);
+        const lastId = mapId[mapId.length - 1];
+        const newId = lastId + 1;
+        this.setState({ newEventId: newId });
+
+        console.log(this.state.newEventId);
+      })
+      .catch((err) => console.log(err));
+  };
 
   postNewEvent = (event) => {
     event.preventDefault();
@@ -102,7 +120,7 @@ export class CreateEvents extends Component {
     const error = Validate(event, this.state);
     if (error) {
       this.setState({
-        errors: { ...this.state.errors, ...error }
+        errors: { ...this.state.errors, ...error },
       });
     } else {
       Axios.post("/api/create/eventcreate", {
@@ -121,16 +139,12 @@ export class CreateEvents extends Component {
       })
         .then((res) => {
           console.log(res);
-          let newEvent = {
-            id: res.data.id,
-          };
-          console.log(newEvent);
-          localStorage.setItem("eventId", JSON.stringify(newEvent));
-          window.location = "/eventspage";
+          this.setState({ eventId: res.data.id });
+
+          console.log(this.state.eventId);
         })
         .catch((err) => console.log(err));
     }
-
   };
 
   handleChange = ({ target }) => {
@@ -391,7 +405,15 @@ export class CreateEvents extends Component {
                   onClick={this.postNewEvent}
                   className="btn btn-success mb-5 mt-3"
                 >
-                  Create
+                  <Link
+                    to={{
+                      pathname: "/eventspage",
+                      search: `?eventId=${this.state.newEventId}`,
+                    }}
+                    style={{ textDecoration: "none", color: "#fff" }}
+                  >
+                    Create
+                  </Link>
                 </button>
               </div>
             </div>
