@@ -11,13 +11,13 @@ export default class Articles extends Component {
     nytData: [],
   };
 
-  componentDidMount() {
-    Axios.get(
-      "https://api.nytimes.com/svc/search/v2/articlesearch.json?q='climate change'&api-key=19vvAaE2PFZaDIcKKKJMoVc6K9QurvYU"
-    ).then((response) =>
-      this.setState({ nytData: response.data.response.docs })
-    );
-  }
+  // componentDidMount() {
+  //   Axios.get(
+  //     "https://api.nytimes.com/svc/search/v2/articlesearch.json?q='climate change'&api-key=19vvAaE2PFZaDIcKKKJMoVc6K9QurvYU"
+  //   ).then((response) =>
+  //     this.setState({ nytData: response.data.response.docs })
+  //   );
+  // }
   render() {
     console.log(this.state.nytData);
 
@@ -66,7 +66,7 @@ export default class Articles extends Component {
             maxHeight: "600px",
           }}
         >
-          {renderArticles}
+          {/* {renderArticles} */}
         </Col>
       </Row>
     );

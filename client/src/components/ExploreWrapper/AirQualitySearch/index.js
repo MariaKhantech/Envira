@@ -41,104 +41,188 @@ export default class AirQualitySearch extends Component {
 
   handleInputSubmit = (event) => {
     event.preventDefault();
+    if (this.state.cityInput === "") {
+      alert("please enter input");
+    } else {
+      Axios.get(
+        `https://api.waqi.info/feed/${this.state.cityInput}/?token=e6e31a62a9defccb8a38e8f3b7defd42e8d929c6`
+      ).then(
+        (response) => {
+          console.log(response);
+          if (response == "") {
+            alert(`no results found for ${this.state.cityInput}`);
+          } else {
+            this.setState({
+              aqiData: [response.data],
+              madeRequest: true,
+              date: moment(response.data.data.time.s).format(
+                "MMMM Do YYYY, h:mm a"
+              ),
+              currentAqi: response.data.data.aqi,
+              currentCity: response.data.data.city.name,
+              open: true,
+            });
 
-    Axios.get(
-      `https://api.waqi.info/feed/${this.state.cityInput}/?token=e6e31a62a9defccb8a38e8f3b7defd42e8d929c6`
-    ).then(
-      (response) => {
+            if (this.state.currentAqi >= 0 && this.state.currentAqi <= 50) {
+              this.setState({
+                boxColor: "#009966",
+                status: "Good",
+                toolTip: false,
+                healthMessage:
+                  "Air quality is considered satisfactory, and air pollution poses little or no risk",
+                cautionMessage: "None",
+              });
+            }
+            if (this.state.currentAqi >= 51 && this.state.currentAqi <= 100) {
+              this.setState({
+                boxColor: "#FFDE33",
+                status: "Moderate",
+                toolTip: false,
+                healthMessage:
+                  "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution.",
+                cautionMessage:
+                  "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
+              });
+            }
+            if (this.state.currentAqi >= 101 && this.state.currentAqi <= 150) {
+              this.setState({
+                boxColor: "#FF9933",
+                status: "Unhealthy for Sensitive Groups",
+                toolTip: false,
+                healthMessage:
+                  "Members of sensitive groups may experience health effects. The general public is not likely to be affected.",
+                cautionMessage:
+                  "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
+              });
+            }
+            if (this.state.currentAqi >= 151 && this.state.currentAqi <= 200) {
+              this.setState({
+                boxColor: "#CC0033",
+                status: "Unhealthy",
+                toolTip: false,
+                healthMessage:
+                  "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects",
+                cautionMessage:
+                  "Active children and adults, and people with respiratory disease, such as asthma, should avoid prolonged outdoor exertion; everyone else, especially children, should limit prolonged outdoor exertion",
+              });
+            }
+            if (this.state.currentAqi >= 201 && this.state.currentAqi <= 299) {
+              this.setState({
+                boxColor: "#660099",
+                status: "Very Unhealthy",
+                toolTip: false,
+                healthMessage:
+                  "Health warnings of emergency conditions. The entire population is more likely to be affected",
+                cautionMessage:
+                  "Active children and adults, and people with respiratory disease, such as asthma, should avoid all outdoor exertion; everyone else, especially children, should limit outdoor exertion.",
+              });
+            }
+            if (this.state.currentAqi >= 300) {
+              this.setState({
+                boxColor: "#7E0023",
+                status: "Hazardous",
+                healthMessage:
+                  "Health alert: everyone may experience more serious health effects",
+                cautionMessage: "Everyone should avoid all outdoor exertion",
+              });
+            }
+          }
+        },
+        (error) => {
+          this.setState({
+            error,
+          });
+        },
+
         this.setState({
-          aqiData: [response.data],
-          madeRequest: true,
-          date: moment(response.data.data.time.s).format(
-            "MMMM Do YYYY, h:mm a"
-          ),
-          currentAqi: response.data.data.aqi,
-          currentCity: response.data.data.city.name,
-          open: true,
-        });
-
-        if (this.state.currentAqi >= 0 && this.state.currentAqi <= 50) {
-          this.setState({
-            boxColor: "#009966",
-            status: "Good",
-            toolTip: false,
-            healthMessage:
-              "Air quality is considered satisfactory, and air pollution poses little or no risk",
-            cautionMessage: "None",
-          });
-        }
-        if (this.state.currentAqi >= 51 && this.state.currentAqi <= 100) {
-          this.setState({
-            boxColor: "#FFDE33",
-            status: "Moderate",
-            toolTip: false,
-            healthMessage:
-              "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution.",
-            cautionMessage:
-              "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
-          });
-        }
-        if (this.state.currentAqi >= 101 && this.state.currentAqi <= 150) {
-          this.setState({
-            boxColor: "#FF9933",
-            status: "Unhealthy for Sensitive Groups",
-            toolTip: false,
-            healthMessage:
-              "Members of sensitive groups may experience health effects. The general public is not likely to be affected.",
-            cautionMessage:
-              "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
-          });
-        }
-        if (this.state.currentAqi >= 151 && this.state.currentAqi <= 200) {
-          this.setState({
-            boxColor: "#CC0033",
-            status: "Unhealthy",
-            toolTip: false,
-            healthMessage:
-              "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects",
-            cautionMessage:
-              "Active children and adults, and people with respiratory disease, such as asthma, should avoid prolonged outdoor exertion; everyone else, especially children, should limit prolonged outdoor exertion",
-          });
-        }
-        if (this.state.currentAqi >= 201 && this.state.currentAqi <= 299) {
-          this.setState({
-            boxColor: "#660099",
-            status: "Very Unhealthy",
-            toolTip: false,
-            healthMessage:
-              "Health warnings of emergency conditions. The entire population is more likely to be affected",
-            cautionMessage:
-              "Active children and adults, and people with respiratory disease, such as asthma, should avoid all outdoor exertion; everyone else, especially children, should limit outdoor exertion.",
-          });
-        }
-        if (this.state.currentAqi >= 300) {
-          this.setState({
-            boxColor: "#7E0023",
-            status: "Hazardous",
-            healthMessage:
-              "Health alert: everyone may experience more serious health effects",
-            cautionMessage: "Everyone should avoid all outdoor exertion",
-          });
-        }
-      },
-      (error) => {
-        this.setState({
-          error,
-        });
-      },
-
-      this.setState({
-        madeRequest: false,
-        cityInput: "",
-        date: "",
-        status: "",
-        healthMessage: "",
-        open: false,
-      })
-    );
+          madeRequest: false,
+          cityInput: "",
+          date: "",
+          status: "",
+          healthMessage: "",
+          open: false,
+        })
+      );
+    }
   };
 
   render() {
+    let renderIntroCard = (
+      <Row>
+        <Col md={10} className="mx-auto mt-3 mb-3">
+          <Card className="mx-auto" id="aqiIntroCard">
+            <Card.Header id="aqiIntroCardHeader">
+              <Card.Title
+                className="text-center mt-2"
+                style={{ fontSize: "28px" }}
+              >
+                What is AQI?
+              </Card.Title>
+            </Card.Header>
+            <Card.Body>
+              <ul className="list-group list-group-flush" id="aqiIntro">
+                <li className="list-group list-group-flush ">
+                  What is the Air Quality Index (AQI)?
+                </li>
+                <li
+                  className="list-group list-group-flush mt-2"
+                  style={{ fontSize: "14px" }}
+                >
+                  The AQI is EPA’s index for reporting air quality.
+                </li>
+              </ul>
+
+              <ul className="list-group list-group-flush mt-2" id="aqiDef">
+                <li className="list-group list-group-flush mt-2">
+                  How does the AQI work?
+                </li>
+                <li
+                  className="list-group list-group-flush mt-2"
+                  style={{ fontSize: "14px" }}
+                >
+                  Think of the AQI as a yardstick that runs from 0 to 500. The
+                  higher the AQI value, the greater the level of air pollution
+                  and the greater the health concern. For example, an AQI value
+                  of 50 or below represents good air quality, while an AQI value
+                  over 300 represents hazardous air quality.
+                </li>
+                <li
+                  className="list-group list-group-flush mt-2"
+                  style={{ fontSize: "14px" }}
+                >
+                  For each pollutant an AQI value of 100 generally corresponds
+                  to an ambient air concentration that equals the level of the
+                  short-term national ambient air quality standard for
+                  protection of public health. AQI values at or below 100 are
+                  generally thought of as satisfactory. When AQI values are
+                  above 100, air quality is unhealthy: at first for certain
+                  sensitive groups of people, then for everyone as AQI values
+                  get higher.
+                </li>
+                <li
+                  className="list-group list-group-flush mt-2"
+                  style={{ fontSize: "14px" }}
+                >
+                  The AQI is divided into six categories. Each category
+                  corresponds to a different level of health concern. Each
+                  category also has a specific color. The color makes it easy
+                  for people to quickly determine whether air quality is
+                  reaching unhealthy levels in their communities.
+                </li>
+              </ul>
+            </Card.Body>
+            <Card.Footer
+              id="aqiIntroCardFooter"
+              className="text-body text-center"
+            >
+              To use AQI Search, input a city in the search bar above to get the
+              latest AQI, health concerns, and caution warnings.
+            </Card.Footer>
+          </Card>
+        </Col>
+      </Row>
+    );
+
     const {
       aqiData,
       currentAqi,
@@ -146,7 +230,6 @@ export default class AirQualitySearch extends Component {
       boxColor,
       healthMessage,
     } = this.state;
-    console.log(aqiData, currentAqi, boxColor);
 
     const aqiBox = {
       backgroundColor: boxColor,
@@ -167,14 +250,14 @@ export default class AirQualitySearch extends Component {
               onChange={this.onChange}
             />
             <InputGroup.Append>
-              <Button variant="primary" onClick={this.handleInputSubmit}>
+              <Button onClick={this.handleInputSubmit} id="aqiBtn">
                 <i className="fa fa-search"></i>
               </Button>
             </InputGroup.Append>
           </InputGroup>
-
           <Col md={12} id="wrapper" className="p-4 mb-3">
             <Container fluid className="px-1 px-md-4 py-5 mx-auto">
+              {renderIntroCard}
               <Fade in={this.state.open}>
                 <Row className="d-flex justify-content-center px-3">
                   <Card className="text-white" id="aqiCard">
