@@ -20,7 +20,6 @@ export class NavBar extends Component {
       const user = await Auth.currentAuthenticatedUser();
       // get username from user object
       const userDetail = user.username;
-      console.log(userDetail);
       // get the user details for logged in user from the User table
       Axios.get(`/api/auth/user/${userDetail}`)
         .then((response) => {
@@ -49,7 +48,6 @@ export class NavBar extends Component {
   };
 
   render() {
-    console.log(this.state.profile);
     return (
       <Menu>
         <hr style={{ background: "white" }} />
