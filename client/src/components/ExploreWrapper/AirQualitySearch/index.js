@@ -57,110 +57,102 @@ export default class AirQualitySearch extends Component {
     } else {
       Axios.get(
         `https://api.waqi.info/feed/${this.state.cityInput}/?token=e6e31a62a9defccb8a38e8f3b7defd42e8d929c6`
-      ).then(
-        (response) => {
-          console.log(response);
-          if (response == "") {
-            this.setState({
-              madeRequest: false,
-              showModal: true,
-              modalText: `No results found for ${this.state.cityInput}, please enter a valid city and try again`,
-              cityInput: "",
-              showIntroCard: true,
-            });
-          } else {
-            this.setState({
-              aqiData: [response.data],
-              madeRequest: true,
-              date: moment(response.data.data.time.s).format(
-                "MMMM Do YYYY, h:mm a"
-              ),
-              currentAqi: response.data.data.aqi,
-              currentCity: response.data.data.city.name,
-              showIntroCard: false,
-              open: true,
-            });
+      )
+        .then((response) => {
+          this.setState({
+            aqiData: [response.data],
+            madeRequest: true,
+            date: moment(response.data.data.time.s).format(
+              "MMMM Do YYYY, h:mm a"
+            ),
+            currentAqi: response.data.data.aqi,
+            currentCity: response.data.data.city.name,
+            showIntroCard: false,
+            open: true,
+          });
 
-            if (this.state.currentAqi >= 0 && this.state.currentAqi <= 50) {
-              this.setState({
-                boxColor: "#009966",
-                status: "Good",
-                toolTip: false,
-                healthMessage:
-                  "Air quality is considered satisfactory, and air pollution poses little or no risk",
-                cautionMessage: "None",
-              });
-            }
-            if (this.state.currentAqi >= 51 && this.state.currentAqi <= 100) {
-              this.setState({
-                boxColor: "#FFDE33",
-                status: "Moderate",
-                toolTip: false,
-                healthMessage:
-                  "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution.",
-                cautionMessage:
-                  "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
-              });
-            }
-            if (this.state.currentAqi >= 101 && this.state.currentAqi <= 150) {
-              this.setState({
-                boxColor: "#FF9933",
-                status: "Unhealthy for Sensitive Groups",
-                toolTip: false,
-                healthMessage:
-                  "Members of sensitive groups may experience health effects. The general public is not likely to be affected.",
-                cautionMessage:
-                  "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
-              });
-            }
-            if (this.state.currentAqi >= 151 && this.state.currentAqi <= 200) {
-              this.setState({
-                boxColor: "#CC0033",
-                status: "Unhealthy",
-                toolTip: false,
-                healthMessage:
-                  "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects",
-                cautionMessage:
-                  "Active children and adults, and people with respiratory disease, such as asthma, should avoid prolonged outdoor exertion; everyone else, especially children, should limit prolonged outdoor exertion",
-              });
-            }
-            if (this.state.currentAqi >= 201 && this.state.currentAqi <= 299) {
-              this.setState({
-                boxColor: "#660099",
-                status: "Very Unhealthy",
-                toolTip: false,
-                healthMessage:
-                  "Health warnings of emergency conditions. The entire population is more likely to be affected",
-                cautionMessage:
-                  "Active children and adults, and people with respiratory disease, such as asthma, should avoid all outdoor exertion; everyone else, especially children, should limit outdoor exertion.",
-              });
-            }
-            if (this.state.currentAqi >= 300) {
-              this.setState({
-                boxColor: "#7E0023",
-                status: "Hazardous",
-                healthMessage:
-                  "Health alert: everyone may experience more serious health effects",
-                cautionMessage: "Everyone should avoid all outdoor exertion",
-              });
-            }
+          if (this.state.currentAqi >= 0 && this.state.currentAqi <= 50) {
+            this.setState({
+              boxColor: "#009966",
+              status: "Good",
+              toolTip: false,
+              healthMessage:
+                "Air quality is considered satisfactory, and air pollution poses little or no risk",
+              cautionMessage: "None",
+            });
           }
-        },
-        (error) => {
+          if (this.state.currentAqi >= 51 && this.state.currentAqi <= 100) {
+            this.setState({
+              boxColor: "#FFDE33",
+              status: "Moderate",
+              toolTip: false,
+              healthMessage:
+                "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution.",
+              cautionMessage:
+                "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
+            });
+          }
+          if (this.state.currentAqi >= 101 && this.state.currentAqi <= 150) {
+            this.setState({
+              boxColor: "#FF9933",
+              status: "Unhealthy for Sensitive Groups",
+              toolTip: false,
+              healthMessage:
+                "Members of sensitive groups may experience health effects. The general public is not likely to be affected.",
+              cautionMessage:
+                "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
+            });
+          }
+          if (this.state.currentAqi >= 151 && this.state.currentAqi <= 200) {
+            this.setState({
+              boxColor: "#CC0033",
+              status: "Unhealthy",
+              toolTip: false,
+              healthMessage:
+                "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects",
+              cautionMessage:
+                "Active children and adults, and people with respiratory disease, such as asthma, should avoid prolonged outdoor exertion; everyone else, especially children, should limit prolonged outdoor exertion",
+            });
+          }
+          if (this.state.currentAqi >= 201 && this.state.currentAqi <= 299) {
+            this.setState({
+              boxColor: "#660099",
+              status: "Very Unhealthy",
+              toolTip: false,
+              healthMessage:
+                "Health warnings of emergency conditions. The entire population is more likely to be affected",
+              cautionMessage:
+                "Active children and adults, and people with respiratory disease, such as asthma, should avoid all outdoor exertion; everyone else, especially children, should limit outdoor exertion.",
+            });
+          }
+          if (this.state.currentAqi >= 300) {
+            this.setState({
+              boxColor: "#7E0023",
+              status: "Hazardous",
+              healthMessage:
+                "Health alert: everyone may experience more serious health effects",
+              cautionMessage: "Everyone should avoid all outdoor exertion",
+            });
+          }
+        })
+        .catch((error) => {
           this.setState({
             error,
+            madeRequest: false,
+            showModal: true,
+            modalText: `No results found for ${this.state.cityInput}, please enter a valid city and try again`,
+            cityInput: "",
+            showIntroCard: true,
           });
-        },
-
-        this.setState({
-          madeRequest: false,
-          cityInput: "",
-          date: "",
-          status: "",
-          healthMessage: "",
-          open: false,
-        })
-      );
+        });
+      this.setState({
+        madeRequest: false,
+        cityInput: "",
+        date: "",
+        status: "",
+        healthMessage: "",
+        open: false,
+      });
     }
   };
 

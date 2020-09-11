@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-// import { overviewTab, startRating } from "../profileTabs";
-import StarRatingComponent from "react-star-rating-component";
+import { overviewTab, startRating } from "../profileTabs";
 import "./style.scss";
 import Axios from "axios";
 import { Auth } from "aws-amplify";
@@ -19,7 +18,6 @@ export default class CompanyProfile extends Component {
     imagePreviewUrl: "",
     imageName: [],
     totalEvent: "",
-    userRating: [],
   };
 
   async componentDidMount() {
@@ -39,7 +37,6 @@ export default class CompanyProfile extends Component {
           // call this function to get logged in company event details
           this.getUserTotalEvent();
           this.getImage();
-          this.getUserRating();
         })
         .catch((err) => console.log(err));
     } catch (error) {
@@ -104,16 +101,6 @@ export default class CompanyProfile extends Component {
       .catch((err) => console.log(err));
   };
 
-  getUserRating = () => {
-    Axios.get(`/api/rate/userprofile/${this.state.profile.id}`)
-      .then((res) => {
-        console.log(res);
-        this.setState({ userRating: res.data });
-        console.log(this.state.userRating);
-      })
-      .catch((err) => console.log(err));
-  };
-
   render() {
     const myStyle = {
       width: "304px",
@@ -130,16 +117,6 @@ export default class CompanyProfile extends Component {
       borderBottom: "5px solid gray",
       borderRadius: 50,
     };
-
-    //  add avgRating to starRating component value
-    // Get average rating using map and reduce
-    const ratings = this.state.userRating.map((data) => data.rating);
-    const avgRating =
-      ratings.reduce((a, b) => a + parseInt(b), 0) / ratings.length;
-    const starRating = (
-      <StarRatingComponent name="rating" starCount={5} value={avgRating} />
-    );
-
     return (
       <div className=" main-content">
         {/* <!--reference https://www.creative-tim.com/bits/bootstrap/user-profile-page-argon-dashboard--> */}
@@ -262,72 +239,10 @@ export default class CompanyProfile extends Component {
                       id="tabs-1"
                       role="tabpanel"
                     >
-                      {/* {overviewTab} */}
-                      <div className="row">
-                        <div className="col">
-                          <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                            <div>
-                              <span className="heading">{starRating}</span>
-                              <span className="description">
-                                AVERAGE EVENT RATINGS
-                              </span>
-                            </div>
-                            <div>
-                              <span className="heading">10</span>
-                              <span className="description">Event Photos</span>
-                            </div>
-                            <div>
-                              <span className="heading">89</span>
-                              <span className="description">
-                                Event Comments
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <h3 class="h1-design">
-                          Greta Thunburg
-                          <span className="font-weight-light">, 17</span>
-                        </h3>
-                        <div className="h5 font-weight-300">
-                          <i className="ni location_pin mr-2"></i>Stockholm,
-                          Sweden
-                        </div>
-                        <div className="h5 mt-4">
-                          <i className="ni business_briefcase-24 mr-2"></i>
-                          Environmentalist- Activist
-                        </div>
-                        <div>
-                          <i className="ni education_hat mr-2"></i>University of
-                          Environmentalist
-                        </div>
-                        <hr class="hr-design" />
-                        <div>
-                          <h5 className="h1-design ni business_briefcase-24 mr-2">
-                            How to connect:
-                          </h5>
-                          <i
-                            className="fa fa-linkedin-square fa-2x"
-                            aria-hidden="true"
-                          ></i>
-                          <i
-                            className="fa fa-facebook-official fa-2x"
-                            aria-hidden="true"
-                          ></i>
-                          <i
-                            className="fa fa-twitter-square fa-2x"
-                            aria-hidden="true"
-                          ></i>
-                          <i
-                            className="fa fa-meetup fa-2x"
-                            aria-hidden="true"
-                          ></i>
-                        </div>
-                      </div>
+                      {overviewTab}
                     </div>
                     <div className="tab-pane " id="tabs-2" role="tabpanel">
-                      {/* {startRating} */}
+                      {startRating}
                     </div>
                     <div className="tab-pane " id="tabs-3" role="tabpanel">
                       <div className="row">
@@ -339,6 +254,47 @@ export default class CompanyProfile extends Component {
                       </div>
                     </div>
                   </div>
+
+                  {/* <div className="row">
+                  <div className="col">
+                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">
+                      <div>
+                        <span className="heading">10/10</span>
+                        <span className="description">AVERAGE EVENT RATINGS</span>
+                      </div>
+                      <div>
+                        <span className="heading">10</span>
+                        <span className="description">Event Photos</span>
+                      </div>
+                      <div>
+                        <span className="heading">89</span>
+                        <span className="description">Event Comments</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <h3 class="h1-design">
+                    Greta Thunburg<span className="font-weight-light">, 17</span>
+                  </h3>
+                  <div className="h5 font-weight-300">
+                    <i className="ni location_pin mr-2"></i>Stockholm, Sweden
+                </div>
+                  <div className="h5 mt-4">
+                    <i className="ni business_briefcase-24 mr-2"></i>Environmentalist- Activist
+                </div>
+                  <div>
+                    <i className="ni education_hat mr-2"></i>University of Environmentalist
+                </div>
+                  <hr class="hr-design"/>
+                  <div>
+                    <h5 className="h1-design ni business_briefcase-24 mr-2">How to connect:</h5>
+                    <i className="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
+                    <i className="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
+                    <i className="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+                    <i className="fa fa-meetup fa-2x" aria-hidden="true"></i>
+                  </div>
+                </div> */}
                 </div>
               </div>
             </div>
