@@ -21,7 +21,8 @@ export default class Search extends Component {
       href,
       buttonDisabled,
       searchDisabled,
-      alertTip,
+      alertTip1,
+      alertTip2,
       searchInput,
     } = this.props.state;
     const {
@@ -33,14 +34,14 @@ export default class Search extends Component {
 
     return (
       <Row>
-        <Col md={8} className="mx-auto mt-5">
+        <Col md={9} className="mx-auto mt-2">
           <InputGroup>
             <InputGroup.Prepend>
               <DropdownButton
                 title={filter}
                 id="dropdown"
                 data-tip
-                data-for="filterTip"
+                data-for="filterSelect"
               >
                 <Dropdown.Item onClick={handleFilterOption}>
                   Event Name
@@ -59,7 +60,7 @@ export default class Search extends Component {
                 </Dropdown.Item>
               </DropdownButton>
 
-              <ReactTooltip id="filterTip" place="top" effect="solid">
+              <ReactTooltip id="filterSelect" place="top" effect="solid">
                 Select a Filter
               </ReactTooltip>
             </InputGroup.Prepend>
@@ -76,20 +77,15 @@ export default class Search extends Component {
                 onClick={handleFilterSubmit}
                 style={{ backgroundColor: "#c38d9e", border: "none" }}
                 id="search"
-                data-tip
-                data-for="searchTip"
               >
                 <i className="fa fa-search"></i>
               </Button>
-              <ReactTooltip id="searchTip" place="top" effect="solid">
-                Search
-              </ReactTooltip>
 
               <Button disabled={buttonDisabled} id="addEvent">
                 <a
                   style={{ textDecoration: "none", color: "#fff" }}
                   data-tip
-                  data-for="alertTip"
+                  data-for="alertTip2"
                   href={href}
                 >
                   Create New Event
@@ -97,8 +93,8 @@ export default class Search extends Component {
               </Button>
 
               <ReactTooltip
-                disable={alertTip}
-                id="alertTip"
+                disable={alertTip2}
+                id="alertTip2"
                 place="top"
                 effect="solid"
               >

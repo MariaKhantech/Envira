@@ -11,13 +11,13 @@ export default class Articles extends Component {
     nytData: [],
   };
 
-  componentDidMount() {
-    Axios.get(
-      "https://api.nytimes.com/svc/search/v2/articlesearch.json?q='climate change'&api-key=19vvAaE2PFZaDIcKKKJMoVc6K9QurvYU"
-    ).then((response) =>
-      this.setState({ nytData: response.data.response.docs })
-    );
-  }
+  // componentDidMount() {
+  //   Axios.get(
+  //     "https://api.nytimes.com/svc/search/v2/articlesearch.json?q='climate change'&api-key=19vvAaE2PFZaDIcKKKJMoVc6K9QurvYU"
+  //   ).then((response) =>
+  //     this.setState({ nytData: response.data.response.docs })
+  //   );
+  // }
   render() {
     console.log(this.state.nytData);
 
@@ -38,7 +38,9 @@ export default class Articles extends Component {
           </Col>
 
           <Col md={5} className="" style={{ margin: "-10px 0px 0px 10px" }}>
-            <p className="text-left">{data.lead_paragraph}</p>
+            <p className="text-left" style={{ fontSize: "16px" }}>
+              {data.lead_paragraph}
+            </p>
             <Button
               style={{ backgroundColor: "#41b3a3", border: "none" }}
               className="float-left"
@@ -53,18 +55,18 @@ export default class Articles extends Component {
     ));
 
     return (
-      <Row className="mt-2">
+      <Row className="mt-3">
         <Col
           md={12}
           id="wrapper"
-          className="mx-auto p-3 overflow-auto"
-          // style={{
-          //   overflow: "scroll",
-          //   maxWidth: "750px",
-          //   maxHeight: "600px",
-          // }}
+          className="mx-auto p-3"
+          style={{
+            overflow: "scroll",
+            maxWidth: "850px",
+            maxHeight: "600px",
+          }}
         >
-          {renderArticles}
+          {/* {renderArticles} */}
         </Col>
       </Row>
     );
