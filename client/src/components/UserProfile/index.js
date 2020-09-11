@@ -11,6 +11,9 @@ import $ from "jquery";
 export default class UserProfile extends Component {
   state = {
     profile: [],
+    userName: "",
+    email: "",
+    urlUserId: "",
     firstName: "",
     lastName: "",
     city: "",
@@ -40,8 +43,10 @@ export default class UserProfile extends Component {
           });
           // call this function to get logged in user profile details
           this.getUserProfile();
+          this.getUserName();
           // call this function to get logged in user event details
           this.getUserJoinedEvent();
+          this.getUserEvents();
           this.getImage();
           this.getUserRating();
         })
@@ -55,9 +60,13 @@ export default class UserProfile extends Component {
 
   // get logged in user info from UserProfile model
   getUserProfile = () => {
-    const UserId = this.state.profile.id;
+    // const UserId = this.state.profile.id;
 
-    Axios.get(`/api/auth/userProfile/${UserId}`)
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    Axios.get(`/api/auth/userProfile/${urlUserId}`)
       .then((response) => {
         this.setState({
           firstName: response.data.first_name,
@@ -73,25 +82,55 @@ export default class UserProfile extends Component {
       .catch((err) => console.log(err));
   };
 
+  getUserName = () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    console.log(urlUserId);
+    Axios.get(`/api/auth/userid/${urlUserId}`)
+      .then((response) => {
+        this.setState({
+          userName: response.data.user_name,
+          email: response.data.email,
+        });
+
+        console.log(this.state.userName);
+      })
+      .catch((err) => console.log(err));
+  };
+
   // get logged in user info from EventAttendee model
   getUserJoinedEvent = () => {
-    const UserId = this.state.profile.id;
-    Axios.get(`/api/auth/joinevent/${UserId}`)
+    // const UserId = this.state.profile.id;
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    Axios.get(`/api/auth/joinevent/${urlUserId}`)
       .then((response) => {
         this.setState({
           totalEvent: response.data,
         });
+        console.log(this.state.totalEvent.length);
       })
       .catch((err) => console.log(err));
   };
 
   getImage = () => {
-    const UserId = this.state.profile.id;
+    // const UserId = this.state.profile.id;
 
-    this.setState({ eventId: UserId });
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    this.setState({ eventId: urlUserId });
+
+    // console.log(this.state.eventId);
 
     // console.log(UserId);
-    Axios.get(`/api/auth/image/${UserId}`)
+    Axios.get(`/api/auth/image/${urlUserId}`)
       .then((response) => {
         this.setState({
           imageName: response.data,
@@ -116,21 +155,34 @@ export default class UserProfile extends Component {
   };
 
   getUserRating = () => {
-    const UserId = this.state.profile.id;
+    // const UserId = this.state.profile.id;
 
-    Axios.get(`/api/rate/userprofile/${UserId}`)
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    // console.log(urlUserId);
+
+    Axios.get(`/api/rate/userprofile/${urlUserId}`)
       .then((res) => {
+        // console.log(res);
         this.setState({ userRating: res.data });
-        console.log(this.state.userRating);
       })
       .catch((err) => console.log(err));
   };
 
   // get logged in user info from Event model
   getUserEvents = () => {
-    console.log("herer");
-    const UserId = this.state.profile.id;
-    Axios.get(`/api/getuserevents/${UserId}`)
+    // console.log("herer");
+    // const UserId = this.state.profile.id;
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    console.log(urlUserId);
+
+    Axios.get(`/api/getuserevents/${urlUserId}`)
       .then((response) => {
         this.setState({
           events: response.data,
@@ -146,6 +198,34 @@ export default class UserProfile extends Component {
   }
 
   render() {
+    const loggedInUserId = this.state.profile.id;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+    let editProfileBtn;
+
+    console.log(urlUserId);
+
+    if (loggedInUserId == urlUserId) {
+      editProfileBtn = (
+        <a
+          class="a-design"
+          href="edituserprofile"
+          className="btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary"
+        >
+          Edit Profile
+        </a>
+      );
+    } else {
+      editProfileBtn = (
+        <a
+          class="a-design"
+          href="edituserprofile"
+          className="btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary d-none"
+        ></a>
+      );
+    }
+
     const myStyle = {
       width: "304px",
       height: "200px",
@@ -274,7 +354,7 @@ export default class UserProfile extends Component {
             <div className="row">
               <div className="col-lg-7 col-md-10 ">
                 <h1 className="display-2 text-dark text-center">
-                  {this.state.profile.user_name}
+                  {this.state.userName}
                 </h1>
               </div>
             </div>
@@ -434,14 +514,16 @@ export default class UserProfile extends Component {
                     </div>
 
                     <div className="col-4 text-right">
-                      <a
-                        class="a-design"
-                        href="edituserprofile"
-                        hideButton={this.hideButtonRender}
-                        className="btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary"
-                      >
-                        Edit Profile
-                      </a>
+                      {/* <a
+                          class="a-design"
+                          href="edituserprofile"
+                          className="btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary"
+                        >
+                          Edit Profile
+                        </a>
+                     */}
+
+                      {editProfileBtn}
                     </div>
                   </div>
                 </div>
@@ -460,9 +542,7 @@ export default class UserProfile extends Component {
                             <label class="label-design">User Name:</label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">
-                              {this.state.profile.user_name}
-                            </p>
+                            <p class="p-design">{this.state.userName}</p>
                           </div>
                         </div>
                         <div className="row">
@@ -480,7 +560,7 @@ export default class UserProfile extends Component {
                             <label class="label-design">Email:</label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">{this.state.profile.email}</p>
+                            <p class="p-design">{this.state.email}</p>
                           </div>
                         </div>
                         <div className="row">

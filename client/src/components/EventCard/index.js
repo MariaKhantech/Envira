@@ -7,6 +7,7 @@ import ImageGallery from "react-image-gallery";
 import moment from "moment";
 import Axios from "axios";
 import { Auth } from "aws-amplify";
+import { withRouter } from "react-router-dom";
 import "./style.scss";
 
 export class index extends Component {
@@ -16,6 +17,7 @@ export class index extends Component {
       reviewArray: [],
       eventId: "",
       userId: "",
+      roleId: "",
       eventData: [],
       eventImage: "",
       eventImageUrl: "",
@@ -53,17 +55,16 @@ export class index extends Component {
       const user = await Auth.currentAuthenticatedUser();
       // get username from user object
       const userDetail = user.username;
-      // get the user details for logged in user from the User table 
+      // get the user details for logged in user from the User table
       Axios.get(`/api/auth/user/${userDetail}`)
-        .then(
-          (response) => {
-            this.setState({
-              profile: response.data,
-            });
-            this.getUserRating();
-            this.getUserAttendance()
-          })
-        .catch(err => console.log(err))
+        .then((response) => {
+          this.setState({
+            profile: response.data,
+          });
+          this.getUserRating();
+          this.getUserAttendance();
+        })
+        .catch((err) => console.log(err));
     } catch (error) {
       if (error !== "No current user") {
         console.log(error);
@@ -125,6 +126,7 @@ export class index extends Component {
         const UserId = this.state.eventData.map((data) => data.UserId);
         const image = this.state.eventData.map((data) => data.image);
         this.setState({ eventImage: image, userId: UserId });
+        this.getRoleId();
         this.getEventImageUrl();
         this.getProfileImage(this.state.userId);
         this.getUserImageUrl(this.state.userId);
@@ -189,6 +191,7 @@ export class index extends Component {
       .then((res) => {
         this.setState({ rating: res.data.rating, postRatingDisabled: true })
 
+
       })
       .catch((err) => console.log(err));
   };
@@ -223,10 +226,10 @@ export class index extends Component {
   }
   // post event attendee details
   eventAttendee = (event) => {
-    event.preventDefault()
-    const UserId = this.state.profile.id
-    const EventId = this.state.eventId
-    console.log(UserId)
+    event.preventDefault();
+    const UserId = this.state.profile.id;
+    const EventId = this.state.eventId;
+    console.log(UserId);
     Axios.post("/api/auth/joinevent", {
       UserId,
       EventId
@@ -236,14 +239,51 @@ export class index extends Component {
         joinEventDisabled: true,
         postRatingDisabled: false
       })
-    }).catch(err => console.log(err))
-  }
+      .catch((err) => console.log(err));
+  };
 
   //redirect user to signup page
   registerToJoinEvent = (event) => {
     event.preventDefault();
-    window.location = "/signup"
-  }
+    window.location = "/signup";
+  };
+
+  //
+  getRoleId = () => {
+    const UserId = this.state.userId[0];
+    console.log(UserId);
+    Axios.get(`/api/auth/userid/${UserId}`)
+      .then((response) => {
+        // console.log(response.data);
+        this.setState({
+          roleId: response.data.roleId,
+        });
+
+        console.log(this.state.roleId);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  handleRedirect = (event) => {
+    event.preventDefault();
+    const {
+      history: { push },
+    } = this.props;
+
+    const roleId = this.state.roleId;
+
+    if (roleId === 1) {
+      push({
+        pathname: "/userprofile",
+        search: `?userId=${this.state.userId[0]}`,
+      });
+    } else if (roleId === 2) {
+      push({
+        pathname: "/companyprofile",
+        search: `?userId=${this.state.userId[0]}`,
+      });
+    }
+  };
 
   render() {
     const scrollingContainer = {
@@ -327,8 +367,24 @@ export class index extends Component {
                   <span>
                     <b>Contact: </b>
                   </span>
-
-                  {contactPerson}
+                  {this.state.profile.id && (
+                    <a>
+                      <button className="" onClick={this.handleRedirect}>
+                        {contactPerson}
+                      </button>
+                    </a>
+                  )}{" "}
+                  {!this.state.profile.id && (
+                    <a>
+                      <button
+                        className=""
+                        onClick={this.handleRedirect}
+                        disabled={this.state.disabled}
+                      >
+                        {contactPerson}
+                      </button>
+                    </a>
+                  )}
                 </h4>
                 <hr />
                 <h5>
@@ -389,7 +445,6 @@ export class index extends Component {
               </button>
               </p>
             )} */}
-
           </div>
         </div>
 
@@ -546,4 +601,4 @@ export class index extends Component {
   }
 }
 
-export default index;
+export default withRouter(index);
