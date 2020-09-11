@@ -43,6 +43,7 @@ export default class CompanyProfile extends Component {
           this.getUserTotalEvent();
           this.getUserEvents();
           this.getImage();
+          this.getUserRating();
         })
         .catch((err) => console.log(err));
     } catch (error) {
@@ -121,6 +122,15 @@ export default class CompanyProfile extends Component {
       .catch((err) => console.log(err));
   };
 
+  getUserRating = () => {
+    Axios.get(`/api/rate/userprofile/${this.state.profile.id}`)
+      .then((res) => {
+        this.setState({ userRating: res.data });
+        console.log(this.state.userRating);
+      })
+      .catch((err) => console.log(err));
+  };
+
   //close the modal if user edits an event
   closeModal() {
     $("#eventModal").modal("hide");
@@ -143,6 +153,16 @@ export default class CompanyProfile extends Component {
       borderRadius: 50,
     };
 
+    // Get average rating using map and reduce
+    const ratings = this.state.userRating.map((data) => data.rating);
+    const avgRating =
+      ratings.reduce((a, b) => a + parseInt(b), 0) / ratings.length;
+
+    // add avgRating to starRating component value
+    const starRating = (
+      <StarRatingComponent name="rating" starCount={5} value={avgRating} />
+    );
+
     // const that storest the content of the overview
     const overviewTab = (
       <div>
@@ -150,7 +170,7 @@ export default class CompanyProfile extends Component {
           <div className="col">
             <div className="card-profile-stats d-flex justify-content-center mt-md-5">
               <div>
-                <span className="heading">10/10</span>
+                <span className="heading">{starRating}</span>
                 <span className="description">AVERAGE EVENT RATINGS</span>
               </div>
               <div>
@@ -229,16 +249,6 @@ export default class CompanyProfile extends Component {
         <hr />
       </div>
     ));
-
-    // Get average rating using map and reduce
-    const ratings = this.state.userRating.map((data) => data.rating);
-    const avgRating =
-      ratings.reduce((a, b) => a + parseInt(b), 0) / ratings.length;
-
-    // add avgRating to starRating component value
-    const starRating = (
-      <StarRatingComponent name="rating" starCount={5} value={avgRating} />
-    );
 
     return (
       <div className=" main-content">
