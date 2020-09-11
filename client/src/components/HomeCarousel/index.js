@@ -90,7 +90,7 @@ export class index extends Component {
 					<div className="col-m-4">
 					<a href='/rainforest'>
 						<div className="card bg-transparent border-0" style={{ width: '12rem' }}>
-						<Fade>
+						
 							<div className="card-body">
 							
 								<h5 className="card-title text-center">Forest Fires & Deforestation</h5>
@@ -106,7 +106,7 @@ export class index extends Component {
 								</div>
 								
 							</div>
-							</Fade>
+						
 						</div>
 						</a>
 					</div>
@@ -114,7 +114,7 @@ export class index extends Component {
 					<div className="col-m-4">
 					<a href='/ocean'>
 						<div className="card bg-transparent border-0" style={{ width: '12rem' }}>
-						<Fade right>
+						
 							<div className="card-body ">
 								<h5 className="card-title text-center">Ocean Pollution</h5>
 								<div className="image ocean-border">
@@ -127,7 +127,7 @@ export class index extends Component {
 									</object>{' '}
 								</div>
 							</div>
-							</Fade>
+						
 						</div>
 						</a>
 					</div>
@@ -139,8 +139,8 @@ export class index extends Component {
 						<div className="row">
 							
 							<div className="col-md-4 ml-5">
-							<Fade bottom>
-								<div className="card react-reveal">
+						
+								<div className="card">
 									<div className="card-body homepgCardBackground text-center">
 									
 										<h4 className="card-title text-center">Latest News on Climate Change</h4>
@@ -150,6 +150,7 @@ export class index extends Component {
 											alt="image of greenland icecaps"
 											class="img-thumbnail img-fluid ice-caps rounded"
 										/>
+										<Fade bottom>
 										<p class="text-muted">
 											Icebergs discharged from Allison Glacier float near Kullorsuaq, western
 											Greenland. (Image: © Margie Turrin/Lamont-Doherty Earth Observatory)
@@ -161,6 +162,7 @@ export class index extends Component {
 											visual, all the water combined would cover the state of California by more
 											than 4 feet of water.
 										</p>
+										</Fade>
 										<button
 											type="button"
 											onClick={this.enviraAudio}
@@ -168,10 +170,11 @@ export class index extends Component {
 										>
 											<i class="fas fa-robot" />
 										</button>
+										
 									</div>
 								
 								</div>
-								</Fade>
+					
 							</div>
 						
 							<div className="col-md-4 ml-5">
@@ -249,10 +252,10 @@ export class index extends Component {
 					</div>
 					<div className="card orangeHcard text-center">
 						<Fade bottom>
-						<img className="card-img-top  icon-Hsize mx-auto mt-5" src="../assets/homepageIcons/people.png" alt="group of people"/>
+						<a href="/eventsearch"><img className="card-img-top  icon-Hsize mx-auto mt-5" src="../assets/homepageIcons/people.png" alt="group of people"/></a>
 						<div className="card-body">
 						<h5 className="card-title text-white">JOIN THE COMMUNITY</h5>
-						<p className="card-text text-white">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+						<p className="card-text text-white">We have created a a way for you to join the community in the efforts to combat climate change! Click to head over to the events page. Find an Event to join or create one! If you would like to create an event please remember to sign up.</p>
 						</div>
 						</Fade>
 					</div>

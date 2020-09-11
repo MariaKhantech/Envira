@@ -11,6 +11,14 @@ export class RainforestInfo extends Component {
 		);
 		ForestFiresAudio.play();
 	}
+
+	enviraAmazonForestFires() {
+		let amazonForestFires= new Audio(
+			'https://envirabucket215241-dev.s3.amazonaws.com/polly/amazonforestfires.9fb9a29e-8580-4ee5-bb06-8b1749f3fcad.mp3'
+			
+		);
+		amazonForestFires.play();
+	}
 	// enviraAmazon() {
 	// 	let AmazonAudio = new Audio('');
 	// 	ForestFiresAudio.play();
@@ -242,9 +250,12 @@ export class RainforestInfo extends Component {
 												of burning. They expect the number to increase over the coming months as
 												the dry season intensifies.
 											</p>
-											<p class="card-text">
-												<small class="text-muted">Last updated 3 mins ago</small>
-											</p>
+											<button
+													type="button"
+													onClick={this.enviraAmazonForestFires}
+													class="btn btn-outline-danger float-right text-danger">
+													<i class="fas fa-robot" />
+												</button>
 										</div>
 									</div>
 
@@ -279,7 +290,7 @@ export class RainforestInfo extends Component {
 							<div class="row mb-5">
 								<div class="card mt-5 mx-auto border-0" style={{ width: '25rem' }}>
 									<div class="card-body forest-fire-card">
-										<h3 class="card-title text-white text-center">Amazon Deforestation</h3>
+										<h3 class="card-title text-white text-center">Deforestation</h3>
 										<div
 											id="carouselExampleFade"
 											class="carousel slide carousel-fade"
