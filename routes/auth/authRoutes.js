@@ -279,11 +279,12 @@ router.post("/joinevent", (req, res) => {
 });
 
 // route to post event attendees
-router.get('/joinevent/:UserId', (req, res) => {
+router.get('/joinevent/:UserId/:EventId', (req, res) => {
   console.log(req.body.UserId)
-  db.EventAttendee.findAll({
+  db.EventAttendee.findOne({
     where: {
-      UserId: req.params.UserId
+      UserId: req.params.UserId,
+      EventId:req.params.EventId
     }
   })
     .then((data) => {
