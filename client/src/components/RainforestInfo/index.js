@@ -11,6 +11,14 @@ export class RainforestInfo extends Component {
 		);
 		ForestFiresAudio.play();
 	}
+
+	enviraAmazonForestFires() {
+		let amazonForestFires= new Audio(
+			'https://envirabucket215241-dev.s3.amazonaws.com/polly/amazonforestfires.9fb9a29e-8580-4ee5-bb06-8b1749f3fcad.mp3'
+			
+		);
+		amazonForestFires.play();
+	}
 	// enviraAmazon() {
 	// 	let AmazonAudio = new Audio('');
 	// 	ForestFiresAudio.play();
@@ -71,6 +79,16 @@ export class RainforestInfo extends Component {
 				}}
 			/>
 		);
+
+		const videoStyle = {
+			position: 'relative',
+			inset: '0px',
+			width: '100%',
+			height: '1080px',
+			maxWidth: 'none',
+			maxHeight: 'none',
+			margin: '-250px 0px 0px'
+		};
 
 		return (
 			<div className="RainforestWrapper">
@@ -232,9 +250,12 @@ export class RainforestInfo extends Component {
 												of burning. They expect the number to increase over the coming months as
 												the dry season intensifies.
 											</p>
-											<p class="card-text">
-												<small class="text-muted">Last updated 3 mins ago</small>
-											</p>
+											<button
+													type="button"
+													onClick={this.enviraAmazonForestFires}
+													class="btn btn-outline-danger float-right text-danger">
+													<i class="fas fa-robot" />
+												</button>
 										</div>
 									</div>
 
@@ -251,14 +272,15 @@ export class RainforestInfo extends Component {
 					</section>
 
 					<Parallax bgImage={`${forestBackground}`} strength={500}>
-						<div style={{ height: 500 }}>
+					<div style={{ height: 600 }}>
 							<iframe
 								width="100%"
-								height="500"
-								src="https://www.youtube.com/embed/icgEDDrlR28?controls=0"
+								height="auto"
+								src="https://www.youtube.com/embed/icgEDDrlR28?autohide=1&amp;rel=0&amp;autoplay=0&amp;playsinline=1&amp;iv_load_policy=3&amp;modestbranding=1&amp;controls=0&amp;showinfo=0&amp;disablekb=1&amp;enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1"
 								frameborder="0"
-								allow="accelerometer; autoplay=1; encrypted-media; gyroscope;"
-								allowfullscreen
+								allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+								allowfullscreen='1'
+								style={videoStyle}
 							/>
 						</div>
 					</Parallax>
@@ -268,7 +290,7 @@ export class RainforestInfo extends Component {
 							<div class="row mb-5">
 								<div class="card mt-5 mx-auto border-0" style={{ width: '25rem' }}>
 									<div class="card-body forest-fire-card">
-										<h3 class="card-title text-white text-center">Amazon Deforestation</h3>
+										<h3 class="card-title text-white text-center">Deforestation</h3>
 										<div
 											id="carouselExampleFade"
 											class="carousel slide carousel-fade"
