@@ -9,6 +9,8 @@ import StarRatingComponent from "react-star-rating-component";
 export default class UserProfile extends Component {
   state = {
     profile: [],
+    userName: "",
+    urlUserId: "",
     firstName: "",
     lastName: "",
     city: "",
@@ -21,6 +23,7 @@ export default class UserProfile extends Component {
     imagePreviewUrl: "",
     imageName: [],
     userRating: [],
+    hideButton: "",
   };
 
   async componentDidMount() {
@@ -37,6 +40,8 @@ export default class UserProfile extends Component {
           });
           // call this function to get logged in user profile details
           this.getUserProfile();
+          this.getUserName();
+
           // call this function to get logged in user event details
           this.getUserTotalEvent();
           this.getImage();
@@ -50,10 +55,32 @@ export default class UserProfile extends Component {
     }
   }
 
+  getUserName = () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+    Axios.get(`/api/auth/userid/${urlUserId}`)
+      .then((response) => {
+        this.setState({
+          userName: response.data.user_name,
+        });
+
+        console.log(this.state.userName);
+      })
+      .catch((err) => console.log(err));
+  };
+
   // get logged in user info from UserProfile model
   getUserProfile = () => {
-    const UserId = this.state.profile.id;
-    Axios.get(`/api/auth/userProfile/${UserId}`)
+    // const UserId = this.state.profile.id;
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    this.setState({ eventId: urlUserId });
+
+    Axios.get(`/api/auth/userProfile/${urlUserId}`)
       .then((response) => {
         this.setState({
           firstName: response.data.first_name,
@@ -71,8 +98,15 @@ export default class UserProfile extends Component {
 
   // get logged in user info from EventAttendee model
   getUserTotalEvent = () => {
-    const UserId = this.state.profile.id;
-    Axios.get(`/api/auth/userTotalEvent/${UserId}`)
+    // const UserId = this.state.profile.id;
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    console.log(urlUserId);
+
+    Axios.get(`/api/auth/userTotalEvent/${urlUserId}`)
       .then((response) => {
         this.setState({
           totalEvent: response.data,
@@ -82,9 +116,18 @@ export default class UserProfile extends Component {
   };
 
   getImage = () => {
-    const UserId = this.state.profile.id;
-    console.log(UserId);
-    Axios.get(`/api/auth/image/${UserId}`)
+    // const UserId = this.state.profile.id;
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    console.log(urlUserId);
+
+    this.setState({ eventId: urlUserId });
+
+    // console.log(UserId);
+    Axios.get(`/api/auth/image/${urlUserId}`)
       .then((response) => {
         this.setState({
           imageName: response.data,
@@ -109,12 +152,29 @@ export default class UserProfile extends Component {
   };
 
   getUserRating = () => {
-    Axios.get(`/api/rate/userprofile/${this.state.profile.id}`)
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    Axios.get(`/api/rate/userprofile/${urlUserId}`)
       .then((res) => {
         this.setState({ userRating: res.data });
         console.log(this.state.userRating);
       })
       .catch((err) => console.log(err));
+  };
+
+  hideButtonRender = () => {
+    const loggedInUserId = this.state.profile.id;
+    const urlUserId = this.state.urlUserId;
+
+    if (1 !== 2) {
+      console.log("does not equal");
+      this.setState({ hideButton: "d-none" });
+    } else {
+      console.log("is equal");
+      this.setState({ hideButton: "" });
+    }
   };
 
   render() {
@@ -208,7 +268,7 @@ export default class UserProfile extends Component {
             <div className="row">
               <div className="col-lg-7 col-md-10 mx-auto">
                 <h1 className="display-2 text-dark text-center">
-                  {this.state.profile.user_name}
+                  {this.state.userName}
                 </h1>
               </div>
             </div>
@@ -337,7 +397,8 @@ export default class UserProfile extends Component {
                       <a
                         class="a-design"
                         href="edituserprofile"
-                        className="btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary"
+                        hideButton={this.hideButtonRender}
+                        className={`btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary ${this.state.hideButton}`}
                       >
                         Edit Profile
                       </a>

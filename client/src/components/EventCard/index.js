@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import ReviewComment from "../ReviewForm";
 import { Storage } from "aws-amplify";
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
@@ -6,7 +7,7 @@ import StarRatingComponent from "react-star-rating-component";
 import ImageGallery from "react-image-gallery";
 import moment from "moment";
 import Axios from "axios";
-import { Auth } from 'aws-amplify';
+import { Auth } from "aws-amplify";
 import "./style.scss";
 
 export class index extends Component {
@@ -170,18 +171,20 @@ export class index extends Component {
   };
 
   eventAttendee = (event) => {
-    event.preventDefault()
-    const UserId = this.state.userId[0]
-    const EventId = this.state.eventId
-    console.log(UserId)
-    console.log(EventId)
+    event.preventDefault();
+    const UserId = this.state.userId[0];
+    const EventId = this.state.eventId;
+    console.log(UserId);
+    console.log(EventId);
     Axios.post("/api/auth/joinevent", {
       UserId,
-      EventId
-    }).then((res) => {
-      console.log(res)
-    }).catch(err => console.log(err))
-  }
+      EventId,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
 
   render() {
     const scrollingContainer = {
@@ -278,7 +281,14 @@ export class index extends Component {
                   <span>
                     <b>Contact: </b>
                   </span>
-                  {contactPerson}
+                  <Link
+                    to={{
+                      pathname: "/userprofile",
+                      search: `?userId=${this.state.userId}`,
+                    }}
+                  >
+                    {contactPerson}
+                  </Link>
                 </h4>
                 <hr />
                 <h5>
