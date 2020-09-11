@@ -56,7 +56,7 @@ export class OceanParallax extends Component {
 					<h3 className="card-title plastic-margin text-center" style={{ color: '#001a33'}}>Ocean's Plastic Problem</h3>
 					<div className="card border-0">
 					<div className="row no-gutters">
-								<div className="col-md-4">
+								<div className="col-md-4" style={{backgroundColor: " #fff7ed"}}>
 								<img src="../assets/imgs/treeplastic.jpg" className="card-img rounded ml-5 mb-5" alt="tree covered in garbages"/>
 								</div>
 							<div className="col-8 body-color ">
@@ -89,16 +89,12 @@ export class OceanParallax extends Component {
 											class="btn btn-outline-danger float-right text-danger mr-5"
 										>
 											<i class="fas fa-robot" />
-										</button>
-								
-
-								
-
+									</button>
 							</div>
 						</div>
 						</div>
 						</div>
-					<div className="card-footer background-longCard"></div>
+					<div className="card-footer background-longCard" style={{paddingTop:"4rem"}}></div>
 				</div>
 			</div>
 		);
@@ -181,13 +177,29 @@ export class OceanParallax extends Component {
 
 				<div class="background2">
 					<Parallax strength={500}>
-						<div class="container border-0">
-							<div className="card mb-3 body-color mt-5" style={{ maxWidth: '540px;' }}>
-								<div className="row no-gutters mb-3 mt-3">
-									<div className="col-md-4">
+						<div className="container border-0">
+
+						<div className="card body-color2 border-0 mb-3" style={{width: "18rem;"}}>
+							<div className="card-body">
+							<hr className="bg-white"/>
+								<h3 className="card-title text-white text-center mb-2">Envira</h3>
+								<hr className="bg-white"/>
+								<h6 className="card-subtitle mb-2 text-white text-center">Questions you can ask Envira</h6>
+								<li className="card-text text-white">What are the tempatures of the ocean?</li>
+								<li className="text-white">What can I do to help the ocean?</li>
+								<li className="text-white">How do you feel about the ocean pollution?</li>
+								<li className="text-white">How will this affect the ocean for future generations?</li>
+								<li className="text-white">What are some ways I can reduce plastic use?</li>
+								<li className="text-white">What is your favorite ocean animal?</li>
+							</div>
+							</div>
+
+						<div className="card mb-3 body-color2 border-0" style={{ maxWidth: '540px;' }}>
+								<div className="row no-gutters mt-3 mb-5">
+								<div className="col-md-5 mt-5">
 										<div
-											id="carouselExampleIndicators"
-											style={{ width: '90%', paddingLeft: '35px' }}
+											id="carouselExampleIndicators mr-5"
+											style={{ width: '90%' }}
 											class="carousel slide"
 											data-ride="carousel"
 										>
@@ -230,7 +242,7 @@ export class OceanParallax extends Component {
 												data-slide="prev"
 											>
 												<span class="carousel-control-prev-icon" aria-hidden="true" />
-												<span class="sr-only">Previous</span>
+												<span class="sr-only text-white">Previous</span>
 											</a>
 											<a
 												class="carousel-control-next"
@@ -239,45 +251,45 @@ export class OceanParallax extends Component {
 												data-slide="next"
 											>
 												<span class="carousel-control-next-icon" aria-hidden="true" />
-												<span class="sr-only">Next</span>
+												<span class="sr-only text-white">Next</span>
 											</a>
 										</div>
 									</div>
-									<div className="col-md-8">
+									<div className="col-md-7">
 										<div className="card-body">
-											<h1 class="card-title text-center">Oceans Offshore Drilling</h1>
-											<hr/>
-											<p className="card-text">
-											First, let us go over the big oil spills. These oil spills are a known killer of wildlife. In 2010 at the Gulf of Mexico, BP's Deepwater Horizon rig had an explosion resulting in a spill that covered 68,000 square miles of sea surface. It killed approximately 1 MILLION coastal and offshore seabirds, 5,000 marine mammals, and 1,000 sea turtles. Smaller spills don't typically make headlines. Oil spills, both big and small, have been increasing over the years. In 2018 there were 2,834 oil spills reported by oil and gas companies in Colorado alone. This can have long term environmental impacts and devastating effects on animals through direct contact, inhalation, and ingestion of toxic chemicals. 
+											<h1 class="card-title text-center text-white">Oceans Offshore Drilling</h1>
+											<hr class="bg-white"/>
+											<p className="card-text text-white">
+											First, let us go over the big oil spills. These oil spills are a known killer of wildlife. In 2010 at the Gulf of Mexico, BP's Deepwater Horizon rig had an explosion resulting in a spill that covered 68,000 square miles of sea surface. It killed approximately 1 MILLION coastal and offshore seabirds, 5,000 marine mammals, and 1,000 sea turtles. Smaller spills don't typically make headlines. Oil spills, both big and small, have been increasing over the years. In 2018 there were 2,834 oil spills reported by oil and gas companies in Colorado alone. This can have long term environmental impacts and devastating effects on animals through direct contact, inhalation, and ingestion of toxic chemicals. . 
 											</p>
-											<p>These oil spills have a negative impact on local communities as well. More than 12 million people live near oil and gas facilities. This leaves those communities exposed to water and air pollution on a daily basis. This can lead to an array of health problems. This mostly affects people of color who typically live in neighborhoods with more pollution.</p>
+											<p class="text-white">
+											These oil spills have a negative impact on local communities as well. More than 12 million people live near oil and gas facilities. This leaves those communities exposed to water and air pollution on a daily basis. This can lead to an array of health problems. This mostly affects people of color who typically live in neighborhoods with more pollution.
+											</p>
+											<p className="text-white"> The dirtiest emissions originate from fossil fuels, the most abundant being carbon dioxide, primarily released into the air from burning oil, coal, and gas.  Methane a gas that is released into the air during the extraction of natural gas through the method of "fracking."</p>
 
-											<p>The dirtiest emissions originate from fossil fuels, the most abundant being carbon dioxide, primarily released into the air from burning oil, coal, and gas.  Methane a gas that is released into the air during the extraction of natural gas through the method of "fracking."</p>
-
-											<p>United States is one of the world's top emitters at 24% of all U.S greenhouse gas emissions, including methane, which can be traced back to fossil fuel extraction from federal lands.</p>
-											<p className="card-text" />
+											<p class="text-white">United States is one of the world's top emitters at 24% of all U.S greenhouse gas emissions, including methane, which can be traced back to fossil fuel extraction from federal lands.</p>
 											<button
 											type="button"
 											onClick={this.enviraOffshore}
-											class="btn btn-outline-danger float-right text-danger mr-5"
-										>
+											class="btn btn-outline-danger float-right text-danger mr-5">
 											<i class="fas fa-robot" />
 										</button>
 										</div>
 									</div>
+
 								</div>
 							</div>
 
-							<div className="card mb-3 body-color" style={{ maxWidth: '540px;' }}>
+							<div className="card mb-3 body-color2 border-0" style={{ maxWidth: '540px;' }}>
 								<div className="row no-gutters mt-3 mb-5">
-									<div className="col-md-8">
+									<div className="col-md-7">
 										<div className="card-body">
-											<h1 class="card-title text-center">Marine Wildlife</h1>
-											<hr/>
-											<p className="card-text">
+											<h1 class="card-title text-center text-white">Marine Wildlife</h1>
+											<hr class="bg-white"/>
+											<p className="card-text text-white">
 											Illegal Fish poaching has affected many marine mammals to the brink of becoming endangered. Whales have been hunted, tangled in fishing gear or marine garbage, and also killed by ships. Something as small as a party balloon can kill a whale by cutting off its digestive tract. Another species affected are seals. The primary loss of certain seal species is due to commercial fishing and loss of food. 
 											</p>
-											<p>
+											<p class="text-white">
 											Currently, too many fish are being taken out of the ocean. This creates an imbalance in the ocean's ecosystem, creating less food availability for species of animals. We are finding that catching to many fish at once interrupts the breeding population, and it becomes too depleted to recover.
 											</p>
 											<p className="card-text" />
@@ -291,7 +303,7 @@ export class OceanParallax extends Component {
 										</div>
 									</div>
 
-									<div className="col-md-4 mt-5">
+									<div className="col-md-5 mt-5">
 										<div
 											id="carouselExampleIndicators mr-5"
 											style={{ width: '90%' }}

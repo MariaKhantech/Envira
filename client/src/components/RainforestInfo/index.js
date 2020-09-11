@@ -229,9 +229,11 @@ export class RainforestInfo extends Component {
 						</div>
 
 						<div class="row mx-auto">
+
+				
 							<div class="card mb-3 forest-fire-card mt-5 mx-auto" style={{ maxWidth: '1000px' }}>
 								<div class="row ">
-									<div class="col-md-8 ">
+									<div class="col-md-5 ">
 										<div class="card-body forest-fire-card ">
 											<h2 class="card-title text-white">Amazon Rainforest Fires</h2>
 											<p class="card-text text-white">
@@ -288,9 +290,10 @@ export class RainforestInfo extends Component {
 					<Parallax strength={500}>
 						<div style={{ height: '100%' }}>
 							<div class="row mb-5">
+							<div class="col-md-5 ">
 								<div class="card mt-5 mx-auto border-0" style={{ width: '25rem' }}>
 									<div class="card-body forest-fire-card">
-										<h3 class="card-title text-white text-center">Deforestation</h3>
+										<h3 class="card-title text-white text-center">Deforestation & Orangutans</h3>
 										<div
 											id="carouselExampleFade"
 											class="carousel slide carousel-fade"
@@ -338,23 +341,28 @@ export class RainforestInfo extends Component {
 												<span class="sr-only">Next</span>
 											</a>
 										</div>
-										<h6 class="card-subtitle mb-2 mt-2 text-muted text-center">Brazil</h6>
-										<p class="card-text text-white text-center">
-											The Amazon is disappearing quickly due to deforestation. The amount of
-											forest lost in the last 30-40 years is about 20% of its levels before that
-											time. Brazil is considered to have one of the most detailed data, it seems
-											to an area of forest the size of Texas every year.
+										<h5 class="card-subtitle mb-2 mt-2 text-muted text-center">Asia</h5>
+										<p class="card-text text-white">
+										Orangutans are known for their keen intelligence. The United Natiosn Environmental Program predicts that they will be eliminated in 2 decades if the deforestation continues on its trend. The large demand for palm oil is its main cause. Orangutans are also killed illegally for wildlife trade. The babies sold off as pets. 
 										</p>
 									</div>
 								</div>
-								<div class="col-md-6 text-center">
-									<iframe
-										class="first-chart mt-5 bg-white"
-										width="500"
-										height="525"
-										frameborder="0"
-										src="https://www.globalforestwatch.org/embed/widget/treeLossRanked/country/BRA"
-									/>
+							</div>
+								<div class="col-md-5">
+								<div className="card forest-fire-card border-0 mt-5 ml-5" style={{width: "18rem;"}}>
+							<div className="card-body">
+							<hr className="bg-white"/>
+								<h3 className="card-title text-white text-center mb-2">Envira</h3>
+								<hr className="bg-white"/>
+								<h6 className="card-subtitle mb-2 text-white text-center">Questions you can ask Envira</h6>
+								<li className="card-text text-white">How many orangutans are left in the world?</li>
+								<li className="text-white">How many animals are at risk due to deforestation?</li>
+								<li className="text-white">What can we do to help?</li>
+								<li className="text-white">What was the largest wildfire to date?</li>
+								<li className="text-white">Will this get better?</li>
+								<li className="text-white">What do you feel about deforestation?</li>
+							</div>
+							</div>
 								</div>
 							</div>
 						</div>
@@ -374,7 +382,7 @@ export class RainforestInfo extends Component {
 									<div class="card mt-5 mx-auto mb-5 border-0" style={{ width: '30rem' }}>
 										<div class="card-body forest-fire-card ">
 											<h3 class="card-title text-white text-center">American Deforestation</h3>
-											<h5 class="card-subtitle mb-2 text-muted text-white text-center">
+											<h5 class="card-subtitle mb-2 text-muted text-center">
 												America
 											</h5>
 											<p class="card-text text-white text-center">
