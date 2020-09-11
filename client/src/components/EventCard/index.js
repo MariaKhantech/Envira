@@ -171,7 +171,7 @@ export class index extends Component {
     })
       .then((res) => {
         console.log(res);
-        this.setState({ rating: this.state.rating,postRatingDisabled: true});
+        this.setState({ rating: this.state.rating, postRatingDisabled: true });
       })
       .catch((err) => console.log(err));
   };
@@ -190,8 +190,6 @@ export class index extends Component {
     Axios.get(`/api/rate/userprofile/${UserId}/${EventId}`)
       .then((res) => {
         this.setState({ rating: res.data.rating, postRatingDisabled: true })
-
-
       })
       .catch((err) => console.log(err));
   };
@@ -224,23 +222,23 @@ export class index extends Component {
 
       }).catch(err => console.log(err))
   }
-  // post event attendee details
+
+
+  // post event attendee details
   eventAttendee = (event) => {
     event.preventDefault();
     const UserId = this.state.profile.id;
     const EventId = this.state.eventId;
-    console.log(UserId);
     Axios.post("/api/auth/joinevent", {
       UserId,
       EventId
     }).then((res) => {
-      console.log(res)
       this.setState({
         joinEventDisabled: true,
         postRatingDisabled: false
       })
-      .catch((err) => console.log(err));
-  };
+    }).catch((err) => console.log(err));
+  }
 
   //redirect user to signup page
   registerToJoinEvent = (event) => {
