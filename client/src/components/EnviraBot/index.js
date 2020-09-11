@@ -56,11 +56,11 @@ export class EnviraBot extends Component {
 				</Zoom>
 				<ChatBot
 					title="My Bot"
-					botName="BookTrip_dev"
+					botName="Envira"
 					welcomeMessage="Welcome, how can I help you today?"
 					// onComplete={this.handleComplete.bind(this)}
 					clearOnComplete={true}
-					conversationModeOn={false}
+					conversationModeOn={true}
 					voiceEnabled={true}
 				/>
 			</div>
