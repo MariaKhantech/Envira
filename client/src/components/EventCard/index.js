@@ -240,8 +240,8 @@ export class index extends Component {
         postRatingDisabled: false
       })
       .catch((err) => console.log(err));
-  };
-}
+      });
+    }
 
   //redirect user to signup page
   registerToJoinEvent = (event) => {
