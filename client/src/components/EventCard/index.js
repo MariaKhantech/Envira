@@ -241,6 +241,7 @@ export class index extends Component {
       })
       .catch((err) => console.log(err));
   };
+}
 
   //redirect user to signup page
   registerToJoinEvent = (event) => {
