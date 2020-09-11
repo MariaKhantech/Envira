@@ -59,12 +59,7 @@ module.exports = (sequelize, DataTypes) => {
     Event.belongsTo(models.User, { foreignKey: { allowNull: false } });
     Event.hasMany(models.EventComment, { onDelete: "cascade" });
     Event.hasMany(models.Reply, { onDelete: "cascade" });
-    Event.belongsToMany(models.User, {
-      through: "EventAttendee",
-      as: "events",
-      foreignKey: "eventId",
-      otherKey: "userId",
-    });
+    Event.hasMany(models.EventAttendee, { onDelete: "cascade" });
   };
 
   return Event;

@@ -6,6 +6,7 @@ import StarRatingComponent from "react-star-rating-component";
 import ImageGallery from "react-image-gallery";
 import moment from "moment";
 import Axios from "axios";
+import { Auth } from 'aws-amplify';
 import "./style.scss";
 
 export class index extends Component {
@@ -28,7 +29,7 @@ export class index extends Component {
   }
 
   //load any data here like comments
-  componentDidMount() {
+  async componentDidMount() {
     let reviewArray = [
       { name: <ReviewComment /> },
       { name: <ReviewComment /> },
@@ -81,7 +82,6 @@ export class index extends Component {
 
     Axios.get(`/api/create/eventcreate`)
       .then((response) => {
-        console.log(response.data);
         this.setState({ eventData: response.data });
 
         const filteredId = this.state.eventData.filter(
@@ -89,7 +89,6 @@ export class index extends Component {
         );
 
         this.setState({ eventData: filteredId });
-        console.log(this.state.eventData);
 
         const UserId = this.state.eventData.map((data) => data.UserId);
         const image = this.state.eventData.map((data) => data.image);
@@ -108,7 +107,6 @@ export class index extends Component {
         this.setState({
           profileImage: response.data,
         });
-        console.log(this.state.profileImage);
         this.getProfileImageUrl();
       })
       .catch((err) => console.log(err));
@@ -116,10 +114,8 @@ export class index extends Component {
 
   getProfileImageUrl = () => {
     let fileName = this.state.profileImage.image_name;
-    console.log(fileName);
     Storage.get(fileName)
       .then((data) => {
-        console.log(data);
         this.setState({
           profileImageUrl: data,
         });
@@ -163,7 +159,6 @@ export class index extends Component {
     Axios.get(`/api/rate/userprofile/${this.state.userId}`)
       .then((res) => {
         this.setState({ userRating: res.data });
-        console.log(this.state.userRating);
       })
       .catch((err) => console.log(err));
   };
@@ -173,6 +168,20 @@ export class index extends Component {
       <StarRatingComponent name="rating" starCount={5} value={data.rating} />
     ));
   };
+
+  eventAttendee = (event) => {
+    event.preventDefault()
+    const UserId = this.state.userId[0]
+    const EventId = this.state.eventId
+    console.log(UserId)
+    console.log(EventId)
+    Axios.post("/api/auth/joinevent", {
+      UserId,
+      EventId
+    }).then((res) => {
+      console.log(res)
+    }).catch(err => console.log(err))
+  }
 
   render() {
     const scrollingContainer = {
@@ -297,14 +306,14 @@ export class index extends Component {
             <p class="lead text-white">{date}</p>
 
             <p class="lead">
-              <a
+              <button
                 class="btn btn-primary btn-lg"
                 style={{ marginTop: "8rem" }}
-                href="#"
                 role="button"
+                onClick={this.eventAttendee}
               >
                 Join Event
-              </a>
+              </button>
             </p>
           </div>
         </div>

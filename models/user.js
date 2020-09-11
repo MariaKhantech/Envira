@@ -28,12 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasOne(models.Image, { onDelete: 'cascade' });
     User.hasOne(models.CompanyProfile, { onDelete: 'cascade' });
     User.hasMany(models.Rating, { onDelete: 'cascade' });
-    User.belongsToMany(models.Event, {
-      through: 'EventAttendee',
-      as: 'events',
-      foreignKey: 'userId',
-      otherKey: 'eventId',
-    });
+    User.hasMany(models.EventAttendee, { onDelete: 'cascade' });
   };
 
   return User;
