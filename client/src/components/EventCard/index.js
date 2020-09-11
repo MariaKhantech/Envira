@@ -24,12 +24,15 @@ export class index extends Component {
       profileImage: "",
       profileImageUrl: "",
       rating: 0,
-      disabled: true,
+      starDisabled: true,
+      joinEventDisabled: true,
+      postRatingDisabled: true,
       userRating: [],
       profile: [],
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
     this.timeInterval = 0;
+    this.onStarClick = this.onStarClick.bind(this)
   }
 
   //load any data here like comments
@@ -155,7 +158,7 @@ export class index extends Component {
       .catch((err) => console.log(err));
   };
 
-  // Post request to submit rating to DB
+  // Post rating first time
   postRating = (event) => {
     event.preventDefault();
     const queryString = window.location.search;
@@ -168,46 +171,59 @@ export class index extends Component {
     })
       .then((res) => {
         console.log(res);
-        this.setState({ rating: "0", disabled: true });
+        this.setState({ rating: this.state.rating,postRatingDisabled: true});
       })
       .catch((err) => console.log(err));
   };
+
 
   //   click method to change star value
-  onStarClick(nextValue) {
-    this.setState({ rating: nextValue, disabled: false });
+  onStarClick(rating) {
+    console.log(rating)
+    this.setState({ rating });
   }
 
+  //get rating details given by logged in user
   getUserRating = () => {
-    const UserId = this.state.profile.id;
-    console.log(UserId);
-    Axios.get(`/api/rate/userprofile/${UserId}`)
+    const UserId = this.state.profile.id
+    const EventId = this.state.eventId
+    Axios.get(`/api/rate/userprofile/${UserId}/${EventId}`)
       .then((res) => {
-        console.log(res);
-        this.setState({ userRating: res.data });
+        this.setState({ rating: res.data.rating, postRatingDisabled: true })
+
+
       })
       .catch((err) => console.log(err));
   };
 
+  // calculate average rating when user is not logged in 
   starRating = () => {
     this.state.userRating.map((data) => (
-      <StarRatingComponent name="rating" starCount={5} value={data.rating} />
+      <StarRatingComponent name="rating" starCount={5} value={data.rating} postRatingDisabled={false} />
     ));
   };
 
   // get user event attendance details
   getUserAttendance = () => {
-    const UserId = this.state.profile.id;
-    console.log(UserId);
-    Axios.get(`/api/auth/joinevent/${UserId}`)
+    const UserId = this.state.profile.id
+    const EventId = this.state.eventId
+    console.log(EventId)
+    Axios.get(`/api/auth/joinevent/${UserId}/${EventId}`)
       .then((res) => {
-        console.log(res);
-        this.setState({
-          disabled: true,
-        });
-      })
-      .catch((err) => console.log(err));
-  };
+        if (res.data === null) {
+          this.setState({
+            joinEventDisabled: false,
+            postRatingDisabled: true
+          })
+        }
+        else {
+          this.setState({
+            joinEventDisabled: true,
+          })
+        }
+
+      }).catch(err => console.log(err))
+  }
   // post event attendee details
   eventAttendee = (event) => {
     event.preventDefault();
@@ -216,13 +232,12 @@ export class index extends Component {
     console.log(UserId);
     Axios.post("/api/auth/joinevent", {
       UserId,
-      EventId,
-    })
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          disabled: true,
-        });
+      EventId
+    }).then((res) => {
+      console.log(res)
+      this.setState({
+        joinEventDisabled: true,
+        postRatingDisabled: false
       })
       .catch((err) => console.log(err));
   };
@@ -311,8 +326,10 @@ export class index extends Component {
             name="rating"
             starCount={5}
             value={this.state.rating}
-            onStarClick={this.onStarClick.bind(this)}
+            onStarClick={this.onStarClick}
+            disabled={this.state.starDisabled}
           />
+
         </div>
         <OverlayTrigger
           delay={{ show: 250, hide: 350 }}
@@ -320,7 +337,7 @@ export class index extends Component {
           overlay={popover}
         >
           <Button
-            disabled={this.state.disabled}
+            disabled={this.state.postRatingDisabled}
             variant="primary"
             size="sm"
             className="float-center"
@@ -410,7 +427,7 @@ export class index extends Component {
                   style={{ marginTop: "8rem" }}
                   role="button"
                   onClick={this.eventAttendee}
-                  disabled={this.state.disabled}
+                  disabled={this.state.joinEventDisabled}
                 >
                   Join Event
                 </button>

@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const db = require("../../models");
+const { Op } = require("sequelize");
 
 router.post("/event", (req, res) => {
   console.log(req.body.rating);
@@ -18,11 +19,12 @@ router.post("/event", (req, res) => {
     });
 });
 
-router.get("/userprofile/:UserId", (req, res) => {
+router.get("/userprofile/:UserId/:EventId", (req, res) => {
   console.log(req.body.UserId)
-  db.Rating.findAll({
+  db.Rating.findOne({
     where: {
       UserId: req.params.UserId,
+      EventId:req.params.EventId
     },
   })
     .then((dbResponse) => {

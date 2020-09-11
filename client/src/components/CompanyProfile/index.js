@@ -42,7 +42,11 @@ export default class CompanyProfile extends Component {
           // call this function to get logged in company event details
           this.getUserJoinedEvent();
           this.getImage();
+
           this.getUserRating();
+
+          this.getUserEvents();
+
         })
         .catch((err) => console.log(err));
     } catch (error) {
