@@ -10,6 +10,29 @@ import oceanFloor from './oceanfloor.png';
 export class OceanParallax extends Component {
 	componentDidMount() {}
 
+	enviraAudio() {
+		let oceansPlastic= new Audio(
+			' https://envirabucket215241-dev.s3.amazonaws.com/polly/oceans-plastic-problem.eb669192-286a-4cb6-84e2-2a4637ab68cd.mp3'
+		);
+		oceansPlastic.play();
+	}
+	enviraOffshore() {
+		let oceansOffshoreDrilling= new Audio(
+			' https://envirabucket215241-dev.s3.amazonaws.com/polly/oceansoffshore-drilling.94f77961-e2eb-4774-aa15-53785bf2b02b.mp3','https://envirabucket215241-dev.s3.amazonaws.com/polly/enviraheartbreaking.4230988f-d063-438c-8505-6b0f512d8774.mp3'
+			
+		);
+		oceansOffshoreDrilling.play();
+	}
+	enviraOverFishing() {
+		let oceanOverFish= new Audio(
+			'https://envirabucket215241-dev.s3.amazonaws.com/polly/overfishing.a5896923-afa8-43d0-b7fc-713b27199d61.mp3'
+			
+		);
+		oceanOverFish.play();
+	}
+	
+	
+
 	render() {
 		const insideStyles = {
 			background: 'white',
@@ -25,33 +48,57 @@ export class OceanParallax extends Component {
 			'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80';
 
 		let cardDiv = (
-			<div className="card text-center border-0">
-				<div className="card-header" style={{ background: '#001a33' }}>
+			<div className="card border-0">
+				<div className="card-header text-center" style={{ background: '#001a33' }}>
 					<OceanPollutionText />
 				</div>
 				<div className="card-body body-color">
-					<h3 className="card-title">Plastic</h3>
-					<div class="card border-0">
-						<div class="card-body body-color ">
-							<img src="../assets/imgs/treeplastic.jpg" class="rounded float-left" alt="..." />
-							<div class="col-10">
-								<h5>
+					<h3 className="card-title plastic-margin text-center" style={{ color: '#001a33'}}>Ocean's Plastic Problem</h3>
+					<div className="card border-0">
+					<div className="row no-gutters">
+								<div className="col-md-4">
+								<img src="../assets/imgs/treeplastic.jpg" className="card-img rounded ml-5 mb-5" alt="tree covered in garbages"/>
+								</div>
+							<div className="col-8 body-color ">
+							<div className="card-body ">
+								<hr style={{backgroundColor: "#004080"}}/>
+								<h5 class="text-center">
 									If I told you that there will be more plastic in the ocean than fish 2050 would you
 									believe me?
 								</h5>
-								<p class="ml-2">
-									8 million tons of plastic is thrown into the ocean annually. By 2050 there will be
+								<hr   style={{backgroundColor: "#004080"}}/>
+								<p className="ml-2 mr-2">
+									Here are just a few ways that the ocean is affected by climate change:
+									</p>
+
+									<p className="ml-2 mr-2">8 million tons of plastic is thrown into the ocean annually. By 2050 there will be
 									more plastic in the oceans than fish. Which means people that consume seafood will
 									be consuming more plastic. There are currently 800 species worldwide affected by
 									marine debris. Everything from seabirds, sea turtules to fins and marine mamals.
 									They get entangled with plastic. Many of these animals ingesting plastic debris
 									causing suffocation, starvation and drowning.
-								</p>
+									</p>
+									<p className="ml-2 mr-2">Most people have heard of the Great Barrier Reef. Did you know that it is dying due to increased tempatures? Mass coral bleaching results in starvation, shrinkage and death of corals that support thousands of species that live on corals. Coral reefs are sensative to increased tempatures and the oceans are experiancing longer and more severe "marine heat waves" that could push the oceans animals and ecosystems to their limit. Do you know the ocean produces 50-80% of the worlds oxygen?</p>
+
+									<p className="ml-2 mr-2">Many fish migration are being interupted. The fish are migrating towards the poles in response to the ocean warming up. Disturbing many fisheries around the world.</p>
+							
+
+									<button
+											type="button"
+											onClick={this.enviraAudio}
+											class="btn btn-outline-danger float-right text-danger mr-5"
+										>
+											<i class="fas fa-robot" />
+										</button>
+								
+
+								
+
 							</div>
 						</div>
-					</div>
-
-					<div className="card-footer background-longCard">2 days ago</div>
+						</div>
+						</div>
+					<div className="card-footer background-longCard"></div>
 				</div>
 			</div>
 		);
@@ -198,12 +245,24 @@ export class OceanParallax extends Component {
 									</div>
 									<div className="col-md-8">
 										<div className="card-body">
-											<h1 class="card-title">Oceans Plastic Pollution</h1>
+											<h1 class="card-title text-center">Oceans Offshore Drilling</h1>
+											<hr/>
 											<p className="card-text">
-												This is a wider card with supporting text below as a natural lead-in to
-												additional content. This content is a little bit longer.
+											First, let us go over the big oil spills. These oil spills are a known killer of wildlife. In 2010 at the Gulf of Mexico, BP's Deepwater Horizon rig had an explosion resulting in a spill that covered 68,000 square miles of sea surface. It killed approximately 1 MILLION coastal and offshore seabirds, 5,000 marine mammals, and 1,000 sea turtles. Smaller spills don't typically make headlines. Oil spills, both big and small, have been increasing over the years. In 2018 there were 2,834 oil spills reported by oil and gas companies in Colorado alone. This can have long term environmental impacts and devastating effects on animals through direct contact, inhalation, and ingestion of toxic chemicals. 
 											</p>
+											<p>These oil spills have a negative impact on local communities as well. More than 12 million people live near oil and gas facilities. This leaves those communities exposed to water and air pollution on a daily basis. This can lead to an array of health problems. This mostly affects people of color who typically live in neighborhoods with more pollution.</p>
+
+											<p>The dirtiest emissions originate from fossil fuels, the most abundant being carbon dioxide, primarily released into the air from burning oil, coal, and gas.  Methane a gas that is released into the air during the extraction of natural gas through the method of "fracking."</p>
+
+											<p>United States is one of the world's top emitters at 24% of all U.S greenhouse gas emissions, including methane, which can be traced back to fossil fuel extraction from federal lands.</p>
 											<p className="card-text" />
+											<button
+											type="button"
+											onClick={this.enviraOffshore}
+											class="btn btn-outline-danger float-right text-danger mr-5"
+										>
+											<i class="fas fa-robot" />
+										</button>
 										</div>
 									</div>
 								</div>
@@ -213,12 +272,22 @@ export class OceanParallax extends Component {
 								<div className="row no-gutters mt-3 mb-5">
 									<div className="col-md-8">
 										<div className="card-body">
-											<h1 class="card-title">Oceans Plastic Pollution</h1>
+											<h1 class="card-title text-center">Marine Wildlife</h1>
+											<hr/>
 											<p className="card-text">
-												This is a wider card with supporting text below as a natural lead-in to
-												additional content. This content is a little bit longer.
+											Illegal Fish poaching has affected many marine mammals to the brink of becoming endangered. Whales have been hunted, tangled in fishing gear or marine garbage, and also killed by ships. Something as small as a party balloon can kill a whale by cutting off its digestive tract. Another species affected are seals. The primary loss of certain seal species is due to commercial fishing and loss of food. 
+											</p>
+											<p>
+											Currently, too many fish are being taken out of the ocean. This creates an imbalance in the ocean's ecosystem, creating less food availability for species of animals. We are finding that catching to many fish at once interrupts the breeding population, and it becomes too depleted to recover.
 											</p>
 											<p className="card-text" />
+											<button
+											type="button"
+											onClick={this.enviraOverFishing}
+											class="btn btn-outline-danger float-right text-danger mr-5"
+										>
+											<i class="fas fa-robot" />
+										</button>
 										</div>
 									</div>
 

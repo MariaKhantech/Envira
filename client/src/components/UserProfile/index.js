@@ -5,6 +5,8 @@ import { Auth } from "aws-amplify";
 import { Storage } from "aws-amplify";
 import ReviewForm from "../ReviewForm";
 import StarRatingComponent from "react-star-rating-component";
+import { Link } from "react-router-dom";
+import $ from "jquery";
 
 export default class UserProfile extends Component {
   state = {
@@ -21,6 +23,7 @@ export default class UserProfile extends Component {
     imagePreviewUrl: "",
     imageName: [],
     userRating: [],
+    events: [],
   };
 
   async componentDidMount() {
@@ -53,6 +56,7 @@ export default class UserProfile extends Component {
   // get logged in user info from UserProfile model
   getUserProfile = () => {
     const UserId = this.state.profile.id;
+
     Axios.get(`/api/auth/userProfile/${UserId}`)
       .then((response) => {
         this.setState({
@@ -83,7 +87,10 @@ export default class UserProfile extends Component {
 
   getImage = () => {
     const UserId = this.state.profile.id;
-    console.log(UserId);
+
+    this.setState({ eventId: UserId });
+
+    // console.log(UserId);
     Axios.get(`/api/auth/image/${UserId}`)
       .then((response) => {
         this.setState({
@@ -109,13 +116,34 @@ export default class UserProfile extends Component {
   };
 
   getUserRating = () => {
-    Axios.get(`/api/rate/userprofile/${this.state.profile.id}`)
+    const UserId = this.state.profile.id;
+
+    Axios.get(`/api/rate/userprofile/${UserId}`)
       .then((res) => {
         this.setState({ userRating: res.data });
         console.log(this.state.userRating);
       })
       .catch((err) => console.log(err));
   };
+
+  // get logged in user info from Event model
+  getUserEvents = () => {
+    console.log("herer");
+    const UserId = this.state.profile.id;
+    Axios.get(`/api/getuserevents/${UserId}`)
+      .then((response) => {
+        this.setState({
+          events: response.data,
+        });
+        console.log(response.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  //close the modal if user edits an event
+  closeModal() {
+    $("#eventModal").modal("hide");
+  }
 
   render() {
     const myStyle = {
@@ -147,7 +175,7 @@ export default class UserProfile extends Component {
       <div>
         <div className="row">
           <div className="col">
-            <div className="card-profile-stats card-style-plus d-flex justify-content-center mt-md-5">
+            <div className="card-profile-stats d-flex justify-content-center mt-md-5">
               <div>
                 <span className="heading" />
                 <span className="heading">{starRating}</span>
@@ -192,9 +220,47 @@ export default class UserProfile extends Component {
     );
     //end of the overview tab //
 
+    //render list of events for modal
+    const eventCards = this.state.events.map((event) => (
+      <div>
+        <div class="card mb-3">
+          <div class="row mx-auto no-gutters">
+            <div class="col-md-4">
+              <img
+                src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${event.image}`}
+                class="card-img"
+                alt="..."
+              />
+            </div>
+            <div class="col-md-6">
+              <div class="card-body">
+                <h5 class="card-title">{event.event_name}</h5>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <Link
+                onClick={this.closeModal}
+                to={{ pathname: "/editevent", search: `?eventId=${event.id}` }}
+              >
+                Edit
+              </Link>
+              <br />
+              <Link
+                onClick={this.closeModal}
+                to={{ pathname: "/eventspage", search: `?eventId=${event.id}` }}
+              >
+                View
+              </Link>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+    ));
+
     //end of star rating tab//
     return (
-      <div className=" main-content mb-4">
+      <div className=" main-content">
         {/* <!--reference https://www.creative-tim.com/bits/bootstrap/user-profile-page-argon-dashboard--> */}
         {/* <!-- Header --> */}
         <div
@@ -206,7 +272,7 @@ export default class UserProfile extends Component {
           {/* <!-- Header container --> */}
           <div className="container-fluid d-flex align-items-center">
             <div className="row">
-              <div className="col-lg-7 col-md-10 mx-auto">
+              <div className="col-lg-7 col-md-10 ">
                 <h1 className="display-2 text-dark text-center">
                   {this.state.profile.user_name}
                 </h1>
@@ -215,7 +281,7 @@ export default class UserProfile extends Component {
           </div>
         </div>
         {/* <!-- Page content --> */}
-        <div className=" mt-7">
+        <div className=" mt--7">
           <div className="row">
             <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0 col-12 ">
               <div className="card card-style-plus card-profile shadow ">
@@ -243,12 +309,63 @@ export default class UserProfile extends Component {
                 </div>
                 <div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                   <div className="d-flex justify-content-between">
-                    <a href="/eventsearch" className="btn btn-sm btn-info mr-4">
-                      Events
+                    <a
+                      class="a-design"
+                      href="#"
+                      className="btn-design btn btn-sm btm-sm-design btn-info mr-4"
+                      data-toggle="modal"
+                      data-target="#eventModal"
+                    >
+                      My Events
                     </a>
-                    <a href="#" className="btn btn-sm btn-default float-right">
-                      Message
+                    <a
+                      class="a-design"
+                      href="/eventCreate"
+                      className="btn-design btn btn-sm btm-sm-design btn-default float-right"
+                    >
+                      Create Event
                     </a>
+                  </div>
+                </div>
+
+                {/* MODAL FOR SEEING EVENTS*/}
+                <div
+                  class="modal fade"
+                  id="eventModal"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="eventModal"
+                  aria-hidden="true"
+                >
+                  <div
+                    class="modal-dialog modal-dialog-centered"
+                    role="document"
+                  >
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">
+                          My Events
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">{eventCards}</div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -274,18 +391,7 @@ export default class UserProfile extends Component {
                         href="#tabs-2"
                         role="tab"
                       >
-                        Rating
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        class="a-design"
-                        className="nav-link"
-                        data-toggle="tab"
-                        href="#tabs-3"
-                        role="tab"
-                      >
-                        Event Photos
+                        Joined Events
                       </a>
                     </li>
                     <li className="nav-item">
@@ -310,16 +416,10 @@ export default class UserProfile extends Component {
                       {overviewTab}
                     </div>
                     <div className="tab-pane " id="tabs-2" role="tabpanel">
-                      <p>probably delete this</p>
+                      <p>Joined events here</p>
                     </div>
                     <div className="tab-pane " id="tabs-3" role="tabpanel">
-                      <div className="row">
-                        <div className="col">
-                          <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                            <ReviewForm />
-                          </div>
-                        </div>
-                      </div>
+                      <p>My event comments here</p>
                     </div>
                   </div>
                 </div>
@@ -337,6 +437,7 @@ export default class UserProfile extends Component {
                       <a
                         class="a-design"
                         href="edituserprofile"
+                        hideButton={this.hideButtonRender}
                         className="btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary"
                       >
                         Edit Profile

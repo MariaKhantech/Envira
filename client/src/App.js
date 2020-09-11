@@ -17,6 +17,7 @@ import EventSearch from "./pages/EventSearch";
 import EventsPage from "./pages/EventsPage";
 import EventCreate from "./pages/EventCreate";
 import ViewEventCard from "./pages/ViewEventCard";
+import EditEvent from './components/EditEvent'
 
 // import CompanyReview from "./pages/CompanyReview";
 
@@ -133,6 +134,13 @@ export default class AppTest extends Component {
                     path="/eventcreate"
                     render={(props) => (
                       <EventCreate {...props} auth={authProps} />
+                    )}
+                  />
+                  <Route
+                    exact
+                    path="/editevent"
+                    render={(props) => (
+                      <EditEvent {...props}  auth={authProps} />
                     )}
                   />
                   <Route

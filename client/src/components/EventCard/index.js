@@ -6,7 +6,7 @@ import StarRatingComponent from "react-star-rating-component";
 import ImageGallery from "react-image-gallery";
 import moment from "moment";
 import Axios from "axios";
-import { Auth } from 'aws-amplify';
+import { Auth } from "aws-amplify";
 import "./style.scss";
 
 export class index extends Component {
@@ -27,6 +27,7 @@ export class index extends Component {
       profile: []
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
+    this.timeInterval = 0;
   }
 
   //load any data here like comments
@@ -39,7 +40,6 @@ export class index extends Component {
       { name: <ReviewComment /> },
     ];
     this.getEventData();
-
     this.setState({ reviewArray });
     //setting date for testing
     let date = new Date();
@@ -67,30 +67,44 @@ export class index extends Component {
       }
     }
   }
+
+  //clear the timer when we leave the page (maria)
+  componentWillUnmount() {
+    clearInterval(this.timeInterval);
+  }
+
   //initialize the countdouwn
   initializeCountdown(endtime) {
-    var timeinterval = setInterval(function () {
-      var t = Date.parse(endtime) - Date.parse(new Date());
-      var seconds = Math.floor((t / 1000) % 60);
-      var minutes = Math.floor((t / 1000 / 60) % 60);
-      var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-      var days = Math.floor(t / (1000 * 60 * 60 * 24));
-      var t = {
-        total: t,
-        days: days,
-        hours: hours,
-        minutes: minutes,
-        seconds: seconds,
-      };
+    this.timeInterval = setInterval(
+      function () {
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        var seconds = Math.floor((t / 1000) % 60);
+        var minutes = Math.floor((t / 1000 / 60) % 60);
+        var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+        var days = Math.floor(t / (1000 * 60 * 60 * 24));
+        var t = {
+          total: t,
+          days: days,
+          hours: hours,
+          minutes: minutes,
+          seconds: seconds,
+        };
 
-      document.querySelector(".days > .value").innerText = t.days;
-      document.querySelector(".hours > .value").innerText = t.hours;
-      document.querySelector(".minutes > .value").innerText = t.minutes;
-      document.querySelector(".seconds > .value").innerText = t.seconds;
-      if (t.total <= 0) {
-        clearInterval(timeinterval);
-      }
-    }, 1000);
+        document.querySelector(".days > .value").innerText = t.days;
+        document.querySelector(".hours > .value").innerText = t.hours;
+        document.querySelector(".minutes > .value").innerText = t.minutes;
+        document.querySelector(".seconds > .value").innerText = t.seconds;
+        if (t.total <= 0) {
+          clearInterval(this.timeInterval);
+          document.querySelector(".days > .value").innerText = "0";
+          document.querySelector(".hours > .value").innerText = "0";
+          document.querySelector(".minutes > .value").innerText = "0";
+          document.querySelector(".seconds > .value").innerText = "0";
+          this.setState({ eventEnd: true });
+        }
+      }.bind(this),
+      1000
+    );
   }
 
   getEventData = () => {
@@ -110,27 +124,22 @@ export class index extends Component {
         this.setState({ eventImage: image, userId: UserId });
         this.getEventImageUrl();
         this.getProfileImage(this.state.userId);
+        this.getUserImageUrl(this.state.userId);
+
+        //loads the countdown clock (Marai)
+        const eventDate = this.state.eventData.map((data) => data.date);
+        let date = new Date(eventDate);
+        this.initializeCountdown(date);
       })
       .catch((err) => console.log(err));
   };
 
-  getProfileImage = (userId) => {
+  //get the image name from Images table whihc holds the user profile image
+  getUserImageUrl = (userId) => {
     Axios.get(`/api/auth/image/${userId}`)
       .then((response) => {
         this.setState({
-          profileImage: response.data,
-        });
-        this.getProfileImageUrl();
-      })
-      .catch((err) => console.log(err));
-  };
-
-  getProfileImageUrl = () => {
-    let fileName = this.state.profileImage.image_name;
-    Storage.get(fileName)
-      .then((data) => {
-        this.setState({
-          profileImageUrl: data,
+          profileImageUrl: `https://envirabucket215241-dev.s3.amazonaws.com/public/${response.data.image_name}`,
         });
       })
       .catch((err) => console.log(err));
@@ -281,21 +290,6 @@ export class index extends Component {
       </>
     );
 
-    const images = [
-      {
-        original: "https://picsum.photos/id/1018/1000/600/",
-        thumbnail: "https://picsum.photos/id/1018/250/150/",
-      },
-      {
-        original: "https://picsum.photos/id/1015/1000/600/",
-        thumbnail: "https://picsum.photos/id/1015/250/150/",
-      },
-      {
-        original: "https://picsum.photos/id/1019/1000/600/",
-        thumbnail: "https://picsum.photos/id/1019/250/150/",
-      },
-    ];
-
     //google image asrc address
     const googleMapUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=${address}+${city}+${eventState}`;
     return (
@@ -314,6 +308,7 @@ export class index extends Component {
                   <span>
                     <b>Contact: </b>
                   </span>
+
                   {contactPerson}
                 </h4>
                 <hr />

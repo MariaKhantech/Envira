@@ -1,0 +1,24 @@
+.h5-Fstyle {
+  font-size: 1rem;
+  line-height: 1.375;
+  font-family: Rubik,Arial,sans-serif;
+  font-weight: 500;
+  color: #030929;
+}
+
+.a-Fstyle {
+  color: #818494;
+  font-weight: 500;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.a-Fstyle:hover {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.F-footer {
+  background: #ebf4fa;
+}
+/*# sourceMappingURL=style.css.map */

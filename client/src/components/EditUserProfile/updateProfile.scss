@@ -1,34 +1,36 @@
-// body {
-//     background: rgb(99, 39, 120)
-// }
+$orange: #e27d60;
+
+.signup-Rstyle {
+    border: #e27d60 !important;
+}
 
 .form-control:focus {
     box-shadow: none;
-    border-color: #BA68C8
+    border-color: $orange;
 }
 
 .profile-button {
-    background: rgb(99, 39, 120);
+    background: $orange !important;
     box-shadow: none;
     border: none
 }
 
 .profile-button:hover {
-    background: #682773
+    background: $orange;
 }
 
 .profile-button:focus {
-    background: #682773;
+    background: $orange;
     box-shadow: none
 }
 
 .profile-button:active {
-    background: #682773;
+    background: $orange;
     box-shadow: none
 }
 
 .back:hover {
-    color: #682773;
+    color: $orange;
     cursor: pointer
 }
 
@@ -37,8 +39,8 @@
 }
 
 .add-experience:hover {
-    background: #BA68C8;
+    background: $orange;
     color: #fff;
     cursor: pointer;
-    border: solid 1px #BA68C8
+    border: solid 1px $orange;
 }

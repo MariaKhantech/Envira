@@ -8,12 +8,16 @@
 	background-clip: content-box, border-box;
 	background-size: cover;
 	box-sizing: border-box;
-	box-shadow: 0 0 5px 5px rgba(133, 220, 186, 0.6);
+	box-shadow: 0 0 5px 5px rgba(190, 194, 192, 0.6);
+}
+.svg-file {
+	height: 10rem;
+	width: auto;
 }
 
 .oceans {
 	border-radius: 30%;
-	border-color: linear-gradient(#f9f047, #0fd850);
+	border-color: linear-gradient(#dee6e9, #0fd850);
 }
 
 .fires {

@@ -9,14 +9,25 @@ $ocean-floor-color: #0d2d52;
 	background-color: $ocean-floor-color;
 }
 
+.plastic-margin {
+	margin-left: 35rem;
+	margin-bottom: 0 !important;
+}
+
 #card-image {
 	width: 18rem;
 }
 .body-color {
 	background-color: $sand-color !important;
+	padding-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+	
+
 }
 .background-longCard {
 	background-color: $ocean-blue-color;
+	
 }
 
 // .card-header {
