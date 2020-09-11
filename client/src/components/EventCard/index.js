@@ -260,12 +260,12 @@ export class index extends Component {
     if (roleId === 1) {
       push({
         pathname: "/userprofile",
-        search: `?eventId=${this.state.userId[0]}`,
+        search: `?userId=${this.state.userId[0]}`,
       });
     } else if (roleId === 2) {
       push({
         pathname: "/companyprofile",
-        search: `?eventId=${this.state.userId[0]}`,
+        search: `?userId=${this.state.userId[0]}`,
       });
     }
   };
@@ -351,21 +351,22 @@ export class index extends Component {
                     <b>Contact: </b>
                   </span>
                   {this.state.profile.id && (
-                    <button
-                      className="btn btn-primary"
-                      onClick={this.handleRedirect}
-                    >
-                      {contactPerson}
-                    </button>
+                    <a>
+                      <button className="" onClick={this.handleRedirect}>
+                        {contactPerson}
+                      </button>
+                    </a>
                   )}{" "}
                   {!this.state.profile.id && (
-                    <button
-                      className="btn btn-primary"
-                      onClick={this.handleRedirect}
-                      disabled={this.state.disabled}
-                    >
-                      {contactPerson}
-                    </button>
+                    <a>
+                      <button
+                        className=""
+                        onClick={this.handleRedirect}
+                        disabled={this.state.disabled}
+                      >
+                        {contactPerson}
+                      </button>
+                    </a>
                   )}
                 </h4>
                 <hr />
