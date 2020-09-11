@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import ReviewComment from "../ReviewForm";
 import { Storage } from "aws-amplify";
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
@@ -25,7 +24,6 @@ export class index extends Component {
       rating: 0,
       disabled: true,
       userRating: [],
-   
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
     this.timeInterval = 0;
@@ -42,44 +40,45 @@ export class index extends Component {
     ];
     this.getEventData();
     this.setState({ reviewArray });
-  
   }
 
-
   //clear the timer when we leave the page (maria)
-	componentWillUnmount(){
-		clearInterval(this.timeInterval)
-	}
+  componentWillUnmount() {
+    clearInterval(this.timeInterval);
+  }
 
   //initialize the countdouwn
   initializeCountdown(endtime) {
-    this.timeInterval = setInterval(function () {
-      var t = Date.parse(endtime) - Date.parse(new Date());
-      var seconds = Math.floor((t / 1000) % 60);
-      var minutes = Math.floor((t / 1000 / 60) % 60);
-      var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-      var days = Math.floor(t / (1000 * 60 * 60 * 24));
-      var t = {
-        total: t,
-        days: days,
-        hours: hours,
-        minutes: minutes,
-        seconds: seconds,
-      };
+    this.timeInterval = setInterval(
+      function () {
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        var seconds = Math.floor((t / 1000) % 60);
+        var minutes = Math.floor((t / 1000 / 60) % 60);
+        var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+        var days = Math.floor(t / (1000 * 60 * 60 * 24));
+        var t = {
+          total: t,
+          days: days,
+          hours: hours,
+          minutes: minutes,
+          seconds: seconds,
+        };
 
-      document.querySelector('.days > .value').innerText = t.days;
-			document.querySelector('.hours > .value').innerText = t.hours;
-			document.querySelector('.minutes > .value').innerText = t.minutes;
-			document.querySelector('.seconds > .value').innerText = t.seconds;
-			if (t.total <= 0) {
-				clearInterval(this.timeInterval);
-				document.querySelector('.days > .value').innerText = '0';
-				document.querySelector('.hours > .value').innerText = '0';
-				document.querySelector('.minutes > .value').innerText = '0';
-				document.querySelector('.seconds > .value').innerText = '0';
-				this.setState({eventEnd:true})
-			}
-		}.bind(this), 1000);
+        document.querySelector(".days > .value").innerText = t.days;
+        document.querySelector(".hours > .value").innerText = t.hours;
+        document.querySelector(".minutes > .value").innerText = t.minutes;
+        document.querySelector(".seconds > .value").innerText = t.seconds;
+        if (t.total <= 0) {
+          clearInterval(this.timeInterval);
+          document.querySelector(".days > .value").innerText = "0";
+          document.querySelector(".hours > .value").innerText = "0";
+          document.querySelector(".minutes > .value").innerText = "0";
+          document.querySelector(".seconds > .value").innerText = "0";
+          this.setState({ eventEnd: true });
+        }
+      }.bind(this),
+      1000
+    );
   }
 
   getEventData = () => {
@@ -99,7 +98,6 @@ export class index extends Component {
           (detail) => detail.id == this.state.eventId
         );
 
-
         this.setState({ eventData: filteredId });
 
         const UserId = this.state.eventData.map((data) => data.UserId);
@@ -111,24 +109,23 @@ export class index extends Component {
         this.getUserRating();
 
         //loads the countdown clock (Marai)
-				const eventDate = this.state.eventData.map((data) => data.date);
-				let date = new Date(eventDate);
-				this.initializeCountdown(date)
+        const eventDate = this.state.eventData.map((data) => data.date);
+        let date = new Date(eventDate);
+        this.initializeCountdown(date);
       })
       .catch((err) => console.log(err));
   };
 
- 	//get the image name from Images table whihc holds the user profile image
-   getUserImageUrl = (userId) => {
-		Axios.get(`/api/auth/image/${userId}`)
-			.then((response) => {
-				this.setState({
-					profileImageUrl: `https://envirabucket215241-dev.s3.amazonaws.com/public/${response.data.image_name}`
-				});
-				
-			})
-			.catch((err) => console.log(err));
-	}
+  //get the image name from Images table whihc holds the user profile image
+  getUserImageUrl = (userId) => {
+    Axios.get(`/api/auth/image/${userId}`)
+      .then((response) => {
+        this.setState({
+          profileImageUrl: `https://envirabucket215241-dev.s3.amazonaws.com/public/${response.data.image_name}`,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
 
   getEventImageUrl = () => {
     Storage.get(this.state.eventImage)
@@ -272,14 +269,8 @@ export class index extends Component {
                   <span>
                     <b>Contact: </b>
                   </span>
-                  <Link
-                    to={{
-                      pathname: "/userprofile",
-                      search: `?userId=${this.state.userId}`,
-                    }}
-                  >
-                    {contactPerson}
-                  </Link>
+
+                  {contactPerson}
                 </h4>
                 <hr />
                 <h5>
