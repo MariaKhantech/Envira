@@ -38,7 +38,7 @@ export default class UserProfile extends Component {
           // call this function to get logged in user profile details
           this.getUserProfile();
           // call this function to get logged in user event details
-          this.getUserTotalEvent();
+          this.getUserJoinedEvent();
           this.getImage();
           this.getUserRating();
         })
@@ -70,9 +70,9 @@ export default class UserProfile extends Component {
   };
 
   // get logged in user info from EventAttendee model
-  getUserTotalEvent = () => {
+  getUserJoinedEvent = () => {
     const UserId = this.state.profile.id;
-    Axios.get(`/api/auth/userTotalEvent/${UserId}`)
+    Axios.get(`/api/auth/joinevent/${UserId}`)
       .then((response) => {
         this.setState({
           totalEvent: response.data,

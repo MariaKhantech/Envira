@@ -35,7 +35,7 @@ export default class CompanyProfile extends Component {
           });
           this.getCompanyProfile();
           // call this function to get logged in company event details
-          this.getUserTotalEvent();
+          this.getUserJoinedEvent();
           this.getImage();
         })
         .catch((err) => console.log(err));
@@ -65,9 +65,9 @@ export default class CompanyProfile extends Component {
   };
 
   // get logged in company info from EventAttendee model
-  getUserTotalEvent = () => {
+  getUserJoinedEvent = () => {
     const UserId = this.state.profile.id;
-    Axios.get(`/api/auth/userTotalEvent/${UserId}`)
+    Axios.get(`/api/auth/joinevent/${UserId}`)
       .then((response) => {
         this.setState({
           totalEvent: response.data,
