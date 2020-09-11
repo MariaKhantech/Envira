@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
+import EnviraBot from '../EnviraBot';
+import { Parallax } from "react-parallax";
 import Zoom from 'react-reveal/Zoom';
 import Fade from 'react-reveal/Fade';
 import './style.scss';
 
 export class index extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+		  isPlaying: false
+	
+		};
+		this.enviraAudio=this.enviraAudio.bind(this);
+		this.pauseEnviraAudio=this.pauseEnviraAudio.bind(this);
+		this.cardAudio = new Audio(
+			'https://envirabucket215241-dev.s3.amazonaws.com/polly/homepageInfo.73f4aa21-db43-4456-8d20-e004f600575f.mp3'
+		);
+
+	  }
 	componentDidMount() {
 		//intro audio
 		// let welcomeAudio = new Audio(
@@ -11,19 +26,40 @@ export class index extends Component {
 		// );
 		// welcomeAudio.play();
 	}
+	
 
 	//Enivira audio for home page//
 	enviraAudio() {
-		let welcomeAudio = new Audio(
-			'https://envirabucket215241-dev.s3.amazonaws.com/polly/homepageInfo.73f4aa21-db43-4456-8d20-e004f600575f.mp3'
-		);
-		welcomeAudio.play();
+	
+		this.cardAudio.play();
+		this.setState({isPlaying: true})
 	}
 
+	//stops audio//
+	pauseEnviraAudio(){
+		this.setState({ isPlaying: false });
+		this.cardAudio.pause();
+	  }
+
 	render() {
+		console.log(this.state.isPlaying);
+		const insideStyles = {
+		
+			position: "absolute",
+			top: "50%",
+			left: "50%",
+			transform: "translate(-50%,-50%)"
+		  };
+		  
 		return (
 			<div className="container-fluid">
-				<div id="carouselExampleCaptions" className="carousel homepage mt-2" data-ride="carousel">
+
+				<Parallax bgImage={'https://images.unsplash.com/photo-1500322969630-a26ab6eb64cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'} strength={600}>
+					<div style={{ height: '100vh' }}>
+						<div style={insideStyles}><h1 className ="text-white"><b>ENVIRA</b></h1></div>
+					</div>
+					</Parallax>
+				{/* <div id="carouselExampleCaptions" className="carousel homepage mt-2" data-ride="carousel">
 					<ol className="carousel-indicators">
 						<li data-target="#carouselExampleCaptions" data-slide-to="0" className="active" />
 						<li data-target="#carouselExampleCaptions" data-slide-to="1" />
@@ -43,7 +79,7 @@ export class index extends Component {
 						</div>
 						<div className="carousel-item">
 							<img
-								src="../assets/imgs/beachplasticanimal.jpg"
+							,	src="../assets/imgs/beachplasticanimal.jpg"
 								className="d-block w-100"
 								alt="Trash that has been left at the beach"
 							/>
@@ -85,15 +121,17 @@ export class index extends Component {
 						<span className="carousel-control-next-icon" aria-hidden="true" />
 						<span className="sr-only">Next</span>
 					</a>
-				</div>
-				<div className="row justify-content-center">
-					<div className="col-m-4">
+				</div> */}
+
+
+				<div className="row justify-content-around ">
+					<div className="col-4 ">
 					<a href='/rainforest'>
-						<div className="card bg-transparent border-0" style={{ width: '12rem' }}>
+						<div className="card bg-transparent border-0 mx-auto" style={{ width: '12rem' }}>
 						
 							<div className="card-body">
 							
-								<h5 className="card-title text-center">Forest Fires & Deforestation</h5>
+								<h5 className="card-title text-center text-white">Forest Fires & Deforestation</h5>
 								
 								<div className="image">
 									<object
@@ -111,12 +149,12 @@ export class index extends Component {
 						</a>
 					</div>
 
-					<div className="col-m-4">
+					<div className="col-4 ">
 					<a href='/ocean'>
-						<div className="card bg-transparent border-0" style={{ width: '12rem' }}>
+						<div className="card bg-transparent border-0 mx-auto" style={{ width: '12rem' }}>
 						
 							<div className="card-body ">
-								<h5 className="card-title text-center">Ocean Pollution</h5>
+								<h5 className="card-title text-center text-white">Ocean Pollution</h5>
 								<div className="image ocean-border">
 									<object
 										className="svg-file oceans"
@@ -134,39 +172,38 @@ export class index extends Component {
 					
 				</div>
 
-				<div className="row">
-					<div className="col">
-						<div className="row">
+						<div className="row justify-content-around">
 							
-							<div className="col-md-4 ml-5">
+							<div className="col-md-4">
 						
-								<div className="card">
+								<div className="card border-0">
 									<div className="card-body homepgCardBackground text-center">
 									
-										<h4 className="card-title text-center">Latest News on Climate Change</h4>
-										<hr />
+										<h4 className="card-title text-center text-white"><b>Latest News on Climate Change</b></h4>
+										<hr class="bg-white"/>
 										<img
 											src="https://cdn.mos.cms.futurecdn.net/xAe6t2584gbMfJU6Who764-650-80.jpg.webp"
 											alt="image of greenland icecaps"
 											class="img-thumbnail img-fluid ice-caps rounded"
 										/>
-										<Fade bottom>
-										<p class="text-muted">
+										
+										<p class="text-black-50">
 											Icebergs discharged from Allison Glacier float near Kullorsuaq, western
 											Greenland. (Image: © Margie Turrin/Lamont-Doherty Earth Observatory)
 										</p>
-										<p>
+										<p class="text-white">
 											Greenland set a new record for ice lost 2019, the mass lost is the highest
 											than ever recorded since 1948. In 2019 that loss was 532 billion tons, this
 											will likely rise global sea levels by 1.5 millimeters. For a hypothetical
 											visual, all the water combined would cover the state of California by more
 											than 4 feet of water.
 										</p>
-										</Fade>
+										
+										{/*https://stackoverflow.com/questions/39779527/toggle-play-pause-in-react-with-audio*/}
 										<button
 											type="button"
-											onClick={this.enviraAudio}
-											class="btn btn-outline-danger float-right text-danger"
+											onClick={this.state.isPlaying ? this.pauseEnviraAudio : this.enviraAudio}
+											class={`btn btn-outline-danger float-right text-danger ${this.state.isPlaying ? "btn-danger" : ""}`}
 										>
 											<i class="fas fa-robot" />
 										</button>
@@ -176,20 +213,24 @@ export class index extends Component {
 								</div>
 					
 							</div>
+
+							<div className="col-md-2 text-center ">
+								<EnviraBot  centerRobot={true}/>
+							</div>
 						
-							<div className="col-md-4 ml-5">
+							<div className="col-md-4">
 							
-								<div className="card">
+								<div className="card border-0">
 									<div className="card-body homepgCardBackground">
-									<Fade bottom>
-										<h4 className="card-title text-center">How to utilize Envira</h4>
-										<hr />
-										<p className="card-text text-center">
+									
+										<h4 className="card-title text-center text-white"><b>How to utilize Envira</b></h4>
+										<hr class="bg-white"/>
+										<p className="card-text text-center text-white">
 											Envira is our AI bot that you can interact in a few ways. You can utilize
 											her to read text off pages for you or ask her questions about climate change
 											and what she feels about it. Here are some of the questions you can ask.
 										</p>
-										<ul>
+										<ul class="text-white">
 											<li>What is your name?</li>
 											<li>What is climate change?</li>
 											<li>Are we in danger?</li>
@@ -197,7 +238,7 @@ export class index extends Component {
 											<li>What can you do?</li>
 											<li>What is the current temperature of the planet?</li>
 										</ul>
-										<p class="card-text text-center">
+										<p class="card-text text-center text-white">
 											Envira can read off text to you. When you see the robot &nbsp;
 											<span>
 												<i class="text-danger fas fa-robot" />
@@ -206,7 +247,7 @@ export class index extends Component {
 											information to you. More interactions can be had with Envira. These are just
 											some tips to start!
 										</p>
-									</Fade>
+								
 									</div>
 								
 								</div>
@@ -214,8 +255,7 @@ export class index extends Component {
 							</div>
 						
 						</div>
-					</div>
-				</div>
+				
 				<Zoom>
 				
 				</Zoom>
