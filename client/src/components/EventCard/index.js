@@ -169,16 +169,16 @@ export class index extends Component {
     })
       .then((res) => {
         console.log(res);
-        this.setState({ rating: this.state.rating, starDisabled: true, postRatingDisabled: true });
+        this.setState({ rating: this.state.rating,postRatingDisabled: true});
       })
       .catch((err) => console.log(err));
   };
 
-   
+
   //   click method to change star value
   onStarClick(rating) {
     console.log(rating)
-    this.setState({ rating});
+    this.setState({ rating });
   }
 
   //get rating details given by logged in user
@@ -187,19 +187,8 @@ export class index extends Component {
     const EventId = this.state.eventId
     Axios.get(`/api/rate/userprofile/${UserId}/${EventId}`)
       .then((res) => {
-        console.log(res)
-        if (res.data === null) {
-          this.setState({
-            postRatingDisabled:false
-          })
-          // this.onStarClick();
-          // this.starRating()
-        }
-     
-        else (
-          this.setState({ rating: res.data.rating, postRatingDisabled: true, starDisabled: true })       
-        )
-        this.updateRating();
+        this.setState({ rating: res.data.rating, postRatingDisabled: true })
+
       })
       .catch((err) => console.log(err));
   };
@@ -207,7 +196,7 @@ export class index extends Component {
   // calculate average rating when user is not logged in 
   starRating = () => {
     this.state.userRating.map((data) => (
-      <StarRatingComponent name="rating" starCount={5} value={data.rating} postRatingDisabled={false}/>
+      <StarRatingComponent name="rating" starCount={5} value={data.rating} postRatingDisabled={false} />
     ));
   };
 
@@ -220,12 +209,13 @@ export class index extends Component {
       .then((res) => {
         if (res.data === null) {
           this.setState({
-            joinEventDisabled: false
+            joinEventDisabled: false,
+            postRatingDisabled: true
           })
         }
         else {
           this.setState({
-            joinEventDisabled: true
+            joinEventDisabled: true,
           })
         }
 
@@ -243,7 +233,8 @@ export class index extends Component {
     }).then((res) => {
       console.log(res)
       this.setState({
-        joinEventDisabled: true
+        joinEventDisabled: true,
+        postRatingDisabled: false
       })
     }).catch(err => console.log(err))
   }
