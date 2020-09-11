@@ -19,6 +19,7 @@ router.post("/event", (req, res) => {
 });
 
 router.get("/userprofile/:UserId", (req, res) => {
+  console.log(req.body.UserId)
   db.Rating.findAll({
     where: {
       UserId: req.params.UserId,
