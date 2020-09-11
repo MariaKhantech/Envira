@@ -1,9 +1,4 @@
-.pollutionTabs {
-  font-size: 24px;
-  text-decoration: none;
-}
-
-#jumbo2 {
+#jumbo {
   border: none;
   border-radius: 0px;
   background-image: url(https://images.unsplash.com/photo-1585495596846-f2818568f1a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1778&q=80);
@@ -12,10 +7,4 @@
   background-size: cover;
   background-attachment: fixed;
 }
-
-#searchCol {
-  background-color: #ececec;
-  border: 3px solid #e27d60;
-  padding: 30px;
-  border-radius: 15px;
-}
+/*# sourceMappingURL=exploreWrapper.css.map */

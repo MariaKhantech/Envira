@@ -1,6 +1,7 @@
 @import "./svgstyles";
 $neutral-green:  #85dcba;
 $light-orange: #daad86;
+$orange: #e27d60;
 
 .carousel-inner > .carousel-item > img {
 	height: 25rem;
@@ -12,15 +13,13 @@ $light-orange: #daad86;
 
 .homepage {
 	border-style: solid;
-	border-color: #e27d60;
+	border-color: $orange;
 	border-width: 1rem;
 	margin-top: 0 !important;
 }
 
 .homepgCardBackground {
-	border-style: solid;
-	border-radius: 5px;
-	border-color: #e27d60;
+background-color: $orange;
 }
 
 .greenHcard {

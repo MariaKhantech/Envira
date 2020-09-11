@@ -1,34 +1,38 @@
+.signup-Rstyle {
+  border: #e27d60 !important;
+}
+
 .form-control:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
-  border-color: #BA68C8;
+  border-color: #e27d60;
 }
 
 .profile-button {
-  background: #632778;
+  background: #e27d60 !important;
   -webkit-box-shadow: none;
           box-shadow: none;
   border: none;
 }
 
 .profile-button:hover {
-  background: #682773;
+  background: #e27d60;
 }
 
 .profile-button:focus {
-  background: #682773;
+  background: #e27d60;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
 .profile-button:active {
-  background: #682773;
+  background: #e27d60;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
 .back:hover {
-  color: #682773;
+  color: #e27d60;
   cursor: pointer;
 }
 
@@ -37,9 +41,9 @@
 }
 
 .add-experience:hover {
-  background: #BA68C8;
+  background: #e27d60;
   color: #fff;
   cursor: pointer;
-  border: solid 1px #BA68C8;
+  border: solid 1px #e27d60;
 }
 /*# sourceMappingURL=updateProfile.css.map */

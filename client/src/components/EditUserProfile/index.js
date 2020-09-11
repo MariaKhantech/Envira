@@ -157,8 +157,8 @@ export default class UpdateProfile extends Component {
     render() {
         return (
             <>
-                <div className="container profile-container rounded mt-5 mb-5">
-                    <div className="row">
+                <div className="container profile-container rounded mt-5 mb-5 bg-light shadow">
+                    <div className="row ">
                         <div className="col-md-4 border-right">
                             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
                                 <span className="font-weight-bold mb-3">Hello {this.state.profile.user_name}</span>
@@ -225,7 +225,7 @@ export default class UpdateProfile extends Component {
                                 )}
                                 {this.state.data && (
                                     <div className="mt-5 text-center">
-                                        <button onClick={this.handleUpdateFormSubmit} className="btn btn-primary profile-button" type="button">Update Profile</button>
+                                        <button onClick={this.handleUpdateFormSubmit} className="btn profile-button border-0" type="button">Update Profile</button>
                                     </div>
                                 )}
                             </div>

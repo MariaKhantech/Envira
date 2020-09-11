@@ -21,21 +21,41 @@ export class EnviraBot extends Component {
 	componentDidMount() {}
 
 	render() {
-		const myTheme = {
-			...AmplifyTheme,
-			sectionHeader: {
-				...AmplifyTheme.sectionHeader,
-				backgroundColor: '#ff6600'
+	
+		// let topPos ='65%';
+		// let leftPos='80%';
+		// let robotPostition = 'fixed'
+
+		// if(this.props.centerRobot === true ) {
+		// 	topPos ='80%';
+		// 	leftPos= '50%';
+		// 	robotPostition='relative'
+		// }
+		let enviraPosition = {};
+
+		if(this.props.centerRobot === true ) {
+			enviraPosition = {
+				position: 'relative',
+				width: '13rem',
+				marginLeft: '50px'
 			}
-		};
+
+		} else {
+           enviraPosition = {
+				position: 'fixed',
+				top: '65%',
+				left: '80%',
+				width: '10rem'
+			}
+		}
+		
 		return (
-			<div className="envirabot">
+			<div style = {enviraPosition}>
 				<Zoom>
 				<Robot />
 				</Zoom>
 				<ChatBot
 					title="My Bot"
-					theme={myTheme}
 					botName="BookTrip_dev"
 					welcomeMessage="Welcome, how can I help you today?"
 					// onComplete={this.handleComplete.bind(this)}
