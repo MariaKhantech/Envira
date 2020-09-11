@@ -24,6 +24,7 @@ export class index extends Component {
       rating: 0,
       disabled: true,
       userRating: [],
+      profile: []
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
     this.timeInterval = 0;
@@ -40,6 +41,31 @@ export class index extends Component {
     ];
     this.getEventData();
     this.setState({ reviewArray });
+    //setting date for testing
+    let date = new Date();
+    date.setDate(30);
+    this.initializeCountdown(date);
+    try {
+      // get the current logged in user details
+      const user = await Auth.currentAuthenticatedUser();
+      // get username from user object
+      const userDetail = user.username;
+      // get the user details for logged in user from the User table 
+      Axios.get(`/api/auth/user/${userDetail}`)
+        .then(
+          (response) => {
+            this.setState({
+              profile: response.data,
+            });
+            this.getUserRating();
+            this.getUserAttendance()
+          })
+        .catch(err => console.log(err))
+    } catch (error) {
+      if (error !== "No current user") {
+        console.log(error);
+      }
+    }
   }
 
   //clear the timer when we leave the page (maria)
@@ -85,28 +111,20 @@ export class index extends Component {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const id = urlParams.get("eventId");
-
-    console.log(id);
-
     this.setState({ eventId: id });
-
     Axios.get(`/api/create/eventcreate`)
       .then((response) => {
         this.setState({ eventData: response.data });
-
         const filteredId = this.state.eventData.filter(
           (detail) => detail.id == this.state.eventId
         );
-
         this.setState({ eventData: filteredId });
-
         const UserId = this.state.eventData.map((data) => data.UserId);
         const image = this.state.eventData.map((data) => data.image);
         this.setState({ eventImage: image, userId: UserId });
-
         this.getEventImageUrl();
+        this.getProfileImage(this.state.userId);
         this.getUserImageUrl(this.state.userId);
-        this.getUserRating();
 
         //loads the countdown clock (Marai)
         const eventDate = this.state.eventData.map((data) => data.date);
@@ -130,13 +148,12 @@ export class index extends Component {
   getEventImageUrl = () => {
     Storage.get(this.state.eventImage)
       .then((data) => {
-        // console.log(data);
         this.setState({ eventImageUrl: data });
       })
       .catch((err) => console.log(err));
   };
 
-  //   //   Post request to submit rating to DB
+  // Post request to submit rating to DB
   postRating = (event) => {
     event.preventDefault();
     const queryString = window.location.search;
@@ -145,7 +162,7 @@ export class index extends Component {
     Axios.post(`/api/rate/event`, {
       rating: this.state.rating,
       EventId: id,
-      UserId: this.state.userId,
+      UserId: this.state.profile.id,
     })
       .then((res) => {
         console.log(res);
@@ -160,8 +177,11 @@ export class index extends Component {
   }
 
   getUserRating = () => {
-    Axios.get(`/api/rate/userprofile/${this.state.userId}`)
+    const UserId = this.state.profile.id
+    console.log(UserId)
+    Axios.get(`/api/rate/userprofile/${UserId}`)
       .then((res) => {
+        console.log(res)
         this.setState({ userRating: res.data });
       })
       .catch((err) => console.log(err));
@@ -173,21 +193,40 @@ export class index extends Component {
     ));
   };
 
+  // get user event attendance details
+  getUserAttendance = () => {
+    const UserId = this.state.profile.id
+    console.log(UserId)
+    Axios.get(`/api/auth/joinevent/${UserId}`)
+      .then((res) => {
+        console.log(res)
+        this.setState({
+          disabled: true
+        })
+      }).catch(err => console.log(err))
+  }
+  // post event attendee details
   eventAttendee = (event) => {
-    event.preventDefault();
-    const UserId = this.state.userId[0];
-    const EventId = this.state.eventId;
-    console.log(UserId);
-    console.log(EventId);
+    event.preventDefault()
+    const UserId = this.state.profile.id
+    const EventId = this.state.eventId
+    console.log(UserId)
     Axios.post("/api/auth/joinevent", {
       UserId,
-      EventId,
-    })
-      .then((res) => {
-        console.log(res);
+      EventId
+    }).then((res) => {
+      console.log(res)
+      this.setState({
+        disabled: true
       })
-      .catch((err) => console.log(err));
-  };
+    }).catch(err => console.log(err))
+  }
+
+  //redirect user to signup page
+  registerToJoinEvent = (event) => {
+    event.preventDefault();
+    window.location = "/signup"
+  }
 
   render() {
     const scrollingContainer = {
@@ -296,17 +335,42 @@ export class index extends Component {
 
             <h1 class="display-4 text-white">{eventName}</h1>
             <p class="lead text-white">{date}</p>
-
             <p class="lead">
-              <button
-                class="btn btn-primary btn-lg"
-                style={{ marginTop: "8rem" }}
-                role="button"
-                onClick={this.eventAttendee}
-              >
-                Join Event
-              </button>
+              {!this.state.profile.id && (
+                <button
+                  class="btn btn-primary btn-lg"
+                  style={{ marginTop: "8rem" }}
+                  role="button"
+                  onClick={this.registerToJoinEvent}
+                >
+                  Register to Join Event
+                </button>
+              )}
+              {this.state.profile.id && (
+                <button
+                  class="btn btn-primary btn-lg"
+                  style={{ marginTop: "8rem" }}
+                  role="button"
+                  onClick={this.eventAttendee}
+                  disabled={this.state.disabled}
+                >
+                  Join Event
+                </button>
+              )}
             </p>
+            {/* {!this.state.userId[0] === "" && (
+              <p class="lead">
+                <button
+                  class="btn btn-primary btn-lg"
+                  style={{ marginTop: "8rem" }}
+                  role="button"
+                  onClick={this.eventAttendee}
+                >
+                  Join Event
+              </button>
+              </p>
+            )} */}
+
           </div>
         </div>
 
