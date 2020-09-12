@@ -95,9 +95,7 @@ export default class Register extends Component {
     }
   }
 
-
   postNewUser = () => {
-    console.log(this.state.role)
     Axios.post("/api/auth/signup", {
       username: this.state.username,
       role: this.state.role,
@@ -114,22 +112,16 @@ export default class Register extends Component {
 
   handleConfirmationSubmit = async event => {
     event.preventDefault();
-
     this.setState({ isLoading: true });
-
     try {
       await Auth.confirmSignUp(this.state.username, this.state.confirmationCode);
       await Auth.signIn(this.state.username, this.state.password);
-
-      // this.props.user.userHasAuthenticated(true);
-      // this.props.history.push('/login');
       window.location = "/"
     } catch (e) {
       alert(e.message);
       this.setState({ isLoading: false });
     }
   };
-
 
   renderConfirmationForm() {
     return (
@@ -159,7 +151,7 @@ export default class Register extends Component {
 
   renderForm() {
     return <>
-      <div className="container w-50 register border-style-signup">
+      <div className="container form-size register border-style-signup">
         <div className="row text-center justify-content-center">
           <div className="col-md-10">
             <div className="card cardStyle bg-light">
@@ -187,9 +179,6 @@ export default class Register extends Component {
                       <span className="input-group-text"> <i className="fa fa-building"></i> </span>
                     </div>
                     <select id="role" name="role" value={this.state.role} onChange={this.handleInputChange} className="form-control">
-                      {/* {this.state.roleTypes.map(role => {
-                        return (<option defaultValue="User" key={role.id} value={role.id}>{role.type}</option>)
-                      })} */}
                       <option value="select">Select a registration type</option>
                       <option value="1">Individual</option>
                       <option value="2">Company</option>

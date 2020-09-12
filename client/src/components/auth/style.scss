@@ -4,6 +4,44 @@
 .page-wrap {
 	min-height: 100vh;
 }
-.container {
-	max-width: 900px;
+
+.password-width{
+	width: 70%;
+}
+
+.border-style-signup {
+	border-style: solid;
+	border-color: #85dcba;
+	border-radius: 5px;
+  }
+
+/*media query for devices with max screen size 980px*/
+@media screen and (max-width: 980px) {
+	.password-width{
+		width: 80%;
+		height: auto;
+	}	  
+}
+/*media query for devices with max screen size 768px*/
+@media screen and (max-width: 768px) {
+	.password-width{
+		width: 65%;
+		height: auto;
+	}	  
+}
+
+/*media query for devices with max screen size 640px*/
+@media screen and (max-width: 640px) {
+	.password-width{
+		width: 60%;
+		height: auto;
+		margin-top: 10px;
+	}
+	.password-font{
+		font-size: 22px;
+		font-weight: bolder;
+	}
+	.password-text{
+		font-size: 13px;
+	}
 }
