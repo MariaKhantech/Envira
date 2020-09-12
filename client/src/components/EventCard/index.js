@@ -128,7 +128,6 @@ export class index extends Component {
         this.setState({ eventImage: image, userId: UserId });
         this.getRoleId();
         this.getEventImageUrl();
-       // this.getProfileImage(this.state.userId);
         this.getUserImageUrl(this.state.userId);
 
         //loads the countdown clock (Marai)
