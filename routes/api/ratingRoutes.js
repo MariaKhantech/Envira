@@ -19,7 +19,21 @@ router.get("/userprofile/:UserId/:EventId", (req, res) => {
   db.Rating.findOne({
     where: {
       UserId: req.params.UserId,
-      EventId:req.params.EventId
+      EventId: req.params.EventId,
+    },
+  })
+    .then((dbResponse) => {
+      res.json(dbResponse);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+router.get("/userprofile/:UserId", (req, res) => {
+  db.Rating.findOne({
+    where: {
+      UserId: req.params.UserId,
     },
   })
     .then((dbResponse) => {
