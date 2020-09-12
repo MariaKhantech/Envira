@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import { Storage } from "aws-amplify";
 import Axios from "axios";
@@ -8,7 +9,7 @@ import "./style.scss";
 
 export class EditEvent extends Component {
   constructor(props) {
-    console.log(props.event)
+    console.log(props.event);
     super(props);
     this.state = {
       eventName: "",
@@ -25,7 +26,9 @@ export class EditEvent extends Component {
       selectedFileName: "Choose file",
       imagePreviewUrl: "",
       displayUploadButton: false,
-      eventId: '',
+      eventId: "",
+      userId: "",
+      roleId: "",
     };
   }
   //test for S3//
@@ -71,15 +74,14 @@ export class EditEvent extends Component {
     //         });
     //     })
     //     .catch((err) => console.log(err));
-};
+  };
 
   // Request to get the event
   async componentDidMount() {
-    const eventId= this.getEventId();
+    const eventId = this.getEventId();
     this.getEventData(eventId);
-    this.setState({eventId:eventId})
-    this.getImageFromS3()
-    
+    this.setState({ eventId: eventId });
+    this.getImageFromS3();
   }
 
   postNewEvent = (event) => {
@@ -99,52 +101,98 @@ export class EditEvent extends Component {
     })
       .then((res) => {
         console.log(res);
-        
-        window.location = "/profile";
+
+        this.handleRedirect();
       })
       .catch((err) => console.log(err));
   };
 
-
   getEventId() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    return urlParams.get('eventId')
+    return urlParams.get("eventId");
   }
 
- async getEventData(eventId) {
+  async getEventData(eventId) {
     Axios.get(`/api/geteditevent/${eventId}`)
-    .then(async(response) => {
-        console.log(response)
-         this.setState({
-            eventName: response.data.event_name,
-            date: response.data.date,
-            description: response.data.description,
-            contactName :response.data.contact_person,
-            contactEmail : response.data.contact_email,
-            contactNumber : response.data.contact_number,
-            website: response.data.website,
-            address :response.data.address,
-            city:response.data.city,
-            state:response.data.state,
-            selectedFileName:response.data.image,
-         imagePreviewUrl:`https://envirabucket215241-dev.s3.amazonaws.com/public/${response.data.image}`
+      .then(async (response) => {
+        console.log(response);
+        this.setState({
+          userId: response.data.UserId,
+          eventName: response.data.event_name,
+          date: response.data.date,
+          description: response.data.description,
+          contactName: response.data.contact_person,
+          contactEmail: response.data.contact_email,
+          contactNumber: response.data.contact_number,
+          website: response.data.website,
+          address: response.data.address,
+          city: response.data.city,
+          state: response.data.state,
+          selectedFileName: response.data.image,
+          imagePreviewUrl: `https://envirabucket215241-dev.s3.amazonaws.com/public/${response.data.image}`,
         });
-    })
-    .catch((err) => console.log(err));
+        this.getRoleId();
+      })
+      .catch((err) => console.log(err));
   }
+
+  getRoleId = () => {
+    const UserId = this.state.userId;
+    Axios.get(`/api/auth/userid/${UserId}`)
+      .then((response) => {
+        // console.log(response.data);
+        this.setState({
+          roleId: response.data.roleId,
+        });
+
+        console.log(this.state.roleId);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  handleRedirect = () => {
+    const {
+      history: { push },
+    } = this.props;
+
+    const roleId = this.state.roleId;
+    const UserId = this.state.userId;
+
+    if (roleId === 1) {
+      setTimeout(() => {
+        push({
+          pathname: "/userprofile",
+          search: `?userId=${UserId}`,
+        });
+      }, 500);
+    } else if (roleId === 2) {
+      setTimeout(() => {
+        push({
+          pathname: "/companyprofile",
+          search: `?userId=${UserId}`,
+        });
+      }, 500);
+    } else if (roleId === 3) {
+      setTimeout(() => {
+        push({
+          pathname: "/companyprofile",
+          search: `?userId=${UserId}`,
+        });
+      }, 500);
+    }
+  };
 
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
   };
   render() {
-
     var styles = {
       backgroundImage:
         "url('https://images.unsplash.com/photo-1562591970-254bc62245c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80')",
     };
 
-    console.log(this.props.location)
+    console.log(this.props.location);
     return (
       <div>
         <div className="container mt-0">
@@ -402,4 +450,4 @@ export class EditEvent extends Component {
   }
 }
 
-export default EditEvent;
+export default withRouter(EditEvent);
