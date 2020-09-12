@@ -1,11 +1,47 @@
 import React, { Component } from "react";
 import { Auth } from "aws-amplify";
 import Axios from "axios";
+import moment from "moment";
+import { Link } from 'react-router-dom'
 import "./style.css";
 
 import StarRatingComponent from "react-star-rating-component";
 
 export class ReviewForm extends Component {
+  state = {
+    rating: 0,
+    disabled: true,
+    reviewerImage:'',
+    username:''
+
+  }
+
+  componentDidMount () {
+    this.getReviewUser();
+    this.getReviewerImage();
+  }
+
+  //get the details of the use from the USER table
+  getReviewUser() {
+    Axios.get(`/api/getreviewer/${this.props.comment.UserId}`)
+			.then((response) => {
+				console.log(response.data);
+				this.setState({username:response.data.user_name})
+			})
+			.catch((err) => console.log(err));
+  }
+
+  getReviewerImage = () => {
+    Axios.get(`/api/auth/image/${this.props.comment.UserId}`)
+      .then((response) => {
+        this.setState({
+          reviewerImage: `https://envirabucket215241-dev.s3.amazonaws.com/public/${response.data.image_name}`,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+
   // state = {
   //   eventId: "",
   //   userId: "",
@@ -79,25 +115,28 @@ export class ReviewForm extends Component {
 
         <div className="col-12 text-center">
           <img
-            src="../assets/imgs/rainforest/orangutans/babyorangutan.jpg"
-            className="img-rounded review-img"
+            src={this.state.reviewerImage}
+            className="img-rounded "
+            width="100px"
+            height="100px"
           />
           <div className="review-block-name">
-            <a href="#">nktailor</a>
+             <Link to={{pathname: "/profile",search: `?username=${this.state.username}`}} >{this.state.username}</Link>
           </div>
 
           <div className="review-block-date">
-            January 29, 2016
-            <br />1 day ago
+          {moment(this.props.comment.createdAt).format("dddd, MMMM Do YYYY")}
           </div>
         </div>
         <div className="col-12 text-center">
-          <div className="review-block-title">this was nice in buy</div>
-          <div className="review-block-description">
+          <div className="review-block-title">
+              {this.props.comment.comment_detail}
+          </div>
+          {/* <div className="review-block-description">
             this was nice in buy. this was nice in buy. this was nice in buy.
             this was nice in buy this was nice in buy this was nice in buy this
             was nice in buy this was nice in buy
-          </div>
+          </div> */}
         </div>
       </div>
     );
