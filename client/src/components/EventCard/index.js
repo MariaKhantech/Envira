@@ -136,7 +136,6 @@ export class index extends Component {
         console.log(eventDate)
         let date = new Date(eventDate);
 				date.setDate(date.getDate()+1)
-				date = new Date()
 				this.initializeCountdown(date);
       })
       .catch((err) => console.log(err));
