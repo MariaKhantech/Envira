@@ -4,7 +4,6 @@ import FormErrors from "../FormErrors";
 import Validate from "../../util/FormValidation";
 
 export default class Login extends Component {
-
     state = {
         username: "",
         password: "",
@@ -34,7 +33,6 @@ export default class Login extends Component {
 
     handleFormSubmit = async (event) => {
         event.preventDefault();
-
         // Form validation
         this.clearErrorState();
         const error = Validate(event, this.state);
@@ -43,7 +41,6 @@ export default class Login extends Component {
                 errors: { ...this.state.errors, ...error }
             });
         }
-
         // AWS Cognito integration here
         const { username, password } = this.state;
         try {
@@ -51,14 +48,10 @@ export default class Login extends Component {
                 username,
                 password,
             });
-            // this.auth.setAuthStatus(true)
-            //redirect user to home page 
-            // this.props.history.push('/');
             window.location = "/";
         } catch (error) {
             let err = null;
             !error.message ? err = { "message": error } : err = error;
-            console.log(err);
             this.setState({
                 errors: {
                     ...this.state.errors,
@@ -72,7 +65,7 @@ export default class Login extends Component {
         return (
             <>
                 <form className="form" onSubmit={this.handleFormSubmit} >
-                    <h3 className="text-center text-white">Login</h3>
+                    <h4 className="text-center text-white">Login</h4>
 
                     <div className="form-group">
                         <label className="font-weight-bold text-white">Username:</label><br />
@@ -82,7 +75,7 @@ export default class Login extends Component {
                         <label className="font-weight-bold text-white">Password:</label><br />
                         <input id="password" onChange={this.handleInputChange} type="password" name="password" id="password" className="form-control" value={this.state.password} />
                     </div>
-                    <FormErrors formerrors={this.state.errors} />
+                    <FormErrors className="error-font" formerrors={this.state.errors} />
                     <div className="form-group mx-auto text-center">
                         <button type="submit" name="submit" className="font-weight-bold btn-login btn btn-info text-white">Login</button>
                     </div>
