@@ -279,7 +279,12 @@ export class index extends Component {
         pathname: "/userprofile",
         search: `?userId=${this.state.userId[0]}`,
       });
-    } else if (roleId === 2 || 3) {
+    } else if (roleId === 2) {
+      push({
+        pathname: "/companyprofile",
+        search: `?userId=${this.state.userId[0]}`,
+      });
+    } else if (roleId === 3) {
       push({
         pathname: "/companyprofile",
         search: `?userId=${this.state.userId[0]}`,

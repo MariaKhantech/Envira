@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { bubble as Menu } from "react-burger-menu";
 import "./style.css";
 import Login from "../Login";
@@ -97,49 +98,46 @@ export class NavBar extends Component {
           </div>
         </li>
 
-        <li className="nav-item dropdown">
-          <a
-            className="nav-link dropdown-toggle text-white"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-toggle="collapse"
-            data-target="#submenu1"
-          >
-            Pollution
-          </a>
-          <div className="collapse" id="submenu1">
-            <a className="dropdown-item text-white" href="/explore">
-              Air Quality
-            </a>
-            <a className="dropdown-item text-white" href="/explore">
-              Water Contaminants
-            </a>
-            <div className="dropdown-divider" />
-            <a className="dropdown-item text-white" href="/explore">
-              Climate Change Articles
-            </a>
-          </div>
-        </li>
+        <a className="menu-item text-white about" href="/explore">
+          Pollution Information
+        </a>
         {/* check the logged in user roleId
 
 	if roleId is 1 then redirect user to userProfile page
 	 if roleId is 2 then redirect user to Profile page
 	if roleId is 3 then redirect user to Profile page */}
         {this.props.auth.isAuthenticated && this.state.profile.roleId === 1 && (
-          <a className="menu-item text-white about" href="/userprofile">
+          <Link
+            className="menu-item text-white about"
+            to={{
+              pathname: "/userprofile",
+              search: `?userId=${this.state.profile.id}`,
+            }}
+          >
             My Account
-          </a>
+          </Link>
         )}
         {this.props.auth.isAuthenticated && this.state.profile.roleId === 2 && (
-          <a className="menu-item text-white about" href="/companyprofile">
+          <Link
+            className="menu-item text-white about"
+            to={{
+              pathname: "/companyprofile",
+              search: `?userId=${this.state.profile.id}`,
+            }}
+          >
             My Account
-          </a>
+          </Link>
         )}
         {this.props.auth.isAuthenticated && this.state.profile.roleId === 3 && (
-          <a className="menu-item text-white about" href="/companyprofile">
+          <Link
+            className="menu-item text-white about"
+            to={{
+              pathname: "/companyprofile",
+              search: `?userId=${this.state.profile.id}`,
+            }}
+          >
             My Account
-          </a>
+          </Link>
         )}
         <hr style={{ background: "white" }} />
         {!this.props.auth.isAuthenticated && (
@@ -175,3 +173,9 @@ export class NavBar extends Component {
 }
 
 export default NavBar;
+
+{
+  /* <a className="menu-item text-white about" href="/userprofile">
+            My Account
+          </a> */
+}
