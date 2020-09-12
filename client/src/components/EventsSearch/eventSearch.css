@@ -16,7 +16,7 @@
 
 #introCard {
   background-color: #ececec;
-  width: 32rem;
+  width: auto;
   color: #32325d;
   border-radius: 10px;
   border: 2px solid #e27d60;

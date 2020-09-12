@@ -33,8 +33,8 @@ export default class Search extends Component {
     } = this.props;
 
     return (
-      <Row>
-        <Col md={9} className="mx-auto mt-2">
+      <Row className="mx-auto">
+        <Col md={8} className="mx-auto mt-2">
           <InputGroup>
             <InputGroup.Prepend>
               <DropdownButton

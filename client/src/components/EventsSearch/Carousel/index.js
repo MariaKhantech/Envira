@@ -8,21 +8,27 @@ import "./carousel.css";
 
 export default class Carousel extends Component {
   render() {
+    console.log(this.props.state.eventData);
     const renderCard = this.props.state.eventData.map((data) => (
-      <div id="contact-box">
+      <div
+        id="contact-box"
+        key={data.id}
+        className="card h-100"
+        style={{ width: "18rem" }}
+      >
         <img
           alt="image"
-          className="img-fluid mx-auto"
+          className="card-img-top"
           style={{ borderRadius: "10px" }}
           src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${data.image}`}
         />
         <h3 className="mx-auto text-center mt-2" name="event">
           <strong>{data.event_name}</strong>
         </h3>
-        <h4 class="text-center">
-          <i className="fa fa-calendar ml-1"></i>
+        <h5 className="text-center">
+          <i className="fa fa-calendar mr-1"></i>
           {moment(data.date).format("dddd, MMMM Do YYYY")}
-        </h4>
+        </h5>
         <ul id="contactList" className="p-1 ">
           <li>
             <i className="fa fa-user mr-1 ml-1 mt-2"></i>
@@ -44,12 +50,14 @@ export default class Carousel extends Component {
               <i className="ml-1 fa fa-map-pin"></i>
             </small>
             <Link
-              to={{ pathname: "/eventspage", search: `?eventId=${data.id}` }}
+              to={{
+                pathname: "/eventspage",
+                search: `?eventId=${data.id}`,
+              }}
             >
               <Button
                 size="sm"
                 className="float-right"
-                key={data.id}
                 value={data.id}
                 style={{ backgroundColor: "#c38d9e", border: "none" }}
               >
@@ -64,10 +72,9 @@ export default class Carousel extends Component {
     const carouselSettings = {
       dots: true,
       infinite: true,
-      adaptiveHeight: true,
       speed: 500,
-      slidesToShow: this.props.state.slidesToShow,
-      slidesToScroll: this.props.state.slidesToScroll,
+      slidesToShow: 1,
+      slidesToScroll: 1,
     };
 
     return (

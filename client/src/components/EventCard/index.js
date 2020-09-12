@@ -423,23 +423,11 @@ export class index extends Component {
                     <b>Contact: </b>
                   </span>
                   {this.state.profile.id && (
-                    <a>
-                      <button className="" onClick={this.handleRedirect}>
-                        {contactPerson}
-                      </button>
-                    </a>
-                  )}{" "}
-                  {!this.state.profile.id && (
-                    <a>
-                      <button
-                        className=""
-                        onClick={this.handleRedirect}
-                        disabled={this.state.disabled}
-                      >
-                        {contactPerson}
-                      </button>
+                    <a href="#" onClick={this.handleRedirect}>
+                      {contactPerson}
                     </a>
                   )}
+                  {!this.state.profile.id && <a>{contactPerson}</a>}
                 </h4>
                 <hr />
                 <h5>
@@ -571,8 +559,6 @@ export class index extends Component {
                   <span class="text-white">Address:</span>
                   <p class="text-white">
                     {address}, {city} {eventState}
-                    <br />
-                    United State
                   </p>
                 </div>
               </div>
