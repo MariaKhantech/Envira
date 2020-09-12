@@ -41,7 +41,7 @@ router.get("/userProfile/:UserId", (req, res) => {
 //this route is to save the user profile first time
 router.post("/updateUserProfile", (req, res) => {
   db.UserProfile.create({
-    UserId: req.body.id,
+    UserId: req.body.urlUserId,
     first_name: req.body.firstName,
     last_name: req.body.lastName,
     city: req.body.city,
@@ -141,7 +141,7 @@ router.get("/companyProfile/:UserId", (req, res) => {
 //this route is to save the company profile first time
 router.post("/updateCompanyProfile", (req, res) => {
   db.CompanyProfile.create({
-    UserId: req.body.id,
+    UserId: req.body.urlUserId,
     company_name: req.body.companyName,
     company_description: req.body.description,
     email: req.body.email,
@@ -168,7 +168,7 @@ router.put("/updateCompanyProfile/:UserId", (req, res) => {
       company_name: req.body.companyName,
       company_description: req.body.description,
       email: req.body.email,
-      website: req.body.website,
+      website: req.body.companyWebsite,
       contact_person: req.body.contactPersonName,
       environmental_focus: req.body.environmentalFocus,
       phone_number: req.body.phoneNumber,
@@ -279,18 +279,18 @@ router.post("/joinevent", (req, res) => {
 });
 
 // route to get event attendees
-router.get('/joinevent/:UserId/:EventId', (req, res) => {
+router.get("/joinevent/:UserId/:EventId", (req, res) => {
   db.EventAttendee.findOne({
     where: {
       UserId: req.params.UserId,
-      EventId: req.params.EventId
-    }
+      EventId: req.params.EventId,
+    },
   })
     .then((data) => {
       res.json(data);
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
       if (err) {
         res.status(500).json(err);
       }

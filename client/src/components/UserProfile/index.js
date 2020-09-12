@@ -208,21 +208,29 @@ export default class UserProfile extends Component {
 
     if (loggedInUserId == urlUserId) {
       editProfileBtn = (
-        <a
+        <Link
           class="a-design"
-          href="edituserprofile"
+          to={{
+            pathname: "/edituserprofile",
+            search: `?userId=${urlUserId}`,
+          }}
           className="btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary"
         >
           Edit Profile
-        </a>
+        </Link>
       );
     } else {
       editProfileBtn = (
-        <a
+        <Link
           class="a-design"
-          href="edituserprofile"
+          to={{
+            pathname: "/edituserprofile",
+            search: `?userId=${urlUserId}`,
+          }}
           className="btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary d-none"
-        ></a>
+        >
+          Edit Profile
+        </Link>
       );
     }
 
