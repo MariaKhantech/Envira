@@ -10,6 +10,9 @@ import $ from "jquery";
 export default class CompanyProfile extends Component {
   state = {
     profile: [],
+    companyUserName: "",
+    email: "",
+    urlUserId: "",
     companyName: "",
     contactPersonName: "",
     companyDescription: "",
@@ -39,6 +42,7 @@ export default class CompanyProfile extends Component {
             profile: response.data,
           });
           this.getCompanyProfile();
+          this.getCompanyUserName();
           // call this function to get logged in company event details
           this.getUserJoinedEvent();
           this.getImage();
@@ -46,7 +50,6 @@ export default class CompanyProfile extends Component {
           this.getUserRating();
 
           this.getUserEvents();
-
         })
         .catch((err) => console.log(err));
     } catch (error) {
@@ -58,8 +61,13 @@ export default class CompanyProfile extends Component {
 
   // get logged in compnay profile details
   getCompanyProfile = () => {
-    const UserId = this.state.profile.id;
-    Axios.get(`/api/auth/companyProfile/${UserId}`)
+    // const UserId = this.state.profile.id;
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    Axios.get(`/api/auth/companyProfile/${urlUserId}`)
       .then((response) => {
         this.setState({
           companyName: response.data.company_name,
@@ -74,10 +82,33 @@ export default class CompanyProfile extends Component {
       .catch((err) => console.log(err));
   };
 
+  getCompanyUserName = () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    console.log(urlUserId);
+    Axios.get(`/api/auth/userid/${urlUserId}`)
+      .then((response) => {
+        this.setState({
+          companyUserName: response.data.user_name,
+          email: response.data.email,
+        });
+
+        console.log(this.state.companyUserName);
+      })
+      .catch((err) => console.log(err));
+  };
+
   // get logged in company info from EventAttendee model
   getUserJoinedEvent = () => {
-    const UserId = this.state.profile.id;
-    Axios.get(`/api/auth/joinevent/${UserId}`)
+    // const UserId = this.state.profile.id;
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    Axios.get(`/api/auth/joinevent/${urlUserId}`)
       .then((response) => {
         this.setState({
           totalEvent: response.data,
@@ -88,8 +119,13 @@ export default class CompanyProfile extends Component {
 
   // get logged in company profile image
   getImage = () => {
-    const UserId = this.state.profile.id;
-    Axios.get(`/api/auth/image/${UserId}`)
+    // const UserId = this.state.profile.id;
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    Axios.get(`/api/auth/image/${urlUserId}`)
       .then((response) => {
         this.setState({
           imageName: response.data,
@@ -113,9 +149,14 @@ export default class CompanyProfile extends Component {
 
   // get logged in user info from EventAttendee model
   getUserEvents = () => {
-    console.log("herer");
-    const UserId = this.state.profile.id;
-    Axios.get(`/api/getuserevents/${UserId}`)
+    // console.log("herer");
+    // const UserId = this.state.profile.id;
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    Axios.get(`/api/getuserevents/${urlUserId}`)
       .then((response) => {
         this.setState({
           events: response.data,
@@ -126,7 +167,13 @@ export default class CompanyProfile extends Component {
   };
 
   getUserRating = () => {
-    Axios.get(`/api/rate/userprofile/${this.state.profile.id}`)
+    // const UserId = this.state.profile.id;
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+
+    Axios.get(`/api/rate/userprofile/${urlUserId}`)
       .then((res) => {
         this.setState({ userRating: res.data });
         console.log(this.state.userRating);
@@ -140,6 +187,34 @@ export default class CompanyProfile extends Component {
   }
 
   render() {
+    const loggedInUserId = this.state.profile.id;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlUserId = urlParams.get("userId");
+    let editProfileBtn;
+
+    console.log(urlUserId);
+
+    if (loggedInUserId == urlUserId) {
+      editProfileBtn = (
+        <a
+          class="a-design"
+          href="edituserprofile"
+          className="btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary"
+        >
+          Edit Profile
+        </a>
+      );
+    } else {
+      editProfileBtn = (
+        <a
+          class="a-design"
+          href="edituserprofile"
+          className="btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary d-none"
+        ></a>
+      );
+    }
+
     const myStyle = {
       width: "304px",
       height: "200px",
@@ -268,7 +343,7 @@ export default class CompanyProfile extends Component {
             <div className="row">
               <div className="col-lg-7 col-md-10">
                 <h1 className="h1-design h1-special display-2 text-black">
-                  {this.state.profile.user_name}
+                  {this.state.companyUserName}
                 </h1>
               </div>
             </div>
@@ -446,15 +521,7 @@ export default class CompanyProfile extends Component {
                       </h3>
                     </div>
 
-                    <div className="col-4 text-right">
-                      <a
-                        class="a-design"
-                        href="editcompanyprofile"
-                        className="btn-design btn btn-sm btm-sm-design btn-primary-design btn-primary"
-                      >
-                        Edit Profile
-                      </a>
-                    </div>
+                    <div className="col-4 text-right">{editProfileBtn}</div>
                   </div>
                 </div>
                 {/* <!--reference https://bootsnipp.com/snippets/K0ZmK--> */}
@@ -472,7 +539,7 @@ export default class CompanyProfile extends Component {
                             <label class="label-design">Company Name:</label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">{this.state.companyName}</p>
+                            <p class="p-design">{this.state.companyUserName}</p>
                           </div>
                         </div>
                         <div className="row">

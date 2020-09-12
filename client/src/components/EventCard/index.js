@@ -32,7 +32,7 @@ export class index extends Component {
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
     this.timeInterval = 0;
-    this.onStarClick = this.onStarClick.bind(this)
+    this.onStarClick = this.onStarClick.bind(this);
   }
 
   //load any data here like comments
@@ -176,53 +176,55 @@ export class index extends Component {
       .catch((err) => console.log(err));
   };
 
-
   //   click method to change star value
   onStarClick(rating) {
-    console.log(rating)
+    console.log(rating);
     this.setState({ rating });
   }
 
   //get rating details given by logged in user
   getUserRating = () => {
-    const UserId = this.state.profile.id
-    const EventId = this.state.eventId
+    const UserId = this.state.profile.id;
+    const EventId = this.state.eventId;
     Axios.get(`/api/rate/userprofile/${UserId}/${EventId}`)
       .then((res) => {
-        this.setState({ rating: res.data.rating, postRatingDisabled: true })
+        this.setState({ rating: res.data.rating, postRatingDisabled: true });
       })
       .catch((err) => console.log(err));
   };
 
-  // calculate average rating when user is not logged in 
+  // calculate average rating when user is not logged in
   starRating = () => {
     this.state.userRating.map((data) => (
-      <StarRatingComponent name="rating" starCount={5} value={data.rating} postRatingDisabled={false} />
+      <StarRatingComponent
+        name="rating"
+        starCount={5}
+        value={data.rating}
+        postRatingDisabled={false}
+      />
     ));
   };
 
   // get user event attendance details
   getUserAttendance = () => {
-    const UserId = this.state.profile.id
-    const EventId = this.state.eventId
-    console.log(EventId)
+    const UserId = this.state.profile.id;
+    const EventId = this.state.eventId;
+    console.log(EventId);
     Axios.get(`/api/auth/joinevent/${UserId}/${EventId}`)
       .then((res) => {
         if (res.data === null) {
           this.setState({
             joinEventDisabled: false,
-            postRatingDisabled: true
-          })
-        }
-        else {
+            postRatingDisabled: true,
+          });
+        } else {
           this.setState({
             joinEventDisabled: true,
-          })
+          });
         }
-
-      }).catch(err => console.log(err))
-  }
-
+      })
+      .catch((err) => console.log(err));
+  };
 
   // post event attendee details
   eventAttendee = (event) => {
@@ -231,14 +233,16 @@ export class index extends Component {
     const EventId = this.state.eventId;
     Axios.post("/api/auth/joinevent", {
       UserId,
-      EventId
-    }).then((res) => {
-      this.setState({
-        joinEventDisabled: true,
-        postRatingDisabled: false
+      EventId,
+    })
+      .then((res) => {
+        this.setState({
+          joinEventDisabled: true,
+          postRatingDisabled: false,
+        });
       })
-    }).catch((err) => console.log(err));
-  }
+      .catch((err) => console.log(err));
+  };
 
   //redirect user to signup page
   registerToJoinEvent = (event) => {
@@ -275,7 +279,7 @@ export class index extends Component {
         pathname: "/userprofile",
         search: `?userId=${this.state.userId[0]}`,
       });
-    } else if (roleId === 2) {
+    } else if (roleId === 2 || 3) {
       push({
         pathname: "/companyprofile",
         search: `?userId=${this.state.userId[0]}`,
@@ -327,7 +331,6 @@ export class index extends Component {
             onStarClick={this.onStarClick}
             disabled={this.state.starDisabled}
           />
-
         </div>
         <OverlayTrigger
           delay={{ show: 250, hide: 350 }}
