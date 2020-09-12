@@ -29,6 +29,7 @@ export class index extends Component {
       postRatingDisabled: true,
       userRating: [],
       profile: [],
+      eventEnd: false
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
     this.timeInterval = 0;
@@ -135,7 +136,7 @@ export class index extends Component {
         console.log(eventDate)
         let date = new Date(eventDate);
 				date.setDate(date.getDate()+1)
-				//date = new Date()
+				date = new Date()
 				this.initializeCountdown(date);
       })
       .catch((err) => console.log(err));
@@ -536,7 +537,7 @@ export class index extends Component {
           </div>
         </div>
 
-        <div class=" home-info-section">
+        <div class={`home-info-section ${this.state.eventEnd ? "" : "d-none"}`}>
           <div class="row justify-content-center">
             <div className="row" style={{ marginTop: "40px;" }}>
               <div className="col-md-12">
