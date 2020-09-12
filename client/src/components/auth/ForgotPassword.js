@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Auth } from 'aws-amplify';
 import FormErrors from "../FormErrors";
 import Validate from "../../util/FormValidation";
+import "./style.css"
 
 export default class ForgotPassword extends Component {
   state = {
@@ -53,11 +54,11 @@ export default class ForgotPassword extends Component {
   render() {
     return (
       <>
-        <div className="container mt-5">
+        <div className="container password-width mt-5">
           <div className="row justify-content-center align-items-center">
             <div className="col-md-7  mt-2 shadow-lg p-3 mb-5 bg-white border-style-signup rounded">
-              <h2 className="font-weight-normal text-center">Forgot your password?</h2>
-              <p className="font-italic">Not to worry. Just enter your email address below and we'll send you an instruction email for recovery.</p>
+              <h2 className="font-weight-normal text-center password-font">Forgot your password?</h2>
+              <p className="font-italic password-text">Not to worry. Just enter your email address below and we'll send you an instruction email for recovery.</p>
               <FormErrors formerrors={this.state.errors} />
               <form onSubmit={this.handleForgotPassword} className="mt-3">
                 <div className="form-group">
