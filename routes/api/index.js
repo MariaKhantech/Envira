@@ -115,9 +115,7 @@ router.put('/updateevent/:eventId', (req, res) => {
 		});
 });
 
-
-
-
+//get the review data
 router.get('/getreviewer/:userId', (req, res) => {
 	db.User.findOne({
 	  where: {
@@ -134,6 +132,25 @@ router.get('/getreviewer/:userId', (req, res) => {
 		}
 	  });
   });
+
+  //get all users attending an event
+  router.get("/geteventattendees/:EventId", (req, res) => {
+	db.EventAttendee.findAll({
+	  where: {
+		EventId: req.params.EventId,
+	  },
+	})
+	  .then((data) => {
+		res.json(data);
+	  })
+	  .catch((err) => {
+		console.log(err);
+		if (err) {
+		  res.status(500).json(err);
+		}
+	  });
+  });
+  
 
 
 module.exports = router;

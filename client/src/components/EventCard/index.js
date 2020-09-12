@@ -31,6 +31,7 @@ export class index extends Component {
       profile: [],
       eventEnd: false,
       comment: "",
+      attendeeList: [],
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
     this.timeInterval = 0;
@@ -129,7 +130,7 @@ export class index extends Component {
         console.log(eventDate);
         let date = new Date(eventDate);
         date.setDate(date.getDate() + 1);
-        date = new Date();
+        //date = new Date()
         this.initializeCountdown(date);
       })
       .catch((err) => console.log(err));
@@ -323,7 +324,18 @@ export class index extends Component {
       .catch((err) => console.log(err));
   };
 
+  //get the
+  getEventAttendees(eventId) {
+    Axios.get(`/api/geteventattendees/${eventId}`)
+      .then((response) => {
+        console.log(response.data);
+        this.setState({ attendeeList: response.data });
+      })
+      .catch((err) => console.log(err));
+  }
+
   render() {
+    console.log("a");
     const scrollingContainer = {
       height: "800px",
       overflowY: "scroll",
@@ -456,8 +468,8 @@ export class index extends Component {
             <p class="lead">
               {!this.state.profile.id && (
                 <button
-                  class="btn btn-primary btn-lg"
-                  style={{ marginTop: "8rem" }}
+                  class="btn btn-lg border-white shadow text-white font-weight-bold"
+                  style={{ marginTop: "8rem", backgroundColor: "#85dcba" }}
                   role="button"
                   onClick={this.registerToJoinEvent}
                 >
@@ -466,8 +478,10 @@ export class index extends Component {
               )}
               {this.state.profile.id && (
                 <button
-                  class="btn btn-primary btn-lg"
-                  style={{ marginTop: "8rem" }}
+                  class={`btn btn-lg border-white shadow text-white font-weight-bold' ${
+                    this.state.eventEnd ? "d-none" : ""
+                  }`}
+                  style={{ marginTop: "8rem", backgroundColor: "#85dcba" }}
                   role="button"
                   onClick={this.eventAttendee}
                   disabled={this.state.joinEventDisabled}

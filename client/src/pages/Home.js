@@ -17,7 +17,7 @@ export default class Home extends Component {
 		return (
 			<div className="wrapper" style = {backgroundWrapperColor}>
 				<Carousel />
-				{/* <Footer color={"red"}/> */}
+				<Footer />
 			</div>
 		);
 	}
