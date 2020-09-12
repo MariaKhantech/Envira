@@ -116,24 +116,7 @@ router.put('/updateevent/:eventId', (req, res) => {
 });
 
 
-//Get all comments for an event
-router.get('/geteventcomments/:eventId', (req, res) => {
-	
-	eventId= req.params.eventId
-  db.Users.findAll(({
-		  where: {
-			EventId: eventId
-		  }
-		}))
-	  .then((data) => {
-		  res.json(data);
-	  })
-	  .catch((err) => {
-		  if (err) {
-			  res.status(500).json(err);
-		  }
-	  });
-});
+
 
 router.get('/getreviewer/:userId', (req, res) => {
 	db.User.findOne({
@@ -155,5 +138,3 @@ router.get('/getreviewer/:userId', (req, res) => {
 
 module.exports = router;
 
-
-module.exports = router;
