@@ -31,9 +31,9 @@ export class Footer extends Component {
                             <h4 className="title">Web Developer</h4>
                             </div>
                             <ul className="social">
-                            <li><a href="#" className="fa fa-github" aria-hidden="true"></a></li>
-                            <li><a href="#" className="fa fa-address-card" aria-hidden="true"></a></li>
-                            <li><a href="#" className="fa fa-linkedin" aria-hidden="true"></a></li>
+                            <li><a href="https://github.com/MariaKhantech" className="fa fa-github" aria-hidden="true"></a></li>
+                            <li><a href="https://mariakhantech.github.io/maria-khan-portfolio/" className="fa fa-address-card" aria-hidden="true"></a></li>
+                            <li><a href="https://www.linkedin.com/in/maria-khan-tech/" className="fa fa-linkedin" aria-hidden="true"></a></li>
                             
                             </ul>
                         </div>
