@@ -100,19 +100,17 @@ export default class CompanyProfile extends Component {
       .catch((err) => console.log(err));
   };
 
-  // get logged in company info from EventAttendee model
+  // get logged in user info from EventAttendee model
   getUserJoinedEvent = () => {
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const urlUserId = urlParams.get("userId");
-
-    Axios.get(`/api/auth/joinevent/${urlUserId}`)
+    const UserId = urlParams.get("userId");
+    Axios.get(`/api/auth/userTotalEvent/${UserId}`)
       .then((response) => {
         this.setState({
           totalEvent: response.data,
         });
+        console.log(this.state.totalEvent.length);
       })
       .catch((err) => console.log(err));
   };
@@ -352,7 +350,7 @@ export default class CompanyProfile extends Component {
           <div className="container-fluid container-design d-flex align-items-center">
             <div className="row">
               <div className="col-lg-7 col-md-10">
-                <h1 className="h1-design h1-special display-2 text-black">
+                <h1 className="h1-design h1-special display-2 text-black ml-5">
                   {this.state.companyUserName}
                 </h1>
               </div>
