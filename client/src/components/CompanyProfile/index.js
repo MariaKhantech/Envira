@@ -357,7 +357,7 @@ export default class CompanyProfile extends Component {
             <div className="row">
               <div className="col-lg-7 col-md-10">
                 <h1 className="h1-design h1-special display-2 text-black">
-                  {this.state.companyUserName}
+                  {this.state.companyUserName.toUpperCase()}
                 </h1>
               </div>
             </div>
@@ -426,9 +426,9 @@ export default class CompanyProfile extends Component {
                     role="document"
                   >
                     <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">
-                          My Events
+                      <div class="modal-header text-center myevent-header">
+                        <h5 class="modal-title text-white" id="exampleModalCenterTitle">
+                         MY EVENTS
                         </h5>
                         <button
                           type="button"
@@ -439,11 +439,11 @@ export default class CompanyProfile extends Component {
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
-                      <div class="modal-body">{eventCards}</div>
-                      <div class="modal-footer">
+                      <div class="modal-body myEvent-modal">{eventCards}</div>
+                      <div class="modal-footer myevent-footer">
                         <button
                           type="button"
-                          class="btn btn-secondary"
+                          class="btn myevent-btn text-white"
                           data-dismiss="modal"
                         >
                           Close
@@ -637,12 +637,6 @@ export default class CompanyProfile extends Component {
             </div>
           </div>
         </div>
-
-        <footer className="footer">
-          <div className="row align-items-center justify-content-xl-between">
-            <div className="col-xl-6 m-auto text-center" />
-          </div>
-        </footer>
       </div>
     );
   }

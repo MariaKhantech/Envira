@@ -1859,4 +1859,25 @@ textarea[resize='horizontal'] {
     margin-bottom: 10px;
   }
 }
+
+.myEvent-modal {
+  background-color: #fff7ed;
+}
+
+.myevent-footer {
+  background: linear-gradient(87deg, #5e72e4 0, #41b3a3 100%) !important;
+}
+
+.myevent-header {
+  background: linear-gradient(87deg, #5e72e4 0, #41b3a3 100%) !important;
+}
+
+.myevent-img {
+  height: 100px;
+  width: 100px;
+}
+
+.myevent-btn {
+  background-color: #5e72e4;
+}
 /*# sourceMappingURL=style.css.map */

@@ -15,7 +15,7 @@ export class index extends Component {
 		this.enviraAudio=this.enviraAudio.bind(this);
 		this.pauseEnviraAudio=this.pauseEnviraAudio.bind(this);
 		this.cardAudio = new Audio(
-			'https://envirabucket215241-dev.s3.amazonaws.com/polly/homepageInfo.73f4aa21-db43-4456-8d20-e004f600575f.mp3'
+			'https://envirabucket215241-dev.s3.amazonaws.com/polly/polarbearsartic.9b7f99b2-e46e-40d1-ba8a-ed76759a03bf.mp3'
 		);
 
 	  }
@@ -59,79 +59,15 @@ export class index extends Component {
 						<div style={insideStyles}><h1 className ="text-white"><b>ENVIRA</b></h1></div>
 					</div>
 					</Parallax>
-				{/* <div id="carouselExampleCaptions" className="carousel homepage mt-2" data-ride="carousel">
-					<ol className="carousel-indicators">
-						<li data-target="#carouselExampleCaptions" data-slide-to="0" className="active" />
-						<li data-target="#carouselExampleCaptions" data-slide-to="1" />
-						<li data-target="#carouselExampleCaptions" data-slide-to="2" />
-					</ol>
-					<div className="carousel-inner">
-						<div className="carousel-item active">
-							<img
-								src="../assets/imgs/forestdeforestation1.jpg"
-								className="d-block w-100"
-								alt="orangutans displaced from deforestation"
-							/>
-							<div className="carousel-caption d-md-block">
-								<h1 className="text-white">Forest Fires & Deforestation</h1>
-								<h5>Go to the Rainforest page to find out more!</h5>
-							</div>
-						</div>
-						<div className="carousel-item">
-							<img
-							,	src="../assets/imgs/beachplasticanimal.jpg"
-								className="d-block w-100"
-								alt="Trash that has been left at the beach"
-							/>
-							<div className="carousel-caption d-md-block">
-								<h1>Ocean Pollution</h1>
-								<h5>Our ocean is full of pollution, check out the Ocean page for more details!</h5>
-							</div>
-						</div>
-						<div className="carousel-item">
-							<img
-								src="../assets/imgs/poorair.jpg"
-								className="d-block w-100"
-								alt="City with poor air quality"
-							/>
-							<div className="carousel-caption d-md-block">
-								<h1>Pollutants</h1>
-								<h5>
-									In the pollutants section you will have the ability to check your air and water
-									quality.
-								</h5>
-							</div>
-						</div>
-					</div>
-					<a
-						className="carousel-control-prev"
-						href="#carouselExampleCaptions"
-						role="button"
-						data-slide="prev"
-					>
-						<span className="carousel-control-prev-icon" aria-hidden="true" />
-						<span className="sr-only">Previous</span>
-					</a>
-					<a
-						className="carousel-control-next"
-						href="#carouselExampleCaptions"
-						role="button"
-						data-slide="next"
-					>
-						<span className="carousel-control-next-icon" aria-hidden="true" />
-						<span className="sr-only">Next</span>
-					</a>
-				</div> */}
-
-
+=
 				<div className="row justify-content-around ">
-					<div className="col-4 ">
+					<div className="col-sm-12 ">
 					<a href='/rainforest'>
 						<div className="card bg-transparent border-0 mx-auto" style={{ width: '12rem' }}>
 						
 							<div className="card-body">
 							
-								<h5 className="card-title text-center text-white">Forest Fires & Deforestation</h5>
+								<h5 className="card-title text-center text-white ml-2">Forest Fires & Deforestation</h5>
 								
 								<div className="image">
 									<object
@@ -154,7 +90,7 @@ export class index extends Component {
 						<div className="card bg-transparent border-0 mx-auto" style={{ width: '12rem' }}>
 						
 							<div className="card-body ">
-								<h5 className="card-title text-center text-white">Ocean Pollution</h5>
+								<h5 className="card-title ml-5 text-white">Ocean Pollution</h5>
 								<div className="image ocean-border">
 									<object
 										className="svg-file oceans"
@@ -179,24 +115,16 @@ export class index extends Component {
 								<div className="card border-0">
 									<div className="card-body homepgCardBackground text-center">
 									
-										<h4 className="card-title text-center text-white"><b>Latest News on Climate Change</b></h4>
+										<h4 className="card-title text-center text-white"><b>Latest News on the Artic</b></h4>
 										<hr class="bg-white"/>
 										<img
-											src="https://cdn.mos.cms.futurecdn.net/xAe6t2584gbMfJU6Who764-650-80.jpg.webp"
+											src="../assets/imgs/polarbears.jpg"
 											alt="image of greenland icecaps"
 											class="img-thumbnail img-fluid ice-caps rounded"
 										/>
 										
-										<p class="text-black-50">
-											Icebergs discharged from Allison Glacier float near Kullorsuaq, western
-											Greenland. (Image: © Margie Turrin/Lamont-Doherty Earth Observatory)
-										</p>
 										<p class="text-white">
-											Greenland set a new record for ice lost 2019, the mass lost is the highest
-											than ever recorded since 1948. In 2019 that loss was 532 billion tons, this
-											will likely rise global sea levels by 1.5 millimeters. For a hypothetical
-											visual, all the water combined would cover the state of California by more
-											than 4 feet of water.
+										The Polar Bear the world and a powerful symbol of strength and endurance in the Artic. The protection of the polar bear habitat is urgent due to the arctic melting. They are considered endangered.
 										</p>
 										
 										{/*https://stackoverflow.com/questions/39779527/toggle-play-pause-in-react-with-audio*/}
@@ -261,7 +189,7 @@ export class index extends Component {
 				</Zoom>
 				<div class="row">
 					<div class="col-md-12 h1-Hstyle mt-5 text-center">
-					<img src="../assets/homepageIcons/titlehelp.png"/>
+					<img class="img-fluid" src="../assets/homepageIcons/titlehelp.png"/>
 					</div>
 					
 				</div>
@@ -314,7 +242,7 @@ export class index extends Component {
 				</div>
 
 				<div className="row mb-5">
-				<div className="card-group">
+				<div className="card-group" >
 			
 					<div className="card greenHcard text-center">
 					<Fade bottom>
@@ -345,7 +273,7 @@ export class index extends Component {
 						</div>
 						</Fade>
 					</div>
-					<div className="card orangeHcard text-center">
+					<div className="card orangeHcard text-center"style={{paddingBottom: "4rem"}}>
 					<Fade bottom>
 					<a href="https://www.theglobaleducationproject.org/climate-change/"><img className="card-img-top icon-Hsize mx-auto mt-5" src="../assets/homepageIcons/extinct.png" alt="south america amazon on fire"/></a>
 						<div className="card-body">

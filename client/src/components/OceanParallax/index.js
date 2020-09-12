@@ -25,7 +25,7 @@ export class OceanParallax extends Component {
 	}
 	enviraOverFishing() {
 		let oceanOverFish= new Audio(
-			'https://envirabucket215241-dev.s3.amazonaws.com/polly/overfishing.a5896923-afa8-43d0-b7fc-713b27199d61.mp3'
+			'https://envirabucket215241-dev.s3.amazonaws.com/polly/marine-wildlife.c72d0dfc-3da7-4a3d-b91f-b973eded03ce.mp3'
 			
 		);
 		oceanOverFish.play();
@@ -177,7 +177,7 @@ export class OceanParallax extends Component {
 
 				<div class="background2">
 					<Parallax strength={500}>
-						<div className="container border-0">
+						<div className="container border-0" style={{ height: '1800px'}}>
 
 						<div className="card body-color2 border-0 mb-3" style={{width: "18rem;"}}>
 							<div className="card-body">
@@ -185,12 +185,15 @@ export class OceanParallax extends Component {
 								<h3 className="card-title text-white text-center mb-2">Envira</h3>
 								<hr className="bg-white"/>
 								<h6 className="card-subtitle mb-2 text-white text-center">Questions you can ask Envira</h6>
-								<li className="card-text text-white">What are the tempatures of the ocean?</li>
+								<li className="card-text text-white">What is the tempature of the ocean?</li>
 								<li className="text-white">What can I do to help the ocean?</li>
 								<li className="text-white">How do you feel about the ocean pollution?</li>
 								<li className="text-white">How will this affect the ocean for future generations?</li>
 								<li className="text-white">What are some ways I can reduce plastic use?</li>
 								<li className="text-white">What is your favorite ocean animal?</li>
+								<h5 class="text-white font-weight-bold">For added fun click on the bubbles!</h5>
+
+							
 							</div>
 							</div>
 
