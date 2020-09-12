@@ -20,7 +20,7 @@
   border-radius: 10px;
   border: 2px solid #e27d60;
   display: block;
-  max-width: 350px !important;
+  /* max-width: 350px !important; */
 }
 
 #contactList {
