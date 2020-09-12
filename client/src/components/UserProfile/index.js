@@ -102,13 +102,11 @@ export default class UserProfile extends Component {
 
   // get logged in user info from EventAttendee model
   getUserJoinedEvent = () => {
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const urlUserId = urlParams.get("userId");
-
-    Axios.get(`/api/auth/joinevent/${urlUserId}`)
+    const UserId = urlParams.get("userId");
+    // const UserId = this.state.profile.id;
+    Axios.get(`/api/auth/userTotalEvent/${UserId}`)
       .then((response) => {
         this.setState({
           totalEvent: response.data,
@@ -365,7 +363,7 @@ export default class UserProfile extends Component {
           <div className="container-fluid d-flex align-items-center">
             <div className="row">
               <div className="col-lg-7 col-md-10 ">
-                <h1 className="display-2 text-dark text-center">
+                <h1 className="display-2 text-dark text-center ml-5">
                   {this.state.userName}
                 </h1>
               </div>
