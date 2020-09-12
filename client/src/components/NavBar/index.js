@@ -173,9 +173,3 @@ export class NavBar extends Component {
 }
 
 export default NavBar;
-
-{
-  /* <a className="menu-item text-white about" href="/userprofile">
-            My Account
-          </a> */
-}
