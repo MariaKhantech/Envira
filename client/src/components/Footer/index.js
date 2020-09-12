@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import Fade from 'react-reveal/Fade';
+import Slide from 'react-reveal/Slide';
 import "./style.scss"
 
 export class Footer extends Component {
     render() {
         return (
             <div className="footer-wrapper ">
-                < footer className="F-footer">
+                < footer className="F-footer ">
                    
                 <div className="container pt-5 border-bottom ">
                 <Fade bottom>
@@ -19,6 +20,7 @@ export class Footer extends Component {
                     </Fade> 
                      {/* https://codepen.io/FrankieDoodie/pen/NOJpVX */}
                     <div className="row">
+                        <Slide left>
                         <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="our-team rounded">
                             <div className="picture">
@@ -29,13 +31,16 @@ export class Footer extends Component {
                             <h4 className="title">Web Developer</h4>
                             </div>
                             <ul className="social">
-                            <li><a href="#" className="fa fa-facebook" aria-hidden="true"></a></li>
-                            <li><a href="#" className="fa fa-twitter" aria-hidden="true"></a></li>
-                            <li><a href="#" className="fa fa-google-plus" aria-hidden="true"></a></li>
+                            <li><a href="#" className="fa fa-github" aria-hidden="true"></a></li>
+                            <li><a href="#" className="fa fa-address-card" aria-hidden="true"></a></li>
                             <li><a href="#" className="fa fa-linkedin" aria-hidden="true"></a></li>
+                            
                             </ul>
                         </div>
                         </div>
+                        </Slide>
+
+                        <Slide bottom>
                             <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="our-team rounded">
                             <div className="picture">
@@ -46,13 +51,15 @@ export class Footer extends Component {
                             <h4 className="title">Web Developer</h4>
                             </div>
                             <ul className="social">
-                            <li><a href="#" className="fa fa-facebook" aria-hidden="true"></a></li>
-                            <li><a href="#" className="fa fa-twitter" aria-hidden="true"></a></li>
-                            <li><a href="#" className="fa fa-google-plus" aria-hidden="true"></a></li>
+                            <li><a href="#" className="fa fa-github" aria-hidden="true"></a></li>
+                            <li><a href="#" className="fa fa-address-card" aria-hidden="true"></a></li>
                             <li><a href="#" className="fa fa-linkedin" aria-hidden="true"></a></li>
                             </ul>
                         </div>
                         </div>
+                        </Slide>
+
+                        <Slide right>
                             <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                         <div className="our-team rounded">
                             <div className="picture">
@@ -63,13 +70,13 @@ export class Footer extends Component {
                             <h4 className="title">Web Developer</h4>
                             </div>
                             <ul className="social">
-                            <li><a href="#" className="fa fa-facebook" aria-hidden="true"></a></li>
-                            <li><a href="#" className="fa fa-twitter" aria-hidden="true"></a></li>
-                            <li><a href="#" className="fa fa-google-plus" aria-hidden="true"></a></li>
+                            <li><a href="#" className="fa fa-github" aria-hidden="true"></a></li>
+                            <li><a href="#" className="fa fa-address-card" aria-hidden="true"></a></li>
                             <li><a href="#" className="fa fa-linkedin" aria-hidden="true"></a></li>
                             </ul>
                         </div>
                         </div>
+                        </Slide>
                             
                     </div>
 
