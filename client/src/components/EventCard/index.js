@@ -469,8 +469,8 @@ export class index extends Component {
             <p class="lead">
               {!this.state.profile.id && (
                 <button
-                  class="btn btn-primary btn-lg"
-                  style={{ marginTop: "8rem" }}
+                  class="btn btn-lg border-white shadow text-white font-weight-bold"
+                  style={{ marginTop: "8rem", backgroundColor:"#85dcba" }}
                   role="button"
                   onClick={this.registerToJoinEvent}
                 >
@@ -479,8 +479,8 @@ export class index extends Component {
               )}
               {this.state.profile.id && (
                 <button
-                  class={`btn btn-primary btn-lg' ${this.state.eventEnd ? "d-none" : ""}`}
-                  style={{ marginTop: "8rem" }}
+                  class={`btn btn-lg border-white shadow text-white font-weight-bold' ${this.state.eventEnd ? "d-none" : ""}`}
+                  style={{ marginTop: "8rem", backgroundColor:"#85dcba" }}
                   role="button"
                   onClick={this.eventAttendee}
                   disabled={this.state.joinEventDisabled}
