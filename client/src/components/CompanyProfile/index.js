@@ -192,6 +192,7 @@ export default class CompanyProfile extends Component {
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
     let editProfileBtn;
+    let hideEditEventLink;
 
     console.log(urlUserId);
 
@@ -221,6 +222,10 @@ export default class CompanyProfile extends Component {
           Edit Profile
         </Link>
       );
+      hideEditEventLink = {
+        pointerEvents: "none",
+        color: "#fff",
+      };
     }
 
     const myStyle = {
@@ -318,16 +323,17 @@ export default class CompanyProfile extends Component {
             <div class="col-md-2">
               <Link
                 onClick={this.closeModal}
-                to={{ pathname: "/editevent", search: `?eventId=${event.id}` }}
+                to={{ pathname: "/eventspage", search: `?eventId=${event.id}` }}
               >
-                Edit
+                View
               </Link>
               <br />
               <Link
                 onClick={this.closeModal}
-                to={{ pathname: "/eventspage", search: `?eventId=${event.id}` }}
+                to={{ pathname: "/editevent", search: `?eventId=${event.id}` }}
+                style={hideEditEventLink}
               >
-                View
+                Edit
               </Link>
             </div>
           </div>
