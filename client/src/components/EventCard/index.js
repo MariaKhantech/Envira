@@ -47,9 +47,9 @@ export class index extends Component {
     this.getEventData();
     this.setState({ reviewArray });
     //setting date for testing
-    let date = new Date();
-    date.setDate(30);
-    this.initializeCountdown(date);
+    // let date = new Date();
+    // date.setDate(30);
+    // this.initializeCountdown(date);
     try {
       // get the current logged in user details
       const user = await Auth.currentAuthenticatedUser();
@@ -128,13 +128,16 @@ export class index extends Component {
         this.setState({ eventImage: image, userId: UserId });
         this.getRoleId();
         this.getEventImageUrl();
-        this.getProfileImage(this.state.userId);
+       // this.getProfileImage(this.state.userId);
         this.getUserImageUrl(this.state.userId);
 
         //loads the countdown clock (Marai)
         const eventDate = this.state.eventData.map((data) => data.date);
+        console.log(eventDate)
         let date = new Date(eventDate);
-        this.initializeCountdown(date);
+				date.setDate(date.getDate()+1)
+				//date = new Date()
+				this.initializeCountdown(date);
       })
       .catch((err) => console.log(err));
   };
