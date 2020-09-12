@@ -203,8 +203,7 @@ export default class UserProfile extends Component {
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
     let editProfileBtn;
-
-    console.log(urlUserId);
+    let hideEditEventLink;
 
     if (loggedInUserId == urlUserId) {
       editProfileBtn = (
@@ -232,6 +231,10 @@ export default class UserProfile extends Component {
           Edit Profile
         </Link>
       );
+      hideEditEventLink = {
+        pointerEvents: "none",
+        color: "#fff",
+      };
     }
 
     const myStyle = {
@@ -328,16 +331,17 @@ export default class UserProfile extends Component {
             <div class="col-md-2">
               <Link
                 onClick={this.closeModal}
-                to={{ pathname: "/editevent", search: `?eventId=${event.id}` }}
-              >
-                Edit
-              </Link>
-              <br />
-              <Link
-                onClick={this.closeModal}
                 to={{ pathname: "/eventspage", search: `?eventId=${event.id}` }}
               >
                 View
+              </Link>
+              <br />
+              <Link
+                style={hideEditEventLink}
+                onClick={this.closeModal}
+                to={{ pathname: "/editevent", search: `?eventId=${event.id}` }}
+              >
+                Edit
               </Link>
             </div>
           </div>
