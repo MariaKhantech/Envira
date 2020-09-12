@@ -30,7 +30,7 @@ export class index extends Component {
       userRating: [],
       profile: [],
       eventEnd: false,
-      comment: ''
+      comment: "",
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
     this.timeInterval = 0;
@@ -107,7 +107,7 @@ export class index extends Component {
     const id = urlParams.get("eventId");
 
     //load the comments of from event using event(id)
-    this.loadEventComments(id)
+    this.loadEventComments(id);
 
     this.setState({ eventId: id });
     Axios.get(`/api/create/eventcreate`)
@@ -126,11 +126,11 @@ export class index extends Component {
 
         //loads the countdown clock (Marai)
         const eventDate = this.state.eventData.map((data) => data.date);
-        console.log(eventDate)
+        console.log(eventDate);
         let date = new Date(eventDate);
-        date.setDate(date.getDate()+1)
-      date = new Date()
-				this.initializeCountdown(date);
+        date.setDate(date.getDate() + 1);
+        date = new Date();
+        this.initializeCountdown(date);
       })
       .catch((err) => console.log(err));
   };
@@ -160,10 +160,11 @@ export class index extends Component {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const id = urlParams.get("eventId");
+    const UserId = this.state.userId[0];
     Axios.post(`/api/rate/event`, {
       rating: this.state.rating,
       EventId: id,
-      UserId: this.state.profile.id,
+      UserId: UserId,
     })
       .then((res) => {
         console.log(res);
@@ -289,39 +290,38 @@ export class index extends Component {
   };
 
   //load the event comments for this event
-	loadEventComments(eventId) {		
-		Axios.get(`/api/geteventcomments/${eventId}`)
-			.then((response) => {
-				console.log(response.data);
-				this.setState({reviewArray:response.data})
-			})
-			.catch((err) => console.log(err));
+  loadEventComments(eventId) {
+    Axios.get(`/api/geteventcomments/${eventId}`)
+      .then((response) => {
+        console.log(response.data);
+        this.setState({ reviewArray: response.data });
+      })
+      .catch((err) => console.log(err));
   }
-  
+
   //track the review comment as the user types
   handleChange = ({ target }) => {
-		this.setState({ [target.name]: target.value });
-		
-	  };
+    this.setState({ [target.name]: target.value });
+  };
 
-	//saves comment to the DB
-	saveReview = () => {
-		const userReview ={
-			userId : this.state.profile.id,
-			eventId : parseInt( this.state.eventId),
-			comment : this.state.comment
-		}
+  //saves comment to the DB
+  saveReview = () => {
+    const userReview = {
+      userId: this.state.profile.id,
+      eventId: parseInt(this.state.eventId),
+      comment: this.state.comment,
+    };
 
-		Axios.post("/api/createcomment", {
-		userReview
-		})
-		.then((res) => {
-			const copyArray = [...this.state.reviewArray]
-			copyArray.push(res.data)
-			this.setState({reviewArray:copyArray})
-		})
-		.catch(err => console.log(err))
-	}
+    Axios.post("/api/createcomment", {
+      userReview,
+    })
+      .then((res) => {
+        const copyArray = [...this.state.reviewArray];
+        copyArray.push(res.data);
+        this.setState({ reviewArray: copyArray });
+      })
+      .catch((err) => console.log(err));
+  };
 
   render() {
     const scrollingContainer = {
@@ -390,9 +390,9 @@ export class index extends Component {
     const googleMapUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=${address}+${city}+${eventState}`;
 
     //map through through all comments/reviews and create a review form/card dor each one
-    const reviewsCards = this.state.reviewArray.map(review => (	
-			<ReviewComment comment ={review}/>
-		));
+    const reviewsCards = this.state.reviewArray.map((review) => (
+      <ReviewComment comment={review} />
+    ));
 
     return (
       <div class="wrapper2">
@@ -590,8 +590,12 @@ export class index extends Component {
                     </h1>
                   </div>
 
-                  <div className="row"vid="post-review-box">
-                    <div className={`col-md-12 ${this.state.profile.length<1 ?"d-none":""}`}>
+                  <div className="row" vid="post-review-box">
+                    <div
+                      className={`col-md-12 ${
+                        this.state.profile.length < 1 ? "d-none" : ""
+                      }`}
+                    >
                       <form accept-charset="UTF-8" action="" method="post">
                         <input
                           id="ratings-hidden"
@@ -606,14 +610,14 @@ export class index extends Component {
                           placeholder="Enter your review here..."
                           rows="5"
                           value={this.state.comment}
-													onChange={this.handleChange}
+                          onChange={this.handleChange}
                         />
 
                         <div className="text-center">
                           <button
                             className="btn btn-lg save-btn mt-2"
                             type="button"
-                            onClick ={this.saveReview}
+                            onClick={this.saveReview}
                           >
                             Save
                           </button>
@@ -628,7 +632,10 @@ export class index extends Component {
           </div>
           <hr />
           <div class="container">
-            <div class="row mt2 border border-dark justify-content-around" style = {scrollingContainer}>
+            <div
+              class="row mt2 border border-dark justify-content-around"
+              style={scrollingContainer}
+            >
               {reviewsCards}
             </div>
           </div>

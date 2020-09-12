@@ -166,7 +166,7 @@ export default class UserProfile extends Component {
     Axios.get(`/api/rate/userprofile/${urlUserId}`)
       .then((res) => {
         // console.log(res);
-        this.setState({ userRating: res.data });
+        this.setState({ userRating: [res.data] });
       })
       .catch((err) => console.log(err));
   };
