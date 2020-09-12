@@ -30,8 +30,8 @@ export class index extends Component {
       userRating: [],
       profile: [],
       eventEnd: false,
-      comment: '',
-      attendeeList: []
+      comment: "",
+      attendeeList: [],
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
     this.timeInterval = 0;
@@ -108,7 +108,7 @@ export class index extends Component {
     const id = urlParams.get("eventId");
 
     //load the comments of from event using event(id)
-    this.loadEventComments(id)
+    this.loadEventComments(id);
 
     this.setState({ eventId: id });
     Axios.get(`/api/create/eventcreate`)
@@ -127,9 +127,9 @@ export class index extends Component {
 
         //loads the countdown clock (Marai)
         const eventDate = this.state.eventData.map((data) => data.date);
-        console.log(eventDate)
+        console.log(eventDate);
         let date = new Date(eventDate);
-        date.setDate(date.getDate() + 1)
+        date.setDate(date.getDate() + 1);
         //date = new Date()
         this.initializeCountdown(date);
       })
@@ -161,10 +161,11 @@ export class index extends Component {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const id = urlParams.get("eventId");
+    const UserId = this.state.userId[0];
     Axios.post(`/api/rate/event`, {
       rating: this.state.rating,
       EventId: id,
-      UserId: this.state.profile.id,
+      UserId: UserId,
     })
       .then((res) => {
         console.log(res);
@@ -294,7 +295,7 @@ export class index extends Component {
     Axios.get(`/api/geteventcomments/${eventId}`)
       .then((response) => {
         console.log(response.data);
-        this.setState({ reviewArray: response.data })
+        this.setState({ reviewArray: response.data });
       })
       .catch((err) => console.log(err));
   }
@@ -302,7 +303,6 @@ export class index extends Component {
   //track the review comment as the user types
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
-
   };
 
   //saves comment to the DB
@@ -310,33 +310,32 @@ export class index extends Component {
     const userReview = {
       userId: this.state.profile.id,
       eventId: parseInt(this.state.eventId),
-      comment: this.state.comment
-    }
+      comment: this.state.comment,
+    };
 
     Axios.post("/api/createcomment", {
-      userReview
+      userReview,
     })
       .then((res) => {
-        const copyArray = [...this.state.reviewArray]
-        copyArray.push(res.data)
-        this.setState({ reviewArray: copyArray })
+        const copyArray = [...this.state.reviewArray];
+        copyArray.push(res.data);
+        this.setState({ reviewArray: copyArray });
       })
-      .catch(err => console.log(err))
-  }
+      .catch((err) => console.log(err));
+  };
 
-  //get the 
+  //get the
   getEventAttendees(eventId) {
     Axios.get(`/api/geteventattendees/${eventId}`)
       .then((response) => {
         console.log(response.data);
-        this.setState({ attendeeList: response.data })
+        this.setState({ attendeeList: response.data });
       })
       .catch((err) => console.log(err));
   }
 
   render() {
-
-    console.log('a')
+    console.log("a");
     const scrollingContainer = {
       height: "800px",
       overflowY: "scroll",
@@ -403,7 +402,7 @@ export class index extends Component {
     const googleMapUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=${address}+${city}+${eventState}`;
 
     //map through through all comments/reviews and create a review form/card dor each one
-    const reviewsCards = this.state.reviewArray.map(review => (
+    const reviewsCards = this.state.reviewArray.map((review) => (
       <ReviewComment comment={review} />
     ));
 
@@ -424,23 +423,11 @@ export class index extends Component {
                     <b>Contact: </b>
                   </span>
                   {this.state.profile.id && (
-                    <a>
-                      <button className="" onClick={this.handleRedirect}>
-                        {contactPerson}
-                      </button>
-                    </a>
-                  )}{" "}
-                  {!this.state.profile.id && (
-                    <a>
-                      <button
-                        className=""
-                        onClick={this.handleRedirect}
-                        disabled={this.state.disabled}
-                      >
-                        {contactPerson}
-                      </button>
+                    <a href="#" onClick={this.handleRedirect}>
+                      {contactPerson}
                     </a>
                   )}
+                  {!this.state.profile.id && <a>{contactPerson}</a>}
                 </h4>
                 <hr />
                 <h5>
@@ -470,7 +457,7 @@ export class index extends Component {
               {!this.state.profile.id && (
                 <button
                   class="btn btn-lg border-white shadow text-white font-weight-bold"
-                  style={{ marginTop: "8rem", backgroundColor:"#85dcba" }}
+                  style={{ marginTop: "8rem", backgroundColor: "#85dcba" }}
                   role="button"
                   onClick={this.registerToJoinEvent}
                 >
@@ -479,8 +466,10 @@ export class index extends Component {
               )}
               {this.state.profile.id && (
                 <button
-                  class={`btn btn-lg border-white shadow text-white font-weight-bold' ${this.state.eventEnd ? "d-none" : ""}`}
-                  style={{ marginTop: "8rem", backgroundColor:"#85dcba" }}
+                  class={`btn btn-lg border-white shadow text-white font-weight-bold' ${
+                    this.state.eventEnd ? "d-none" : ""
+                  }`}
+                  style={{ marginTop: "8rem", backgroundColor: "#85dcba" }}
                   role="button"
                   onClick={this.eventAttendee}
                   disabled={this.state.joinEventDisabled}
@@ -570,8 +559,6 @@ export class index extends Component {
                   <span class="text-white">Address:</span>
                   <p class="text-white">
                     {address}, {city} {eventState}
-                    <br />
-                    United State
                   </p>
                 </div>
               </div>
@@ -604,7 +591,11 @@ export class index extends Component {
                   </div>
 
                   <div className="row" vid="post-review-box">
-                    <div className={`col-md-12 ${this.state.profile.length < 1 ? "d-none" : ""}`}>
+                    <div
+                      className={`col-md-12 ${
+                        this.state.profile.length < 1 ? "d-none" : ""
+                      }`}
+                    >
                       <form accept-charset="UTF-8" action="" method="post">
                         <input
                           id="ratings-hidden"
@@ -641,7 +632,10 @@ export class index extends Component {
           </div>
           <hr />
           <div class="container">
-            <div class="row mt2 border border-dark justify-content-around" style={scrollingContainer}>
+            <div
+              class="row mt2 border border-dark justify-content-around"
+              style={scrollingContainer}
+            >
               {reviewsCards}
             </div>
           </div>

@@ -75,7 +75,7 @@ export class UpdateProfile extends Component {
           contactPersonName: response.data.contact_person,
           description: response.data.company_description,
           environmentalFocus: response.data.environmental_focus,
-          companyWebsite: response.data.companyWebsite,
+          companyWebsite: response.data.website,
           phoneNumber: response.data.phone_number,
           email: response.data.email,
           data: response.data,

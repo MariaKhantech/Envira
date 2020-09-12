@@ -190,7 +190,7 @@ router.put("/updateCompanyProfile/:UserId", (req, res) => {
 
 //this route is to get the logged in user event details
 router.get("/userTotalEvent/:UserId", (req, res) => {
-  db.Event.findAll({
+  db.EventAttendee.findAll({
     where: {
       UserId: req.params.UserId,
     },

@@ -100,19 +100,17 @@ export default class CompanyProfile extends Component {
       .catch((err) => console.log(err));
   };
 
-  // get logged in company info from EventAttendee model
+  // get logged in user info from EventAttendee model
   getUserJoinedEvent = () => {
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const urlUserId = urlParams.get("userId");
-
-    Axios.get(`/api/auth/joinevent/${urlUserId}`)
+    const UserId = urlParams.get("userId");
+    Axios.get(`/api/auth/userTotalEvent/${UserId}`)
       .then((response) => {
         this.setState({
           totalEvent: response.data,
         });
+        console.log(this.state.totalEvent.length);
       })
       .catch((err) => console.log(err));
   };
@@ -175,8 +173,7 @@ export default class CompanyProfile extends Component {
 
     Axios.get(`/api/rate/userprofile/${urlUserId}`)
       .then((res) => {
-        this.setState({ userRating: res.data });
-        console.log(this.state.userRating);
+        this.setState({ userRating: [res.data] });
       })
       .catch((err) => console.log(err));
   };
@@ -193,8 +190,6 @@ export default class CompanyProfile extends Component {
     const urlUserId = urlParams.get("userId");
     let editProfileBtn;
     let hideEditEventLink;
-
-    console.log(urlUserId);
 
     if (loggedInUserId == urlUserId) {
       editProfileBtn = (
@@ -248,7 +243,6 @@ export default class CompanyProfile extends Component {
     const ratings = this.state.userRating.map((data) => data.rating);
     const avgRating =
       ratings.reduce((a, b) => a + parseInt(b), 0) / ratings.length;
-
     // add avgRating to starRating component value
     const starRating = (
       <StarRatingComponent name="rating" starCount={5} value={avgRating} />

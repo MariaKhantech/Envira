@@ -28,8 +28,6 @@ export default class EventsSearch extends Component {
     modalText: "",
     showCarousel: false,
     showIntroCard: true,
-    slidesToShow: 3,
-    slidesToScroll: 3,
     eventData: [],
     madeRequest: false,
   };
@@ -105,8 +103,6 @@ export default class EventsSearch extends Component {
                 eventData: filteredLocation,
                 showIntroCard: false,
                 showCarousel: true,
-                slidesToShow: filteredLocation.length,
-                slidesToScroll: filteredLocation.length,
                 madeRequest: false,
                 searchInput: "",
               });
@@ -132,8 +128,6 @@ export default class EventsSearch extends Component {
                 eventData: filteredEv,
                 showIntroCard: false,
                 showCarousel: true,
-                slidesToShow: filteredEv.length,
-                slidesToScroll: filteredEv.length,
                 madeRequest: false,
                 searchInput: "",
               });
@@ -189,59 +183,56 @@ export default class EventsSearch extends Component {
   render() {
     let renderCarousel = null;
     let renderIntroCard = (
-      <Row>
-        <Col md={8} className="mx-auto mt-3 mb-3">
-          <Card className="mx-auto" id="introCard">
-            <Card.Header id="introCardHeader">
-              <Card.Title
-                className="text-center mt-2"
-                style={{ fontSize: "28px" }}
-              >
-                How to Use Event Search
-              </Card.Title>
-            </Card.Header>
-            <Card.Body>
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item" id="searchIns">
-                  Select the <strong>"Filter"</strong> dropdown located next to
-                  the search bar
-                </li>
-                <li className="list-group-item" id="searchIns">
-                  To browse by event name select <strong>"Event Name"</strong>,
-                  enter the name of the event you wish to view in the search
-                  bar, and then select the search button
-                </li>
-                <li className="list-group-item" id="searchIns">
-                  To browse by location select <strong>"Location"</strong>,
-                  enter the name of a city in the search bar, and then select
-                  the search button
-                </li>
-                <li className="list-group-item" id="searchIns">
-                  To browse all events select <strong>"Show All Events"</strong>
-                  and all events will be displayed
-                </li>
-              </ul>
+      // <Row>
+      //   <Col md={8} className="mx-auto mt-3 mb-3">
+      <Card className="mx-auto" id="introCard">
+        <Card.Header id="introCardHeader">
+          <Card.Title className="text-center mt-2" style={{ fontSize: "28px" }}>
+            How to Use Event Search
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item" id="searchIns">
+              Select the <strong>"Filter"</strong> dropdown located next to the
+              search bar
+            </li>
+            <li className="list-group-item" id="searchIns">
+              To browse by event name select <strong>"Event Name"</strong>,
+              enter the name of the event you wish to view in the search bar,
+              and then select the search button
+            </li>
+            <li className="list-group-item" id="searchIns">
+              To browse by location select <strong>"Location"</strong>, enter
+              the name of a city in the search bar, and then select the search
+              button
+            </li>
+            <li className="list-group-item" id="searchIns">
+              To browse all events select <strong>"Show All Events"</strong>
+              and all events will be displayed
+            </li>
+          </ul>
 
-              <ul className="list-group list-group-flush mt-2">
-                <li className="list-group-item" id="otherIns">
-                  When you find an event you are interested in finding out more
-                  information on select the <strong>"View"</strong> button
-                  located on the event preview card and you will be redirected
-                  to the event's full page.
-                </li>
-                <li className="list-group-item" id="otherIns">
-                  If you wish to create an event select the
-                  <strong>"Create New Event"</strong> button and you will be
-                  directed to the "event create page";
-                </li>
-              </ul>
-            </Card.Body>
-            <Card.Footer id="introCardFooter" className="text-body text-center">
-              Please note: You must be logged in to create events!
-            </Card.Footer>
-          </Card>
-        </Col>
-      </Row>
+          <ul className="list-group list-group-flush mt-2">
+            <li className="list-group-item" id="otherIns">
+              When you find an event you are interested in finding out more
+              information on select the <strong>"View"</strong> button located
+              on the event preview card and you will be redirected to the
+              event's full page.
+            </li>
+            <li className="list-group-item" id="otherIns">
+              If you wish to create an event select the
+              <strong>"Create New Event"</strong> button and you will be
+              directed to the "event create page";
+            </li>
+          </ul>
+        </Card.Body>
+        <Card.Footer id="introCardFooter" className="text-body text-center">
+          Please note: You must be logged in to create events!
+        </Card.Footer>
+      </Card>
+      //   </Col>
+      // </Row>
     );
 
     if (this.state.showCarousel === true) {
@@ -255,7 +246,7 @@ export default class EventsSearch extends Component {
       <>
         <Jumbotron id="jumbo1">
           <Container fluid>
-            <h1 class="display-4 text-white">Event Search</h1>
+            <h1 className="display-4 text-white">Event Search</h1>
           </Container>
         </Jumbotron>
 
@@ -268,10 +259,18 @@ export default class EventsSearch extends Component {
           state={this.state}
         />
 
-        <Row>
-          <Col md={9} id="carouselWrap" className="mx-auto mt-3 mb-5">
-            {renderIntroCard}
-            {renderCarousel}
+        <Row className="mx-auto">
+          <Col md={10} id="carouselWrap" className="mx-auto mt-3 mb-5">
+            <Row>
+              <Col md={8} className="mx-auto mt-3 mb-3">
+                {renderIntroCard}
+              </Col>
+            </Row>
+            <Row>
+              <Col md={6} className="mx-auto">
+                {renderCarousel}
+              </Col>
+            </Row>
           </Col>
         </Row>
 
