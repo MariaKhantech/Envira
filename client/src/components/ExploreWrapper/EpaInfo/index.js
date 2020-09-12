@@ -42,9 +42,9 @@ export default class EpaInfo extends Component {
                     width="225"
                     height="200"
                     scrolling="no"
-                    frameborder="0"
-                    marginwidth="0"
-                    marginheight="0"
+                    frameBorder="0"
+                    marginWidth="0"
+                    marginHeight="0"
                   ></iframe>
                 </Card.Body>
                 <Card.Footer
@@ -57,7 +57,6 @@ export default class EpaInfo extends Component {
                   <ReactTooltip
                     id="sdwisInfo"
                     className="opaque"
-                    border="white"
                     type="dark"
                     place="bottom"
                     effect="solid"
@@ -108,9 +107,9 @@ export default class EpaInfo extends Component {
                     width="225"
                     height="200"
                     scrolling="no"
-                    frameborder="0"
-                    marginwidth="0"
-                    marginheight="0"
+                    frameBorder="0"
+                    marginWidth="0"
+                    marginHeight="0"
                   ></iframe>
                 </Card.Body>
                 <Card.Footer
@@ -123,7 +122,6 @@ export default class EpaInfo extends Component {
                   <ReactTooltip
                     id="echoInfo"
                     className="opaque"
-                    border="white"
                     type="dark"
                     place="bottom"
                     effect="solid"
@@ -174,9 +172,9 @@ export default class EpaInfo extends Component {
                     width="225"
                     height="200"
                     scrolling="no"
-                    frameborder="0"
-                    marginwidth="0"
-                    marginheight="0"
+                    frameBorder="0"
+                    marginWidth="0"
+                    marginHeight="0"
                   ></iframe>
                 </Card.Body>
                 <Card.Footer
@@ -189,7 +187,6 @@ export default class EpaInfo extends Component {
                   <ReactTooltip
                     id="cleanupInfo"
                     className="opaque"
-                    border="white"
                     type="dark"
                     place="bottom"
                     effect="solid"
@@ -246,9 +243,9 @@ export default class EpaInfo extends Component {
                     width="225"
                     height="200"
                     scrolling="no"
-                    frameborder="0"
-                    marginwidth="0"
-                    marginheight="0"
+                    frameBorder="0"
+                    marginWidth="0"
+                    marginHeight="0"
                   ></iframe>
                 </Card.Body>
                 <Card.Footer
@@ -261,7 +258,6 @@ export default class EpaInfo extends Component {
                   <ReactTooltip
                     id="pcsInfo"
                     className="opaque"
-                    border="white"
                     type="dark"
                     place="bottom"
                     effect="solid"
@@ -334,8 +330,8 @@ marginheight="0"
                     width="225"
                     height="200"
                     scrolling="no"
-                    frameborder="0"
-                    marginwidth="0"
-                    marginheight="0"
+                    frameBorder="0"
+                    marginWidth="0"
+                    marginHeight="0"
                   ></iframe> */
 }
