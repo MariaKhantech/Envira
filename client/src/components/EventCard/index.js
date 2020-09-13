@@ -133,7 +133,7 @@ export class index extends Component {
 
         //loads the countdown clock (Marai)
         const eventDate = this.state.eventData.map((data) => data.date);
-        console.log(eventDate);
+
         let date = new Date(eventDate);
         date.setDate(date.getDate() + 1);
         //date = new Date()
@@ -335,31 +335,25 @@ export class index extends Component {
   Axios.get(`/api/geteventattendees/${eventId}`)
   .then((response) => {
     response.data.forEach( async attendee => {
-      console.log("THE ATTENDEE")
-      console.log(attendee.UserId)
 
-      let userName =""
-      let imageName =""
+      let userName,imageName  = ""
+ 
       // //get the ateendeeusername
      await Axios.get(`/api/auth/userid/${attendee.UserId}`)
       .then((response) => {
-        console.log("THE ATTENDEE ANEM")
-       // this.setState({ eventAttendeeNames: [...this.state.eventAttendeeNames, response.data.user_name] })
        userName = response.data.user_name
-       console.log(userName)
       })
       .catch((err) => console.log(err));
 
+      //get the attendee image
       await Axios.get(`/api/auth/image/${attendee.UserId}`)
       .then((response) => {
-        console.log(response.data)
-        //this.setState({ eventAttendeeImages: [...this.state.eventAttendeeImages, response.data.image_name] })
-        console.log("THE ATTENDEE IAMGE")
         imageName = response.data.image_name
-        console.log(imageName)
+ 
       })
       .catch((err) => console.log(err));
   
+      //put the usrname and imagename in an object
       let attendeeObj = {
         username: userName,
         image: imageName
@@ -372,17 +366,6 @@ export class index extends Component {
   })
   .catch((err) => console.log(err));
 }
-
-  //fetch the attendee image
-  getAttendeeImage(attendeeId) {
-    Axios.get(`/api/auth/image/${attendeeId}`)
-      .then((response) => {
-        console.log("getting attendee image")
-        console.log(response.data)
-        this.setState({ eventAttendeeImages: [...this.state.eventAttendeeImages, response.data.image_name] })
-      })
-      .catch((err) => console.log(err));
-  };
 
   render() {
     console.log("a");
