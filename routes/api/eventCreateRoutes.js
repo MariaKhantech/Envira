@@ -2,18 +2,6 @@ const router = require("express").Router();
 const db = require("../../models");
 
 router.post("/eventcreate", (req, res) => {
-  console.log(req.body.eventName);
-  console.log(req.body.description);
-  console.log(req.body.address);
-  console.log(req.body.city);
-  console.log(req.body.state);
-  console.log(req.body.date);
-  console.log(req.body.website);
-  console.log(req.body.contactPerson);
-  console.log(req.body.contactEmail);
-  console.log(req.body.contactNumber);
-  console.log(req.body.id);
-  console.log(req.body.image);
 
   db.Event.create({
     event_name: req.body.eventName,

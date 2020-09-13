@@ -7,6 +7,7 @@ import ReviewForm from "../ReviewForm";
 import StarRatingComponent from "react-star-rating-component";
 import { Link } from "react-router-dom";
 import $ from "jquery";
+import LoadModal from "../LoadModal";
 
 export default class UserProfile extends Component {
   state = {
@@ -22,12 +23,14 @@ export default class UserProfile extends Component {
     occupation: "",
     about: "",
     zipCode: "",
-    totalEvent: "",
+    totalEvent: [],
     imagePreviewUrl: "",
     imageName: [],
     userRating: [],
     events: [],
-    allEventComments : []
+    allEventComments : [],
+    loadModalShow: true,
+    loadModalHide: false,
   };
 
   async componentDidMount() {
@@ -57,12 +60,13 @@ export default class UserProfile extends Component {
         console.log(error);
       }
     }
+    setTimeout(() => {
+      this.setState({ loadModalShow: false, loadModalHide: true });
+    }, 1300);
   }
 
   // get logged in user info from UserProfile model
   getUserProfile = () => {
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
@@ -87,16 +91,12 @@ export default class UserProfile extends Component {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
-
-    console.log(urlUserId);
     Axios.get(`/api/auth/userid/${urlUserId}`)
       .then((response) => {
         this.setState({
           userName: response.data.user_name,
           email: response.data.email,
         });
-
-        console.log(this.state.userName);
       })
       .catch((err) => console.log(err));
   };
@@ -112,29 +112,21 @@ export default class UserProfile extends Component {
         this.setState({
           totalEvent: response.data,
         });
-        console.log(this.state.totalEvent.length);
       })
       .catch((err) => console.log(err));
   };
 
   getImage = () => {
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
 
     this.setState({ eventId: urlUserId });
-
-    // console.log(this.state.eventId);
-
-    // console.log(UserId);
     Axios.get(`/api/auth/image/${urlUserId}`)
       .then((response) => {
         this.setState({
           imageName: response.data,
         });
-        console.log(this.state.imageName);
         this.getImageFromS3();
       })
       .catch((err) => console.log(err));
@@ -142,10 +134,8 @@ export default class UserProfile extends Component {
 
   getImageFromS3 = () => {
     let fileName = this.state.imageName.image_name;
-    console.log(fileName);
     Storage.get(fileName)
       .then((data) => {
-        console.log(data);
         this.setState({
           imagePreviewUrl: data,
         });
@@ -154,14 +144,9 @@ export default class UserProfile extends Component {
   };
 
   getUserRating = () => {
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
-
-    // console.log(urlUserId);
-
     Axios.get(`/api/rate/userprofile/${urlUserId}`)
       .then((res) => {
         if (res.data === null) {
@@ -178,9 +163,6 @@ export default class UserProfile extends Component {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
-
-    console.log(urlUserId);
-
     Axios.get(`/api/getuserevents/${urlUserId}`)
       .then((response) => {
         this.setState({
@@ -330,23 +312,23 @@ export default class UserProfile extends Component {
     //end of the overview tab //
 
     //render list of events for modal
-    const eventCards = this.state.events.map((event) => (
-      <div>
-        <div class="card mb-3" style={{ padding: "25px" }}>
-          <div class="row mx-auto no-gutters">
-            <div class="col-md-4">
+    const eventCards = this.state.events.map((event, index) => (
+      <div key={index}>
+        <div className="card mb-3" style={{ padding: "25px" }}>
+          <div className="row mx-auto no-gutters">
+            <div className="col-md-4">
               <img
                 src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${event.image}`}
-                class="card-img myevent-img"
+                className="card-img myevent-img"
                 alt="..."
               />
             </div>
-            <div class="col-md-6">
-              <div class="card-body l">
-                <h5 class="card-title text-center">{event.event_name}</h5>
+            <div className="col-md-6">
+              <div className="card-body l">
+                <h5 className="card-title text-center">{event.event_name}</h5>
               </div>
             </div>
-            <div class="col-md-2">
+            <div className="col-md-2">
               <Link
                 onClick={this.closeModal}
                 to={{ pathname: "/eventspage", search: `?eventId=${event.id}` }}
@@ -433,7 +415,6 @@ export default class UserProfile extends Component {
                 <div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                   <div className="d-flex justify-content-between">
                     <a
-                      class="a-design"
                       href="#"
                       className="btn-design btn btn-sm btm-sm-design btn-info mr-4"
                       data-toggle="modal"
@@ -442,7 +423,6 @@ export default class UserProfile extends Component {
                       My Events
                     </a>
                     <a
-                      class="a-design"
                       href="/eventCreate"
                       className="btn-design btn btn-sm btm-sm-design btn-default float-right"
                     >
@@ -453,39 +433,41 @@ export default class UserProfile extends Component {
 
                 {/* MODAL FOR SEEING EVENTS*/}
                 <div
-                  class="modal fade"
+                  className="modal fade"
                   id="eventModal"
-                  tabindex="-1"
+                  tabIndex="-1"
                   role="dialog"
                   aria-labelledby="eventModal"
                   aria-hidden="true"
                 >
                   <div
-                    class="modal-dialog modal-dialog-centered"
+                    className="modal-dialog modal-dialog-centered"
                     role="document"
                   >
-                    <div class="modal-content">
-                      <div class="modal-header text-center myevent-header">
+                    <div className="modal-content">
+                      <div className="modal-header text-center myevent-header">
                         <h5
-                          class="modal-title text-white"
+                          className="modal-title text-white"
                           id="exampleModalCenterTitle"
                         >
                           MY EVENTS
                         </h5>
                         <button
                           type="button"
-                          class="close"
+                          className="close"
                           data-dismiss="modal"
                           aria-label="Close"
                         >
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
-                      <div class="modal-body myEvent-modal">{eventCards}</div>
-                      <div class="modal-footer myevent-footer">
+                      <div className="modal-body myEvent-modal">
+                        {eventCards}
+                      </div>
+                      <div className="modal-footer myevent-footer">
                         <button
                           type="button"
-                          class="btn myevent-btn text-white"
+                          className="btn myevent-btn text-white"
                           data-dismiss="modal"
                         >
                           Close
@@ -500,7 +482,6 @@ export default class UserProfile extends Component {
                   <ul className="nav nav-tabs ul-design" role="tablist">
                     <li className="nav-item">
                       <a
-                        class="a-design"
                         className="nav-link active"
                         data-toggle="tab"
                         href="#tabs-1"
@@ -511,7 +492,6 @@ export default class UserProfile extends Component {
                     </li>
                     <li className="nav-item">
                       <a
-                        class="a-design"
                         className="nav-link"
                         data-toggle="tab"
                         href="#tabs-2"
@@ -522,7 +502,6 @@ export default class UserProfile extends Component {
                     </li>
                     <li className="nav-item">
                       <a
-                        class="a-design"
                         className="nav-link"
                         data-toggle="tab"
                         href="#tabs-3"
@@ -585,44 +564,44 @@ export default class UserProfile extends Component {
                       >
                         <div className="row">
                           <div className="col-md-6">
-                            <label class="label-design">User Name:</label>
+                            <label className="label-design">User Name:</label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">{this.state.userName}</p>
+                            <p className="p-design">{this.state.userName}</p>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                            <label class="label-design">Name:</label>
+                            <label className="label-design">Name:</label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">
+                            <p className="p-design">
                               {this.state.firstName} {this.state.lastName}
                             </p>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                            <label class="label-design">Email:</label>
+                            <label className="label-design">Email:</label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">{this.state.email}</p>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-md-6">
-                            <label class="label-design">Phone:</label>
-                          </div>
-                          <div className="col-md-6">
-                            <p class="p-design">{this.state.phoneNumber}</p>
+                            <p className="p-design">{this.state.email}</p>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                            <label class="label-design">Location:</label>
+                            <label className="label-design">Phone:</label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">
+                            <p className="p-design">{this.state.phoneNumber}</p>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label className="label-design">Location:</label>
+                          </div>
+                          <div className="col-md-6">
+                            <p className="p-design">
                               {this.state.state} {this.state.city}{" "}
                               {this.state.zipCode}
                             </p>
@@ -630,18 +609,22 @@ export default class UserProfile extends Component {
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                            <label class="label-design">Current Event:</label>
+                            <label className="label-design">
+                              Current Event:
+                            </label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">N/A</p>
+                            <p className="p-design">N/A</p>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                            <label class="label-design">Joined Events:</label>
+                            <label className="label-design">
+                              Joined Events:
+                            </label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">
+                            <p className="p-design">
                               {this.state.totalEvent.length}
                             </p>
                           </div>
@@ -670,6 +653,7 @@ export default class UserProfile extends Component {
               </div>
             </div>
           </div>
+          <LoadModal state={this.state} />
         </div>
 
         {/* <footer className="footer">

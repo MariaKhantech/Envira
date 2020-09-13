@@ -6,6 +6,7 @@ import { Storage } from "aws-amplify";
 import { Link } from "react-router-dom";
 import StarRatingComponent from "react-star-rating-component";
 import $ from "jquery";
+import LoadModal from "../LoadModal";
 
 export default class CompanyProfile extends Component {
   state = {
@@ -25,17 +26,19 @@ export default class CompanyProfile extends Component {
     userRating: [],
     events: [],
     totalEvent: "",
-    allEventComments : []
+    allEventComments : [],
+    loadModalShow: true,
+    loadModalHide: false,
+    totalEvent: [],
+
   };
 
   async componentDidMount() {
-    console.log("COMPANY");
     try {
       // get the current logged in user details
       const user = await Auth.currentAuthenticatedUser();
       // get username from user object
       const userDetail = user.username;
-      console.log(userDetail);
       // get the user details for logged in user from the User table
       Axios.get(`/api/auth/user/${userDetail}`)
         .then((response) => {
@@ -56,6 +59,9 @@ export default class CompanyProfile extends Component {
         console.log(error);
       }
     }
+    setTimeout(() => {
+      this.setState({ loadModalShow: false, loadModalHide: true });
+    }, 1300);
   }
 
   // get logged in compnay profile details
@@ -85,16 +91,12 @@ export default class CompanyProfile extends Component {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
-
-    console.log(urlUserId);
     Axios.get(`/api/auth/userid/${urlUserId}`)
       .then((response) => {
         this.setState({
           companyUserName: response.data.user_name,
           email: response.data.email,
         });
-
-        console.log(this.state.companyUserName);
       })
       .catch((err) => console.log(err));
   };
@@ -109,7 +111,6 @@ export default class CompanyProfile extends Component {
         this.setState({
           totalEvent: response.data,
         });
-        console.log(this.state.totalEvent.length);
       })
       .catch((err) => console.log(err));
   };
@@ -644,6 +645,7 @@ export default class CompanyProfile extends Component {
             </div>
           </div>
         </div>
+        <LoadModal state={this.state} />
       </div>
     );
   }
