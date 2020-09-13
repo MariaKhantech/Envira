@@ -9,7 +9,7 @@ import Axios from "axios";
 import { Auth } from "aws-amplify";
 import { withRouter } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./style.scss";
 
@@ -34,8 +34,8 @@ export class index extends Component {
       profile: [],
       eventEnd: false,
       comment: "",
-      eventAttendeeImages:[],
-      eventAttendees:[]
+      eventAttendeeImages: [],
+      eventAttendees: [],
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
     this.timeInterval = 0;
@@ -113,8 +113,8 @@ export class index extends Component {
 
     //load the comments of from event using event(id)
     this.loadEventComments(id);
-     //load the event attendees
-     this.getEventAttendees(id);
+    //load the event attendees
+    this.getEventAttendees(id);
 
     this.setState({ eventId: id });
     Axios.get(`/api/create/eventcreate`)
@@ -133,7 +133,6 @@ export class index extends Component {
 
         //loads the countdown clock (Marai)
         const eventDate = this.state.eventData.map((data) => data.date);
-        console.log(eventDate);
         let date = new Date(eventDate);
         date.setDate(date.getDate() + 1);
         //date = new Date()
@@ -174,7 +173,6 @@ export class index extends Component {
       UserId: UserId,
     })
       .then((res) => {
-        console.log(res);
         this.setState({ rating: this.state.rating, postRatingDisabled: true });
       })
       .catch((err) => console.log(err));
@@ -182,7 +180,6 @@ export class index extends Component {
 
   //   click method to change star value
   onStarClick(rating) {
-    console.log(rating);
     this.setState({ rating });
   }
 
@@ -213,7 +210,6 @@ export class index extends Component {
   getUserAttendance = () => {
     const UserId = this.state.profile.id;
     const EventId = this.state.eventId;
-    console.log(EventId);
     Axios.get(`/api/auth/joinevent/${UserId}/${EventId}`)
       .then((res) => {
         if (res.data === null) {
@@ -257,15 +253,11 @@ export class index extends Component {
   //
   getRoleId = () => {
     const UserId = this.state.userId[0];
-    console.log(UserId);
     Axios.get(`/api/auth/userid/${UserId}`)
       .then((response) => {
-        // console.log(response.data);
         this.setState({
           roleId: response.data.roleId,
         });
-
-        console.log(this.state.roleId);
       })
       .catch((err) => console.log(err));
   };
@@ -300,7 +292,6 @@ export class index extends Component {
   loadEventComments(eventId) {
     Axios.get(`/api/geteventcomments/${eventId}`)
       .then((response) => {
-        console.log(response.data);
         this.setState({ reviewArray: response.data });
       })
       .catch((err) => console.log(err));
@@ -330,62 +321,54 @@ export class index extends Component {
       .catch((err) => console.log(err));
   };
 
- //load the users attending this event
- async getEventAttendees(eventId) {		
-  Axios.get(`/api/geteventattendees/${eventId}`)
-  .then((response) => {
-    response.data.forEach( async attendee => {
-      console.log("THE ATTENDEE")
-      console.log(attendee.UserId)
-
-      let userName =""
-      let imageName =""
-      // //get the ateendeeusername
-     await Axios.get(`/api/auth/userid/${attendee.UserId}`)
+  //load the users attending this event
+  async getEventAttendees(eventId) {
+    Axios.get(`/api/geteventattendees/${eventId}`)
       .then((response) => {
-        console.log("THE ATTENDEE ANEM")
-       // this.setState({ eventAttendeeNames: [...this.state.eventAttendeeNames, response.data.user_name] })
-       userName = response.data.user_name
-       console.log(userName)
+        response.data.forEach(async (attendee) => {
+          let userName = "";
+          let imageName = "";
+          // //get the ateendeeusername
+          await Axios.get(`/api/auth/userid/${attendee.UserId}`)
+            .then((response) => {
+              userName = response.data.user_name;
+            })
+            .catch((err) => console.log(err));
+
+          await Axios.get(`/api/auth/image/${attendee.UserId}`)
+            .then((response) => {
+              imageName = response.data.image_name;
+            })
+            .catch((err) => console.log(err));
+          let attendeeObj = {
+            username: userName,
+            image: imageName,
+          };
+
+          //pussh the objet to the state array
+          this.setState({
+            eventAttendees: [...this.state.eventAttendees, attendeeObj],
+          });
+        });
       })
       .catch((err) => console.log(err));
-
-      await Axios.get(`/api/auth/image/${attendee.UserId}`)
-      .then((response) => {
-        console.log(response.data)
-        //this.setState({ eventAttendeeImages: [...this.state.eventAttendeeImages, response.data.image_name] })
-        console.log("THE ATTENDEE IAMGE")
-        imageName = response.data.image_name
-        console.log(imageName)
-      })
-      .catch((err) => console.log(err));
-  
-      let attendeeObj = {
-        username: userName,
-        image: imageName
-      }
-
-      //pussh the objet to the state array
-       this.setState({ eventAttendees: [...this.state.eventAttendees, attendeeObj] });   
-    });
-   
-  })
-  .catch((err) => console.log(err));
-}
+  }
 
   //fetch the attendee image
   getAttendeeImage(attendeeId) {
     Axios.get(`/api/auth/image/${attendeeId}`)
       .then((response) => {
-        console.log("getting attendee image")
-        console.log(response.data)
-        this.setState({ eventAttendeeImages: [...this.state.eventAttendeeImages, response.data.image_name] })
+        this.setState({
+          eventAttendeeImages: [
+            ...this.state.eventAttendeeImages,
+            response.data.image_name,
+          ],
+        });
       })
       .catch((err) => console.log(err));
-  };
+  }
 
   render() {
-    console.log("a");
     const scrollingContainer = {
       height: "800px",
       overflowY: "scroll",
@@ -419,7 +402,7 @@ export class index extends Component {
     const postStarRating = (
       <>
         <div
-          class="card-profile-stats d-flex justify-content-center mt-md-5"
+          className="card-profile-stats d-flex justify-content-center mt-md-5"
           style={{ fontSize: "28px" }}
         >
           <StarRatingComponent
@@ -456,28 +439,55 @@ export class index extends Component {
       <ReviewComment comment={review} />
     ));
 
-      //create the attendee carousel
-    const attendeeCarousel = this.state.eventAttendees.map (attendees => (
-      <div>
-          <img alt="attendee to event" class="rounded img-fluid" style={{border:"#85dcba", borderStyle:"solid", borderRadius: "1rem"}} src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${attendees.image}`}/>
-         {/* <h3 className="legend">{attendees.username}</h3> */}
-         <Link className = "legend" to={{pathname: "/profile",search: `?username=${attendees.username}`}} >{attendees.username}</Link>
-      </div>
-    )); 
-    
+    //create the attendee carousel
+    const attendeeCarousel = this.state.eventAttendees.map(
+      (attendees, index) => (
+        <div key={index}>
+          <img
+            alt="attendee to event"
+            className="rounded img-fluid"
+            style={{
+              border: "#85dcba",
+              borderStyle: "solid",
+              borderRadius: "1rem",
+            }}
+            src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${attendees.image}`}
+          />
+          <Link
+            className="legend"
+            to={{
+              pathname: "/profile",
+              search: `?username=${attendees.username}`,
+            }}
+          >
+            {attendees.username}
+          </Link>
+        </div>
+      )
+    );
 
     return (
-      <div class="wrapper2">
-        <div class="container-fluid ">
+      <div className="wrapper2">
+        <div className="container-fluid">
           <div
-            class="jumbotron background-img"
-            style={{ marginBottom: " 0", borderBottom: "4rem solid #85dcba" }}
+            className="jumbotron background-img"
+            style={{ marginBottom: "0", borderBottom: "4rem solid #85dcba" }}
           >
-            <div class="card flex-row  float-right border-0 style-contact-person">
-              <div class="border-0">
-                <img class="rounded img-fluid" style={{border:"#85dcba", borderStyle:"solid", height:"300px"}} src={this.state.profileImageUrl} height="300px" alt="contact person" />
+            <div className="card flex-row  float-right border-0 style-contact-person">
+              <div className="border-0">
+                <img
+                  className="rounded img-fluid"
+                  style={{
+                    border: "#85dcba",
+                    borderStyle: "solid",
+                    height: "300px",
+                  }}
+                  src={this.state.profileImageUrl}
+                  height="300px"
+                  alt="contact person"
+                />
               </div>
-              <div class="card-body ">
+              <div className="card-body ">
                 <h4>
                   <span>
                     <b>Contact: </b>
@@ -502,7 +512,7 @@ export class index extends Component {
                   </span>
                   <i>{contactEmail}</i>
                 </h5>
-                <p class="card-text ">
+                <p className="card-text ">
                   <span>
                     <b>Website: </b>
                   </span>
@@ -511,12 +521,12 @@ export class index extends Component {
               </div>
             </div>
 
-            <h1 class="display-4 text-white">{eventName}</h1>
-            <p class="lead text-white">{date}</p>
-            <p class="lead">
+            <h1 className="display-4 text-white">{eventName}</h1>
+            <p className="lead text-white">{date}</p>
+            <p className="lead">
               {!this.state.profile.id && (
                 <button
-                  class="btn btn-lg border-white shadow text-white font-weight-bold"
+                  className="btn btn-lg border-white shadow text-white font-weight-bold"
                   style={{ marginTop: "8rem", backgroundColor: "#85dcba" }}
                   role="button"
                   onClick={this.registerToJoinEvent}
@@ -526,7 +536,7 @@ export class index extends Component {
               )}
               {this.state.profile.id && (
                 <button
-                  class={`btn btn-lg border-white shadow text-white font-weight-bold' ${
+                  className={`btn btn-lg border-white shadow text-white font-weight-bold' ${
                     this.state.eventEnd ? "d-none" : ""
                   }`}
                   style={{ marginTop: "8rem", backgroundColor: "#85dcba" }}
@@ -538,74 +548,71 @@ export class index extends Component {
                 </button>
               )}
             </p>
-            {/* {!this.state.userId[0] === "" && (
-              <p class="lead">
-                <button
-                  class="btn btn-primary btn-lg"
-                  style={{ marginTop: "8rem" }}
-                  role="button"
-                  onClick={this.eventAttendee}
-                >
-                  Join Event
-              </button>
-              </p>
-            )} */}
           </div>
         </div>
 
         {/* <!--count down reference https://codepen.io/techmariakhan/pen/ExKXjGv--> */}
-        <div class="continer centerIt">
+        <div className="continer centerIt">
           <div>
-            <label class="project-name text-center">EVENT COUNTDOWN:</label>
+            <label className="project-name text-center">EVENT COUNTDOWN:</label>
           </div>
-          <div class="counter counter-div">
-            <div class="days">
-              <div class="value">00</div>
+          <div className="counter counter-div">
+            <div className="days">
+              <div className="value">00</div>
               <span>Days</span>
             </div>
-            <div class="hours">
-              <div class="value">00</div>
+            <div className="hours">
+              <div className="value">00</div>
               <span>Hours</span>
             </div>
-            <div class="minutes">
-              <div class="value">00</div>
+            <div className="minutes">
+              <div className="value">00</div>
               <span>Minutes</span>
             </div>
-            <div class="seconds">
-              <div class="value">00</div>
+            <div className="seconds">
+              <div className="value">00</div>
               <span>Seconds</span>
             </div>
           </div>
         </div>
 
-        <div class=" home-info-section">
-          {/* <div class="container"> */}
-          <div class="row justify-content-center">
-            <div class="col-3 ">
+        <div className=" home-info-section">
+          <div className="row justify-content-center">
+            <div className="col-3 ">
               <figure>
-                <img class="event-img rounded img-fluid" style={{border:"#e27d60", borderStyle:"solid"}} src={this.state.eventImageUrl} />
+                <img
+                  className="event-img rounded img-fluid"
+                  style={{ border: "#e27d60", borderStyle: "solid" }}
+                  src={this.state.eventImageUrl}
+                />
               </figure>
             </div>
-            <div class="col-4">
-              <header class="entry-header">
-                <h2 class="entry-title text-white">About the event</h2>
+            <div className="col-4">
+              <header className="entry-header">
+                <h2 className="entry-title text-white">About the event</h2>
                 <hr />
               </header>
               <div>
-                <p class="mt-3 text-white">{description}</p>
+                <p className="mt-3 text-white">{description}</p>
               </div>
             </div>
           </div>
-        <hr style={{height:"5rem", backgroundColor: " #85dcba"}} />
-          <div class="container mt-5 text-center text-white " style={{backgroundColor: "#e27d60", borderStyle:"solid", borderColor: "#85dcba" }}>
-            <h1 class="text-white mb-2 mt-3">EVENT ATTENDEES</h1>
+          <hr style={{ height: "5rem", backgroundColor: " #85dcba" }} />
+          <div
+            className="container mt-5 text-center text-white "
+            style={{
+              backgroundColor: "#e27d60",
+              borderStyle: "solid",
+              borderColor: "#85dcba",
+            }}
+          >
+            <h1 className="text-white mb-2 mt-3">EVENT ATTENDEES</h1>
             <br></br>
-            <div class = "row mt-2 justify-content-center mx-auto">
-            <Carousel autoPlay width="350px" >
-             {attendeeCarousel}
-          </Carousel>
-          </div>
-         
+            <div className="row mt-2 justify-content-center mx-auto">
+              <Carousel autoPlay width="350px">
+                {attendeeCarousel}
+              </Carousel>
+            </div>
           </div>
         </div>
 
@@ -618,11 +625,13 @@ export class index extends Component {
               <div className="card-body shadow-lg p-3 rounded location-cardStyle">
                 <div className="section-title">
                   <h2 className="text-white">Location</h2>
-                  <p class="text-white">Get directions to our event center</p>
+                  <p className="text-white">
+                    Get directions to our event center
+                  </p>
                 </div>
-                <div class="ct-address">
-                  <span class="text-white">Address:</span>
-                  <p class="text-white">
+                <div className="ct-address">
+                  <span className="text-white">Address:</span>
+                  <p className="text-white">
                     {address}, {city} {eventState}
                   </p>
                 </div>
@@ -637,19 +646,21 @@ export class index extends Component {
                 src={googleMapUrl}
                 width="500"
                 height="300"
-                frameborder="0"
-                allowfullscreen
+                frameBorder="0"
+                allowFullScreen
               />
             </div>
           </div>
         </div>
 
-        <div class={`home-info-section ${this.state.eventEnd ? "" : "d-none"}`}>
-          <div class="row justify-content-center">
-            <div className="row" style={{ marginTop: "40px;" }}>
+        <div
+          className={`home-info-section ${this.state.eventEnd ? "" : "d-none"}`}
+        >
+          <div className="row justify-content-center">
+            <div className="row" style={{ marginTop: "40px" }}>
               <div className="col-md-12">
                 <div className="well well-sm">
-                  <div class="text-center">
+                  <div className="text-center">
                     <h1 className=" leave-reviewbtn text-center mb-2">
                       Event Review
                     </h1>
@@ -661,14 +672,14 @@ export class index extends Component {
                         this.state.profile.length < 1 ? "d-none" : ""
                       }`}
                     >
-                      <form accept-charset="UTF-8" action="" method="post">
+                      <form acceptCharset="UTF-8" action="" method="post">
                         <input
                           id="ratings-hidden"
                           name="rating"
                           type="hidden"
                         />
                         <textarea
-                          class="form-control animated"
+                          className="form-control animated"
                           cols="100"
                           id="new-review"
                           name="comment"
@@ -696,9 +707,9 @@ export class index extends Component {
             </div>
           </div>
           <hr />
-          <div class="container">
+          <div className="container">
             <div
-              class="row mt2 border border-dark justify-content-around"
+              className="row mt2 border border-dark justify-content-around"
               style={scrollingContainer}
             >
               {reviewsCards}
