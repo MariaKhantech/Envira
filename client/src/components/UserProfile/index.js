@@ -27,6 +27,7 @@ export default class UserProfile extends Component {
     imageName: [],
     userRating: [],
     events: [],
+    allEventComments : []
   };
 
   async componentDidMount() {
@@ -174,9 +175,6 @@ export default class UserProfile extends Component {
 
   // get logged in user info from Event model
   getUserEvents = () => {
-    // console.log("herer");
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
@@ -188,10 +186,24 @@ export default class UserProfile extends Component {
         this.setState({
           events: response.data,
         });
-        console.log(response.data);
+        this.getUserComments();
       })
       .catch((err) => console.log(err));
   };
+
+    //pulls list of all comments from the users events
+    getUserComments() {
+      this.state.events.forEach(event => {
+      Axios.get(`/api/getcommentsforprofile/${event.id}`) 
+      .then((response) => {
+         response.data.map((eventComments) => (
+          this.setState({allEventComments: [...this.state.allEventComments,eventComments.comment_detail]})
+         ));
+      })
+      .catch((err) => console.log(err));
+    });
+
+  }
 
   //close the modal if user edits an event
   closeModal() {
@@ -355,6 +367,16 @@ export default class UserProfile extends Component {
         <hr />
       </div>
     ));
+
+    //render the comments tab
+    const userReviewComments =   this.state.allEventComments.map((eventComments) => (
+      <div class ="text-center">
+        <p><q><i>{eventComments}</i></q></p>
+        <hr>
+        </hr>
+      </div>
+     ));
+    
 
     //end of star rating tab//
     return (
@@ -523,7 +545,7 @@ export default class UserProfile extends Component {
                       <p>Joined events here</p>
                     </div>
                     <div className="tab-pane " id="tabs-3" role="tabpanel">
-                      <p>My event comments here</p>
+                       {userReviewComments}
                     </div>
                   </div>
                 </div>

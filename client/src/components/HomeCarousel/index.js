@@ -125,7 +125,7 @@ export class index extends Component {
 										/>
 										
 										<p class="text-white">
-										The Polar Bear the world and a powerful symbol of strength and endurance in the Artic. The protection of the polar bear habitat is urgent due to the arctic melting. They are considered endangered.
+										The Polar Bear, the largest bear in the world, and a powerful symbol of strength and endurance in the Artic are endangered. The protection of the polar bear habitat is urgent due to the arctic melting.
 										</p>
 										
 										{/*https://stackoverflow.com/questions/39779527/toggle-play-pause-in-react-with-audio*/}

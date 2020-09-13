@@ -151,6 +151,25 @@ router.get('/getreviewer/:userId', (req, res) => {
 			}
 		});
 });
+
+//get all the event comments for the profile page
+router.get('/getcommentsforprofile/:eventId', (req, res) => {
+	
+	eventId= req.params.eventId
+  db.EventComment.findAll(({
+		  where: {
+			EventId: eventId
+		  }
+		}))
+	  .then((data) => {
+		  res.json(data);
+	  })
+	  .catch((err) => {
+		  if (err) {
+			  res.status(500).json(err);
+		  }
+	  });
+});
   
 
 
