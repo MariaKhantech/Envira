@@ -7,6 +7,7 @@ import ReviewForm from "../ReviewForm";
 import StarRatingComponent from "react-star-rating-component";
 import { Link } from "react-router-dom";
 import $ from "jquery";
+import LoadModal from "../LoadModal";
 
 export default class UserProfile extends Component {
   state = {
@@ -27,6 +28,8 @@ export default class UserProfile extends Component {
     imageName: [],
     userRating: [],
     events: [],
+    loadModalShow: true,
+    loadModalHide: false,
   };
 
   async componentDidMount() {
@@ -56,6 +59,9 @@ export default class UserProfile extends Component {
         console.log(error);
       }
     }
+    setTimeout(() => {
+      this.setState({ loadModalShow: false, loadModalHide: true });
+    }, 1300);
   }
 
   // get logged in user info from UserProfile model
@@ -648,6 +654,7 @@ export default class UserProfile extends Component {
               </div>
             </div>
           </div>
+          <LoadModal state={this.state} />
         </div>
 
         {/* <footer className="footer">
