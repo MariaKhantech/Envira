@@ -3,14 +3,15 @@ import EnviraBot from '../EnviraBot';
 import { Parallax } from "react-parallax";
 import Zoom from 'react-reveal/Zoom';
 import Fade from 'react-reveal/Fade';
+import Slide from 'react-reveal/Slide';
 import './style.scss';
 
 export class index extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		  isPlaying: false
-	
+			isPlaying: false
+		
 		};
 		this.enviraAudio=this.enviraAudio.bind(this);
 		this.pauseEnviraAudio=this.pauseEnviraAudio.bind(this);
@@ -25,6 +26,8 @@ export class index extends Component {
 		// 	'https://envirabucket215241-dev.s3.amazonaws.com/polly/welcome-message.69983da5-1526-4a5c-892a-dc34bb8270a0.mp3'
 		// );
 		// welcomeAudio.play();
+
+
 	}
 	
 
@@ -61,14 +64,13 @@ export class index extends Component {
 					</Parallax>
 =
 				<div className="row justify-content-around ">
-					<div className="col-sm-12 ">
+					<div className="col-4 ">
 					<a href='/rainforest'>
 						<div className="card bg-transparent border-0 mx-auto" style={{ width: '12rem' }}>
-						
 							<div className="card-body">
 							
 								<h5 className="card-title text-center text-white ml-2">Forest Fires & Deforestation</h5>
-								
+						
 								<div className="image">
 									<object
 										className="svg-file fires"
@@ -78,9 +80,9 @@ export class index extends Component {
 										<img src="../assets/imgs/svg/editedWildfire.svg" />
 									</object>{' '}
 								</div>
-								
-							</div>
 						
+							</div>
+							
 						</div>
 						</a>
 					</div>
@@ -88,7 +90,6 @@ export class index extends Component {
 					<div className="col-4 ">
 					<a href='/ocean'>
 						<div className="card bg-transparent border-0 mx-auto" style={{ width: '12rem' }}>
-						
 							<div className="card-body ">
 								<h5 className="card-title ml-5 text-white">Ocean Pollution</h5>
 								<div className="image ocean-border">
@@ -101,7 +102,7 @@ export class index extends Component {
 									</object>{' '}
 								</div>
 							</div>
-						
+	
 						</div>
 						</a>
 					</div>

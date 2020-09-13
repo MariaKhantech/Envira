@@ -448,7 +448,7 @@ export default class CompanyProfile extends Component {
                 </div>
 
                 <div className="card-body shadow p-3 pt-0 pt-md-4 mt-5">
-                  <ul className="nav nav-tabs ul-design" role="tablist">
+                <ul className="nav nav-tabs ul-design" role="tablist">
                     <li className="nav-item">
                       <a
                         class="a-design"
@@ -468,18 +468,7 @@ export default class CompanyProfile extends Component {
                         href="#tabs-2"
                         role="tab"
                       >
-                        Rating
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        class="a-design"
-                        className="nav-link"
-                        data-toggle="tab"
-                        href="#tabs-3"
-                        role="tab"
-                      >
-                        Event Photos
+                        Joined Events
                       </a>
                     </li>
                     <li className="nav-item">
@@ -504,16 +493,10 @@ export default class CompanyProfile extends Component {
                       {overviewTab}
                     </div>
                     <div className="tab-pane " id="tabs-2" role="tabpanel">
-                      {starRating}
+                     <p>joined events</p>
                     </div>
                     <div className="tab-pane " id="tabs-3" role="tabpanel">
-                      <div className="row">
-                        <div className="col">
-                          <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                            <p class="p-design">images</p>
-                          </div>
-                        </div>
-                      </div>
+                        <p>all comments from my events</p>
                     </div>
                   </div>
                 </div>

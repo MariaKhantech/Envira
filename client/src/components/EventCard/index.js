@@ -8,6 +8,8 @@ import moment from "moment";
 import Axios from "axios";
 import { Auth } from "aws-amplify";
 import { withRouter } from "react-router-dom";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./style.scss";
 
 export class index extends Component {
@@ -31,7 +33,7 @@ export class index extends Component {
       profile: [],
       eventEnd: false,
       comment: "",
-      attendeeList: [],
+      eventAttendeeImages:[]
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
     this.timeInterval = 0;
@@ -109,6 +111,8 @@ export class index extends Component {
 
     //load the comments of from event using event(id)
     this.loadEventComments(id);
+     //load the event attendees
+     this.getEventAttendees(id);
 
     this.setState({ eventId: id });
     Axios.get(`/api/create/eventcreate`)
@@ -324,15 +328,28 @@ export class index extends Component {
       .catch((err) => console.log(err));
   };
 
-  //get the
-  getEventAttendees(eventId) {
+  //load the users attending this event
+  async getEventAttendees(eventId) {		
     Axios.get(`/api/geteventattendees/${eventId}`)
+    .then(async (response) => {
+      response.data.forEach(attendee => {
+        this.getAttendeeImage(attendee.UserId);   
+      });
+    
+    })
+    .catch((err) => console.log(err));
+  }
+
+  //fetch the attendee image
+  getAttendeeImage(attendeeId) {
+    Axios.get(`/api/auth/image/${attendeeId}`)
       .then((response) => {
-        console.log(response.data);
-        this.setState({ attendeeList: response.data });
+        console.log("getting atenddee image")
+        console.log(response.data)
+        this.setState({ eventAttendeeImages: [...this.state.eventAttendeeImages, response.data.image_name] })
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   render() {
     console.log("a");
@@ -405,6 +422,15 @@ export class index extends Component {
     const reviewsCards = this.state.reviewArray.map((review) => (
       <ReviewComment comment={review} />
     ));
+
+     //create the attendee carousel
+     const attendeeCarousel = this.state.eventAttendeeImages.map (image => (
+      <div>
+         <img alt="" src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${image}`}/>
+         <p className="legend">Legend 1</p>
+      </div>
+    ));
+
 
     return (
       <div class="wrapper2">
@@ -535,12 +561,17 @@ export class index extends Component {
               </div>
             </div>
           </div>
-
-          <div class="container mt-5 text-center text-white">
-            <h1 class="text-white">Event Attendees</h1>
-            {/* <section>
-						<ImageGallery items={images} />
-						</section> */}
+          <hr/>
+          <hr/>
+          <div class="container mt-5 text-center text-white ">
+            <h1 class="text-white mb-2">Event Attendees</h1>
+            <br></br>
+            <div class = "row mt-2 justify-content-center mx-auto">
+            <Carousel autoPlay width="400px">
+             {attendeeCarousel}
+          </Carousel>
+          </div>
+         
           </div>
         </div>
 

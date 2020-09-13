@@ -2,42 +2,40 @@ import React, { Component } from 'react';
 import forestBackground from './greenforest.jpg';
 import { Parallax, Background } from 'react-parallax';
 import Particles from 'react-particles-js';
+import Fade from 'react-reveal/Fade';
 import './style.scss';
 
-export class RainforestInfo extends Component {
-	enviraAudio() {
-		let ForestFiresAudio = new Audio(
-			'https://envirabucket215241-dev.s3.amazonaws.com/polly/forest-fires.ed367291-bbcf-4606-8d61-11399fc93bb3.mp3'
-		);
-		ForestFiresAudio.play();
+export default class RainforestInfo extends Component {
+
+	state = {
+		isPlaying: false,
+		audioTracks:[]
 	}
 
-	enviraAmazonForestFires() {
-		let amazonForestFires= new Audio(
-			'https://envirabucket215241-dev.s3.amazonaws.com/polly/amazonforestfires.9fb9a29e-8580-4ee5-bb06-8b1749f3fcad.mp3'
-			
-		);
-		amazonForestFires.play();
-	}
-	deforestationOrangutans() {
-		let deforestationOrangutanAudio= new Audio(
-			'https://envirabucket215241-dev.s3.amazonaws.com/polly/deforestation-orangutans.03d2a93d-8964-44df-bbe1-cc34dddb86f7.mp3'
-			
-		);
-		deforestationOrangutanAudio.play();
+	componentDidMount () {
+
+		let audioArray = [
+			new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/forest-fires.ed367291-bbcf-4606-8d61-11399fc93bb3.mp3'),
+			new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/amazonforestfires.9fb9a29e-8580-4ee5-bb06-8b1749f3fcad.mp3'),
+			new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/deforestation-orangutans.03d2a93d-8964-44df-bbe1-cc34dddb86f7.mp3'),
+			new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/americandeforestation.c5ae68b7-3208-4869-9d2c-f6b2c45097c8.mp3')
+		];
+
+		this.setState({audioTracks:audioArray})
 	}
 
-	americanDeforestation() {
-		let americanDeforestation= new Audio(
-			'https://envirabucket215241-dev.s3.amazonaws.com/polly/americandeforestation.c5ae68b7-3208-4869-9d2c-f6b2c45097c8.mp3'
-			
-		);
-		americanDeforestation.play();
+	//plays the audio
+	playAudio(index) {
+			this.state.audioTracks[index].play();
+			this.setState({isPlaying: true});
 	}
-	// enviraAmazon() {
-	// 	let AmazonAudio = new Audio('');
-	// 	ForestFiresAudio.play();
-	// }
+
+	//stops audio//
+	pauseAudio(index){
+		this.state.audioTracks[index].pause();
+		this.setState({ isPlaying: false });
+	}
+
 	render() {
 		const particles = (
 			<Particles
@@ -104,6 +102,7 @@ export class RainforestInfo extends Component {
 			maxHeight: 'none',
 			margin: '-250px 0px 0px'
 		};
+		console.log(this.state.audioTracks)
 
 		return (
 			<div className="RainforestWrapper">
@@ -192,6 +191,7 @@ export class RainforestInfo extends Component {
 						</div>
 
 						<div class="row mx-auto" style={{ marginTop: '-1.5rem' }}>
+							
 							<div class="card forest-fire-card mb-3 mx-auto" style={{ maxWidth: '1000px' }}>
 								<div class="row">
 									<div class="col-md-4">
@@ -229,13 +229,13 @@ export class RainforestInfo extends Component {
 												lightning strike.
 											</p>
 											<p class="card-text">
-												<button
-													type="button"
-													onClick={this.enviraAudio}
-													class="btn btn-outline-danger float-right text-danger"
-												>
-													<i class="fas fa-robot" />
-												</button>
+												<a
+													role="button"
+													onClick={() => this.state.isPlaying ? this.pauseAudio(0) : this.playAudio(0)}
+													class={`btn btn-outline-danger float-right text-danger  ${this.state.isPlaying ? "btn-danger" : ""}`}
+												a>
+													<i class="fas fa-robot" /></a>
+											
 											</p>
 										</div>
 									</div>
@@ -269,8 +269,8 @@ export class RainforestInfo extends Component {
 											</p>
 											<button
 													type="button"
-													onClick={this.enviraAmazonForestFires}
-													class="btn btn-outline-danger float-right text-danger">
+													onClick={() => this.state.isPlaying ? this.pauseAudio(1) : this.playAudio(1)}
+													class={`btn btn-outline-danger float-right text-danger ${this.state.isPlaying ? "btn-danger" : ""}`}>
 													<i class="fas fa-robot" />
 												</button>
 										</div>
@@ -362,8 +362,8 @@ export class RainforestInfo extends Component {
 										</p>
 												<button
 													type="button"
-													onClick={this.deforestationOrangutans}
-													class="btn btn-outline-danger float-right text-danger"
+													onClick={() => this.state.isPlaying ? this.pauseAudio(2) : this.playAudio(2)}
+													class={`btn btn-outline-danger float-right text-danger ${this.state.isPlaying ? "btn-danger" : ""}`}
 												>
 													<i class="fas fa-robot" />
 												</button>
@@ -416,8 +416,8 @@ export class RainforestInfo extends Component {
 											</p>
 											<button
 													type="button"
-													onClick={this.americanDeforestation}
-													class="btn btn-outline-danger float-right text-danger"
+													onClick={() => this.state.isPlaying ? this.pauseAudio(3) : this.playAudio(3)}
+													class={`btn btn-outline-danger float-right text-danger ${this.state.isPlaying ? "btn-danger" : ""}`}
 												>
 													<i class="fas fa-robot" />
 												</button>
@@ -443,4 +443,4 @@ export class RainforestInfo extends Component {
 	}
 }
 
-export default RainforestInfo;
+// export default RainforestInfo;

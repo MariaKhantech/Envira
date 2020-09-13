@@ -9,10 +9,10 @@ export class Ocean extends Component {
 		
 		// Welcome to the ocean. Here I will teach you about the ocean pollution. Please watch this short demonstration video.
 		//play audio for welcome to the ocean
-		//let welcomeAudio = new Audio(
-		// 	'https://envirabucket215241-dev.s3.amazonaws.com/polly/welcome-message.69983da5-1526-4a5c-892a-dc34bb8270a0.mp3'
-		// );
-		// welcomeAudio.play();
+		let welcomeAudio = new Audio(
+			'https://envirabucket215241-dev.s3.amazonaws.com/polly/welcomeocean.5add53b7-9f68-4cbc-b3eb-b72b2868850b.mp3'
+		);
+		//welcomeAudio.play();
 		setTimeout(() => {
 			this.autoplayVideo();
 		}, 8000);
@@ -21,7 +21,7 @@ export class Ocean extends Component {
 	autoplayVideo() {
 
 		let youtubeUrl = document.getElementsByTagName('iframe')[0].src;
-		let newYoutubeUrl = youtubeUrl.replace('autoplay=0','autoplay=1' ); 
+		let newYoutubeUrl = youtubeUrl.replace('autoplay=0','autoplay=0' ); 
 		document.getElementsByTagName('iframe')[0].src = newYoutubeUrl;
 	}
 

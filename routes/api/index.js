@@ -134,22 +134,23 @@ router.get('/getreviewer/:userId', (req, res) => {
   });
 
   //get all users attending an event
-  router.get("/geteventattendees/:EventId", (req, res) => {
-	db.EventAttendee.findAll({
-	  where: {
-		EventId: req.params.EventId,
-	  },
-	})
-	  .then((data) => {
-		res.json(data);
-	  })
-	  .catch((err) => {
-		console.log(err);
-		if (err) {
-		  res.status(500).json(err);
-		}
-	  });
-  });
+  router.get('/geteventattendees/:eventId', (req, res) => {
+
+	eventId= req.params.eventId
+	db.EventAttendee.findAll(({
+			where: {
+			EventId: eventId
+			}
+		}))
+		.then((data) => {
+			res.json(data);
+		})
+		.catch((err) => {
+			if (err) {
+				res.status(500).json(err);
+			}
+		});
+});
   
 
 

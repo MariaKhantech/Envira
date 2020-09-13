@@ -31,3 +31,13 @@
 .amplify-section-footer-content form > button {
 	background-color: #e8a87c !important;
 }
+
+
+@media (min-width:320px) and (max-width:900px) {
+	.envirabot {
+		position: fixed;
+		top: 65%;
+		left: 10% !important;
+		width: 10rem;
+	}
+}
