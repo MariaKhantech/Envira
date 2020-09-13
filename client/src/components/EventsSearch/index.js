@@ -246,7 +246,7 @@ export default class EventsSearch extends Component {
       <>
         <Jumbotron id="jumbo1">
           <Container fluid>
-            <h1 className="display-4 text-white">Event Search</h1>
+            <h1 className="display-4 text-white text-center">Event Search</h1>
           </Container>
         </Jumbotron>
 

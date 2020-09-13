@@ -400,7 +400,7 @@ export default class RainforestInfo extends Component {
 					<Parallax strength={500}>
 						<div style={{ height: '800px', paddingBottom: "100px" }}>
 							<div class="row justify-content-around mb-5 forest-fire-card ">
-								<div class="col-4">
+								<div class="col-5 4 sm-12">
 									<div class="card mt-5 mx-auto mb-5 border-0" style={{ width: '30rem' }}>
 									<img src="../assets/imgs/rainforest/deforestation.jpg" class="card-img-top" alt="forest cut down"/>
 										<div class="card-body forest-fire-card ">
@@ -424,7 +424,7 @@ export default class RainforestInfo extends Component {
 										</div>
 									</div>
 								</div>
-								<div class="col-4 mb-5">
+								<div class="col-5 sm-12 ">
 									<iframe
 										class="first-chart mt-5"
 										width="600"
