@@ -321,52 +321,44 @@ export class index extends Component {
       .catch((err) => console.log(err));
   };
 
-  //load the users attending this event
-  async getEventAttendees(eventId) {
-    Axios.get(`/api/geteventattendees/${eventId}`)
+
+ //load the users attending this event
+ async getEventAttendees(eventId) {		
+  Axios.get(`/api/geteventattendees/${eventId}`)
+  .then((response) => {
+    response.data.forEach( async attendee => {
+
+      let userName,imageName  = ""
+ 
+      // //get the ateendeeusername
+     await Axios.get(`/api/auth/userid/${attendee.UserId}`)
       .then((response) => {
-        response.data.forEach(async (attendee) => {
-          let userName = "";
-          let imageName = "";
-          // //get the ateendeeusername
-          await Axios.get(`/api/auth/userid/${attendee.UserId}`)
-            .then((response) => {
-              userName = response.data.user_name;
-            })
-            .catch((err) => console.log(err));
-
-          await Axios.get(`/api/auth/image/${attendee.UserId}`)
-            .then((response) => {
-              imageName = response.data.image_name;
-            })
-            .catch((err) => console.log(err));
-          let attendeeObj = {
-            username: userName,
-            image: imageName,
-          };
-
-          //pussh the objet to the state array
-          this.setState({
-            eventAttendees: [...this.state.eventAttendees, attendeeObj],
-          });
-        });
+       userName = response.data.user_name
       })
       .catch((err) => console.log(err));
-  }
 
-  //fetch the attendee image
-  getAttendeeImage(attendeeId) {
-    Axios.get(`/api/auth/image/${attendeeId}`)
+      //get the attendee image
+      await Axios.get(`/api/auth/image/${attendee.UserId}`)
       .then((response) => {
-        this.setState({
-          eventAttendeeImages: [
-            ...this.state.eventAttendeeImages,
-            response.data.image_name,
-          ],
-        });
+        imageName = response.data.image_name
+ 
       })
       .catch((err) => console.log(err));
-  }
+  
+      //put the usrname and imagename in an object
+      let attendeeObj = {
+        username: userName,
+        image: imageName
+      }
+
+      //pussh the objet to the state array
+       this.setState({ eventAttendees: [...this.state.eventAttendees, attendeeObj] });   
+    });
+   
+  })
+  .catch((err) => console.log(err));
+}
+
 
   render() {
     const scrollingContainer = {

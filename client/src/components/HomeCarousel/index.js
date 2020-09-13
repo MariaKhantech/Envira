@@ -16,16 +16,17 @@ export class index extends Component {
 		this.enviraAudio=this.enviraAudio.bind(this);
 		this.pauseEnviraAudio=this.pauseEnviraAudio.bind(this);
 		this.cardAudio = new Audio(
-			'https://envirabucket215241-dev.s3.amazonaws.com/polly/polarbearsartic.9b7f99b2-e46e-40d1-ba8a-ed76759a03bf.mp3'
+			'https://envirabucket215241-dev.s3.amazonaws.com/polly/polarbearPOLLY.5239010d-8dc1-4a70-9cfa-0620dbb1a4ac.mp3'
 		);
+		this.audio2 = new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/envirapolarbearGrowUp.fff7a681-fa8d-44a3-ad77-ec60bbbe3dd2.mp3')
 
 	  }
 	componentDidMount() {
 		//intro audio
-		// let welcomeAudio = new Audio(
-		// 	'https://envirabucket215241-dev.s3.amazonaws.com/polly/welcome-message.69983da5-1526-4a5c-892a-dc34bb8270a0.mp3'
-		// );
-		// welcomeAudio.play();
+		let welcomeAudio = new Audio(
+			'https://envirabucket215241-dev.s3.amazonaws.com/polly/welcome-message.69983da5-1526-4a5c-892a-dc34bb8270a0.mp3'
+		);
+		welcomeAudio.play();
 
 
 	}
@@ -33,19 +34,35 @@ export class index extends Component {
 
 	//Enivira audio for home page//
 	enviraAudio() {
-	
+
+		if (this.cardAudio === null) {
+			this.cardAudio = new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/polarbearPOLLY.5239010d-8dc1-4a70-9cfa-0620dbb1a4ac.mp3');
+		  }
+
+		if (this.audio2 === null) {
+			this.audio2 = new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/envirapolarbearGrowUp.fff7a681-fa8d-44a3-ad77-ec60bbbe3dd2.mp3')
+		 }
+
 		this.cardAudio.play();
 		this.setState({isPlaying: true})
+
+		setTimeout(() => {
+			if(this.audio2!= null) {
+				this.audio2.play();
+			}
+		  }, 16000);
 	}
 
 	//stops audio//
 	pauseEnviraAudio(){
 		this.setState({ isPlaying: false });
 		this.cardAudio.pause();
+		this.audio2 = null
 	  }
 
+
 	render() {
-		console.log(this.state.isPlaying);
+
 		const insideStyles = {
 		
 			position: "absolute",
@@ -127,6 +144,7 @@ export class index extends Component {
 										<p class="text-white">
 										The Polar Bear, the largest bear in the world, and a powerful symbol of strength and endurance in the Artic are endangered. The protection of the polar bear habitat is urgent due to the arctic melting.
 										</p>
+
 										
 										{/*https://stackoverflow.com/questions/39779527/toggle-play-pause-in-react-with-audio*/}
 										<button
