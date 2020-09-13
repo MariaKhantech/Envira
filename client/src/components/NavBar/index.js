@@ -14,7 +14,8 @@ const orangeColor = {
 export class NavBar extends Component {
   state = {
     profile: [],
-    data: ""
+    data: "",
+    companyData:""
   };
   async componentDidMount() {
     try {
@@ -71,7 +72,7 @@ export class NavBar extends Component {
     Axios.get(`/api/auth/companyProfile/${UserId}`)
       .then((response) => {
         this.setState({
-          data: response.data,
+          companyData: response.data,
         });
       })
       .catch((err) => console.log(err));
@@ -153,7 +154,7 @@ export class NavBar extends Component {
             My Account
           </Link>
         )}
-        {this.props.auth.isAuthenticated && this.state.profile.roleId === 2 && !this.state.data && (
+        {this.props.auth.isAuthenticated && this.state.profile.roleId === 2 && !this.state.companyData && (
           <Link
             className="menu-item text-white about"
             to={{
@@ -164,7 +165,7 @@ export class NavBar extends Component {
             My Account
           </Link>
         )}
-        {this.props.auth.isAuthenticated && this.state.profile.roleId === 2 && this.state.data && (
+        {this.props.auth.isAuthenticated && this.state.profile.roleId === 2 && this.state.companyData && (
           <Link
             className="menu-item text-white about"
             to={{
@@ -175,7 +176,7 @@ export class NavBar extends Component {
             My Account
           </Link>
         )}
-        {this.props.auth.isAuthenticated && this.state.profile.roleId === 3 && this.state.data && (
+        {this.props.auth.isAuthenticated && this.state.profile.roleId === 3 && this.state.companyData && (
           <Link
             className="menu-item text-white about"
             to={{
@@ -186,7 +187,7 @@ export class NavBar extends Component {
             My Account
           </Link>
         )}
-        {this.props.auth.isAuthenticated && this.state.profile.roleId === 3 && !this.state.data && (
+        {this.props.auth.isAuthenticated && this.state.profile.roleId === 3 && !this.state.companyData && (
           <Link
             className="menu-item text-white about"
             to={{
