@@ -6,6 +6,7 @@ import { Storage } from "aws-amplify";
 import { Link } from "react-router-dom";
 import StarRatingComponent from "react-star-rating-component";
 import $ from "jquery";
+import LoadModal from "../LoadModal";
 
 export default class CompanyProfile extends Component {
   state = {
@@ -24,6 +25,9 @@ export default class CompanyProfile extends Component {
     imageName: [],
     userRating: [],
     events: [],
+    totalEvent: "",
+    loadModalShow: true,
+    loadModalHide: false,
     totalEvent: [],
   };
 
@@ -55,6 +59,9 @@ export default class CompanyProfile extends Component {
         console.log(error);
       }
     }
+    setTimeout(() => {
+      this.setState({ loadModalShow: false, loadModalHide: true });
+    }, 1300);
   }
 
   // get logged in compnay profile details
@@ -614,6 +621,7 @@ export default class CompanyProfile extends Component {
             </div>
           </div>
         </div>
+        <LoadModal state={this.state} />
       </div>
     );
   }
