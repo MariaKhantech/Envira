@@ -147,15 +147,7 @@ export default class AirQualitySearch extends Component {
           }
         })
         .catch((error) => {
-          // this.setState({
-          //   error,
-          //   madeRequest: false,
-          //   showModal: true,
-          //   modalText: `No results found for ${this.state.cityInput}, please enter a valid city and try again`,
-          //   cityInput: "",
-          //   showIntroCard: true,
-          //   showAqiCard: false,
-          // });
+          console.log(error);
         });
       this.setState({
         madeRequest: false,

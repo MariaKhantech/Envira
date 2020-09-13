@@ -8,6 +8,8 @@
 #searchCol {
   background-color: #ececec;
   border-bottom: 3px solid #e27d60;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 #aqiBtn {
