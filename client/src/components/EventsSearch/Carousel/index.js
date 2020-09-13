@@ -18,8 +18,8 @@ export default class Carousel extends Component {
       >
         <img
           alt="image"
-          className="card-img-top"
-          style={{ borderRadius: "10px" }}
+          className="card-img-top mx-auto"
+          style={{ borderRadius: "10px", maxHeight: "75%", maxWidth: "75%" }}
           src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${data.image}`}
         />
         <h3 className="mx-auto text-center mt-2" name="event">

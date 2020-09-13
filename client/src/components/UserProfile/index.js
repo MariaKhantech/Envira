@@ -206,7 +206,6 @@ export default class UserProfile extends Component {
     if (loggedInUserId == urlUserId) {
       editProfileBtn = (
         <Link
-          class="a-design"
           to={{
             pathname: "/edituserprofile",
             search: `?userId=${urlUserId}`,
@@ -219,7 +218,6 @@ export default class UserProfile extends Component {
     } else {
       editProfileBtn = (
         <Link
-          class="a-design"
           to={{
             pathname: "/edituserprofile",
             search: `?userId=${urlUserId}`,

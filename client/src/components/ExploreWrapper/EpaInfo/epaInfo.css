@@ -4,13 +4,6 @@
   background-color: rgba(133, 220, 186, 0.7);
 }
 
-#title {
-  color: #32325d;
-  background-color: #ececec;
-  padding: 20px;
-  border-bottom: 3px solid #e27d60;
-}
-
 #epaCard {
   background-color: #ececec;
   color: #32325d;
@@ -20,11 +13,11 @@
 }
 
 #epaCardHeader {
-  background-color: #e8a87c;
+  background-color: rgb(232, 168, 124, 0.3);
 }
 
 #epaCardFooter {
-  background-color: #c38d9e;
+  background-color: rgb(195, 141, 158, 0.3);
 }
 
 #sdwis {

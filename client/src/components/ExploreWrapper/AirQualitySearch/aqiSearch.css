@@ -8,6 +8,8 @@
 #searchCol {
   background-color: #ececec;
   border-bottom: 3px solid #e27d60;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 #aqiBtn {
@@ -43,7 +45,7 @@
 
 #aqiIntroCard {
   background-color: #ececec;
-  width: 36rem;
+  width: auto;
   color: #32325d;
   border-radius: 10px;
   border: 2px solid #e27d60;
