@@ -8,7 +8,6 @@ import "./carousel.css";
 
 export default class Carousel extends Component {
   render() {
-    console.log(this.props.state.eventData);
     const renderCard = this.props.state.eventData.map((data) => (
       <div
         id="contact-box"
