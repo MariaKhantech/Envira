@@ -15,7 +15,7 @@ export class NavBar extends Component {
   state = {
     profile: [],
     data: "",
-    companyData:""
+    companyData: "",
   };
   async componentDidMount() {
     try {
@@ -61,14 +61,13 @@ export class NavBar extends Component {
         this.setState({
           data: response.data,
         });
-        console.log(response)
       })
       .catch((err) => console.log(err));
   };
 
   // call this function to get the existing company profile details
   getCompanyProfile = () => {
-    const UserId = this.state.profile.id
+    const UserId = this.state.profile.id;
     Axios.get(`/api/auth/companyProfile/${UserId}`)
       .then((response) => {
         this.setState({
@@ -91,8 +90,6 @@ export class NavBar extends Component {
           </h5>
         )}
         <hr className="bg-light" style={{ background: "white" }} />
-
-
 
         <li className="nav-item dropdown">
           <a
@@ -132,72 +129,84 @@ export class NavBar extends Component {
 	if roleId is 1 then redirect user to userProfile page
 	 if roleId is 2 then redirect user to Profile page
 	if roleId is 3 then redirect user to Profile page */}
-        {this.props.auth.isAuthenticated && this.state.profile.roleId === 1 && !this.state.data && (
-          <Link
-            className="menu-item text-white about"
-            to={{
-              pathname: "/edituserprofile",
-              search: `?userId=${this.state.profile.id}`,
-            }}
-          >
-            My Account
-          </Link>
-        )}
-        {this.props.auth.isAuthenticated && this.state.profile.roleId === 1 && this.state.data && (
-          <Link
-            className="menu-item text-white about"
-            to={{
-              pathname: "/userprofile",
-              search: `?userId=${this.state.profile.id}`,
-            }}
-          >
-            My Account
-          </Link>
-        )}
-        {this.props.auth.isAuthenticated && this.state.profile.roleId === 2 && !this.state.companyData && (
-          <Link
-            className="menu-item text-white about"
-            to={{
-              pathname: "/editcompanyprofile",
-              search: `?userId=${this.state.profile.id}`,
-            }}
-          >
-            My Account
-          </Link>
-        )}
-        {this.props.auth.isAuthenticated && this.state.profile.roleId === 2 && this.state.companyData && (
-          <Link
-            className="menu-item text-white about"
-            to={{
-              pathname: "/companyprofile",
-              search: `?userId=${this.state.profile.id}`,
-            }}
-          >
-            My Account
-          </Link>
-        )}
-        {this.props.auth.isAuthenticated && this.state.profile.roleId === 3 && this.state.companyData && (
-          <Link
-            className="menu-item text-white about"
-            to={{
-              pathname: "/companyprofile",
-              search: `?userId=${this.state.profile.id}`,
-            }}
-          >
-            My Account
-          </Link>
-        )}
-        {this.props.auth.isAuthenticated && this.state.profile.roleId === 3 && !this.state.companyData && (
-          <Link
-            className="menu-item text-white about"
-            to={{
-              pathname: "/editcompanyprofile",
-              search: `?userId=${this.state.profile.id}`,
-            }}
-          >
-            My Account
-          </Link>
-        )}
+        {this.props.auth.isAuthenticated &&
+          this.state.profile.roleId === 1 &&
+          !this.state.data && (
+            <Link
+              className="menu-item text-white about"
+              to={{
+                pathname: "/edituserprofile",
+                search: `?userId=${this.state.profile.id}`,
+              }}
+            >
+              My Account
+            </Link>
+          )}
+        {this.props.auth.isAuthenticated &&
+          this.state.profile.roleId === 1 &&
+          this.state.data && (
+            <Link
+              className="menu-item text-white about"
+              to={{
+                pathname: "/userprofile",
+                search: `?userId=${this.state.profile.id}`,
+              }}
+            >
+              My Account
+            </Link>
+          )}
+        {this.props.auth.isAuthenticated &&
+          this.state.profile.roleId === 2 &&
+          !this.state.companyData && (
+            <Link
+              className="menu-item text-white about"
+              to={{
+                pathname: "/editcompanyprofile",
+                search: `?userId=${this.state.profile.id}`,
+              }}
+            >
+              My Account
+            </Link>
+          )}
+        {this.props.auth.isAuthenticated &&
+          this.state.profile.roleId === 2 &&
+          this.state.companyData && (
+            <Link
+              className="menu-item text-white about"
+              to={{
+                pathname: "/companyprofile",
+                search: `?userId=${this.state.profile.id}`,
+              }}
+            >
+              My Account
+            </Link>
+          )}
+        {this.props.auth.isAuthenticated &&
+          this.state.profile.roleId === 3 &&
+          this.state.companyData && (
+            <Link
+              className="menu-item text-white about"
+              to={{
+                pathname: "/companyprofile",
+                search: `?userId=${this.state.profile.id}`,
+              }}
+            >
+              My Account
+            </Link>
+          )}
+        {this.props.auth.isAuthenticated &&
+          this.state.profile.roleId === 3 &&
+          !this.state.companyData && (
+            <Link
+              className="menu-item text-white about"
+              to={{
+                pathname: "/editcompanyprofile",
+                search: `?userId=${this.state.profile.id}`,
+              }}
+            >
+              My Account
+            </Link>
+          )}
         <hr style={{ background: "white" }} />
         {!this.props.auth.isAuthenticated && (
           <li className="dropdown dropdown-login  order-1 menu-item mt-4">

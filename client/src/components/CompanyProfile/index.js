@@ -26,11 +26,10 @@ export default class CompanyProfile extends Component {
     userRating: [],
     events: [],
     totalEvent: "",
-    allEventComments : [],
+    allEventComments: [],
     loadModalShow: true,
     loadModalHide: false,
     totalEvent: [],
-
   };
 
   async componentDidMount() {
@@ -66,8 +65,6 @@ export default class CompanyProfile extends Component {
 
   // get logged in compnay profile details
   getCompanyProfile = () => {
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
@@ -117,8 +114,6 @@ export default class CompanyProfile extends Component {
 
   // get logged in company profile image
   getImage = () => {
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
@@ -162,8 +157,6 @@ export default class CompanyProfile extends Component {
   };
 
   getUserRating = () => {
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
@@ -179,18 +172,22 @@ export default class CompanyProfile extends Component {
       .catch((err) => console.log(err));
   };
 
-    //pulls list of all comments from the users events
-    getUserComments() {
-      this.state.events.forEach(event => {
-      Axios.get(`/api/getcommentsforprofile/${event.id}`) 
-      .then((response) => {
-         response.data.map((eventComments) => (
-          this.setState({allEventComments: [...this.state.allEventComments,eventComments.comment_detail]})
-         ));
-      })
-      .catch((err) => console.log(err));
+  //pulls list of all comments from the users events
+  getUserComments() {
+    this.state.events.forEach((event) => {
+      Axios.get(`/api/getcommentsforprofile/${event.id}`)
+        .then((response) => {
+          response.data.map((eventComments) =>
+            this.setState({
+              allEventComments: [
+                ...this.state.allEventComments,
+                eventComments.comment_detail,
+              ],
+            })
+          );
+        })
+        .catch((err) => console.log(err));
     });
-
   }
 
   //close the modal if user edits an event
@@ -317,23 +314,23 @@ export default class CompanyProfile extends Component {
     //end of the overview tab //
 
     //render list of events for modal
-    const eventCards = this.state.events.map((event) => (
-      <div>
-        <div class="card mb-3">
-          <div class="row mx-auto no-gutters">
-            <div class="col-md-4">
+    const eventCards = this.state.events.map((event, index) => (
+      <div key={index}>
+        <div className="card mb-3">
+          <div className="row mx-auto no-gutters">
+            <div className="col-md-4">
               <img
                 src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${event.image}`}
-                class="card-img"
+                className="card-img"
                 alt="..."
               />
             </div>
-            <div class="col-md-6">
-              <div class="card-body">
-                <h5 class="card-title">{event.event_name}</h5>
+            <div className="col-md-6">
+              <div className="card-body">
+                <h5 className="card-title">{event.event_name}</h5>
               </div>
             </div>
-            <div class="col-md-2">
+            <div className="col-md-2">
               <Link
                 onClick={this.closeModal}
                 to={{ pathname: "/eventspage", search: `?eventId=${event.id}` }}
@@ -356,13 +353,18 @@ export default class CompanyProfile extends Component {
     ));
 
     //render the comments tab
-    const userReviewComments =   this.state.allEventComments.map((eventComments) => (
-      <div class ="text-center">
-        <p><q><i>{eventComments}</i></q></p>
-        <hr>
-        </hr>
-      </div>
-     ));
+    const userReviewComments = this.state.allEventComments.map(
+      (eventComments) => (
+        <div className="text-center">
+          <p>
+            <q>
+              <i>{eventComments}</i>
+            </q>
+          </p>
+          <hr></hr>
+        </div>
+      )
+    );
 
     return (
       <div className=" main-content">
@@ -416,7 +418,7 @@ export default class CompanyProfile extends Component {
                 <div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                   <div className="d-flex justify-content-between">
                     <a
-                      class="a-design"
+                      className="a-design"
                       href="#"
                       className="btn-design btn btn-sm btm-sm-design btn-info mr-4"
                       data-toggle="modal"
@@ -425,7 +427,7 @@ export default class CompanyProfile extends Component {
                       My Events
                     </a>
                     <a
-                      class="a-design"
+                      className="a-design"
                       href="/eventCreate"
                       className="btn-design btn btn-sm btm-sm-design btn-default float-right"
                     >
@@ -436,39 +438,41 @@ export default class CompanyProfile extends Component {
 
                 {/* MODAL FOR SEEING EVENTS*/}
                 <div
-                  class="modal fade"
+                  className="modal fade"
                   id="eventModal"
-                  tabindex="-1"
+                  tabIndex="-1"
                   role="dialog"
                   aria-labelledby="eventModal"
                   aria-hidden="true"
                 >
                   <div
-                    class="modal-dialog modal-dialog-centered"
+                    className="modal-dialog modal-dialog-centered"
                     role="document"
                   >
-                    <div class="modal-content">
-                      <div class="modal-header text-center myevent-header">
+                    <div className="modal-content">
+                      <div className="modal-header text-center myevent-header">
                         <h5
-                          class="modal-title text-white"
+                          className="modal-title text-white"
                           id="exampleModalCenterTitle"
                         >
                           MY EVENTS
                         </h5>
                         <button
                           type="button"
-                          class="close"
+                          className="close"
                           data-dismiss="modal"
                           aria-label="Close"
                         >
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
-                      <div class="modal-body myEvent-modal">{eventCards}</div>
-                      <div class="modal-footer myevent-footer">
+                      <div className="modal-body myEvent-modal">
+                        {eventCards}
+                      </div>
+                      <div className="modal-footer myevent-footer">
                         <button
                           type="button"
-                          class="btn myevent-btn text-white"
+                          className="btn myevent-btn text-white"
                           data-dismiss="modal"
                         >
                           Close
@@ -482,7 +486,7 @@ export default class CompanyProfile extends Component {
                   <ul className="nav nav-tabs ul-design" role="tablist">
                     <li className="nav-item">
                       <a
-                        class="a-design"
+                        className="a-design"
                         className="nav-link active"
                         data-toggle="tab"
                         href="#tabs-1"
@@ -493,7 +497,6 @@ export default class CompanyProfile extends Component {
                     </li>
                     <li className="nav-item">
                       <a
-                        class="a-design"
                         className="nav-link"
                         data-toggle="tab"
                         href="#tabs-2"
@@ -504,7 +507,6 @@ export default class CompanyProfile extends Component {
                     </li>
                     <li className="nav-item">
                       <a
-                        class="a-design"
                         className="nav-link"
                         data-toggle="tab"
                         href="#tabs-3"
@@ -527,7 +529,7 @@ export default class CompanyProfile extends Component {
                       <p>joined events</p>
                     </div>
                     <div className="tab-pane " id="tabs-3" role="tabpanel">
-                       {userReviewComments}
+                      {userReviewComments}
                     </div>
                   </div>
                 </div>
@@ -558,62 +560,76 @@ export default class CompanyProfile extends Component {
                       >
                         <div className="row">
                           <div className="col-md-6">
-                            <label class="label-design">Company Name:</label>
+                            <label className="label-design">
+                              Company Name:
+                            </label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">{this.state.companyUserName}</p>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-md-6">
-                            <label class="label-design">Email:</label>
-                          </div>
-                          <div className="col-md-6">
-                            <p class="p-design">{this.state.companyEmail}</p>
+                            <p className="p-design">
+                              {this.state.companyUserName}
+                            </p>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                            <label class="label-design">Phone:</label>
+                            <label className="label-design">Email:</label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">
+                            <p className="p-design">
+                              {this.state.companyEmail}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <label className="label-design">Phone:</label>
+                          </div>
+                          <div className="col-md-6">
+                            <p className="p-design">
                               {this.state.companyPhoneNumber}
                             </p>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                            <label class="label-design">Website:</label>
+                            <label className="label-design">Website:</label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">{this.state.companyWebsite}</p>
+                            <p className="p-design">
+                              {this.state.companyWebsite}
+                            </p>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                            <label class="label-design">Contact Person:</label>
+                            <label className="label-design">
+                              Contact Person:
+                            </label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">
+                            <p className="p-design">
                               {this.state.contactPersonName}
                             </p>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                            <label class="label-design">Current Event:</label>
+                            <label className="label-design">
+                              Current Event:
+                            </label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">N/A</p>
+                            <p className="p-design">N/A</p>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                            <label class="label-design">Joined Events:</label>
+                            <label className="label-design">
+                              Joined Events:
+                            </label>
                           </div>
                           <div className="col-md-6">
-                            <p class="p-design">
+                            <p className="p-design">
                               {this.state.totalEvent.length}
                             </p>
                           </div>
@@ -626,7 +642,7 @@ export default class CompanyProfile extends Component {
                         {/* <h6 className="h1-design heading-small text-muted mb-4"></h6> */}
                         <div className="pl-lg-4">
                           <div className="form-group focused">
-                            <label class="label-design">
+                            <label className="label-design">
                               Environmental Focus
                             </label>
                             <textarea
