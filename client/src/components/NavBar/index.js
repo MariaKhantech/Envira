@@ -29,6 +29,8 @@ export class NavBar extends Component {
             profile: response.data,
           });
           this.getUserProfile();
+          // call this function to get the existing company profile details
+          this.getCompanyProfile();
         })
         .catch((err) => console.log(err));
     } catch (error) {
@@ -62,6 +64,19 @@ export class NavBar extends Component {
       })
       .catch((err) => console.log(err));
   };
+
+  // call this function to get the existing company profile details
+  getCompanyProfile = () => {
+    const UserId = this.state.profile.id
+    Axios.get(`/api/auth/companyProfile/${UserId}`)
+      .then((response) => {
+        this.setState({
+          data: response.data,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
     return (
       <Menu>
