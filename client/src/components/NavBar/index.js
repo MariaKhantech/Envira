@@ -14,6 +14,7 @@ const orangeColor = {
 export class NavBar extends Component {
   state = {
     profile: [],
+    data: ""
   };
   async componentDidMount() {
     try {
@@ -27,6 +28,7 @@ export class NavBar extends Component {
           this.setState({
             profile: response.data,
           });
+          this.getUserProfile();
         })
         .catch((err) => console.log(err));
     } catch (error) {
@@ -48,6 +50,18 @@ export class NavBar extends Component {
     }
   };
 
+  // call this function to get the existing user profile details
+  getUserProfile = () => {
+    const UserId = this.state.profile.id;
+    Axios.get(`/api/auth/userProfile/${UserId}`)
+      .then((response) => {
+        this.setState({
+          data: response.data,
+        });
+        console.log(response)
+      })
+      .catch((err) => console.log(err));
+  };
   render() {
     return (
       <Menu>
@@ -62,7 +76,7 @@ export class NavBar extends Component {
         )}
         <hr className="bg-light" style={{ background: "white" }} />
 
-      
+
 
         <li className="nav-item dropdown">
           <a
@@ -96,13 +110,24 @@ export class NavBar extends Component {
         <a className="menu-item text-white about" href="/explore">
           Pollution Information
         </a>
-        
+
         {/* check the logged in user roleId
 
 	if roleId is 1 then redirect user to userProfile page
 	 if roleId is 2 then redirect user to Profile page
 	if roleId is 3 then redirect user to Profile page */}
-        {this.props.auth.isAuthenticated && this.state.profile.roleId === 1 && (
+        {this.props.auth.isAuthenticated && this.state.profile.roleId === 1 && !this.state.data && (
+          <Link
+            className="menu-item text-white about"
+            to={{
+              pathname: "/edituserprofile",
+              search: `?userId=${this.state.profile.id}`,
+            }}
+          >
+            My Account
+          </Link>
+        )}
+        {this.props.auth.isAuthenticated && this.state.profile.roleId === 1 && this.state.data && (
           <Link
             className="menu-item text-white about"
             to={{
@@ -113,7 +138,18 @@ export class NavBar extends Component {
             My Account
           </Link>
         )}
-        {this.props.auth.isAuthenticated && this.state.profile.roleId === 2 && (
+        {this.props.auth.isAuthenticated && this.state.profile.roleId === 2 && !this.state.data && (
+          <Link
+            className="menu-item text-white about"
+            to={{
+              pathname: "/editcompanyprofile",
+              search: `?userId=${this.state.profile.id}`,
+            }}
+          >
+            My Account
+          </Link>
+        )}
+        {this.props.auth.isAuthenticated && this.state.profile.roleId === 2 && this.state.data && (
           <Link
             className="menu-item text-white about"
             to={{
@@ -124,11 +160,22 @@ export class NavBar extends Component {
             My Account
           </Link>
         )}
-        {this.props.auth.isAuthenticated && this.state.profile.roleId === 3 && (
+        {this.props.auth.isAuthenticated && this.state.profile.roleId === 3 && this.state.data && (
           <Link
             className="menu-item text-white about"
             to={{
               pathname: "/companyprofile",
+              search: `?userId=${this.state.profile.id}`,
+            }}
+          >
+            My Account
+          </Link>
+        )}
+        {this.props.auth.isAuthenticated && this.state.profile.roleId === 3 && !this.state.data && (
+          <Link
+            className="menu-item text-white about"
+            to={{
+              pathname: "/editcompanyprofile",
               search: `?userId=${this.state.profile.id}`,
             }}
           >
