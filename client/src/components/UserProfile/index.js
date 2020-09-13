@@ -22,7 +22,7 @@ export default class UserProfile extends Component {
     occupation: "",
     about: "",
     zipCode: "",
-    totalEvent: "",
+    totalEvent: [],
     imagePreviewUrl: "",
     imageName: [],
     userRating: [],
@@ -60,8 +60,6 @@ export default class UserProfile extends Component {
 
   // get logged in user info from UserProfile model
   getUserProfile = () => {
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
@@ -86,16 +84,12 @@ export default class UserProfile extends Component {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
-
-    console.log(urlUserId);
     Axios.get(`/api/auth/userid/${urlUserId}`)
       .then((response) => {
         this.setState({
           userName: response.data.user_name,
           email: response.data.email,
         });
-
-        console.log(this.state.userName);
       })
       .catch((err) => console.log(err));
   };
@@ -111,29 +105,21 @@ export default class UserProfile extends Component {
         this.setState({
           totalEvent: response.data,
         });
-        console.log(this.state.totalEvent.length);
       })
       .catch((err) => console.log(err));
   };
 
   getImage = () => {
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
 
     this.setState({ eventId: urlUserId });
-
-    // console.log(this.state.eventId);
-
-    // console.log(UserId);
     Axios.get(`/api/auth/image/${urlUserId}`)
       .then((response) => {
         this.setState({
           imageName: response.data,
         });
-        console.log(this.state.imageName);
         this.getImageFromS3();
       })
       .catch((err) => console.log(err));
@@ -141,10 +127,8 @@ export default class UserProfile extends Component {
 
   getImageFromS3 = () => {
     let fileName = this.state.imageName.image_name;
-    console.log(fileName);
     Storage.get(fileName)
       .then((data) => {
-        console.log(data);
         this.setState({
           imagePreviewUrl: data,
         });
@@ -153,14 +137,9 @@ export default class UserProfile extends Component {
   };
 
   getUserRating = () => {
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
-
-    // console.log(urlUserId);
-
     Axios.get(`/api/rate/userprofile/${urlUserId}`)
       .then((res) => {
         if (res.data === null) {
@@ -174,21 +153,14 @@ export default class UserProfile extends Component {
 
   // get logged in user info from Event model
   getUserEvents = () => {
-    // console.log("herer");
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
-
-    console.log(urlUserId);
-
     Axios.get(`/api/getuserevents/${urlUserId}`)
       .then((response) => {
         this.setState({
           events: response.data,
         });
-        console.log(response.data);
       })
       .catch((err) => console.log(err));
   };
@@ -612,6 +584,7 @@ export default class UserProfile extends Component {
                           </div>
                           <div className="col-md-6">
                             <p class="p-design">N/A</p>
+
                           </div>
                         </div>
                         <div className="row">

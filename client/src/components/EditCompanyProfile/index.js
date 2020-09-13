@@ -41,7 +41,6 @@ export class UpdateProfile extends Component {
       const user = await Auth.currentAuthenticatedUser();
       // get username from user object
       const userDetail = user.username;
-      console.log(userDetail);
       // get the user details for logged in user from the User table
       Axios.get(`/api/auth/user/${userDetail}`)
         .then((response) => {
@@ -61,8 +60,6 @@ export class UpdateProfile extends Component {
 
   // call this function to get the existing company profile details
   getCompanyProfile = () => {
-    // const UserId = this.state.profile.id
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
@@ -166,8 +163,7 @@ export class UpdateProfile extends Component {
         environmentalFocus,
         phoneNumber,
       } = this.state;
-      console.log(companyWebsite);
-      //   const UserId = this.state.profile.id;
+
       Axios.put(`/api/auth/updateCompanyProfile/${urlUserId}`, {
         companyName,
         description,
