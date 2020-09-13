@@ -173,7 +173,11 @@ export default class CompanyProfile extends Component {
 
     Axios.get(`/api/rate/userprofile/${urlUserId}`)
       .then((res) => {
-        this.setState({ userRating: [res.data] });
+        if (res.data === null) {
+          this.setState({ userRating: "N/A" });
+        } else {
+          this.setState({ userRating: [res.data] });
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -238,13 +242,19 @@ export default class CompanyProfile extends Component {
     };
 
     // Get average rating using map and reduce
-    const ratings = this.state.userRating.map((data) => data.rating);
-    const avgRating =
-      ratings.reduce((a, b) => a + parseInt(b), 0) / ratings.length;
-    // add avgRating to starRating component value
-    const starRating = (
-      <StarRatingComponent name="rating" starCount={5} value={avgRating} />
-    );
+    let ratings;
+    let avgRating;
+    let starRating;
+
+    if (this.state.userRating === "N/A") {
+      starRating = <p>{this.state.userRating}</p>;
+    } else {
+      ratings = this.state.userRating.map((data) => data.rating);
+      avgRating = ratings.reduce((a, b) => a + parseInt(b), 0) / ratings.length;
+      starRating = (
+        <StarRatingComponent name="rating" starCount={5} value={avgRating} />
+      );
+    }
 
     // const that storest the content of the overview
     const overviewTab = (
@@ -419,8 +429,11 @@ export default class CompanyProfile extends Component {
                   >
                     <div class="modal-content">
                       <div class="modal-header text-center myevent-header">
-                        <h5 class="modal-title text-white" id="exampleModalCenterTitle">
-                         MY EVENTS
+                        <h5
+                          class="modal-title text-white"
+                          id="exampleModalCenterTitle"
+                        >
+                          MY EVENTS
                         </h5>
                         <button
                           type="button"
@@ -446,7 +459,7 @@ export default class CompanyProfile extends Component {
                 </div>
 
                 <div className="card-body shadow p-3 pt-0 pt-md-4 mt-5">
-                <ul className="nav nav-tabs ul-design" role="tablist">
+                  <ul className="nav nav-tabs ul-design" role="tablist">
                     <li className="nav-item">
                       <a
                         class="a-design"
@@ -491,10 +504,10 @@ export default class CompanyProfile extends Component {
                       {overviewTab}
                     </div>
                     <div className="tab-pane " id="tabs-2" role="tabpanel">
-                     <p>joined events</p>
+                      <p>joined events</p>
                     </div>
                     <div className="tab-pane " id="tabs-3" role="tabpanel">
-                        <p>all comments from my events</p>
+                      <p>all comments from my events</p>
                     </div>
                   </div>
                 </div>

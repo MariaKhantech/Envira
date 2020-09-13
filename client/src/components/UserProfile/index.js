@@ -163,8 +163,11 @@ export default class UserProfile extends Component {
 
     Axios.get(`/api/rate/userprofile/${urlUserId}`)
       .then((res) => {
-        // console.log(res);
-        this.setState({ userRating: [res.data] });
+        if (res.data === null) {
+          this.setState({ userRating: "N/A" });
+        } else {
+          this.setState({ userRating: [res.data] });
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -250,12 +253,19 @@ export default class UserProfile extends Component {
     };
     // add avgRating to starRating component value
     // Get average rating using map and reduce
-    const ratings = this.state.userRating.map((data) => data.rating);
-    const avgRating =
-      ratings.reduce((a, b) => a + parseInt(b), 0) / ratings.length;
-    const starRating = (
-      <StarRatingComponent name="rating" starCount={5} value={avgRating} />
-    );
+    let ratings;
+    let avgRating;
+    let starRating;
+
+    if (this.state.userRating === "N/A") {
+      starRating = <p>{this.state.userRating}</p>;
+    } else {
+      ratings = this.state.userRating.map((data) => data.rating);
+      avgRating = ratings.reduce((a, b) => a + parseInt(b), 0) / ratings.length;
+      starRating = (
+        <StarRatingComponent name="rating" starCount={5} value={avgRating} />
+      );
+    }
 
     // const that storest the content of the overview
     const overviewTab = (
@@ -310,7 +320,7 @@ export default class UserProfile extends Component {
     //render list of events for modal
     const eventCards = this.state.events.map((event) => (
       <div>
-        <div class="card mb-3" style={{padding:"25px"}}>
+        <div class="card mb-3" style={{ padding: "25px" }}>
           <div class="row mx-auto no-gutters">
             <div class="col-md-4">
               <img
@@ -361,7 +371,10 @@ export default class UserProfile extends Component {
           <div className="container-fluid d-flex align-items-center">
             <div className="row">
               <div className="col-lg-7 col-md-10 ">
-                <h1 className="display-2 text-dark text-center" style={{marginLeft: "3rem"}}>
+                <h1
+                  className="display-2 text-dark text-center"
+                  style={{ marginLeft: "3rem" }}
+                >
                   {this.state.userName.toUpperCase()}
                 </h1>
               </div>
@@ -431,8 +444,11 @@ export default class UserProfile extends Component {
                   >
                     <div class="modal-content">
                       <div class="modal-header text-center myevent-header">
-                        <h5 class="modal-title text-white" id="exampleModalCenterTitle">
-                      MY EVENTS
+                        <h5
+                          class="modal-title text-white"
+                          id="exampleModalCenterTitle"
+                        >
+                          MY EVENTS
                         </h5>
                         <button
                           type="button"
