@@ -348,8 +348,8 @@ export default class CompanyProfile extends Component {
           <div className="container-fluid container-design d-flex align-items-center">
             <div className="row">
               <div className="col-lg-7 col-md-10">
-                <h1 className="h1-design h1-special display-2 text-black ml-5">
-                  {this.state.companyUserName}
+                <h1 className="h1-design h1-special display-2 text-black">
+                  {this.state.companyUserName.toUpperCase()}
                 </h1>
               </div>
             </div>
@@ -418,9 +418,9 @@ export default class CompanyProfile extends Component {
                     role="document"
                   >
                     <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">
-                          My Events
+                      <div class="modal-header text-center myevent-header">
+                        <h5 class="modal-title text-white" id="exampleModalCenterTitle">
+                         MY EVENTS
                         </h5>
                         <button
                           type="button"
@@ -431,11 +431,11 @@ export default class CompanyProfile extends Component {
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
-                      <div class="modal-body">{eventCards}</div>
-                      <div class="modal-footer">
+                      <div class="modal-body myEvent-modal">{eventCards}</div>
+                      <div class="modal-footer myevent-footer">
                         <button
                           type="button"
-                          class="btn btn-secondary"
+                          class="btn myevent-btn text-white"
                           data-dismiss="modal"
                         >
                           Close
@@ -446,7 +446,7 @@ export default class CompanyProfile extends Component {
                 </div>
 
                 <div className="card-body shadow p-3 pt-0 pt-md-4 mt-5">
-                  <ul className="nav nav-tabs ul-design" role="tablist">
+                <ul className="nav nav-tabs ul-design" role="tablist">
                     <li className="nav-item">
                       <a
                         class="a-design"
@@ -466,18 +466,7 @@ export default class CompanyProfile extends Component {
                         href="#tabs-2"
                         role="tab"
                       >
-                        Rating
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        class="a-design"
-                        className="nav-link"
-                        data-toggle="tab"
-                        href="#tabs-3"
-                        role="tab"
-                      >
-                        Event Photos
+                        Joined Events
                       </a>
                     </li>
                     <li className="nav-item">
@@ -502,16 +491,10 @@ export default class CompanyProfile extends Component {
                       {overviewTab}
                     </div>
                     <div className="tab-pane " id="tabs-2" role="tabpanel">
-                      {starRating}
+                     <p>joined events</p>
                     </div>
                     <div className="tab-pane " id="tabs-3" role="tabpanel">
-                      <div className="row">
-                        <div className="col">
-                          <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                            <p class="p-design">images</p>
-                          </div>
-                        </div>
-                      </div>
+                        <p>all comments from my events</p>
                     </div>
                   </div>
                 </div>
@@ -629,12 +612,6 @@ export default class CompanyProfile extends Component {
             </div>
           </div>
         </div>
-
-        <footer className="footer">
-          <div className="row align-items-center justify-content-xl-between">
-            <div className="col-xl-6 m-auto text-center" />
-          </div>
-        </footer>
       </div>
     );
   }

@@ -6,6 +6,7 @@ body {
   width: auto;
   height: 100vh;
   overflow-x: hidden;
+  font-family: 'Libre Baskerville', serif;
 }
 
 .signup {

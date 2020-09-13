@@ -61,13 +61,8 @@ export class NavBar extends Component {
           </h5>
         )}
         <hr className="bg-light" style={{ background: "white" }} />
-        <a className="menu-item text-white about" href="/ocean">
-          About
-        </a>
 
-        <a className="menu-item text-white about" href="/eventsearch">
-          Events
-        </a>
+      
 
         <li className="nav-item dropdown">
           <a
@@ -92,15 +87,16 @@ export class NavBar extends Component {
             <a className="dropdown-item text-white" href="/rainforest">
               Rainforest
             </a>
-            <a className="dropdown-item text-white" href="#">
-              Climate Change Info
-            </a>
           </div>
         </li>
+        <a className="menu-item text-white about" href="/eventsearch">
+          Environmental Events
+        </a>
 
         <a className="menu-item text-white about" href="/explore">
           Pollution Information
         </a>
+        
         {/* check the logged in user roleId
 
 	if roleId is 1 then redirect user to userProfile page

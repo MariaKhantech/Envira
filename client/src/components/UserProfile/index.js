@@ -310,18 +310,18 @@ export default class UserProfile extends Component {
     //render list of events for modal
     const eventCards = this.state.events.map((event) => (
       <div>
-        <div class="card mb-3">
+        <div class="card mb-3" style={{padding:"25px"}}>
           <div class="row mx-auto no-gutters">
             <div class="col-md-4">
               <img
                 src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${event.image}`}
-                class="card-img"
+                class="card-img myevent-img"
                 alt="..."
               />
             </div>
             <div class="col-md-6">
-              <div class="card-body">
-                <h5 class="card-title">{event.event_name}</h5>
+              <div class="card-body l">
+                <h5 class="card-title text-center">{event.event_name}</h5>
               </div>
             </div>
             <div class="col-md-2">
@@ -361,8 +361,8 @@ export default class UserProfile extends Component {
           <div className="container-fluid d-flex align-items-center">
             <div className="row">
               <div className="col-lg-7 col-md-10 ">
-                <h1 className="display-2 text-dark text-center ml-5">
-                  {this.state.userName}
+                <h1 className="display-2 text-dark text-center" style={{marginLeft: "3rem"}}>
+                  {this.state.userName.toUpperCase()}
                 </h1>
               </div>
             </div>
@@ -430,9 +430,9 @@ export default class UserProfile extends Component {
                     role="document"
                   >
                     <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">
-                          My Events
+                      <div class="modal-header text-center myevent-header">
+                        <h5 class="modal-title text-white" id="exampleModalCenterTitle">
+                      MY EVENTS
                         </h5>
                         <button
                           type="button"
@@ -443,11 +443,11 @@ export default class UserProfile extends Component {
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
-                      <div class="modal-body">{eventCards}</div>
-                      <div class="modal-footer">
+                      <div class="modal-body myEvent-modal">{eventCards}</div>
+                      <div class="modal-footer myevent-footer">
                         <button
                           type="button"
-                          class="btn btn-secondary"
+                          class="btn myevent-btn text-white"
                           data-dismiss="modal"
                         >
                           Close

@@ -60,7 +60,7 @@ export class EnviraBot extends Component {
 					welcomeMessage="Welcome, how can I help you today?"
 					// onComplete={this.handleComplete.bind(this)}
 					clearOnComplete={true}
-					conversationModeOn={true}
+					conversationModeOn={false}
 					voiceEnabled={true}
 				/>
 			</div>

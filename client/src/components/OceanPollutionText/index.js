@@ -6,7 +6,7 @@ export class OceanPollutionText extends Component {
     render() {
         return (
             
-                  <svg id="logo"
+                  <svg class="img-fluid" id="logo"
     width="853" height="79" viewBox="0 0 853 79" fill="none" xmlns="http://www.w3.org/2000/svg">
         <mask id="path-1-outside-1" maskUnits="userSpaceOnUse" x="0.190491" y="0.223999" width="853" height="79" fill="black">
         <rect fill="white" x="0.190491" y="0.223999" width="853" height="79"/>

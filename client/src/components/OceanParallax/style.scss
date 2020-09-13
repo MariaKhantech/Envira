@@ -170,3 +170,63 @@ $ocean-floor-color: #0d2d52;
 		top: 95%;
 	}
 }
+
+@media (min-width:320px) and (max-width:1200px) {
+
+    #imgpol{ /* No Space */
+      margin: 0 !important; 
+	}
+	.bluebag-trash {
+		position: absolute;
+		height: 30px;
+		left: 10%;
+		animation: animateDown 25s linear infinite;
+	}
+	.slurpee-trash {
+		position: absolute;
+		height: 30px;
+		left: 35%;
+		animation: animateDown 15s linear infinite;
+	}
+	
+	@keyframes animateForward {
+		0% {
+			transform: translateY(-50px);
+			left: -25%;
+		}
+		25% {
+			transform: translateY(0px);
+		}
+		50% {
+			transform: translateY(50px);
+		}
+		75% {
+			transform: translateY(0px);
+		}
+		100% {
+			transform: translateY(-50px);
+			left: 45%;
+		}
+	}
+
+	@keyframes animateBackward {
+		0% {
+			transform: translateY(-50px);
+			right: 25%;
+		}
+		25% {
+			transform: translateY(0px);
+		}
+		50% {
+			transform: translateY(50px);
+		}
+		75% {
+			transform: translateY(0px);
+		}
+		100% {
+			transform: translateY(-50px);
+			right: 110%;
+		}
+	}
+
+}

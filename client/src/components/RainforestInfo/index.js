@@ -2,27 +2,40 @@ import React, { Component } from 'react';
 import forestBackground from './greenforest.jpg';
 import { Parallax, Background } from 'react-parallax';
 import Particles from 'react-particles-js';
+import Fade from 'react-reveal/Fade';
 import './style.scss';
 
-export class RainforestInfo extends Component {
-	enviraAudio() {
-		let ForestFiresAudio = new Audio(
-			'https://envirabucket215241-dev.s3.amazonaws.com/polly/forest-fires.ed367291-bbcf-4606-8d61-11399fc93bb3.mp3'
-		);
-		ForestFiresAudio.play();
+export default class RainforestInfo extends Component {
+
+	state = {
+		isPlaying: false,
+		audioTracks:[]
 	}
 
-	enviraAmazonForestFires() {
-		let amazonForestFires= new Audio(
-			'https://envirabucket215241-dev.s3.amazonaws.com/polly/amazonforestfires.9fb9a29e-8580-4ee5-bb06-8b1749f3fcad.mp3'
-			
-		);
-		amazonForestFires.play();
+	componentDidMount () {
+
+		let audioArray = [
+			new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/forest-fires.ed367291-bbcf-4606-8d61-11399fc93bb3.mp3'),
+			new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/amazonforestfires.9fb9a29e-8580-4ee5-bb06-8b1749f3fcad.mp3'),
+			new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/deforestation-orangutans.03d2a93d-8964-44df-bbe1-cc34dddb86f7.mp3'),
+			new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/americandeforestation.c5ae68b7-3208-4869-9d2c-f6b2c45097c8.mp3')
+		];
+
+		this.setState({audioTracks:audioArray})
 	}
-	// enviraAmazon() {
-	// 	let AmazonAudio = new Audio('');
-	// 	ForestFiresAudio.play();
-	// }
+
+	//plays the audio
+	playAudio(index) {
+			this.state.audioTracks[index].play();
+			this.setState({isPlaying: true});
+	}
+
+	//stops audio//
+	pauseAudio(index){
+		this.state.audioTracks[index].pause();
+		this.setState({ isPlaying: false });
+	}
+
 	render() {
 		const particles = (
 			<Particles
@@ -89,6 +102,7 @@ export class RainforestInfo extends Component {
 			maxHeight: 'none',
 			margin: '-250px 0px 0px'
 		};
+		console.log(this.state.audioTracks)
 
 		return (
 			<div className="RainforestWrapper">
@@ -177,6 +191,7 @@ export class RainforestInfo extends Component {
 						</div>
 
 						<div class="row mx-auto" style={{ marginTop: '-1.5rem' }}>
+							
 							<div class="card forest-fire-card mb-3 mx-auto" style={{ maxWidth: '1000px' }}>
 								<div class="row">
 									<div class="col-md-4">
@@ -214,13 +229,13 @@ export class RainforestInfo extends Component {
 												lightning strike.
 											</p>
 											<p class="card-text">
-												<button
-													type="button"
-													onClick={this.enviraAudio}
-													class="btn btn-outline-danger float-right text-danger"
-												>
-													<i class="fas fa-robot" />
-												</button>
+												<a
+													role="button"
+													onClick={() => this.state.isPlaying ? this.pauseAudio(0) : this.playAudio(0)}
+													class={`btn btn-outline-danger float-right text-danger  ${this.state.isPlaying ? "btn-danger" : ""}`}
+												a>
+													<i class="fas fa-robot" /></a>
+											
 											</p>
 										</div>
 									</div>
@@ -254,8 +269,8 @@ export class RainforestInfo extends Component {
 											</p>
 											<button
 													type="button"
-													onClick={this.enviraAmazonForestFires}
-													class="btn btn-outline-danger float-right text-danger">
+													onClick={() => this.state.isPlaying ? this.pauseAudio(1) : this.playAudio(1)}
+													class={`btn btn-outline-danger float-right text-danger ${this.state.isPlaying ? "btn-danger" : ""}`}>
 													<i class="fas fa-robot" />
 												</button>
 										</div>
@@ -290,7 +305,7 @@ export class RainforestInfo extends Component {
 					<Parallax strength={500}>
 						<div style={{ height: '100%' }}>
 							<div class="row mb-5">
-							<div class="col-md-5 ">
+							<div class="col-md-6 ">
 								<div class="card mt-5 mx-auto border-0" style={{ width: '25rem' }}>
 									<div class="card-body forest-fire-card">
 										<h3 class="card-title text-white text-center">Deforestation & Orangutans</h3>
@@ -343,8 +358,15 @@ export class RainforestInfo extends Component {
 										</div>
 										<h5 class="card-subtitle mb-2 mt-2 text-muted text-center">Asia</h5>
 										<p class="card-text text-white">
-										Orangutans are known for their keen intelligence. The United Natiosn Environmental Program predicts that they will be eliminated in 2 decades if the deforestation continues on its trend. The large demand for palm oil is its main cause. Orangutans are also killed illegally for wildlife trade. The babies sold off as pets. 
+										Orangutans are known for their keen intelligence. The United Nations Environmental Program predicts that they will be eliminated in 2 decades if the deforestation continues on its trend. The large demand for palm oil is its main cause. Orangutans are also killed illegally for wildlife trade. The babies sold off as pets. 
 										</p>
+												<button
+													type="button"
+													onClick={() => this.state.isPlaying ? this.pauseAudio(2) : this.playAudio(2)}
+													class={`btn btn-outline-danger float-right text-danger ${this.state.isPlaying ? "btn-danger" : ""}`}
+												>
+													<i class="fas fa-robot" />
+												</button>
 									</div>
 								</div>
 							</div>
@@ -357,9 +379,9 @@ export class RainforestInfo extends Component {
 								<h6 className="card-subtitle mb-2 text-white text-center">Questions you can ask Envira</h6>
 								<li className="card-text text-white">How many orangutans are left in the world?</li>
 								<li className="text-white">How many animals are at risk due to deforestation?</li>
-								<li className="text-white">What can we do to help?</li>
+								<li className="text-white">What can we do to help with the Amazon or deforestation?</li>
 								<li className="text-white">What was the largest wildfire to date?</li>
-								<li className="text-white">Will this get better?</li>
+								<li className="text-white">What is your favorite Amazon animal?</li>
 								<li className="text-white">What do you feel about deforestation?</li>
 							</div>
 							</div>
@@ -376,25 +398,33 @@ export class RainforestInfo extends Component {
 					</Parallax>
 
 					<Parallax strength={500}>
-						<div style={{ height: '600px' }}>
+						<div style={{ height: '800px', paddingBottom: "100px" }}>
 							<div class="row justify-content-around mb-5 forest-fire-card ">
 								<div class="col-4">
 									<div class="card mt-5 mx-auto mb-5 border-0" style={{ width: '30rem' }}>
+									<img src="../assets/imgs/rainforest/deforestation.jpg" class="card-img-top" alt="forest cut down"/>
 										<div class="card-body forest-fire-card ">
 											<h3 class="card-title text-white text-center">American Deforestation</h3>
 											<h5 class="card-subtitle mb-2 text-muted text-center">
 												America
+												
 											</h5>
 											<p class="card-text text-white text-center">
-												United States deforestation has caused the destruction of virgin forests
-												by 75% percent since 1600. In 2015, 33.9% of the total land area was
-												under forests, inclduing primary, naturally regenerating and other
-												woodlands.
+											United States deforestation has destroyed virgin forests
+											by 75% since the 1600's. In 2015, 33.9% of the total land area were forests, including primary, naturally regenerating, and other
+											woodlands. One of the biggest problems in America is illegal logging. Illegal logging has caused catastrophic fires. More than 83 million acres have been lost to wildfires.
 											</p>
+											<button
+													type="button"
+													onClick={() => this.state.isPlaying ? this.pauseAudio(3) : this.playAudio(3)}
+													class={`btn btn-outline-danger float-right text-danger ${this.state.isPlaying ? "btn-danger" : ""}`}
+												>
+													<i class="fas fa-robot" />
+												</button>
 										</div>
 									</div>
 								</div>
-								<div class="col-4">
+								<div class="col-4 mb-5">
 									<iframe
 										class="first-chart mt-5"
 										width="600"
@@ -406,10 +436,11 @@ export class RainforestInfo extends Component {
 							</div>
 						</div>
 					</Parallax>
+				
 				</div>
 			</div>
 		);
 	}
 }
 
-export default RainforestInfo;
+// export default RainforestInfo;

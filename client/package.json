@@ -21,6 +21,7 @@
     "react-image-gallery": "^1.0.8",
     "react-parallax": "^3.0.3",
     "react-particles-js": "^3.3.0",
+    "react-responsive-carousel": "^3.2.9",
     "react-reveal": "^1.2.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^4.3.1",

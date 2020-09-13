@@ -4,7 +4,7 @@ import './style.scss'
 export class Robot extends Component {
     render() {
         return (
-            <svg
+            <svg class="img-fluid"
 			xmlns="http://www.w3.org/2000/svg"
 			version="1.1"
 			id="robot"
@@ -13,7 +13,7 @@ export class Robot extends Component {
 			viewBox="0 0 600 800"
 			enableBackground="new 0 0 600 800"
 		>
-			<ellipse id="shadow" opacity="0.4" fill="#2C3332" cx="300" cy="703.4" rx="89" ry="30.6" />
+			<ellipse id="shadow" class="img-fluid" opacity="0.4" fill="#2C3332" cx="300" cy="703.4" rx="89" ry="30.6" />
 			<g id="left_arm">
 				<path
 					fill="#BABEB7"

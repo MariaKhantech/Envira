@@ -7,30 +7,34 @@ import Particles from 'react-particles-js';
 import './style.scss';
 import oceanFloor from './oceanfloor.png';
 
-export class OceanParallax extends Component {
-	componentDidMount() {}
+export default class OceanParallax extends Component {
 
-	enviraAudio() {
-		let oceansPlastic= new Audio(
-			' https://envirabucket215241-dev.s3.amazonaws.com/polly/oceans-plastic-problem.eb669192-286a-4cb6-84e2-2a4637ab68cd.mp3'
-		);
-		oceansPlastic.play();
-	}
-	enviraOffshore() {
-		let oceansOffshoreDrilling= new Audio(
-			' https://envirabucket215241-dev.s3.amazonaws.com/polly/oceansoffshore-drilling.94f77961-e2eb-4774-aa15-53785bf2b02b.mp3','https://envirabucket215241-dev.s3.amazonaws.com/polly/enviraheartbreaking.4230988f-d063-438c-8505-6b0f512d8774.mp3'
-			
-		);
-		oceansOffshoreDrilling.play();
-	}
-	enviraOverFishing() {
-		let oceanOverFish= new Audio(
-			'https://envirabucket215241-dev.s3.amazonaws.com/polly/overfishing.a5896923-afa8-43d0-b7fc-713b27199d61.mp3'
-			
-		);
-		oceanOverFish.play();
+	state = {
+		isPlaying: false,
+		audioTracks:[]
 	}
 	
+	componentDidMount() {
+		let audioArray = [
+			new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/oceans-plastic-problem.eb669192-286a-4cb6-84e2-2a4637ab68cd.mp3'),
+			new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/oceansoffshore-drilling.94f77961-e2eb-4774-aa15-53785bf2b02b.mp3'),
+			new Audio('https://envirabucket215241-dev.s3.amazonaws.com/polly/marine-wildlife.c72d0dfc-3da7-4a3d-b91f-b973eded03ce.mp3'),
+		];
+
+		this.setState({audioTracks:audioArray})
+	}
+
+	//plays the audio
+	playAudio(index) {
+		this.state.audioTracks[index].play();
+		this.setState({isPlaying: true});
+    }
+
+	//stops audio//
+	pauseAudio(index){
+		this.state.audioTracks[index].pause();
+		this.setState({ isPlaying: false });
+	}
 	
 
 	render() {
@@ -53,14 +57,14 @@ export class OceanParallax extends Component {
 					<OceanPollutionText />
 				</div>
 				<div className="card-body body-color">
-					<h3 className="card-title plastic-margin text-center" style={{ color: '#001a33'}}>Ocean's Plastic Problem</h3>
 					<div className="card border-0">
 					<div className="row no-gutters">
 								<div className="col-md-4" style={{backgroundColor: " #fff7ed"}}>
-								<img src="../assets/imgs/treeplastic.jpg" className="card-img rounded ml-5 mb-5" alt="tree covered in garbages"/>
+								<img id="imgpol" src="../assets/imgs/treeplastic.jpg" className="card-img rounded ml-4 mb-5 img-fluid" alt="tree covered in garbages"/>
 								</div>
-							<div className="col-8 body-color ">
+							<div className="col-md-8 body-color ">
 							<div className="card-body ">
+							<h3 className="card-title text-center" style={{ color: '#001a33'}}>Ocean's Plastic Problem</h3>
 								<hr style={{backgroundColor: "#004080"}}/>
 								<h5 class="text-center">
 									If I told you that there will be more plastic in the ocean than fish 2050 would you
@@ -85,8 +89,8 @@ export class OceanParallax extends Component {
 
 									<button
 											type="button"
-											onClick={this.enviraAudio}
-											class="btn btn-outline-danger float-right text-danger mr-5"
+											onClick={() => this.state.isPlaying ? this.pauseAudio(0) : this.playAudio(0)}
+											class={`btn btn-outline-danger float-right text-danger  ${this.state.isPlaying ? "btn-danger" : ""}`}
 										>
 											<i class="fas fa-robot" />
 									</button>
@@ -160,16 +164,16 @@ export class OceanParallax extends Component {
 				{cardDiv}
 				<div class="container-fluid ocean-para">
 					<div className="card text-center ocean-para border-0 ">
-						<img className="ocean-floor-img" src="../assets/imgs/ocean/oceanfloor.png" />
-						<img className="diver diver1" src="../assets/imgs//ocean/diver.png" />
-						<img className="long-fish" src="../assets/imgs/ocean/long-fish.png" />
-						<img className="group-fish" src="../assets/imgs/ocean/group-fish.png" />
-						<img className="orange-fish" src="../assets/imgs/ocean/orange-fish.png" />
-						<img className="blue-fish" src="../assets/imgs/ocean/blue-fish.png" />
-						<img className="bottle-trash" src="../assets/imgs/ocean/trash/bottle.png" />
-						<img className="slurpee-trash" src="../assets/imgs/ocean/trash/slurpee.png" />
-						<img className="clearbag-trash" src="../assets/imgs/ocean/trash/clearbag.png" />
-						<img className="bluebag-trash" src="../assets/imgs/ocean/trash/bluebag.png" />
+						<img className="ocean-floor-img img-fluid" src="../assets/imgs/ocean/oceanfloor.png" />
+						<img className="diver diver1 img-fluid" src="../assets/imgs//ocean/diver.png" />
+						<img className="long-fish img-fluid" src="../assets/imgs/ocean/long-fish.png" />
+						<img className="group-fish img-fluid" src="../assets/imgs/ocean/group-fish.png" />
+						<img className="orange-fish img-fluid" src="../assets/imgs/ocean/orange-fish.png" />
+						<img className="blue-fish img-fluid" src="../assets/imgs/ocean/blue-fish.png" />
+						<img className="bottle-trash img-fluid" src="../assets/imgs/ocean/trash/bottle.png" />
+						<img className="slurpee-trash img-fluid" src="../assets/imgs/ocean/trash/slurpee.png" />
+						<img className="clearbag-trash img-fluid" src="../assets/imgs/ocean/trash/clearbag.png" />
+						<img className="bluebag-trash img-fluid" src="../assets/imgs/ocean/trash/bluebag.png" />
 
 						<div className="oceanParticles">{particles}</div>
 					</div>
@@ -177,7 +181,7 @@ export class OceanParallax extends Component {
 
 				<div class="background2">
 					<Parallax strength={500}>
-						<div className="container border-0">
+						<div className="container border-0" style={{ height: '1800px'}}>
 
 						<div className="card body-color2 border-0 mb-3" style={{width: "18rem;"}}>
 							<div className="card-body">
@@ -185,12 +189,15 @@ export class OceanParallax extends Component {
 								<h3 className="card-title text-white text-center mb-2">Envira</h3>
 								<hr className="bg-white"/>
 								<h6 className="card-subtitle mb-2 text-white text-center">Questions you can ask Envira</h6>
-								<li className="card-text text-white">What are the tempatures of the ocean?</li>
+								<li className="card-text text-white">What is the tempature of the ocean?</li>
 								<li className="text-white">What can I do to help the ocean?</li>
 								<li className="text-white">How do you feel about the ocean pollution?</li>
 								<li className="text-white">How will this affect the ocean for future generations?</li>
 								<li className="text-white">What are some ways I can reduce plastic use?</li>
 								<li className="text-white">What is your favorite ocean animal?</li>
+								<h5 class="text-white font-weight-bold">For added fun click on the bubbles!</h5>
+
+							
 							</div>
 							</div>
 
@@ -270,8 +277,8 @@ export class OceanParallax extends Component {
 											<p class="text-white">United States is one of the world's top emitters at 24% of all U.S greenhouse gas emissions, including methane, which can be traced back to fossil fuel extraction from federal lands.</p>
 											<button
 											type="button"
-											onClick={this.enviraOffshore}
-											class="btn btn-outline-danger float-right text-danger mr-5">
+											onClick={() => this.state.isPlaying ? this.pauseAudio(1) : this.playAudio(1)}
+											class={`btn btn-outline-danger float-right text-danger  ${this.state.isPlaying ? "btn-danger" : ""}`}>
 											<i class="fas fa-robot" />
 										</button>
 										</div>
@@ -295,9 +302,9 @@ export class OceanParallax extends Component {
 											<p className="card-text" />
 											<button
 											type="button"
-											onClick={this.enviraOverFishing}
-											class="btn btn-outline-danger float-right text-danger mr-5"
-										>
+											onClick={() => this.state.isPlaying ? this.pauseAudio(2) : this.playAudio(2)}
+											class={`btn btn-outline-danger float-right text-danger  ${this.state.isPlaying ? "btn-danger" : ""}`}
+											>
 											<i class="fas fa-robot" />
 										</button>
 										</div>
@@ -371,5 +378,3 @@ export class OceanParallax extends Component {
 		);
 	}
 }
-
-export default OceanParallax;
