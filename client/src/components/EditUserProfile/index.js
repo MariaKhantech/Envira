@@ -173,8 +173,7 @@ export class UpdateProfile extends Component {
         phoneNumber,
         occupation,
       } = this.state;
-      //   const UserId = this.state.profile.id;
-      //   console.log(UserId);
+  
       Axios.put(`/api/auth/updateUserProfile/${urlUserId}`, {
         firstName,
         lastName,

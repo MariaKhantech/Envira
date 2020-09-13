@@ -262,7 +262,6 @@ router.get("/image/:UserId", (req, res) => {
 
 // route to post event attendees
 router.post("/joinevent", (req, res) => {
-  console.log(req.body.UserId);
   db.EventAttendee.create({
     UserId: req.body.UserId,
     EventId: req.body.EventId,
