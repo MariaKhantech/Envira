@@ -66,7 +66,7 @@ export default class Register extends Component {
       });
     }
     else {
-      this.postNewUser();
+      this.userSignup();
     }
   };
 
@@ -93,6 +93,7 @@ export default class Register extends Component {
         }
       });
     }
+    this.postNewUser();
   }
 
   postNewUser = () => {
@@ -102,7 +103,7 @@ export default class Register extends Component {
       email: this.state.email
     })
       .then((res) => {
-        this.userSignup();
+        console.log(res)
       })
       .catch((err) => {
         this.emailErrorMessage('Email address or user name already in use');

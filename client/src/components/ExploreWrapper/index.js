@@ -24,7 +24,7 @@ export default class ExploreWrapper extends Component {
       <>
         <Jumbotron id="jumbo2">
           <Container fluid>
-            <h1 className="display-4 text-white">Pollution Information</h1>
+            <h1 className="display-4 text-white text-center">Pollution Information</h1>
           </Container>
         </Jumbotron>
         <Row>
