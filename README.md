@@ -1,25 +1,61 @@
-# **React-Sequelize with Passport Authentication**
+# Project: Envira
 
-## A full-stack application template complete with passport local strategy authentication
-### **Stack:**
-* node and express 
-* sequelize ORM
-* passport js authentication
-* create-react-app
+## Table of Contents
+* [Project Description](#project-description)
+* [Project Features](#project-features)
+* [Technologies](#technologies)
+* [Demo](#demo)
+* [Developer](#developer)
+* [Deployed Project Links](#deployed-project-links)
 
-### **How to Use This Template**
-* click "use template" next to the clone button, this will create a new repository on *your* github account
-* clone the repository down to your machine
-* create a mySql database named as you like
-* run &nbsp; `npm install`
-* run &nbsp; `touch .env` &nbsp;in the root of your repository
-* open the .env file
-* add the four environmental variables that will be used to connect to the database:
-    <br/>       `DB_PASSWORD=yourpassword`
-    <br/>       `DB_HOST=127.0.0.1`
-    <br/>       `DB_USER=root`
-    <br/>       `DB_NAME=yourDBname`
+## Project Description: 
+Utilizing Amazon Web Services, we have created an environmental app using an AI robot (Envira) to interact with users and read information. Envira is designed to have personality, a fun interactive way to deliver climate change data. A user (company or individual) can also create, join, and search environmentally friendly events.  The rating system allows a user to determine the best events to attend. These events help to service the community and do our part in preserving our planet. This app also offers information about air quality, EPA and articles related to climate changes. This is a great app for those concerned about climate change and wants to make a difference.
 
-* In development, the server and client are started separately.
-* run &nbsp; `npm start` in the root of the project to start the server
-* run &nbsp; `npm start` in the root of the client folder to start the client
+
+## Project Features:
+* 
+
+
+## Technologies
+* MySQL
+* Express
+* React
+* Node
+* Axios
+* React-Bootstrap
+* Sequelize
+* AWS Amplify
+* AWS Cognito
+* AWS Polly
+* AWS Lex
+* AWS S3
+* AWS EC2
+
+
+
+## Demo
+
+
+
+
+## Developer
+
+*Maria Khan*
+
+*Priyanka Singh*
+
+*Gus Heptig*
+
+## Deployed Project Links
+
+GitHub Repository Link
+
+*https://github.com/MariaKhantech/Envira*
+
+Deployed project Link
+
+*https://envira-bot.com/*
+
+
+
+
