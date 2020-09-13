@@ -26,9 +26,11 @@ export default class CompanyProfile extends Component {
     userRating: [],
     events: [],
     totalEvent: "",
+    allEventComments : [],
     loadModalShow: true,
     loadModalHide: false,
     totalEvent: [],
+
   };
 
   async componentDidMount() {
@@ -48,9 +50,7 @@ export default class CompanyProfile extends Component {
           // call this function to get logged in company event details
           this.getUserJoinedEvent();
           this.getImage();
-
           this.getUserRating();
-
           this.getUserEvents();
         })
         .catch((err) => console.log(err));
@@ -156,6 +156,7 @@ export default class CompanyProfile extends Component {
         this.setState({
           events: response.data,
         });
+        this.getUserComments();
       })
       .catch((err) => console.log(err));
   };
@@ -177,6 +178,20 @@ export default class CompanyProfile extends Component {
       })
       .catch((err) => console.log(err));
   };
+
+    //pulls list of all comments from the users events
+    getUserComments() {
+      this.state.events.forEach(event => {
+      Axios.get(`/api/getcommentsforprofile/${event.id}`) 
+      .then((response) => {
+         response.data.map((eventComments) => (
+          this.setState({allEventComments: [...this.state.allEventComments,eventComments.comment_detail]})
+         ));
+      })
+      .catch((err) => console.log(err));
+    });
+
+  }
 
   //close the modal if user edits an event
   closeModal() {
@@ -339,6 +354,15 @@ export default class CompanyProfile extends Component {
         <hr />
       </div>
     ));
+
+    //render the comments tab
+    const userReviewComments =   this.state.allEventComments.map((eventComments) => (
+      <div class ="text-center">
+        <p><q><i>{eventComments}</i></q></p>
+        <hr>
+        </hr>
+      </div>
+     ));
 
     return (
       <div className=" main-content">
@@ -503,7 +527,7 @@ export default class CompanyProfile extends Component {
                       <p>joined events</p>
                     </div>
                     <div className="tab-pane " id="tabs-3" role="tabpanel">
-                      <p>all comments from my events</p>
+                       {userReviewComments}
                     </div>
                   </div>
                 </div>

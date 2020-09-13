@@ -9,6 +9,7 @@ import Axios from "axios";
 import { Auth } from "aws-amplify";
 import { withRouter } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
+import { Link } from 'react-router-dom'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./style.scss";
 
@@ -33,7 +34,8 @@ export class index extends Component {
       profile: [],
       eventEnd: false,
       comment: "",
-      eventAttendeeImages:[]
+      eventAttendeeImages:[],
+      eventAttendees:[]
     };
     this.initializeCountdown = this.initializeCountdown.bind(this);
     this.timeInterval = 0;
@@ -328,17 +330,48 @@ export class index extends Component {
       .catch((err) => console.log(err));
   };
 
-  //load the users attending this event
-  async getEventAttendees(eventId) {		
-    Axios.get(`/api/geteventattendees/${eventId}`)
-    .then(async (response) => {
-      response.data.forEach(attendee => {
-        this.getAttendeeImage(attendee.UserId);   
-      });
-    
-    })
-    .catch((err) => console.log(err));
-  }
+ //load the users attending this event
+ async getEventAttendees(eventId) {		
+  Axios.get(`/api/geteventattendees/${eventId}`)
+  .then((response) => {
+    response.data.forEach( async attendee => {
+      console.log("THE ATTENDEE")
+      console.log(attendee.UserId)
+
+      let userName =""
+      let imageName =""
+      // //get the ateendeeusername
+     await Axios.get(`/api/auth/userid/${attendee.UserId}`)
+      .then((response) => {
+        console.log("THE ATTENDEE ANEM")
+       // this.setState({ eventAttendeeNames: [...this.state.eventAttendeeNames, response.data.user_name] })
+       userName = response.data.user_name
+       console.log(userName)
+      })
+      .catch((err) => console.log(err));
+
+      await Axios.get(`/api/auth/image/${attendee.UserId}`)
+      .then((response) => {
+        console.log(response.data)
+        //this.setState({ eventAttendeeImages: [...this.state.eventAttendeeImages, response.data.image_name] })
+        console.log("THE ATTENDEE IAMGE")
+        imageName = response.data.image_name
+        console.log(imageName)
+      })
+      .catch((err) => console.log(err));
+  
+      let attendeeObj = {
+        username: userName,
+        image: imageName
+      }
+
+      //pussh the objet to the state array
+       this.setState({ eventAttendees: [...this.state.eventAttendees, attendeeObj] });   
+    });
+   
+  })
+  .catch((err) => console.log(err));
+}
 
   //fetch the attendee image
   getAttendeeImage(attendeeId) {
@@ -423,14 +456,15 @@ export class index extends Component {
       <ReviewComment comment={review} />
     ));
 
-     //create the attendee carousel
-     const attendeeCarousel = this.state.eventAttendeeImages.map (image => (
-      <div class="div-cara-events">
-         <img alt="attendee to event" class="rounded img-fluid" style={{border:"#85dcba", borderStyle:"solid", borderRadius: "1rem"}} src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${image}`}/>
-         <p className="legend">Attendee Name</p>
+      //create the attendee carousel
+    const attendeeCarousel = this.state.eventAttendees.map (attendees => (
+      <div>
+          <img alt="attendee to event" class="rounded img-fluid" style={{border:"#85dcba", borderStyle:"solid", borderRadius: "1rem"}} src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${attendees.image}`}/>
+         {/* <h3 className="legend">{attendees.username}</h3> */}
+         <Link className = "legend" to={{pathname: "/profile",search: `?username=${attendees.username}`}} >{attendees.username}</Link>
       </div>
-    ));
-
+    )); 
+    
 
     return (
       <div class="wrapper2">
