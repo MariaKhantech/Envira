@@ -224,7 +224,7 @@ export default class OceanParallax extends Component {
 													<img
 														src="https://cdn.pixabay.com/photo/2018/04/04/11/39/dead-bird-3289550_960_720.jpg"
 														class="d-block w-100 img-fluid"
-														alt="..."
+														alt=""
 													/>
 												</div>
 												<div class="carousel-item">
@@ -331,21 +331,21 @@ export default class OceanParallax extends Component {
 													<img
 														src="../assets/imgs/ocean/humpbackwhales.jpg"
 														class="d-block w-100 img-fluid"
-														alt="..."
+														alt="humpback whales feeding"
 													/>
 												</div>
 												<div class="carousel-item">
 													<img
 														src="../assets/imgs/ocean/beluga.jpg"
 														class="d-block w-100 img-fluid"
-														alt="..."
+														alt="beluga whale"
 													/>
 												</div>
 												<div class="carousel-item">
 													<img
 														src="../assets/imgs/ocean/fishshop.jpg"
 														class="d-block w-100 img-fluid"
-														alt="..."
+														alt="hundreds of fish in a shop"
 													/>
 												</div>
 											</div>

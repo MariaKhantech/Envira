@@ -344,7 +344,7 @@ export class index extends Component {
   getAttendeeImage(attendeeId) {
     Axios.get(`/api/auth/image/${attendeeId}`)
       .then((response) => {
-        console.log("getting atenddee image")
+        console.log("getting attendee image")
         console.log(response.data)
         this.setState({ eventAttendeeImages: [...this.state.eventAttendeeImages, response.data.image_name] })
       })
@@ -425,9 +425,9 @@ export class index extends Component {
 
      //create the attendee carousel
      const attendeeCarousel = this.state.eventAttendeeImages.map (image => (
-      <div>
-         <img alt="" src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${image}`}/>
-         <p className="legend">Legend 1</p>
+      <div class="div-cara-events">
+         <img alt="attendee to event" class="rounded img-fluid" style={{border:"#85dcba", borderStyle:"solid", borderRadius: "1rem"}} src={`https://envirabucket215241-dev.s3.amazonaws.com/public/${image}`}/>
+         <p className="legend">Attendee Name</p>
       </div>
     ));
 
@@ -441,7 +441,7 @@ export class index extends Component {
           >
             <div class="card flex-row  float-right border-0 style-contact-person">
               <div class="border-0">
-                <img src={this.state.profileImageUrl} height="300px" alt="" />
+                <img class="rounded img-fluid" style={{border:"#85dcba", borderStyle:"solid", height:"300px"}} src={this.state.profileImageUrl} height="300px" alt="contact person" />
               </div>
               <div class="card-body ">
                 <h4>
@@ -522,7 +522,7 @@ export class index extends Component {
         {/* <!--count down reference https://codepen.io/techmariakhan/pen/ExKXjGv--> */}
         <div class="continer centerIt">
           <div>
-            <label class="project-name text-center">Event Countdown:</label>
+            <label class="project-name text-center">EVENT COUNTDOWN:</label>
           </div>
           <div class="counter counter-div">
             <div class="days">
@@ -549,25 +549,25 @@ export class index extends Component {
           <div class="row justify-content-center">
             <div class="col-3 ">
               <figure>
-                <img class="event-img" src={this.state.eventImageUrl} />
+                <img class="event-img rounded img-fluid" style={{border:"#e27d60", borderStyle:"solid"}} src={this.state.eventImageUrl} />
               </figure>
             </div>
             <div class="col-4">
               <header class="entry-header">
                 <h2 class="entry-title text-white">About the event</h2>
+                <hr />
               </header>
               <div>
                 <p class="mt-3 text-white">{description}</p>
               </div>
             </div>
           </div>
-          <hr/>
-          <hr/>
-          <div class="container mt-5 text-center text-white ">
-            <h1 class="text-white mb-2">Event Attendees</h1>
+        <hr style={{height:"5rem", backgroundColor: " #85dcba"}} />
+          <div class="container mt-5 text-center text-white " style={{backgroundColor: "#e27d60", borderStyle:"solid", borderColor: "#85dcba" }}>
+            <h1 class="text-white mb-2 mt-3">EVENT ATTENDEES</h1>
             <br></br>
             <div class = "row mt-2 justify-content-center mx-auto">
-            <Carousel autoPlay width="400px">
+            <Carousel autoPlay width="350px" >
              {attendeeCarousel}
           </Carousel>
           </div>
@@ -576,11 +576,11 @@ export class index extends Component {
         </div>
 
         <div
-          className="row justify-content-center mb-5"
+          className="row justify-content-center mb-5 mt-3"
           style={{ marginTop: "5rem" }}
         >
           <div className="col-4 text-center">
-            <div className="card border-0  " style={{ width: "10rem;" }}>
+            <div className="card border-0  mt-5" style={{ width: "10rem;" }}>
               <div className="card-body shadow-lg p-3 rounded location-cardStyle">
                 <div className="section-title">
                   <h2 className="text-white">Location</h2>
@@ -596,7 +596,7 @@ export class index extends Component {
             </div>
           </div>
 
-          <div className="col-6">
+          <div className="col-6 mt-5">
             <div className="map-responsive text-center">
               <iframe
                 className="rounded map-style"
