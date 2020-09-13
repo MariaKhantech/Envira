@@ -64,7 +64,7 @@ export class index extends Component {
 					</Parallax>
 =
 				<div className="row justify-content-around ">
-					<div className="col-4 ">
+					<div id='svg1'className="col-4 ">
 					<a href='/rainforest'>
 						<div className="card bg-transparent border-0 mx-auto" style={{ width: '12rem' }}>
 							<div className="card-body">
@@ -87,7 +87,7 @@ export class index extends Component {
 						</a>
 					</div>
 
-					<div className="col-4 ">
+					<div id='svg2'className="col-4 ">
 					<a href='/ocean'>
 						<div className="card bg-transparent border-0 mx-auto" style={{ width: '12rem' }}>
 							<div className="card-body ">
