@@ -28,16 +28,15 @@ export default class CompanyProfile extends Component {
     totalEvent: "",
     loadModalShow: true,
     loadModalHide: false,
+    totalEvent: [],
   };
 
   async componentDidMount() {
-    console.log("COMPANY");
     try {
       // get the current logged in user details
       const user = await Auth.currentAuthenticatedUser();
       // get username from user object
       const userDetail = user.username;
-      console.log(userDetail);
       // get the user details for logged in user from the User table
       Axios.get(`/api/auth/user/${userDetail}`)
         .then((response) => {
@@ -92,16 +91,12 @@ export default class CompanyProfile extends Component {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
-
-    console.log(urlUserId);
     Axios.get(`/api/auth/userid/${urlUserId}`)
       .then((response) => {
         this.setState({
           companyUserName: response.data.user_name,
           email: response.data.email,
         });
-
-        console.log(this.state.companyUserName);
       })
       .catch((err) => console.log(err));
   };
@@ -116,7 +111,6 @@ export default class CompanyProfile extends Component {
         this.setState({
           totalEvent: response.data,
         });
-        console.log(this.state.totalEvent.length);
       })
       .catch((err) => console.log(err));
   };
@@ -153,9 +147,6 @@ export default class CompanyProfile extends Component {
 
   // get logged in user info from EventAttendee model
   getUserEvents = () => {
-    // console.log("herer");
-    // const UserId = this.state.profile.id;
-
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlUserId = urlParams.get("userId");
@@ -165,7 +156,6 @@ export default class CompanyProfile extends Component {
         this.setState({
           events: response.data,
         });
-        console.log(response.data);
       })
       .catch((err) => console.log(err));
   };
