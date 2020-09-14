@@ -333,7 +333,7 @@ export class UpdateProfile extends Component {
                       type="text"
                       className="form-control"
                       value={this.state.zipCode}
-                      placeholder="state"
+                      placeholder="zip code"
                       onChange={this.handleInputChange}
                     />
                   </div>
