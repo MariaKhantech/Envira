@@ -326,11 +326,12 @@ export class index extends Component {
  async getEventAttendees(eventId) {		
   Axios.get(`/api/geteventattendees/${eventId}`)
   .then((response) => {
+    
     response.data.forEach( async attendee => {
 
       let userName,imageName  = ""
  
-      // //get the ateendeeusername
+      // //get the attendeeusername
      await Axios.get(`/api/auth/userid/${attendee.UserId}`)
       .then((response) => {
        userName = response.data.user_name

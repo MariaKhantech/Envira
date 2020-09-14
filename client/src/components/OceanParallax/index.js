@@ -4,6 +4,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import OceanPollutionText from '../OceanPollutionText';
 import { Parallax, Background } from 'react-parallax';
 import Particles from 'react-particles-js';
+import Fade from 'react-reveal/Fade';
 import './style.scss';
 import oceanFloor from './oceanfloor.png';
 
@@ -56,6 +57,7 @@ export default class OceanParallax extends Component {
 				<div className="card-header text-center" style={{ background: '#001a33' }}>
 					<OceanPollutionText />
 				</div>
+				<Fade bottom>
 				<div className="card-body body-color">
 					<div className="card border-0">
 					<div className="row no-gutters">
@@ -87,7 +89,7 @@ export default class OceanParallax extends Component {
 									<p className="ml-2 mr-2">Many fish migration are being interupted. The fish are migrating towards the poles in response to the ocean warming up. Disturbing many fisheries around the world.</p>
 							
 
-									<button
+									<button 
 											type="button"
 											onClick={() => this.state.isPlaying ? this.pauseAudio(0) : this.playAudio(0)}
 											class={`btn btn-outline-danger float-right text-danger  ${this.state.isPlaying ? "btn-danger" : ""}`}
@@ -98,8 +100,9 @@ export default class OceanParallax extends Component {
 						</div>
 						</div>
 						</div>
-					<div className="card-footer background-longCard" style={{paddingTop:"4rem"}}></div>
+					<div className="card-footer background-longCard mt-2" style={{paddingTop:"4rem"}}></div>
 				</div>
+				</Fade>
 			</div>
 		);
 
@@ -182,7 +185,7 @@ export default class OceanParallax extends Component {
 				<div class="background2">
 					<Parallax strength={500}>
 						<div className="container border-0" style={{ height: '1800px'}}>
-
+						<Fade left>
 						<div className="card body-color2 border-0 mb-3" style={{width: "18rem;"}}>
 							<div className="card-body">
 							<hr className="bg-white"/>
@@ -200,7 +203,8 @@ export default class OceanParallax extends Component {
 							
 							</div>
 							</div>
-
+							</Fade>
+							<Fade right>
 						<div className="card mb-3 body-color2 border-0" style={{ maxWidth: '540px;' }}>
 								<div className="row no-gutters mt-3 mb-5">
 								<div className="col-md-5 mt-5">
@@ -222,21 +226,21 @@ export default class OceanParallax extends Component {
 											<div class="carousel-inner">
 												<div class="carousel-item active">
 													<img
-														src="https://cdn.pixabay.com/photo/2018/04/04/11/39/dead-bird-3289550_960_720.jpg"
+														src="../assets/imgs/ocean/birdoil.jpg"
 														class="d-block w-100 img-fluid"
 														alt=""
 													/>
 												</div>
 												<div class="carousel-item">
 													<img
-														src="https://cdn.pixabay.com/photo/2015/01/31/17/37/oil-rig-explosion-618704_960_720.jpg"
+														src="../assets/imgs/ocean/oilspillbeach.jpeg"
 														class="d-block w-100 img-fluid"
 														alt="..."
 													/>
 												</div>
 												<div class="carousel-item">
 													<img
-														src="https://cdn.pixabay.com/photo/2018/01/06/16/07/waters-3065288_960_720.jpg"
+														src="../assets/imgs/ocean/oil-rig-explosion.jpg"
 														class="d-block w-100 img-fluid"
 														alt="..."
 													/>
@@ -286,7 +290,8 @@ export default class OceanParallax extends Component {
 
 								</div>
 							</div>
-
+						</Fade>
+						<Fade left>
 							<div className="card mb-3 body-color2 border-0" style={{ maxWidth: '540px;' }}>
 								<div className="row no-gutters mt-3 mb-5">
 									<div className="col-md-7">
@@ -371,6 +376,7 @@ export default class OceanParallax extends Component {
 									</div>
 								</div>
 							</div>
+							</Fade>
 						</div>
 					</Parallax>
 				</div>

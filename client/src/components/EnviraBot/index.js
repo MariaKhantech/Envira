@@ -22,15 +22,6 @@ export class EnviraBot extends Component {
 
 	render() {
 	
-		// let topPos ='65%';
-		// let leftPos='80%';
-		// let robotPostition = 'fixed'
-
-		// if(this.props.centerRobot === true ) {
-		// 	topPos ='80%';
-		// 	leftPos= '50%';
-		// 	robotPostition='relative'
-		// }
 		let enviraPosition = {};
 
 		if(this.props.centerRobot === true ) {
@@ -51,9 +42,9 @@ export class EnviraBot extends Component {
 		
 		return (
 			<div style = {enviraPosition}>
-				<Zoom>
+			
 				<Robot />
-				</Zoom>
+				
 				<ChatBot
 					title="My Bot"
 					botName="Envira"
