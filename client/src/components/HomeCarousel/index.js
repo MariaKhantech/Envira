@@ -276,10 +276,10 @@ export class index extends Component {
 
 					<div className="card orangeHcard text-center">
 					<Fade bottom>
-					<a href="./explore"><img className="card-img-top icon-Hsize mx-auto mt-5" src="../assets/homepageIcons/dolphin.png" alt="dolphin, ocean and the sun"/></a>
+					<a href="./explore"><img className="card-img-top icon-Hsize mx-auto mt-5" src="../assets/imgs/toxic.png" alt="skull"/></a>
 						<div className="card-body">
 						<h5 className="card-title text-white">Pollution Information</h5>
-						<p className="card-text text-white">...........</p>
+						<p className="card-text text-white">You can check out our Pollution information page. Here we provide great information to find out what pollution or contaminat in your area. You can search for everything from air quality, water contaminats, companies compliance with the EPA and more! Just click on the icon above. </p>
 						</div>
 						</Fade>
 					</div>
