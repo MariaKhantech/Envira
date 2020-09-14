@@ -184,7 +184,7 @@ export default class OceanParallax extends Component {
 
 				<div class="background2">
 					<Parallax strength={500}>
-						<div className="container border-0" style={{ height: '1800px'}}>
+						<div className="container border-0" style={{ height: 'max-content'}}>
 						<Fade left>
 						<div className="card body-color2 border-0 mb-3" style={{width: "18rem;"}}>
 							<div className="card-body">
