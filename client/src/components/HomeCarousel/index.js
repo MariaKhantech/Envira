@@ -133,7 +133,7 @@ export class index extends Component {
 								<div className="card border-0">
 									<div className="card-body homepgCardBackground text-center">
 									
-										<h4 className="card-title text-center text-white"><b>Latest News on the Artic</b></h4>
+										<h4 className="card-title text-center text-white"><b>Latest News on the Arctic</b></h4>
 										<hr class="bg-white"/>
 										<img
 											src="../assets/imgs/polarbears.jpg"
@@ -142,7 +142,7 @@ export class index extends Component {
 										/>
 										
 										<p class="text-white">
-										The Polar Bear, the largest bear in the world, and a powerful symbol of strength and endurance in the Artic are endangered. The protection of the polar bear habitat is urgent due to the arctic melting.
+										The Polar Bear, the largest bear in the world, and a powerful symbol of strength and endurance in the Arctic are endangered. The protection of the polar bear habitat is urgent due to the arctic melting.
 										</p>
 
 										
@@ -276,10 +276,10 @@ export class index extends Component {
 
 					<div className="card orangeHcard text-center">
 					<Fade bottom>
-					<a href="https://ocean.si.edu/conservation/climate-change/how-you-can-help-ocean"><img className="card-img-top icon-Hsize mx-auto mt-5" src="../assets/homepageIcons/dolphin.png" alt="dolphin, ocean and the sun"/></a>
+					<a href="./explore"><img className="card-img-top icon-Hsize mx-auto mt-5" src="../assets/homepageIcons/dolphin.png" alt="dolphin, ocean and the sun"/></a>
 						<div className="card-body">
-						<h5 className="card-title text-white">OCEAN LIFE</h5>
-						<p className="card-text text-white">Find ways you can help the ocean and ocean life.</p>
+						<h5 className="card-title text-white">Pollution Information</h5>
+						<p className="card-text text-white">...........</p>
 						</div>
 						</Fade>
 					</div>
