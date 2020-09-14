@@ -9,21 +9,30 @@
 
 ## Table of Contents
 
-- [Project Description](#project-description)
-- [Project Features](#project-features)
+- [Application Description](#project-description)
+- [Application Features](#project-features)
 - [Technologies](#technologies)
 - [Demo](#demo)
 - [License](#license)
 - [Developer](#developer)
 - [Deployed Project Links](#deployed-project-links)
 
-## Project Description:
+## Application Description:
 
 Utilizing Amazon Web Services, we have created an environmental app using an AI robot (Envira) to interact with users and read information. Envira is designed to have personality, a fun interactive way to deliver climate change data. A user (company or individual) can also create, join, and search environmentally friendly events. The rating system allows a user to determine the best events to attend. These events help to service the community and do our part in preserving our planet. This app also offers information about air quality, EPA and articles related to climate changes. This is a great app for those concerned about climate change and wants to make a difference.
 
-## Project Features:
+## Application Features:
 
--
+- User sign-up, login, and authentication using AWS Cognito.
+- Interactive and intuitive AI bot to deliver information related to climate change to a user utilizing AWS Lex & AWS Polly.
+- Dedicated theme pages for major issues concerning the environment used to inform and educate in unique manner.
+- Image upload and retrieval using AWS S3 storage.
+- Ability to create and update a profile for a given user.
+- Search for events that are created by user that link to full information page related to particular event, and give user ability to attend event.
+- Leave comments, ratings, and reviews for events that have occurred.
+- Edit/update information to events created by user.
+- Additional external resources and data to inform user on pollution information.
+- Application is fully deployed and hosted using AWS EC2 and AWS Route 53.
 
 ## Technologies
 
@@ -47,6 +56,8 @@ Utilizing Amazon Web Services, we have created an environmental app using an AI 
 ## Additional Technologies/Resources
 
 - [Unsplash](https://unsplash.com/)
+- [Freepik](https://www.freepik.com/)
+- [Flaticon](https://www.flaticon.com/)
 - [jQuery](https://jquery.com/)
 - [Moment.js](https://momentjs.com/)
 - [TypeScript](https://www.typescriptlang.org/)
@@ -55,6 +66,8 @@ Utilizing Amazon Web Services, we have created an environmental app using an AI 
 - [EPA Envirofacts](https://www.epa.gov/enviro/widgets)
 
 ## Demo
+
+![gif1](https://media.giphy.com/media/VDAuv7bMueJSBo4rMc/giphy.gif)
 
 ## License
 
