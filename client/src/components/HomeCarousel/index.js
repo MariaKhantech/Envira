@@ -179,6 +179,7 @@ export class index extends Component {
 										</p>
 										<ul class="text-white">
 											<li>What is your name?</li>
+											<li>What is your age?</li>
 											<li>What is climate change?</li>
 											<li>Are we in danger?</li>
 											<li>How do you feel about climate change?</li>
