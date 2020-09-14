@@ -120,6 +120,7 @@ export default class RainforestInfo extends Component {
 					{/* forest fires */}
 
 					<section class="under-rain">
+						<Fade left>
 						<div class="row mx-auto">
 							<div class="col-md-6">
 								<div class="mo-fire">
@@ -189,7 +190,9 @@ export default class RainforestInfo extends Component {
 								</div>
 							</div>
 						</div>
+						</Fade>
 
+						<Fade left>
 						<div class="row mx-auto" style={{ marginTop: '-1.5rem' }}>
 							
 							<div class="card forest-fire-card mb-3 mx-auto" style={{ maxWidth: '1000px' }}>
@@ -242,10 +245,10 @@ export default class RainforestInfo extends Component {
 								</div>
 							</div>
 						</div>
-
+						</Fade>
+						<Fade right>
 						<div class="row mx-auto">
 
-				
 							<div class="card mb-3 forest-fire-card mt-5 mx-auto" style={{ maxWidth: '1000px' }}>
 								<div class="row ">
 									<div class="col-md-5 ">
@@ -286,6 +289,7 @@ export default class RainforestInfo extends Component {
 								</div>
 							</div>
 						</div>
+						</Fade>
 					</section>
 
 					<Parallax bgImage={`${forestBackground}`} strength={500}>
@@ -301,10 +305,12 @@ export default class RainforestInfo extends Component {
 							/>
 						</div>
 					</Parallax>
-
+					<Fade bottom>
 					<Parallax strength={500}>
 						<div style={{ height: '100%' }}>
+						
 							<div class="row mb-5">
+							
 							<div class="col-md-6 ">
 								<div class="card mt-5 mx-auto border-0" style={{ width: '25rem' }}>
 									<div class="card-body forest-fire-card">
@@ -370,6 +376,7 @@ export default class RainforestInfo extends Component {
 									</div>
 								</div>
 							</div>
+							
 								<div class="col-md-5">
 								<div className="card forest-fire-card border-0 mt-5 ml-5" style={{width: "18rem;"}}>
 							<div className="card-body">
@@ -383,20 +390,24 @@ export default class RainforestInfo extends Component {
 								<li className="text-white">What was the largest wildfire to date?</li>
 								<li className="text-white">What is your favorite Amazon animal?</li>
 								<li className="text-white">What do you feel about deforestation?</li>
+								<br/>
+								<p class="font-weight-bold text-white">Click on the image below click on the ashes.</p>
 							</div>
 							</div>
 								</div>
 							</div>
+						
 						</div>
+					
 					</Parallax>
-
+					</Fade>
 					<Parallax
 						bgImage={'https://cdn.pixabay.com/photo/2019/06/14/09/05/ape-4273153_960_720.jpg'}
 						strength={500}
 					>
 						{particles}
 					</Parallax>
-
+					<Fade bottom>
 					<Parallax strength={500}>
 						<div style={{ height: '800px', paddingBottom: "100px" }}>
 							<div class="row justify-content-around mb-5 forest-fire-card ">
@@ -436,7 +447,7 @@ export default class RainforestInfo extends Component {
 							</div>
 						</div>
 					</Parallax>
-				
+				</Fade>
 				</div>
 			</div>
 		);
