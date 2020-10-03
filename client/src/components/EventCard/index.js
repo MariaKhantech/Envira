@@ -719,7 +719,7 @@ export class index extends Component {
           <hr />
           <div className="container">
             <div
-              className="row mt-2 mb-5 border border-dark justify-content-around review-card"
+              className="row mt-2 border border-dark justify-content-around review-card"
               style={scrollingContainer}
             >
               {reviewsCards}
