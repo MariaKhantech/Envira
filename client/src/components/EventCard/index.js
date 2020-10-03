@@ -197,7 +197,7 @@ export class index extends Component {
   // calculate average rating when user is not logged in
   starRating = () => {
     this.state.userRating.map((data) => (
-      <StarRatingComponent
+      <StarRatingComponent 
         name="rating"
         starCount={5}
         value={data.rating}
@@ -483,7 +483,7 @@ export class index extends Component {
               <div className="card-body ">
                 <h4>
                   <span>
-                    <b>Contact: </b>
+                    <b className="text-white">Contact: </b>
                   </span>
                   {this.state.profile.id && (
                     <a href="#" onClick={this.handleRedirect}>
@@ -492,22 +492,22 @@ export class index extends Component {
                   )}
                   {!this.state.profile.id && <a>{contactPerson}</a>}
                 </h4>
-                <hr />
+                <hr className="bg-white" />
                 <h5>
                   <span>
-                    <b>Phone:</b>
+                    <b class="text-white">Phone:</b>
                   </span>
                   {contactNumber}
                 </h5>
                 <h5>
                   <span>
-                    <b>Email: </b>
+                    <b className="text-white">Email: </b>
                   </span>
-                  <i>{contactEmail}</i>
+                  <i className="text-white">{contactEmail}</i>
                 </h5>
                 <p className="card-text ">
                   <span>
-                    <b>Website: </b>
+                    <b className="text-white">Website: </b>
                   </span>
                   {website}
                 </p>
@@ -583,15 +583,15 @@ export class index extends Component {
             <div className="col-4">
               <header className="entry-header">
                 <h2 className="entry-title text-white">About the event</h2>
-                <hr />
+                <hr className="bg-white"/>
               </header>
               <div>
                 <p className="mt-3 text-white">{description}</p>
               </div>
             </div>
           </div>
-          <hr style={{ height: "5rem", backgroundColor: " #85dcba" }} />
-          <div
+          {/* <hr style={{ height: "4rem", backgroundColor: " #85dcba" }} /> */}
+          {/* <div
             className="container mt-5 text-center text-white "
             style={{
               backgroundColor: "#e27d60",
@@ -606,7 +606,7 @@ export class index extends Component {
                 {attendeeCarousel}
               </Carousel>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div
@@ -647,15 +647,32 @@ export class index extends Component {
         </div>
 
         <div
-          className={`home-info-section ${this.state.eventEnd ? "" : "d-none"}`}
+          className={`home-info-section2 ${this.state.eventEnd ? "" : "d-none"}`}
         >
           <div className="row justify-content-center">
             <div className="row" style={{ marginTop: "40px" }}>
               <div className="col-md-12">
                 <div className="well well-sm">
+                <div
+            className="container mt-5 text-center text-white "
+            style={{
+              backgroundColor: "#e27d60",
+              borderStyle: "solid",
+              borderColor: "#85dcba",
+            }}
+          >
+            <h1 className="text-white mb-2">EVENT ATTENDEES</h1>
+            <br></br>
+            <div className="row mt-2 justify-content-center mx-auto">
+              <Carousel autoPlay width="350px">
+                {attendeeCarousel}
+              </Carousel>
+            </div>
+          </div>
                   <div className="text-center">
-                    <h1 className=" leave-reviewbtn text-center mb-2">
+                    <h1 className=" leave-reviewbtn text-center mb-2 mt-5">
                       Event Review
+                      
                     </h1>
                   </div>
 
@@ -702,7 +719,7 @@ export class index extends Component {
           <hr />
           <div className="container">
             <div
-              className="row mt2 border border-dark justify-content-around"
+              className="row mt-2 mb-5 border border-dark justify-content-around review-card"
               style={scrollingContainer}
             >
               {reviewsCards}

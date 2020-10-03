@@ -26,7 +26,11 @@ $light-green: #85dcba;
 
 .home-info-section {
 	padding: 150px 10px 60px 0px;
-	background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 25%, #fad0c4 50%);
+	background-color: #004080;
+}
+.home-info-section2 {
+	padding:  10px 60px 0px;
+	background-color: #004080;
 }
 
 .home-info-section figure img {
@@ -75,4 +79,8 @@ img {
 
 .legend {
 	font-size: x-large !important;
+}
+
+.review-card {
+	background-color:#E27d60 ;
 }
