@@ -376,8 +376,8 @@ export default class UserProfile extends Component {
             <div className="row">
               <div className="col-lg-7 col-md-10 ">
                 <h1
-                  className="display-2 text-dark text-center"
-                  style={{ marginLeft: "3rem" }}
+                  className="display-2 h1-design h1-special text-white text-center"
+                  style={{ marginLeft: "25rem" }}
                 >
                   {this.state.userName.toUpperCase()}
                 </h1>
@@ -416,7 +416,7 @@ export default class UserProfile extends Component {
                   <div className="d-flex justify-content-between">
                     <a
                       href="#"
-                      className="btn-design btn btn-sm btm-sm-design mr-4"
+                      className="btn-design btn btn-sm btm-sm-design mr-4 text-white"
                       data-toggle="modal"
                       data-target="#eventModal"
                     >

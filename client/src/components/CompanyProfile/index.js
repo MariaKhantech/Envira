@@ -420,7 +420,7 @@ export default class CompanyProfile extends Component {
                     <a
                       className="a-design"
                       href="#"
-                      className="btn-design btn btn-sm btm-sm-design btn-info mr-4"
+                      className="btn-design btn btn-sm btm-sm-design btn-info mr-4 text-white"
                       data-toggle="modal"
                       data-target="#eventModal"
                     >
