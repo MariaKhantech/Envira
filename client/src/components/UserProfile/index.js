@@ -416,7 +416,7 @@ export default class UserProfile extends Component {
                   <div className="d-flex justify-content-between">
                     <a
                       href="#"
-                      className="btn-design btn btn-sm btm-sm-design btn-info mr-4"
+                      className="btn-design btn btn-sm btm-sm-design mr-4"
                       data-toggle="modal"
                       data-target="#eventModal"
                     >

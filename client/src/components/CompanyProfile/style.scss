@@ -7,11 +7,11 @@
 }
 
 .myevent-footer {
-    background: linear-gradient(87deg, rgb(94, 114, 228) 0, rgb(65, 179, 163) 100%) !important;
+    background: linear-gradient(87deg, rgb(226, 125, 96) 0, rgb(0, 64, 128) 100%) !important;
 }
 
 .myevent-header {
-    background: linear-gradient(87deg, rgb(94, 114, 228) 0, rgb(65, 179, 163) 100%) !important;
+    background: linear-gradient(87deg, rgb(226, 125, 96) 0, rgb(0, 64, 128) 100%) !important;
 }
 
 .myevent-img {
@@ -19,5 +19,10 @@
     width: 100px;
 }
 .myevent-btn {
-   background-color: rgb(94, 114, 228);
+   background-color: rgb(226, 125, 96);
+}
+
+.main-content {
+    background: linear-gradient(87deg, rgb(226, 125, 96) 0, rgb(0, 64, 128) 100%) !important;
+    height: 932px;
 }

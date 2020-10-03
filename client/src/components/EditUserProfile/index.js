@@ -203,7 +203,7 @@ export class UpdateProfile extends Component {
           <div className="row ">
             <div className="col-md-4 border-right">
               <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-                <span className="font-weight-bold mb-3">
+                <span className="font-weight-bold mb-3 text-white">
                   Hello {this.state.profile.user_name}
                 </span>
                 {/* <span className="text-black-50">{this.state.profile.email}</span> */}
@@ -214,11 +214,11 @@ export class UpdateProfile extends Component {
               <div className="p-3 py-5">
                 <FormErrors formerrors={this.state.errors} />
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                  <h4 className="text-right">Profile Settings</h4>
+                  <h4 className="text-right text-white">Profile Settings</h4>
                 </div>
                 <div className="row mt-2">
                   <div className="col-md-12">
-                    <label className="editFormlabels">User Name</label>
+                    <label className="editFormlabels text-white">User Name</label>
                     <input
                       id="username"
                       type="text"
@@ -228,7 +228,7 @@ export class UpdateProfile extends Component {
                     />
                   </div>
                   <div className="col-md-6 mt-1">
-                    <label className="editFormlabels">First Name</label>
+                    <label className="editFormlabels text-white">First Name</label>
                     <input
                       id="firstname"
                       name="firstName"
@@ -240,7 +240,7 @@ export class UpdateProfile extends Component {
                     />
                   </div>
                   <div className="col-md-6 mt-1">
-                    <label className="editFormlabels">Last Name</label>
+                    <label className="editFormlabels text-white">Last Name</label>
                     <input
                       id="lastname"
                       name="lastName"
@@ -254,7 +254,7 @@ export class UpdateProfile extends Component {
                 </div>
                 <div className="row mt-3">
                   <div className="col-md-6">
-                    <label className="editFormlabels">Phone Number</label>
+                    <label className="editFormlabels text-white">Phone Number</label>
                     <input
                       id="phonenumber"
                       name="phoneNumber"
@@ -266,7 +266,7 @@ export class UpdateProfile extends Component {
                     />
                   </div>
                   <div className="col-md-6">
-                    <label className="editFormlabels">Email ID</label>
+                    <label className="editFormlabels text-white">Email ID</label>
                     <input
                       readOnly
                       type="text"
@@ -275,7 +275,7 @@ export class UpdateProfile extends Component {
                     />
                   </div>
                   <div className="col-md-12 mt-1">
-                    <label className="editFormlabels">Occupation</label>
+                    <label className="editFormlabels text-white">Occupation</label>
                     <input
                       id="occupation"
                       name="occupation"
@@ -288,7 +288,7 @@ export class UpdateProfile extends Component {
                   </div>
 
                   <div className="col-md-12 mt-1">
-                    <label className="editFormlabels">About</label>
+                    <label className="editFormlabels text-white">About</label>
                     <textarea
                       id="about"
                       name="about"
@@ -302,7 +302,7 @@ export class UpdateProfile extends Component {
                 </div>
                 <div className="row mt-3">
                   <div className="col-md-4">
-                    <label className="editFormlabels">City</label>
+                    <label className="editFormlabels text-white">City</label>
                     <input
                       id="city"
                       name="city"
@@ -314,7 +314,7 @@ export class UpdateProfile extends Component {
                     />
                   </div>
                   <div className="col-md-4">
-                    <label className="editFormlabels">State/Region</label>
+                    <label className="editFormlabels text-white">State/Region</label>
                     <input
                       id="state"
                       name="state"
@@ -326,7 +326,7 @@ export class UpdateProfile extends Component {
                     />
                   </div>
                   <div className="col-md-4">
-                    <label className="editFormlabels">Zip Code</label>
+                    <label className="editFormlabels text-white">Zip Code</label>
                     <input
                       id="zipcode"
                       name="zipCode"
