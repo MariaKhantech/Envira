@@ -52,7 +52,7 @@ export default class Search extends Component {
                 <Dropdown.Divider />
                 <Dropdown.Item>
                   <Button
-                    style={{ backgroundColor: "#c38d9e", border: "none" }}
+                    style={{ backgroundColor: "#85dcba", border: "none" }}
                     onClick={handleShowAll}
                   >
                     Show All Events
@@ -75,7 +75,7 @@ export default class Search extends Component {
             <InputGroup.Append>
               <Button
                 onClick={handleFilterSubmit}
-                style={{ backgroundColor: "#c38d9e", border: "none" }}
+                style={{ backgroundColor: "#85dcba", border: "none" }}
                 id="search"
               >
                 <i className="fa fa-search"></i>
