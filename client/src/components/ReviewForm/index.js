@@ -108,7 +108,7 @@ export class ReviewForm extends Component {
     // );
 
     return (
-      <div className=" col-5 review-block mb-5">
+      <div className=" col-5 review-block mb-5 mt-5">
         <hr />
 
         <hr />

@@ -192,7 +192,7 @@ export class UpdateProfile extends Component {
           <div className="row">
             <div className="col-md-4 border-right">
               <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-                <span className="font-weight-bold mb-3">
+                <span className="font-weight-bold mb-3 text-white">
                   Hello {this.state.companyName}
                 </span>
                 <ProfileImage></ProfileImage>
@@ -202,11 +202,11 @@ export class UpdateProfile extends Component {
               <div className="p-3 py-5">
                 <FormErrors formerrors={this.state.errors} />
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                  <h4 className="text-right">Profile Settings</h4>
+                  <h4 className="text-right text-white">Profile Settings</h4>
                 </div>
                 <div className="row mt-2">
                   <div className="col-md-6">
-                    <label className="labels">User Name</label>
+                    <label className="labels text-white">User Name</label>
                     <input
                       id="username"
                       type="text"
@@ -216,7 +216,7 @@ export class UpdateProfile extends Component {
                     />
                   </div>
                   <div className="col-md-6">
-                    <label className="labels">Company Name</label>
+                    <label className="labels text-white">Company Name</label>
                     <input
                       id="companyname"
                       name="companyName"
@@ -230,7 +230,7 @@ export class UpdateProfile extends Component {
                 </div>
                 <div className="row mt-2">
                   <div className="col-md-6">
-                    <label className="labels">Phone Number</label>
+                    <label className="labels text-white">Phone Number</label>
                     <input
                       id="phonenumber"
                       name="phoneNumber"
@@ -242,7 +242,7 @@ export class UpdateProfile extends Component {
                     />
                   </div>
                   <div className="col-md-6">
-                    <label className="labels">Company Email</label>
+                    <label className="labels text-white">Company Email</label>
                     <input
                       id="email"
                       name="email"
@@ -256,7 +256,7 @@ export class UpdateProfile extends Component {
                 </div>
                 <div className="row mt-2">
                   <div className="col-md-6 mt-1">
-                    <label className="labels">Contact Person</label>
+                    <label className="labels text-white">Contact Person</label>
                     <input
                       id="contactperson"
                       name="contactPersonName"
@@ -268,7 +268,7 @@ export class UpdateProfile extends Component {
                     />
                   </div>
                   <div className="col-md-6">
-                    <label className="labels">Website</label>
+                    <label className="labels text-white">Website</label>
                     <input
                       id="companywebsite"
                       name="companyWebsite"
@@ -282,7 +282,7 @@ export class UpdateProfile extends Component {
                 </div>
                 <div className="row mt-2">
                   <div className="col-md-12 mt-1">
-                    <label className="labels">Description</label>
+                    <label className="labels text-white">Description</label>
                     <textarea
                       id="description"
                       name="description"
@@ -294,7 +294,7 @@ export class UpdateProfile extends Component {
                     />
                   </div>
                   <div className="col-md-12 mt-1">
-                    <label className="labels">Environmental Focus</label>
+                    <label className="labels text-white">Environmental Focus</label>
                     <textarea
                       id="envirofocus"
                       name="environmentalFocus"

@@ -35,6 +35,10 @@
 	--font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
 
+
+$primary-orange: #E27D60;
+$primary-darkblue:#004080;
+
 *,
 *::before,
 *::after {
@@ -560,6 +564,7 @@ textarea.form-control {
 	white-space: nowrap;
 	border: 1px solid transparent;
 	border-radius: .375rem;
+	background-color: $primary-orange;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -571,6 +576,7 @@ textarea.form-control {
 .btn-design:hover,
 .btn-design:focus {
 	text-decoration: none;
+	background-color: $primary-darkblue;
 }
 
 .btn-design:focus {
@@ -597,15 +603,15 @@ textarea.form-control {
 
 .btn-primary-design {
 	color: #fff;
-	border-color: #5e72e4;
-	background-color: #5e72e4;
+	border-color: $primary-orange;
+	background-color: $primary-orange;
 	box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
 }
 
 .btn-primary-design:hover {
 	color: #fff;
-	border-color: #5e72e4;
-	background-color: #5e72e4;
+	border-color: $primary-darkblue;
+	background-color: $primary-darkblue;
 }
 
 .btn-primary-design:focus {
@@ -667,6 +673,7 @@ textarea.form-control {
 	padding: .25rem .5rem;
 	border-radius: .375rem;
 }
+
 
 .dropdown {
 	position: relative;
@@ -1217,7 +1224,7 @@ button.bg-white:focus {
 // }
 
 .bg-gradient-default {
-	background: linear-gradient(87deg, rgb(94, 114, 228) 0, rgb(65, 179, 163) 100%) !important;
+	background: linear-gradient(87deg, rgb(226, 125, 96) 0, rgb(0, 64, 128) 100%) !important;
 }
 
 @keyframes floating-lg {
