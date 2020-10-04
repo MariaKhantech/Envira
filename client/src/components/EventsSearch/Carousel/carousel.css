@@ -25,14 +25,14 @@
 
 #contactList {
   list-style: none;
-  background-color: #41b3a3;
+  background-color: #e8a87c;
   border-radius: 10px;
   color: #32325d;
 }
 
 #contact-box-footer {
   text-align: left;
-  background-color: #41b3a3;
+  background-color: #e8a87c;
   border-top: 2px solid #e7eaec;
   padding: 15px 20px;
   border-radius: 10px;

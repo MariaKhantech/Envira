@@ -58,7 +58,7 @@ export default class Carousel extends Component {
                 size="sm"
                 className="float-right"
                 value={data.id}
-                style={{ backgroundColor: "#c38d9e", border: "none" }}
+                style={{ backgroundColor: " #85dcba", border: "none" }}
               >
                 View
               </Button>

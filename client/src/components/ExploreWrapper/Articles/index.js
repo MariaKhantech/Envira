@@ -54,7 +54,7 @@ export default class Articles extends Component {
                     {data.lead_paragraph}
                   </p>
                   <Button
-                    style={{ backgroundColor: "#41b3a3", border: "none" }}
+                    style={{ backgroundColor: "#85dcba", border: "none" }}
                     className="float-left"
                     href={data.web_url}
                     target="_blank"

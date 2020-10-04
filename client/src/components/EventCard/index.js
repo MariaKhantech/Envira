@@ -197,7 +197,7 @@ export class index extends Component {
   // calculate average rating when user is not logged in
   starRating = () => {
     this.state.userRating.map((data) => (
-      <StarRatingComponent 
+      <StarRatingComponent
         name="rating"
         starCount={5}
         value={data.rating}
@@ -321,45 +321,42 @@ export class index extends Component {
       .catch((err) => console.log(err));
   };
 
-
- //load the users attending this event
- async getEventAttendees(eventId) {		
-  Axios.get(`/api/geteventattendees/${eventId}`)
-  .then((response) => {
-    
-    response.data.forEach( async attendee => {
-
-      let userName,imageName  = ""
- 
-      // //get the attendeeusername
-     await Axios.get(`/api/auth/userid/${attendee.UserId}`)
+  //load the users attending this event
+  async getEventAttendees(eventId) {
+    Axios.get(`/api/geteventattendees/${eventId}`)
       .then((response) => {
-       userName = response.data.user_name
+        response.data.forEach(async (attendee) => {
+          let userName,
+            imageName = "";
+
+          // //get the attendeeusername
+          await Axios.get(`/api/auth/userid/${attendee.UserId}`)
+            .then((response) => {
+              userName = response.data.user_name;
+            })
+            .catch((err) => console.log(err));
+
+          //get the attendee image
+          await Axios.get(`/api/auth/image/${attendee.UserId}`)
+            .then((response) => {
+              imageName = response.data.image_name;
+            })
+            .catch((err) => console.log(err));
+
+          //put the usrname and imagename in an object
+          let attendeeObj = {
+            username: userName,
+            image: imageName,
+          };
+
+          //pussh the objet to the state array
+          this.setState({
+            eventAttendees: [...this.state.eventAttendees, attendeeObj],
+          });
+        });
       })
       .catch((err) => console.log(err));
-
-      //get the attendee image
-      await Axios.get(`/api/auth/image/${attendee.UserId}`)
-      .then((response) => {
-        imageName = response.data.image_name
- 
-      })
-      .catch((err) => console.log(err));
-  
-      //put the usrname and imagename in an object
-      let attendeeObj = {
-        username: userName,
-        image: imageName
-      }
-
-      //pussh the objet to the state array
-       this.setState({ eventAttendees: [...this.state.eventAttendees, attendeeObj] });   
-    });
-   
-  })
-  .catch((err) => console.log(err));
-}
-
+  }
 
   render() {
     const scrollingContainer = {
@@ -395,7 +392,7 @@ export class index extends Component {
     const postStarRating = (
       <>
         <div
-          className="card-profile-stats d-flex justify-content-center mt-md-5"
+          className="card-profile-stats d-flex justify-content-center mt-md-2"
           style={{ fontSize: "28px" }}
         >
           <StarRatingComponent
@@ -404,6 +401,7 @@ export class index extends Component {
             value={this.state.rating}
             onStarClick={this.onStarClick}
             disabled={this.state.starDisabled}
+            emptyStarColor={"#DCDCDC"}
           />
         </div>
         <OverlayTrigger
@@ -413,7 +411,7 @@ export class index extends Component {
         >
           <Button
             disabled={this.state.postRatingDisabled}
-            variant="primary"
+            style={{ backgroundColor: "#85dcba" }}
             size="sm"
             className="float-center"
             onClick={this.postRating}
@@ -583,7 +581,7 @@ export class index extends Component {
             <div className="col-4">
               <header className="entry-header">
                 <h2 className="entry-title text-white">About the event</h2>
-                <hr className="bg-white"/>
+                <hr className="bg-white" />
               </header>
               <div>
                 <p className="mt-3 text-white">{description}</p>
@@ -647,32 +645,33 @@ export class index extends Component {
         </div>
 
         <div
-          className={`home-info-section2 ${this.state.eventEnd ? "" : "d-none"}`}
+          className={`home-info-section2 ${
+            this.state.eventEnd ? "" : "d-none"
+          }`}
         >
           <div className="row justify-content-center">
             <div className="row" style={{ marginTop: "40px" }}>
               <div className="col-md-12">
                 <div className="well well-sm">
-                <div
-            className="container mt-5 text-center text-white "
-            style={{
-              backgroundColor: "#e27d60",
-              borderStyle: "solid",
-              borderColor: "#85dcba",
-            }}
-          >
-            <h1 className="text-white mb-2">EVENT ATTENDEES</h1>
-            <br></br>
-            <div className="row mt-2 justify-content-center mx-auto">
-              <Carousel autoPlay width="350px">
-                {attendeeCarousel}
-              </Carousel>
-            </div>
-          </div>
+                  <div
+                    className="container mt-5 text-center text-white "
+                    style={{
+                      backgroundColor: "#e27d60",
+                      borderStyle: "solid",
+                      borderColor: "#85dcba",
+                    }}
+                  >
+                    <h1 className="text-white mb-2">EVENT ATTENDEES</h1>
+                    <br></br>
+                    <div className="row mt-2 justify-content-center mx-auto">
+                      <Carousel autoPlay width="350px">
+                        {attendeeCarousel}
+                      </Carousel>
+                    </div>
+                  </div>
                   <div className="text-center">
                     <h1 className=" leave-reviewbtn text-center mb-2 mt-5">
                       Event Review
-                      
                     </h1>
                   </div>
 
