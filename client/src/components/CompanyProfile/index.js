@@ -380,7 +380,7 @@ export default class CompanyProfile extends Component {
           <div className="container-fluid container-design d-flex align-items-center">
             <div className="row">
               <div className="col-lg-7 col-md-10">
-                <h1 className="h1-design h1-special display-2 text-black">
+                <h1 className="h1-design h1-special display-2 text-white">
                   {this.state.companyUserName.toUpperCase()}
                 </h1>
               </div>
@@ -420,7 +420,7 @@ export default class CompanyProfile extends Component {
                     <a
                       className="a-design"
                       href="#"
-                      className="btn-design btn btn-sm btm-sm-design btn-info mr-4"
+                      className="btn-design btn btn-sm btm-sm-design btn-info mr-4 text-white"
                       data-toggle="modal"
                       data-target="#eventModal"
                     >
@@ -463,7 +463,7 @@ export default class CompanyProfile extends Component {
                           data-dismiss="modal"
                           aria-label="Close"
                         >
-                          <span aria-hidden="true">&times;</span>
+                          <span className="text-white" aria-hidden="true">&times;</span>
                         </button>
                       </div>
                       <div className="modal-body myEvent-modal">
@@ -549,7 +549,7 @@ export default class CompanyProfile extends Component {
                   </div>
                 </div>
                 {/* <!--reference https://bootsnipp.com/snippets/K0ZmK--> */}
-                <div className="card-body shadow-lg p-3">
+                <div className="card-body p-3">
                   <div className="col-md-8">
                     <div className="tab-content profile-tab" id="myTabContent">
                       <div

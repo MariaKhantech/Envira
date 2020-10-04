@@ -599,6 +599,7 @@ textarea.form-control {
   white-space: nowrap;
   border: 1px solid transparent;
   border-radius: .375rem;
+  background-color: #E27D60;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -611,6 +612,7 @@ textarea.form-control {
 .btn-design:hover,
 .btn-design:focus {
   text-decoration: none;
+  background-color: #004080;
 }
 
 .btn-design:focus {
@@ -641,16 +643,16 @@ textarea.form-control {
 
 .btn-primary-design {
   color: #fff;
-  border-color: #5e72e4;
-  background-color: #5e72e4;
+  border-color: #E27D60;
+  background-color: #E27D60;
   -webkit-box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
           box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .btn-primary-design:hover {
   color: #fff;
-  border-color: #5e72e4;
-  background-color: #5e72e4;
+  border-color: #004080;
+  background-color: #004080;
 }
 
 .btn-primary-design:focus {
@@ -1288,7 +1290,7 @@ button.bg-white:focus {
 
 /*change top section of page*/
 .bg-gradient-default {
-  background: linear-gradient(87deg, #5e72e4 0, #41b3a3 100%) !important;
+  background: linear-gradient(87deg, #e27d60 0, #004080 100%) !important;
 }
 
 @-webkit-keyframes floating-lg {
@@ -1865,11 +1867,11 @@ textarea[resize='horizontal'] {
 }
 
 .myevent-footer {
-  background: linear-gradient(87deg, #5e72e4 0, #41b3a3 100%) !important;
+  background: linear-gradient(87deg, #e27d60 0, #004080 100%) !important;
 }
 
 .myevent-header {
-  background: linear-gradient(87deg, #5e72e4 0, #41b3a3 100%) !important;
+  background: linear-gradient(87deg, #e27d60 0, #004080 100%) !important;
 }
 
 .myevent-img {
@@ -1878,6 +1880,11 @@ textarea[resize='horizontal'] {
 }
 
 .myevent-btn {
-  background-color: #5e72e4;
+  background-color: #e27d60;
+}
+
+.main-content {
+  background: linear-gradient(87deg, #e27d60 0, #004080 100%) !important;
+  height: 966px;
 }
 /*# sourceMappingURL=style.css.map */
